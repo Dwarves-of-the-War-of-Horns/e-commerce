@@ -1,6 +1,12 @@
 {
   "cSpell.words": [
+    "commitlint",
     "Dompurify",
-    "tinkoff"
+    "compodoc",
+    "plusplus",
+    "tinkoff",
+    "devkit",
+    "proto",
+    "ngrx",
   ]
 }

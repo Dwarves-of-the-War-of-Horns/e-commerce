@@ -1,7 +1,16 @@
 {
   "root": true,
   "plugins": ["prettier"],
-  "extends": ["prettier", "eslint:recommended"],
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:@typescript-eslint/strict",
+    "plugin:@angular-eslint/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@angular-eslint/template/process-inline-templates",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
   "overrides": [
     {
       "files": ["*.spec.ts"],
@@ -223,7 +232,10 @@
         ],
         "@typescript-eslint/prefer-includes": 2,
         "@typescript-eslint/no-non-null-assertion": 2,
-        "@typescript-eslint/dot-notation": [2, { "allowIndexSignaturePropertyAccess": true }],
+        "@typescript-eslint/dot-notation": [
+          2,
+          { "allowIndexSignaturePropertyAccess": true }
+        ],
         "@typescript-eslint/no-throw-literal": 2,
         "@typescript-eslint/no-base-to-string": 2,
         "@typescript-eslint/no-dynamic-delete": 2,
@@ -314,7 +326,16 @@
           2,
           {
             "blankLine": "always",
-            "prev": ["case", "default", "block", "block-like", "multiline-block-like", "interface", "type", "export"],
+            "prev": [
+              "case",
+              "default",
+              "block",
+              "block-like",
+              "multiline-block-like",
+              "interface",
+              "type",
+              "export"
+            ],
             "next": "*"
           },
           {
@@ -325,18 +346,21 @@
           {
             "blankLine": "always",
             "prev": "*",
-            "next": ["switch", "while", "try", "return", "if", "interface", "type", "function"]
+            "next": [
+              "switch",
+              "while",
+              "try",
+              "return",
+              "if",
+              "interface",
+              "type",
+              "function"
+            ]
           }
         ],
         "@typescript-eslint/no-duplicate-imports": 2,
         "@typescript-eslint/no-extraneous-class": 0
-      },
-      "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "plugin:@typescript-eslint/strict",
-        "plugin:import/recommended"
-      ]
+      }
     }
   ],
   "settings": {

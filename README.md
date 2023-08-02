@@ -7,7 +7,24 @@ We are the ~~LLC~~ DDS (disabled dwarf society). And we are proud to introduce o
  - Fufill the needs of our dear customers
  - Gather and store more gold than **can** imagine
 
+  
+---
+### Our tech stack:
 
+  - Angular
+  - ngRx
+  - Jest
+  - Compadoc
+  - ESLint
+  - TypeScript
+  - husky
+  - commitlint
+  - Prettier
+  - Stylelint
+  - Taiga UI
+  - SCSS
+
+---
 ### How to install and run our store?
 1. clone this repo
 
@@ -18,4 +35,4 @@ We are the ~~LLC~~ DDS (disabled dwarf society). And we are proud to introduce o
 3.  ```bash
     npm run start
     ```
-   
+ 

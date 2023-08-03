@@ -14,9 +14,6 @@
     "test:coverage": "jest --coverage",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "**/*.ts": "npm run lint"
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.2.0",

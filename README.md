@@ -5,7 +5,7 @@ We are the ~~LLC~~ DDS (disabled dwarf society). And we are proud to introduce o
 ### Our goals as dwarfs:
  - Produce and deliver qulity product
  - Fufill the needs of our dear customers
- - Gather and store more gold than **can** imagine
+ - Gather and store more gold than we can imagine
 
   
 ---

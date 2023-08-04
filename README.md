@@ -55,6 +55,23 @@ While we are proud of our work on **ECommerce**, we also carry a slight trepidat
    npm run start
    ```
 
+
+## Description to all of the scripts
+
+| Script name | What does it |
+| ----------- | ----------- |
+| start | starts development server |
+| build | compiles project into the dist directory |
+| watch  | recompiles project on change into the dist directory |
+| lint | checks for problems every ts and html file |
+| eslint | checks for problems every ts file |
+| eslint:fix | checks for problems every ts file and tries to fix them by it's self |
+| compodoc:build | compiles compodoc into the documentation directory [read more about compodoc](https://compodoc.app/) |
+| compodoc:build-and-serve | compiles compodoc into the documentation directory and starts the deploy |
+| compodoc:serve | starts deploying compodoc from documentation directory if it exists |
+| test | starts testing |
+| test:coverage | starts testing and shows information about coverage |
+| prepare | installs git hooks for husky |
 ## Contribution
 
 As kin, we welcome contributions from fellow dwarves and allies. Whether you're a skilled developer, an artist, or a master storyteller, your talents can help shape our project.

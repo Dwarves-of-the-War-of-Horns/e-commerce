@@ -9,9 +9,11 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
+import { AuthComponent } from './auth/auth.component'
+import { CartComponent } from './cart/cart.component'
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AuthComponent, CartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

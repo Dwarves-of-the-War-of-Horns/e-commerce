@@ -1,13 +1,14 @@
-import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify'
-import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from '@taiga-ui/core'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { NgModule, isDevMode } from '@angular/core'
+import { isDevMode, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreModule } from '@ngrx/store'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { TUI_SANITIZER, TuiAlertModule, TuiDialogModule, TuiRootModule } from '@taiga-ui/core'
+import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify'
+
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { StoreModule } from '@ngrx/store'
-import { EffectsModule } from '@ngrx/effects'
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 @NgModule({
   declarations: [AppComponent],

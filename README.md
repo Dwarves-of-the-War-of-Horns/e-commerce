@@ -80,6 +80,7 @@ While we are proud of our work on **ECommerce**, we also carry a slight trepidat
 | compodoc:build-and-serve | compiles compodoc into the documentation directory and starts the deploy                             |
 | compodoc:serve           | starts deploying compodoc from documentation directory if it exists                                  |
 | test                     | starts testing                                                                                       |
+| test:watch               | starts testing in watch mode                                                                         |
 | test:coverage            | starts testing and shows information about coverage                                                  |
 | prepare                  | installs git hooks for husky                                                                         |
 | update                   | get last changes from branch and install dependencies                                                |

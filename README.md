@@ -29,30 +29,41 @@ While we are proud of our work on **ECommerce**, we also carry a slight trepidat
 
 ### Our tech stack:
 
-- Angular
+- Npm
+- TypeScript
+- Angular@15.2.9
 - NgRx
 - RxJs
+- Taiga UI
 - Jest
 - Compodoc
 - ESLint
-- TypeScript
-- husky
-- commitlint
+- Husky
+- Commitlint
 - Prettier
 - Stylelint
-- Taiga UI
-- SASS
+- Sass/Scss
 
 ## Installation
 
 1. clone this repo
 
-2. ```bash
+2. install all dependencies
+
+   ```bash
    npm install
    ```
 
-3. ```bash
+3. run
+
+   ```bash
    npm run start
+   ```
+
+   or
+
+   ```bash
+   ng s -o
    ```
 
 ## Description to all of the scripts

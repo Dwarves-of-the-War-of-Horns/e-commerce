@@ -16,7 +16,8 @@
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "update": "git pull && npm i"
   },
   "private": true,
   "dependencies": {

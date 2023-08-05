@@ -36,12 +36,13 @@ While we are proud of our work on **ECommerce**, we also carry a slight trepidat
 - Compodoc
 - ESLint
 - TypeScript
-- husky
-- commitlint
+- Husky
+- Commitlint
 - Prettier
 - Stylelint
 - Taiga UI
-- SASS
+- Sass/Scss
+- Npm
 
 ## Installation
 

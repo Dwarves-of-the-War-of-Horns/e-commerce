@@ -223,7 +223,7 @@
         ],
         "@typescript-eslint/no-explicit-any": 2,
         "@typescript-eslint/triple-slash-reference": [
-          "error",
+          2,
           {
             "lib": "never",
             "path": "never",
@@ -232,10 +232,7 @@
         ],
         "@typescript-eslint/prefer-includes": 2,
         "@typescript-eslint/no-non-null-assertion": 2,
-        "@typescript-eslint/dot-notation": [
-          2,
-          { "allowIndexSignaturePropertyAccess": true }
-        ],
+        "@typescript-eslint/dot-notation": [2, { "allowIndexSignaturePropertyAccess": true }],
         "@typescript-eslint/no-throw-literal": 2,
         "@typescript-eslint/no-base-to-string": 2,
         "@typescript-eslint/no-dynamic-delete": 2,
@@ -326,16 +323,7 @@
           2,
           {
             "blankLine": "always",
-            "prev": [
-              "case",
-              "default",
-              "block",
-              "block-like",
-              "multiline-block-like",
-              "interface",
-              "type",
-              "export"
-            ],
+            "prev": ["case", "default", "block", "block-like", "multiline-block-like", "interface", "type", "export"],
             "next": "*"
           },
           {
@@ -346,16 +334,7 @@
           {
             "blankLine": "always",
             "prev": "*",
-            "next": [
-              "switch",
-              "while",
-              "try",
-              "return",
-              "if",
-              "interface",
-              "type",
-              "function"
-            ]
+            "next": ["switch", "while", "try", "return", "if", "interface", "type", "function"]
           }
         ],
         "@typescript-eslint/no-duplicate-imports": 2,

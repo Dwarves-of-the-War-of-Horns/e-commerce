@@ -20,7 +20,6 @@
             "ngxEnv": {
               "prefix": "EC_"
             },
-            "baseHref": "",
             "outputPath": "dist/",
             "allowedCommonJsDependencies": ["dompurify"],
             "index": "src/index.html",

@@ -1,4 +1,8 @@
 import { NgModule } from '@angular/core'
 
-@NgModule({})
+import { CartPageComponent } from './cart-page.component'
+
+@NgModule({
+  declarations: [CartPageComponent],
+})
 export class CartModule {}

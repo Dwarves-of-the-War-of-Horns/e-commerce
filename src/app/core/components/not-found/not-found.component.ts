@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { TuiButtonModule } from '@taiga-ui/core'
+import { TuiBlockStatusModule } from '@taiga-ui/layout'
 
 @Component({
   selector: 'ec-not-found',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TuiBlockStatusModule, RouterModule, TuiButtonModule],
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

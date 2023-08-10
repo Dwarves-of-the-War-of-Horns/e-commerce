@@ -5,14 +5,14 @@ exec >/dev/console 2>&1
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
-if [ "$branch" = "develop" ]; then
-  echo "You can't commit directly to develop branch\nPlease switch to another branch."
-  exit 1
-fi
+protected_branch_regex="^(develop|main|release)\/.*$"
 
-if [ "$branch" = "main" ]; then
-  echo "You can't commit directly to main branch\nPlease switch to another branch."
-  exit 1
+message="You can't commit directly to this branch. Please switch to another branch."
+
+if [[ $branch =~ $protected_branch_regex ]]
+then
+    echo "$message"
+    exit 1
 fi
 
 npx lint-staged

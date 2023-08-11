@@ -1,0 +1,115 @@
+<form [formGroup]="singUpForm">
+  <h3 class="tui-form__header tui-form__header_margin-top_none">Registration</h3>
+
+  <div class="tui-form__row">
+    <tui-input tuiTextfieldExampleText="Field placeholder" formControlName="email" tuiHintContent="A tooltip">
+      <input tuiTextfield type="email" autocomplete="username" />
+      Email
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input tuiTextfieldExampleText="Field placeholder" formControlName="firstName" tuiHintContent="A tooltip">
+      <input tuiTextfield />
+      First name
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="firstName" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input tuiTextfieldExampleText="Field placeholder" formControlName="lastName" tuiHintContent="A tooltip">
+      <input tuiTextfield />
+      Last name
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="lastName" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input-password formControlName="password"
+      ><input tuiTextfield autocomplete="new-password" placeholder="Make it secure!" />Password
+      <span class="tui-required"></span>
+    </tui-input-password>
+    <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input-date tuiTextfieldExampleText="Placeholder" formControlName="date">
+      Date of birth
+      <span class="tui-required"></span>
+    </tui-input-date>
+    <tui-error formControlName="date" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input tuiTextfieldExampleText="Field placeholder" formControlName="street" tuiHintContent="A tooltip">
+      <input tuiTextfield />
+      Street
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="street" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input tuiTextfieldExampleText="Field placeholder" formControlName="city" tuiHintContent="A tooltip">
+      <input tuiTextfield />
+      City
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="city" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input tuiTextfieldExampleText="Field placeholder" formControlName="postalCode" tuiHintContent="A tooltip">
+      <input tuiTextfield />
+      Postal code
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="postalCode" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-select formControlName="country" class="tui-form__row">
+      Country
+      <tui-data-list *tuiDataList>
+        <tui-opt-group>
+          <button
+            *ngFor="let country of countryArray"
+            tuiOption
+            [value]="country"
+            (click)="updatePostalCodeValidation()"
+          >
+            {{ country }}
+          </button>
+        </tui-opt-group>
+      </tui-data-list>
+    </tui-select>
+  </div>
+
+  <div class="tui-form__row tui-form__row_multi-fields">
+    <tui-checkbox-block
+      contentAlign="right"
+      formControlName="defaultBillingAddress"
+      size="m"
+      class="tui-form__multi-field"
+    >
+      Set as default billing address
+    </tui-checkbox-block>
+
+    <tui-checkbox-block
+      contentAlign="right"
+      formControlName="defaultShippingAddress"
+      size="m"
+      class="tui-form__multi-field"
+    >
+      Set as default shipping address
+    </tui-checkbox-block>
+  </div>
+  <div class="tui-form__buttons">
+    <button tuiButton size="m" type="submit" class="tui-form__button">Submit</button>
+    <button tuiButton type="button" size="m" class="tui-form__button">Cancel</button>
+  </div>
+</form>

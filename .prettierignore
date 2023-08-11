@@ -3,6 +3,5 @@ dist
 .git
 .svn
 .github
-**/*.html
 node_modules
 documentation

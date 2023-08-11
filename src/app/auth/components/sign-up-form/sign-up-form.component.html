@@ -1,4 +1,4 @@
-<form [formGroup]="singUpForm">
+<form [formGroup]="singUpForm" (ngSubmit)="onSubmit()">
   <h3 class="tui-form__header tui-form__header_margin-top_none">Registration</h3>
 
   <div class="tui-form__row">
@@ -109,7 +109,7 @@
     </tui-checkbox-block>
   </div>
   <div class="tui-form__buttons">
-    <button tuiButton size="m" type="submit" class="tui-form__button">Submit</button>
+    <button tuiButton size="m" type="submit" class="tui-form__button" [disabled]="singUpForm.invalid">Submit</button>
     <button tuiButton type="button" size="m" class="tui-form__button">Cancel</button>
   </div>
 </form>

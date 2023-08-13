@@ -1,7 +1,25 @@
 <header class="header">
-  <div class="container">
-    <a routerLink="/" title="Home page" class="header__link">
-      <h1 class="header__title"><span>Dwarves</span><span>store</span></h1>
-    </a>
+  <div class="header__block">
+    <tui-svg [routerLink]="['/']" src="/assets/header.svg" class="icon"></tui-svg>
+
+    <span class="header__buttons-container">
+      <ng-container *ngIf="!(isUser$ | async)">
+        <button tuiButton [routerLink]="['/auth/sign-in']" class="tui-space_right-3 tui-button tui-button-secondary">
+          sign-in
+        </button>
+
+        <button tuiButton [routerLink]="['/auth/sign-up']" class="tui-space_right-3">sign-up</button>
+      </ng-container>
+
+      <button
+        *ngIf="isUser$ | async"
+        tuiIconButton
+        class="tui-space_right-3"
+        [routerLink]="['/']"
+        icon="tuiIconUser"
+      ></button>
+
+      <button tuiIconButton class="tui-space_right-3" [routerLink]="['/']" icon="tuiIconShoppingCart"></button>
+    </span>
   </div>
 </header>

@@ -10,7 +10,7 @@ export const postalCodeValidator = (control: AbstractControl): ValidationErrors 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const country = (control.parent?.value.country as string) ?? 'U.S.'
+  const country = (control.parent?.value.country as string) ?? 'USA'
 
-  return countryRegExpDictionary[String(country === 'U.S.')](control.value as string)
+  return countryRegExpDictionary[country.toLocaleLowerCase()](control.value as string)
 }

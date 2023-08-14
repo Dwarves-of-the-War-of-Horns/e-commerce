@@ -1,7 +1,9 @@
 import type { AbstractControl, ValidationErrors } from '@angular/forms'
 
-export const hasOneLowerCaseCharacter = (control: AbstractControl): ValidationErrors | null => {
-  const isValid = (control.value as string).toUpperCase() === (control.value as string)
+import { lowerCharacterRegExp } from '../constants/regExp'
 
-  return isValid ? { error: 'Must contain one or more lower character.' } : null
+export const hasOneLowerCaseCharacter = (control: AbstractControl): ValidationErrors | null => {
+  const isValid = lowerCharacterRegExp.test(control.value as string)
+
+  return isValid ? null : { error: 'Must contain one or more lower character.' }
 }

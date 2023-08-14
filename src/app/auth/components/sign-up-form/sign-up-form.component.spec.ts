@@ -4,20 +4,20 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { TuiFieldErrorPipe } from '@taiga-ui/kit'
 
 import { AuthRoutingModule } from '../../auth-routing.module'
-import { SingUpFormComponent } from './sign-up-form.component'
+import { SignUpFormComponent } from './sign-up-form.component'
 
 describe('SingUpFormComponent', () => {
-  let component: SingUpFormComponent
-  let fixture: ComponentFixture<SingUpFormComponent>
+  let component: SignUpFormComponent
+  let fixture: ComponentFixture<SignUpFormComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-      declarations: [SingUpFormComponent, TuiFieldErrorPipe],
+      declarations: [SignUpFormComponent, TuiFieldErrorPipe],
       imports: [CommonModule, AuthRoutingModule],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(SingUpFormComponent)
+    fixture = TestBed.createComponent(SignUpFormComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

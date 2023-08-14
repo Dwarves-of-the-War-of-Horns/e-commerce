@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { TuiDay } from '@taiga-ui/cdk'
 
@@ -10,44 +10,119 @@ import { hasOneUpperCaseCharacter } from '../../../shared/validators/has-one-upp
 import { minCharacterValidator } from '../../../shared/validators/min-character.validator'
 import { nameValidator } from '../../../shared/validators/name.validator'
 import { postalCodeValidator } from '../../../shared/validators/postal-code.validator'
+import { toggleEnableStatusFields } from '../../dictionary/toggle-enable-status-fields.dictionary'
+import { subscribeToValueChangesOnForms } from '../../utils/subscribe-to-value-changes-on-forms.utils'
+import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validation'
+import { hasOneNumber } from 'src/app/shared/validators/has-one-number.validator'
 
 @Component({
-  selector: 'ec-sing-up-form',
+  selector: 'ec-sign-up-form',
   templateUrl: './sign-up-form.component.html',
   styleUrls: ['./sign-up-form.component.scss'],
 })
-export class SingUpFormComponent {
-  public countryArray = ['U.S.', 'Canada']
-  public country = this.countryArray[0]
+export class SignUpFormComponent implements OnInit {
+  public isDisableBillingAddress = true
+  public countryArray = ['USA', 'Canada']
+
   public singUpForm = this.fb.group({
-    email: new FormControl<string | null>('', [
-      control => hasOneCharacter(control),
-      controls => emailValidator(controls),
-    ]),
-    firstName: new FormControl<string | null>('', [
-      control => hasOneCharacter(control),
-      control => nameValidator(control),
-    ]),
-    lastName: new FormControl<string | null>('', [
-      control => hasOneCharacter(control),
-      control => nameValidator(control),
-    ]),
+    email: new FormControl<string | null>('', [hasOneCharacter, emailValidator]),
+    firstName: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
+    lastName: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
     password: new FormControl<string | null>('', [
-      control => minCharacterValidator(control),
-      control => hasOneUpperCaseCharacter(control),
-      control => hasOneLowerCaseCharacter(control),
+      hasNoSpaces,
+      hasOneNumber,
+      hasOneUpperCaseCharacter,
+      hasOneLowerCaseCharacter,
+      minCharacterValidator,
     ]),
-    date: new FormControl<TuiDay | null>(new TuiDay(2010, 1, 1), [control => birthValidator(control)]),
-    street: new FormControl<string | null>('', [control => hasOneCharacter(control)]),
-    city: new FormControl<string | null>('', [control => hasOneCharacter(control), control => nameValidator(control)]),
-    postalCode: new FormControl<string | null>('', [control => postalCodeValidator(control)]),
+    date: new FormControl<TuiDay | null>(new TuiDay(2010, 0, 1), [birthValidator]),
+    street: new FormControl<string | null>('', [hasOneCharacter]),
+    city: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
+    postalCode: new FormControl<string | null>('', [postalCodeValidator]),
     country: new FormControl(this.countryArray[0]),
-    defaultBillingAddress: new FormControl(true),
-    defaultShippingAddress: new FormControl(false),
+    defaultAddress: new FormControl(true),
+    billingStreet: new FormControl<string | null>('', [hasOneCharacter]),
+    billingCity: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
+    billingPostalCode: new FormControl<string | null>('', [postalCodeValidator]),
+    billingCountry: new FormControl(this.countryArray[0]),
+    copyAddressCheckbox: new FormControl(false),
+    defaultBillingAddress: new FormControl(false),
   })
+
   constructor(private fb: FormBuilder) {}
 
-  updatePostalCodeValidation = (): void => {
+  ngOnInit(): void {
+    const arrayForms = [
+      this.singUpForm.controls.email,
+      this.singUpForm.controls.firstName,
+      this.singUpForm.controls.lastName,
+      this.singUpForm.controls.password,
+      this.singUpForm.controls.street,
+      this.singUpForm.controls.city,
+      this.singUpForm.controls.postalCode,
+    ]
+
+    subscribeToValueChangesOnForms(arrayForms)
+  }
+
+  public updateShippingPostalCodeValidation = (): void => {
     this.singUpForm.controls.postalCode.updateValueAndValidity()
+  }
+
+  public updateBillingPostalCodeValidation = (): void => {
+    this.singUpForm.controls.billingPostalCode.updateValueAndValidity()
+  }
+
+  private copyShippingAddressToBillingAddress(): void {
+    const arrayAddressControls = [
+      this.singUpForm.controls.street,
+      this.singUpForm.controls.city,
+      this.singUpForm.controls.postalCode,
+      this.singUpForm.controls.country,
+    ]
+    const arrayBillingAddressControls = [
+      this.singUpForm.controls.billingStreet,
+      this.singUpForm.controls.billingCity,
+      this.singUpForm.controls.billingPostalCode,
+      this.singUpForm.controls.billingCountry,
+    ]
+
+    arrayBillingAddressControls.forEach((formControl, index) => {
+      formControl.setValue(arrayAddressControls[index].getRawValue())
+    })
+  }
+
+  private clearBillingAddress(): void {
+    const arrayBillingAddressControls = [
+      this.singUpForm.controls.billingStreet,
+      this.singUpForm.controls.billingCity,
+      this.singUpForm.controls.billingPostalCode,
+    ]
+
+    arrayBillingAddressControls.forEach(formControl => {
+      formControl.setValue('')
+    })
+  }
+
+  public toggleShippingAddressToBillingAddress = (): void => {
+    this.singUpForm.controls.copyAddressCheckbox.getRawValue()
+      ? this.copyShippingAddressToBillingAddress()
+      : this.clearBillingAddress()
+  }
+
+  public onSubmit(): void {
+    this.singUpForm.getRawValue()
+  }
+
+  public toggleStatusBillingAddressField = (): void => {
+    this.isDisableBillingAddress = !this.isDisableBillingAddress
+
+    const arrayControls = [
+      this.singUpForm.controls.billingStreet,
+      this.singUpForm.controls.billingCity,
+      this.singUpForm.controls.billingPostalCode,
+    ]
+
+    toggleEnableStatusFields[String(this.isDisableBillingAddress)](arrayControls)
   }
 }

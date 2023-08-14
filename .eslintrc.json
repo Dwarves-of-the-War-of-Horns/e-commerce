@@ -46,7 +46,7 @@
           {
             "selector": ["variable", "property"],
             "types": ["boolean"],
-            "format": ["strictCamelCase"],
+            "format": ["PascalCase"],
             "prefix": ["is", "has", "should", "can", "will"],
             "leadingUnderscore": "forbid",
             "trailingUnderscore": "forbid"

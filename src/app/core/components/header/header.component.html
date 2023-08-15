@@ -1,23 +1,24 @@
 <header class="header">
   <div class="header__block">
-    <tui-svg [routerLink]="['/']" src="/assets/header.svg" class="icon"></tui-svg>
+    <tui-svg [routerLink]="['/']" src="/assets/icons/header.svg" class="icon"></tui-svg>
+
+    <tui-tabs class="header__navigation" [activeItemIndex]="0" [underline]="false">
+      <button *ngFor="let pageData of pagesData" tuiTab [routerLink]="pageData.routerLink">
+        {{ pageData.title }}
+      </button>
+    </tui-tabs>
 
     <span class="header__buttons-container">
       <ng-container *ngIf="!(isUser$ | async)">
-        <button tuiButton [routerLink]="['/auth/sign-in']" class="tui-space_right-3 tui-button tui-button-secondary">
-          sign-in
-        </button>
+        <button tuiButton [routerLink]="['/auth/sign-in']" class="tui-space_right-3">sign in</button>
 
-        <button tuiButton [routerLink]="['/auth/sign-up']" class="tui-space_right-3">sign-up</button>
+        <button tuiButton [routerLink]="['/auth/sign-up']" class="tui-space_right-3">sign up</button>
       </ng-container>
 
-      <button
-        *ngIf="isUser$ | async"
-        tuiIconButton
-        class="tui-space_right-3"
-        [routerLink]="['/']"
-        icon="tuiIconUser"
-      ></button>
+      <ng-container *ngIf="isUser$ | async">
+        <button tuiButton class="tui-space_right-3">log out</button>
+        <button tuiIconButton class="tui-space_right-3" [routerLink]="['/']" icon="tuiIconUser"></button>
+      </ng-container>
 
       <button tuiIconButton class="tui-space_right-3" [routerLink]="['/']" icon="tuiIconShoppingCart"></button>
     </span>

@@ -2,12 +2,15 @@ import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { TUI_BUTTON_OPTIONS, TuiButtonModule, TuiSvgModule } from '@taiga-ui/core'
+import { TuiTabsModule } from '@taiga-ui/kit'
 import { of, shareReplay } from 'rxjs'
+
+import type { PageData } from '../../models/page-data'
 
 @Component({
   selector: 'ec-header',
   standalone: true,
-  imports: [RouterLink, TuiButtonModule, TuiSvgModule, CommonModule],
+  imports: [RouterLink, TuiButtonModule, TuiSvgModule, CommonModule, TuiTabsModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   providers: [
@@ -21,5 +24,12 @@ import { of, shareReplay } from 'rxjs'
   ],
 })
 export class HeaderComponent {
-  isUser$ = of(false).pipe(shareReplay(1))
+  isUser$ = of(true).pipe(shareReplay(1))
+
+  pagesData: PageData[] = [
+    {
+      title: 'Home',
+      routerLink: ['/'],
+    },
+  ]
 }

@@ -12,6 +12,7 @@ import {
 import { LocalStorageService } from '../storage/services/local-storage.service'
 import { TokenStorage } from './commercetools-tokenstorage'
 import { CommercetoolsTokenFlow } from './enums/commercetools-token-flow.enum'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +20,14 @@ import { CommercetoolsTokenFlow } from './enums/commercetools-token-flow.enum'
 export class CommercetoolsClientBuilder {
   private ls: LocalStorageService = inject(LocalStorageService)
   private activeClient!: Client
-  private readonly projectKey = import.meta.env.EC_PROJECT_KEY
-  private readonly authHost = import.meta.env.EC_AUTH_URL
-  private readonly apiHost = import.meta.env.EC_API_URL
+  private readonly projectKey = environment.projectKey
+  private readonly authHost = environment.authHost
+  private readonly apiHost = environment.apiHost
   private readonly credentials = {
-    clientId: import.meta.env.EC_CLIENT_ID,
-    clientSecret: import.meta.env.EC_CLIENT_SECRET,
+    clientId: environment.clientId,
+    clientSecret: environment.clientSecret,
   }
-  private readonly scopes = [import.meta.env.EC_SCOPES]
+  private readonly scopes = environment.scopes
   private httpOptions: HttpMiddlewareOptions = {
     host: this.apiHost,
     fetch,

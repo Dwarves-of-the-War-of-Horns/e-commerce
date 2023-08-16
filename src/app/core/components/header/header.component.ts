@@ -24,12 +24,22 @@ import type { PageData } from '../../models/page-data'
   ],
 })
 export class HeaderComponent {
-  isUser$ = of(true).pipe(shareReplay(1))
+  isUser$ = of(false).pipe(shareReplay(1))
 
   pagesData: PageData[] = [
     {
       title: 'Home',
       routerLink: ['/'],
+    },
+
+    {
+      title: 'About us',
+      routerLink: ['/', 'about'],
+    },
+
+    {
+      title: 'Our goodies',
+      routerLink: ['/', 'catalog'],
     },
   ]
 }

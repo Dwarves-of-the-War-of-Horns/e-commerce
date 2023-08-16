@@ -1,6 +1,7 @@
-import { Component, type OnInit } from '@angular/core'
+import { Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { TuiDay } from '@taiga-ui/cdk'
+import type { Subscription } from 'rxjs'
 
 import { toggleEnableStatusFields } from 'src/app/auth/dictionary/toggle-enable-status-fields.dictionary'
 import { subscribeToValueChangesOnForms } from 'src/app/auth/utils/subscribe-to-value-changes-on-forms.utils'
@@ -20,9 +21,10 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   templateUrl: './sign-up-form.component.html',
   styleUrls: ['./sign-up-form.component.scss'],
 })
-export class SignUpFormComponent implements OnInit {
+export class SignUpFormComponent implements OnInit, OnDestroy {
   public isDisableBillingAddress = true
   public countryArray = ['USA', 'Canada']
+  public arraySubscriptions: Subscription[] = []
 
   public singUpForm = this.fb.group({
     email: new FormControl<string | null>('', [hasOneCharacter, emailValidator]),
@@ -51,7 +53,7 @@ export class SignUpFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const arrayForms = [
       this.singUpForm.controls.email,
       this.singUpForm.controls.firstName,
@@ -62,7 +64,7 @@ export class SignUpFormComponent implements OnInit {
       this.singUpForm.controls.postalCode,
     ]
 
-    subscribeToValueChangesOnForms(arrayForms)
+    this.arraySubscriptions = subscribeToValueChangesOnForms(arrayForms)
   }
 
   public updateShippingPostalCodeValidation = (): void => {
@@ -124,5 +126,11 @@ export class SignUpFormComponent implements OnInit {
     ]
 
     toggleEnableStatusFields[String(this.isDisableBillingAddress)](arrayControls)
+  }
+
+  public ngOnDestroy(): void {
+    this.arraySubscriptions.forEach(subscription => {
+      subscription.unsubscribe()
+    })
   }
 }

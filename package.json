@@ -63,6 +63,7 @@
     "@commitlint/cli": "^17.6.7",
     "@commitlint/config-conventional": "^17.6.7",
     "@compodoc/compodoc": "^1.1.21",
+    "@ng-web-apis/universal": "^3.0.3",
     "@ngrx/eslint-plugin": "^15.4.0",
     "@ngrx/schematics": "^16.1.0",
     "@ngx-env/builder": "^16.1.3",

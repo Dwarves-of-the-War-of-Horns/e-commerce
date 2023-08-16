@@ -3,12 +3,13 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { TuiRootModule } from '@taiga-ui/core'
 
 import { AppComponent } from './app.component'
+import { HeaderComponent } from './core/components/header/header.component'
 import { CoreModule } from './core/core.module'
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, TuiRootModule, CoreModule],
+      imports: [RouterTestingModule, TuiRootModule, CoreModule, HeaderComponent],
       declarations: [AppComponent],
     }).compileComponents()
   })

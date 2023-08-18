@@ -1,5 +1,6 @@
 <form [formGroup]="singUpForm" (ngSubmit)="onSubmit()">
   <h2 class="tui-form__header tui-form__header_margin-top_none">Registration</h2>
+  <tui-error *ngIf="error | async as errorMessage" [error]="errorMessage"></tui-error>
 
   <div class="tui-form__row">
     <tui-input
@@ -53,13 +54,13 @@
   <div class="tui-form__row">
     <tui-input-date
       tuiTextfieldExampleText="Placeholder"
-      formControlName="date"
+      formControlName="dateOfBirth"
       tuiHintContent="A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)"
     >
       Date of birth
       <span class="tui-required"></span>
     </tui-input-date>
-    <tui-error formControlName="date" [error]="[] | tuiFieldError | async"></tui-error>
+    <tui-error formControlName="dateOfBirth" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
 
   <div class="tui-form__row">
@@ -120,7 +121,7 @@
   </div>
 
   <div class="tui-form__row tui-form__row_multi-fields">
-    <tui-checkbox-block contentAlign="right" formControlName="defaultAddress" class="tui-form__multi-field">
+    <tui-checkbox-block contentAlign="right" formControlName="defaultShippingAddress" class="tui-form__multi-field">
       Set as default shipping address
     </tui-checkbox-block>
   </div>
@@ -207,7 +208,6 @@
       </div>
     </ng-template>
   </tui-accordion-item>
-
   <div class="tui-form__buttons">
     <button tuiButton size="m" type="submit" class="tui-form__button" [disabled]="singUpForm.invalid">Submit</button>
   </div>

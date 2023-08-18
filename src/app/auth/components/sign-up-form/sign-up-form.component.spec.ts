@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
+import { provideMockStore } from '@ngrx/store/testing'
 import { TuiFieldErrorPipe } from '@taiga-ui/kit'
 
 import { AuthRoutingModule } from '../../auth-routing.module'
@@ -15,6 +16,7 @@ describe('SingUpFormComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       declarations: [SignUpFormComponent, TuiFieldErrorPipe],
       imports: [CommonModule, AuthRoutingModule],
+      providers: [provideMockStore({})],
     }).compileComponents()
 
     fixture = TestBed.createComponent(SignUpFormComponent)

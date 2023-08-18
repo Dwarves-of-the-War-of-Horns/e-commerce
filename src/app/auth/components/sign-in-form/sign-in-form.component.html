@@ -1,17 +1,18 @@
 <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
   <h2 class="tui-form__header tui-form__header_margin-top_none">Login</h2>
+  <tui-error *ngIf="error | async as errorMessage" [error]="errorMessage"></tui-error>
 
   <div class="tui-form__row">
     <tui-input
       tuiTextfieldExampleText="Field placeholder"
-      formControlName="email"
+      formControlName="username"
       tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
     >
       <input tuiTextfield type="email" autocomplete="username" />
       Email
       <span class="tui-required"></span>
     </tui-input>
-    <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+    <tui-error formControlName="username" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
 
   <div class="tui-form__row">

@@ -1,8 +1,13 @@
 import { Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
+import { Router } from '@angular/router'
+import { Store } from '@ngrx/store'
 import { TuiDay } from '@taiga-ui/cdk'
 import type { Subscription } from 'rxjs'
 
+import { signUpPageActions } from '../../auth-store/auth.action'
+import { selectError } from '../../auth-store/auth.selectors'
+import { transformRegistrationSubmitForm } from '../../utils/transform-registration-submit-form'
 import { toggleEnableStatusFields } from 'src/app/auth/dictionary/toggle-enable-status-fields.dictionary'
 import { subscribeToValueChangesOnForms } from 'src/app/auth/utils/subscribe-to-value-changes-on-forms.utils'
 import { birthValidator } from 'src/app/shared/validators/birth.validator'
@@ -25,6 +30,7 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
   public isDisableBillingAddress = true
   public countryArray = ['USA', 'Canada']
   public arraySubscriptions: Subscription[] = []
+  public error = this.store.select(selectError)
 
   public singUpForm = this.fb.group({
     email: new FormControl<string | null>('', [hasOneCharacter, emailValidator]),
@@ -37,21 +43,25 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
       hasOneLowerCaseCharacter,
       minCharacterValidator,
     ]),
-    date: new FormControl<TuiDay | null>(new TuiDay(2010, 0, 1), [birthValidator]),
+    dateOfBirth: new FormControl<TuiDay>(new TuiDay(2010, 0, 1), [birthValidator]),
     street: new FormControl<string | null>('', [hasOneCharacter]),
     city: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
     postalCode: new FormControl<string | null>('', [postalCodeValidator]),
     country: new FormControl(this.countryArray[0]),
-    defaultAddress: new FormControl(true),
     billingStreet: new FormControl<string | null>('', [hasOneCharacter]),
     billingCity: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
     billingPostalCode: new FormControl<string | null>('', [postalCodeValidator]),
     billingCountry: new FormControl(this.countryArray[0]),
     copyAddressCheckbox: new FormControl(false),
+    defaultShippingAddress: new FormControl(true),
     defaultBillingAddress: new FormControl(false),
   })
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private router: Router,
+  ) {}
 
   public ngOnInit(): void {
     const arrayForms = [
@@ -65,6 +75,7 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     ]
 
     this.arraySubscriptions = subscribeToValueChangesOnForms(arrayForms)
+    this.toggleStatusBillingAddressField()
   }
 
   public updateShippingPostalCodeValidation = (): void => {
@@ -113,7 +124,16 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    this.singUpForm.getRawValue()
+    this.store.dispatch(
+      signUpPageActions.signUp({
+        customer: transformRegistrationSubmitForm(this.singUpForm, this.isDisableBillingAddress),
+      }),
+    )
+    this.error.subscribe(err => {
+      if (err === null) {
+        void this.router.navigate(['home'])
+      }
+    })
   }
 
   public toggleStatusBillingAddressField = (): void => {
@@ -123,6 +143,8 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
       this.singUpForm.controls.billingStreet,
       this.singUpForm.controls.billingCity,
       this.singUpForm.controls.billingPostalCode,
+      this.singUpForm.controls.billingCountry,
+      this.singUpForm.controls.defaultBillingAddress,
     ]
 
     toggleEnableStatusFields[String(this.isDisableBillingAddress)](arrayControls)

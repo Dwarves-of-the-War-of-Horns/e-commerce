@@ -1,0 +1,214 @@
+<form [formGroup]="singUpForm" (ngSubmit)="onSubmit()">
+  <h2 class="tui-form__header tui-form__header_margin-top_none">Registration</h2>
+  <tui-error *ngIf="error | async as errorMessage" [error]="errorMessage"></tui-error>
+
+  <div class="tui-form__row">
+    <tui-input
+      tuiTextfieldExampleText="Field placeholder"
+      formControlName="email"
+      tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
+    >
+      <input tuiTextfield type="email" autocomplete="username" />
+      Email
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input
+      tuiTextfieldExampleText="Field placeholder"
+      formControlName="firstName"
+      tuiHintContent="Must contain at least one character and no special characters or numbers"
+    >
+      <input tuiTextfield />
+      First name
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="firstName" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input
+      tuiTextfieldExampleText="Field placeholder"
+      formControlName="lastName"
+      tuiHintContent="Must contain at least one character and no special characters or numbers"
+    >
+      <input tuiTextfield />
+      Last name
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="lastName" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input-password
+      formControlName="password"
+      tuiHintContent="Password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end"
+      ><input tuiTextfield autocomplete="new-password" placeholder="Make it secure!" />Password
+      <span class="tui-required"></span>
+    </tui-input-password>
+    <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input-date
+      tuiTextfieldExampleText="Placeholder"
+      formControlName="dateOfBirth"
+      tuiHintContent="A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)"
+    >
+      Date of birth
+      <span class="tui-required"></span>
+    </tui-input-date>
+    <tui-error formControlName="dateOfBirth" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input
+      tuiTextfieldExampleText="Field placeholder"
+      formControlName="street"
+      tuiHintContent="Must contain at least one character"
+    >
+      <input tuiTextfield />
+      Street
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="street" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input
+      tuiTextfieldExampleText="Field placeholder"
+      formControlName="city"
+      tuiHintContent="Must contain at least one character and no special characters or numbers"
+    >
+      <input tuiTextfield />
+      City
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="city" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input
+      tuiTextfieldExampleText="Field placeholder"
+      formControlName="postalCode"
+      tuiHintContent="Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)"
+    >
+      <input tuiTextfield />
+      Postal code
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="postalCode" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-select formControlName="country">
+      Country
+      <tui-data-list *tuiDataList>
+        <tui-opt-group>
+          <button
+            *ngFor="let country of countryArray"
+            tuiOption
+            [value]="country"
+            (click)="updateShippingPostalCodeValidation()"
+          >
+            {{ country }}
+          </button>
+        </tui-opt-group>
+      </tui-data-list>
+    </tui-select>
+  </div>
+
+  <div class="tui-form__row tui-form__row_multi-fields">
+    <tui-checkbox-block contentAlign="right" formControlName="defaultShippingAddress" class="tui-form__multi-field">
+      Set as default shipping address
+    </tui-checkbox-block>
+  </div>
+
+  <tui-accordion-item class="container" (openChange)="toggleStatusBillingAddressField()" class="tui-form__row">
+    Set billing address.
+    <ng-template tuiAccordionItemContent>
+      <div class="tui-form__row">
+        <tui-checkbox-block
+          (ngModelChange)="toggleShippingAddressToBillingAddress()"
+          formControlName="copyAddressCheckbox"
+          contentAlign="left"
+          nativeId="example3"
+          size="l"
+        >
+          <div class="inner inner_flex">
+            Write shipping address to billing address.
+            <tui-tooltip describeId="example3" content="some tooltip content"></tui-tooltip>
+          </div>
+        </tui-checkbox-block>
+      </div>
+
+      <div class="tui-form__row">
+        <tui-input
+          tuiTextfieldExampleText="Field placeholder"
+          formControlName="billingStreet"
+          tuiHintContent="Must contain at least one character"
+        >
+          <input tuiTextfield />
+          Street
+          <span class="tui-required"></span>
+        </tui-input>
+        <tui-error formControlName="billingStreet" [error]="[] | tuiFieldError | async"></tui-error>
+      </div>
+
+      <div class="tui-form__row">
+        <tui-input
+          tuiTextfieldExampleText="Field placeholder"
+          formControlName="billingCity"
+          tuiHintContent="Must contain at least one character and no special characters or numbers"
+        >
+          <input tuiTextfield />
+          City
+          <span class="tui-required"></span>
+        </tui-input>
+        <tui-error formControlName="billingCity" [error]="[] | tuiFieldError | async"></tui-error>
+      </div>
+
+      <div class="tui-form__row">
+        <tui-input
+          tuiTextfieldExampleText="Field placeholder"
+          formControlName="billingPostalCode"
+          tuiHintContent="Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)"
+        >
+          <input tuiTextfield />
+          Postal code
+          <span class="tui-required"></span>
+        </tui-input>
+        <tui-error formControlName="billingPostalCode" [error]="[] | tuiFieldError | async"></tui-error>
+      </div>
+
+      <div class="tui-form__row">
+        <tui-select formControlName="billingCountry">
+          Country
+          <tui-data-list *tuiDataList>
+            <tui-opt-group>
+              <button
+                *ngFor="let country of countryArray"
+                tuiOption
+                [value]="country"
+                (click)="updateBillingPostalCodeValidation()"
+              >
+                {{ country }}
+              </button>
+            </tui-opt-group>
+          </tui-data-list>
+        </tui-select>
+      </div>
+
+      <div class="tui-form__row tui-form__row_multi-fields">
+        <tui-checkbox-block contentAlign="right" formControlName="defaultBillingAddress" class="tui-form__multi-field">
+          Set as default billing address
+        </tui-checkbox-block>
+      </div>
+    </ng-template>
+  </tui-accordion-item>
+  <div class="tui-form__buttons">
+    <button tuiButton size="m" type="submit" class="tui-form__button" [disabled]="singUpForm.invalid">Submit</button>
+  </div>
+</form>

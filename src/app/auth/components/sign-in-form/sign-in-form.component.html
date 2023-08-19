@@ -1,0 +1,31 @@
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+  <h2 class="tui-form__header tui-form__header_margin-top_none">Login</h2>
+  <tui-error *ngIf="error | async as errorMessage" [error]="errorMessage"></tui-error>
+
+  <div class="tui-form__row">
+    <tui-input
+      tuiTextfieldExampleText="Field placeholder"
+      formControlName="username"
+      tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
+    >
+      <input tuiTextfield type="email" autocomplete="username" />
+      Email
+      <span class="tui-required"></span>
+    </tui-input>
+    <tui-error formControlName="username" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+
+  <div class="tui-form__row">
+    <tui-input-password
+      formControlName="password"
+      tuiHintContent="Password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end"
+      ><input tuiTextfield autocomplete="new-password" placeholder="Make it secure!" />Password
+      <span class="tui-required"></span>
+    </tui-input-password>
+    <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
+  </div>
+  <h3>If you don't have an account, please <a tuiLink routerLink="/auth/sign-up">register</a>.</h3>
+  <div class="tui-form__buttons">
+    <button tuiButton size="m" type="submit" class="tui-form__buttons" [disabled]="signInForm.invalid">Submit</button>
+  </div>
+</form>

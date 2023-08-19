@@ -4,4 +4,5 @@ export interface AuthState {
   authData: Customer | null
   isLoading: boolean
   error: string | null
+  isLogined: boolean
 }

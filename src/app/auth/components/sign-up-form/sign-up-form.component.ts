@@ -6,7 +6,7 @@ import { TuiDay } from '@taiga-ui/cdk'
 import type { Subscription } from 'rxjs'
 
 import { signUpPageActions } from '../../auth-store/auth.action'
-import { selectError } from '../../auth-store/auth.selectors'
+import { selectError, selectIsLogined } from '../../auth-store/auth.selectors'
 import { transformRegistrationSubmitForm } from '../../utils/transform-registration-submit-form'
 import { toggleEnableStatusFields } from 'src/app/auth/dictionary/toggle-enable-status-fields.dictionary'
 import { subscribeToValueChangesOnForms } from 'src/app/auth/utils/subscribe-to-value-changes-on-forms.utils'
@@ -27,10 +27,11 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   styleUrls: ['./sign-up-form.component.scss'],
 })
 export class SignUpFormComponent implements OnInit, OnDestroy {
+  public isLogined = this.store.select(selectIsLogined)
+  public error = this.store.select(selectError)
   public isDisableBillingAddress = true
   public countryArray = ['USA', 'Canada']
   public arraySubscriptions: Subscription[] = []
-  public error = this.store.select(selectError)
 
   public singUpForm = this.fb.group({
     email: new FormControl<string | null>('', [hasOneCharacter, emailValidator]),
@@ -129,8 +130,8 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
         customer: transformRegistrationSubmitForm(this.singUpForm, this.isDisableBillingAddress),
       }),
     )
-    this.error.subscribe(err => {
-      if (err === null) {
+    this.isLogined.subscribe(value => {
+      if (value) {
         void this.router.navigate(['home'])
       }
     })
@@ -154,5 +155,7 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     this.arraySubscriptions.forEach(subscription => {
       subscription.unsubscribe()
     })
+
+    this.arraySubscriptions = []
   }
 }

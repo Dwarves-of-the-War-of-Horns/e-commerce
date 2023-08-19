@@ -1,26 +1,54 @@
 <header class="header">
   <div class="header__block">
-    <tui-svg [routerLink]="['/']" src="/assets/icons/header.svg" class="icon"></tui-svg>
+    <img class="" [routerLink]="['/']" height="100" width="100" ngSrc="/assets/icons/header.svg" />
 
-    <tui-tabs class="header__navigation" [activeItemIndex]="0" [underline]="false">
-      <button *ngFor="let pageData of pagesData" tuiTab [routerLink]="pageData.routerLink">
-        {{ pageData.title }}
-      </button>
-    </tui-tabs>
+    <nav class="header__navigation">
+      <tui-tabs-with-more [activeItemIndex]="0" [underline]="false">
+        <button *tuiItem tuiTab [routerLink]="['/']">
+          <tui-svg appearance="outline" src="tuiIconHome"></tui-svg>
+          Home
+        </button>
 
-    <span class="header__buttons-container">
-      <ng-container *ngIf="!(isUser$ | async)">
-        <button tuiButton [routerLink]="['/auth/sign-in']" class="tui-space_right-3">sign in</button>
+        <button *tuiItem tuiTab [routerLink]="['/', 'about']">
+          <tui-svg appearance="outline" src="tuiIconSmile"></tui-svg>
+          About us
+        </button>
 
-        <button tuiButton [routerLink]="['/auth/sign-up']" class="tui-space_right-3">sign up</button>
-      </ng-container>
+        <button *tuiItem tuiTab [routerLink]="['/', 'catalog']">
+          <tui-svg appearance="outline" src="tuiIconTruck"></tui-svg>
+          Our goods
+        </button>
 
-      <ng-container *ngIf="isUser$ | async">
-        <button tuiButton class="tui-space_right-3">log out</button>
-        <button tuiIconButton class="tui-space_right-3" [routerLink]="['/']" icon="tuiIconUser"></button>
-      </ng-container>
+        <button *tuiItem tuiTab [routerLink]="['/auth/sign-in']">
+          <tui-svg appearance="outline" src="tuiIconUserPlus"></tui-svg>
+          Sign in
+        </button>
 
-      <button tuiIconButton class="tui-space_right-3" [routerLink]="['/']" icon="tuiIconShoppingCart"></button>
-    </span>
+        <button *tuiItem tuiTab [routerLink]="['/auth/sign-up']">
+          <tui-svg appearance="outline" src="tuiIconUserCheck"></tui-svg>
+          Sign up
+        </button>
+
+        <button *tuiItem tuiTab appearance="outline" [routerLink]="['/']">
+          <tui-svg appearance="outline" src="tuiIconUser"></tui-svg>
+          User
+        </button>
+
+        <button *tuiItem tuiTab appearance="outline" [routerLink]="['/']">
+          <tui-svg appearance="outline" src="tuiIconShoppingCart"></tui-svg>
+          Cart
+        </button>
+      </tui-tabs-with-more>
+    </nav>
+
+    <div class="header__buttons-container" *ngIf="isUser$ | async">
+      <button
+        tuiIconButton
+        size="s"
+        appearance="outline"
+        [routerLink]="['/']"
+        icon="tuiIconLogOut"
+      ></button>
+    </div>
   </div>
 </header>

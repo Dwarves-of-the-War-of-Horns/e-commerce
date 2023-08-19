@@ -5,34 +5,16 @@
   background-color: var(--tui-base-02);
 
   &__navigation {
-    margin-left: 1rem;
+    width: 60vw;
   }
 
   &__block {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     width: 90vw;
     height: 100%;
     margin: auto;
-  }
-
-  &__link {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  &__title {
-    margin: 0;
-  }
-
-  .icon {
-    cursor: pointer;
-    width: 5.5em;
-    height: 5.5em;
-  }
-
-  &__buttons-container {
-    margin-left: auto;
   }
 }

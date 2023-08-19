@@ -21,7 +21,7 @@
               "prefix": "EC_"
             },
             "outputPath": "dist/",
-            "allowedCommonJsDependencies": ["dompurify"],
+            "allowedCommonJsDependencies": ["dompurify", "text-mask-core"],
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],

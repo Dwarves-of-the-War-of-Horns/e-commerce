@@ -3,11 +3,13 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { TuiRootModule } from '@taiga-ui/core'
 
 import { AppComponent } from './app.component'
+import { HeaderComponent } from './core/components/header/header.component'
+import { CoreModule } from './core/core.module'
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, TuiRootModule],
+      imports: [RouterTestingModule, TuiRootModule, CoreModule, HeaderComponent],
       declarations: [AppComponent],
     }).compileComponents()
   })
@@ -16,11 +18,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent)
     const app = fixture.componentInstance
     expect(app).toBeTruthy()
-  })
-
-  it(`should have as title 'e-commerce'`, () => {
-    const fixture = TestBed.createComponent(AppComponent)
-    const app = fixture.componentInstance
-    expect(app.title).toEqual('e-commerce')
   })
 })

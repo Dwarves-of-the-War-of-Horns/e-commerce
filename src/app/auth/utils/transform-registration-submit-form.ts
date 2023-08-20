@@ -1,8 +1,8 @@
 import type { FormGroup } from '@angular/forms'
 import type { MyCustomerDraft } from '@commercetools/platform-sdk'
 
+import { convertCountryFormat } from '../dictionary/convert-country-format.dictionary'
 import type { SignUpSubmitForm } from '../model/sign-up-submit-form.model'
-import { convertCountryFormat } from './convert-country-format'
 
 export function transformRegistrationSubmitForm(form: FormGroup, addedAddress: boolean): MyCustomerDraft {
   const formValue = form.getRawValue() as SignUpSubmitForm
@@ -20,7 +20,7 @@ export function transformRegistrationSubmitForm(form: FormGroup, addedAddress: b
         street: formValue.street,
         city: formValue.city,
         postalCode: formValue.postalCode,
-        country: convertCountryFormat(formValue.country),
+        country: convertCountryFormat[formValue.country],
       },
     ],
   }
@@ -30,7 +30,7 @@ export function transformRegistrationSubmitForm(form: FormGroup, addedAddress: b
       street: formValue.billingStreet,
       city: formValue.billingCity,
       postalCode: formValue.billingPostalCode,
-      country: convertCountryFormat(formValue.billingCountry),
+      country: convertCountryFormat[formValue.billingCountry],
     })
   }
 

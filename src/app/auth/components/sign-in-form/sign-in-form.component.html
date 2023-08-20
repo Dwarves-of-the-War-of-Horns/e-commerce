@@ -1,10 +1,9 @@
 <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
   <h2 class="tui-form__header tui-form__header_margin-top_none">Login</h2>
-  <tui-error *ngIf="error | async as errorMessage" [error]="errorMessage"></tui-error>
+  <tui-error *ngIf="errorMessage$ | async as errorMessage" [error]="errorMessage"></tui-error>
 
   <div class="tui-form__row">
     <tui-input
-      tuiTextfieldExampleText="Field placeholder"
       formControlName="username"
       tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
     >

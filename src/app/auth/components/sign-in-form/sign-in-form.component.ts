@@ -1,16 +1,13 @@
 import { Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
-import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
-import type { Subscription } from 'rxjs'
+import { type Subscription } from 'rxjs'
 
 import { emailValidator } from '../../../shared/validators/email.validator'
 import { hasOneCharacter } from '../../../shared/validators/has-one-character.validator'
 import { hasOneLowerCaseCharacter } from '../../../shared/validators/has-one-lowercase-character.validator'
 import { hasOneUpperCaseCharacter } from '../../../shared/validators/has-one-uppercase-character.validator'
 import { minCharacterValidator } from '../../../shared/validators/min-character.validator'
-import { signInPageActions } from '../../auth-store/auth.action'
-import { selectError, selectIsLogined } from '../../auth-store/auth.selectors'
+import { AuthFacade } from '../../auth-store/auth.facade'
 import type { SignInSubmitForm } from '../../model/sign-in-submit-form.model'
 import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validation'
 import { hasOneNumber } from 'src/app/shared/validators/has-one-number.validator'
@@ -21,8 +18,7 @@ import { hasOneNumber } from 'src/app/shared/validators/has-one-number.validator
   styleUrls: ['./sign-in-form.component.scss'],
 })
 export class SignInFormComponent implements OnInit, OnDestroy {
-  public isLogined = this.store.select(selectIsLogined)
-  public error = this.store.select(selectError)
+  public errorMessage$ = this.authFacade.errorMessage$
   public arraySubscriptions: Subscription[] = []
 
   public signInForm = this.fb.group({
@@ -37,33 +33,21 @@ export class SignInFormComponent implements OnInit, OnDestroy {
   })
   constructor(
     private fb: FormBuilder,
-    private store: Store,
-    private router: Router,
+    private authFacade: AuthFacade,
   ) {}
 
   ngOnInit(): void {
-    this.arraySubscriptions = this.markAsTouched()
+    this.arraySubscriptions = [this.signInForm.controls.username, this.signInForm.controls.password].map(
+      fromControl => {
+        return fromControl.valueChanges.subscribe(() => {
+          fromControl.markAsTouched()
+        })
+      },
+    )
   }
 
   public onSubmit(): void {
-    this.store.dispatch(
-      signInPageActions.signIn({
-        customer: this.signInForm.getRawValue() as SignInSubmitForm,
-      }),
-    )
-    this.isLogined.subscribe(value => {
-      if (value) {
-        void this.router.navigate(['home'])
-      }
-    })
-  }
-
-  public markAsTouched(): Subscription[] {
-    return [this.signInForm.controls.username, this.signInForm.controls.password].map(fromControl => {
-      return fromControl.valueChanges.subscribe(() => {
-        fromControl.markAsTouched()
-      })
-    })
+    this.authFacade.signIn(this.signInForm.getRawValue() as SignInSubmitForm)
   }
 
   public ngOnDestroy(): void {

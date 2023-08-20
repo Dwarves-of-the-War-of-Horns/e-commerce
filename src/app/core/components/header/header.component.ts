@@ -1,9 +1,10 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common'
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { TuiButtonModule, TuiSvgModule } from '@taiga-ui/core'
 import { TuiTabsModule } from '@taiga-ui/kit'
-import { of, shareReplay } from 'rxjs'
+
+import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
 
 @Component({
   selector: 'ec-header',
@@ -13,5 +14,10 @@ import { of, shareReplay } from 'rxjs'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  isUser$ = of(true).pipe(shareReplay(1))
+  private authFacade = inject(AuthFacade)
+  public isUserLogined$ = this.authFacade.isUserLogined$
+
+  public logout(): void {
+    this.authFacade.logOut()
+  }
 }

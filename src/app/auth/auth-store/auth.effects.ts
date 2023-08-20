@@ -8,6 +8,7 @@ import { map, switchMap, tap } from 'rxjs/operators'
 import { alertsAuth } from '../dictionary/auth-alert.dictionary'
 import { authInitApiActions } from './auth-init-api.actions'
 import { authInitActions } from './auth-init.actions'
+import { logoutActions } from './logout.actions'
 import { signInApiActions } from './sign-in-api.actions'
 import { signInPageActions } from './sign-in-page.actions'
 import { signUpApiActions } from './sign-up-api.actions'
@@ -74,6 +75,13 @@ export class AuthEffects {
           catchError(error => of(authInitApiActions.getCustomerFailure({ error: error.message as string }))),
         ),
       ),
+    )
+  })
+
+  logOutEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(logoutActions.logOutStart),
+      switchMap(() => this.authHttpService.logOut().pipe(map(() => logoutActions.logOutFinish()))),
     )
   })
 }

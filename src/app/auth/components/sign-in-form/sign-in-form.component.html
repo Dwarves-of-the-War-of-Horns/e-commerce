@@ -1,5 +1,5 @@
 <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-  <h2 class="tui-form__header tui-form__header_margin-top_none">Login</h2>
+  <h2 class="tui-form__header tui-form__header_margin-top_none sign-in-logo">Login</h2>
   <tui-error *ngIf="errorMessage$ | async as errorMessage" [error]="errorMessage"></tui-error>
 
   <div class="tui-form__row">
@@ -23,8 +23,10 @@
     </tui-input-password>
     <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
   </div>
-  <h3>If you don't have an account, please <a tuiLink routerLink="/auth/sign-up">register</a>.</h3>
-  <div class="tui-form__buttons">
-    <button tuiButton size="m" type="submit" class="tui-form__buttons" [disabled]="signInForm.invalid">Submit</button>
+  <div class="tui-form__row">
+    <button tuiButton size="m" type="submit" class="tui-form__buttons button-center" [disabled]="signInForm.invalid">
+      Submit
+    </button>
   </div>
 </form>
+<h3 class="logo-redirect">If you don't have an account, please <a tuiLink routerLink="/auth/sign-up">register</a>.</h3>

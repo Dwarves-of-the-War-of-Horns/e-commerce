@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store'
 
 import { authInitActions } from './auth-init.actions'
 import { selectError, selectIsLogined } from './auth.selectors'
+import { logoutActions } from './logout.actions'
 import { signInPageActions } from './sign-in-page.actions'
 import { signUpPageActions } from './sign-up-page.actions'
 
@@ -24,5 +25,9 @@ export class AuthFacade {
 
   public init(): void {
     this.store$.dispatch(authInitActions.getCustomer())
+  }
+
+  public logOut(): void {
+    this.store$.dispatch(logoutActions.logOutStart())
   }
 }

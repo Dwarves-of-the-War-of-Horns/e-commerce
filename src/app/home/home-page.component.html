@@ -1,1 +1,56 @@
-<p>home-page works!</p>
+<main class="main">
+  <h4 class="tui-text_h4 main__header">Welcome to our store!</h4>
+  <p class="tui-text_body-xl">
+    We are happy that you visited us! Take a look around – we've got some cool stuff to share that we think you'll love.
+  </p>
+
+  <div class="container">
+    <div class="tui-row">
+      <div class="tui-col_md-4">
+        <tui-island>
+          <h3 class="tui-island__title">Meet our team!</h3>
+          <p class="tui-island__paragraph">Check some info about who we are and what are we standing for.</p>
+          <a tuiLink [routerLink]="['/', 'about']">About us</a>
+        </tui-island>
+      </div>
+
+      <div class="tui-col_md-4">
+        <tui-island>
+          <h3 class="tui-island__title">See our products!</h3>
+          <p class="tui-island__paragraph">Take a look at our products and find something that suits you best!</p>
+          <a tuiLink class="tui-island__paragraph tui-island__paragraph_link" [routerLink]="['/', 'catalog']">Our goods</a>
+        </tui-island>
+      </div>
+
+      <div class="tui-col_md-4">
+        <tui-island>
+          <h3 class="tui-island__title">You have already got an account? - sign in!</h3>
+          <p class="tui-island__paragraph">Sign in to see the products that you added to the cart before</p>
+          <a tuiLink [routerLink]="['/', 'auth', 'sign-in']">Sign in</a>
+        </tui-island>
+      </div>
+    </div>
+
+    <div class="tui-row">
+      <div class="tui-col_md-4">
+        <tui-island>
+          <h3 class="tui-island__title">Don't have an account? - sign up!</h3>
+          <p class="tui-island__paragraph">Register to start shopping where you finished it last time!</p>
+          <a tuiLink [routerLink]="['/', 'auth', 'sign-up']">Sign up</a>
+        </tui-island>
+      </div>
+
+      <tui-island class="tui-col_md-4">
+        <h3 class="tui-island__title">Check out your user settings!</h3>
+        <p class="tui-island__paragraph">In user settings you can change your password and more</p>
+        <a tuiLink [routerLink]="['/', 'user']">User settings</a>
+      </tui-island>
+
+      <tui-island class="tui-col_md-4">
+        <h3 class="tui-island__title">Let's see what've you got in your cart!</h3>
+        <p class="tui-island__paragraph">We can only imagine what kind of wonderful goods you store there</p>
+        <a tuiLink [routerLink]="['/', 'cart']">Shopping cart</a>
+      </tui-island>
+    </div>
+  </div>
+</main>

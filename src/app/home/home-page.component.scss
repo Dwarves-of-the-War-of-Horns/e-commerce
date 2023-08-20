@@ -1,0 +1,18 @@
+.main {
+  width: 80vw;
+  margin: auto;
+
+  &__header {
+    margin-bottom: 0.5rem;
+  }
+
+  .tui-row {
+    margin-top: 1rem;
+  }
+}
+
+@media (width <= 650px) {
+  .main {
+    width: 100vw;
+  }
+}

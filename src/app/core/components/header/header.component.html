@@ -41,13 +41,14 @@
       </tui-tabs-with-more>
     </nav>
 
-    <div class="header__buttons-container" *ngIf="isUser$ | async">
+    <div class="header__buttons-container" *ngIf="isUserLogined$ | async">
       <button
         tuiIconButton
         size="s"
         appearance="outline"
         [routerLink]="['/']"
         icon="tuiIconLogOut"
+        (click)="logout()"
       ></button>
     </div>
   </div>

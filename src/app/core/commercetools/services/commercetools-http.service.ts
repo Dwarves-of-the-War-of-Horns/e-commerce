@@ -13,12 +13,12 @@ import { tokenStorageKey } from '../constants/commercetools-token-storage-key'
   providedIn: 'root',
 })
 export class CommercetoolsHttpService {
-  private ls: LocalStorageService = inject(LocalStorageService)
+  private localStorageService: LocalStorageService = inject(LocalStorageService)
   private builder: CommercetoolsClientBuilder = inject(CommercetoolsClientBuilder)
   private api: ByProjectKeyRequestBuilder
 
   constructor() {
-    const storedToken = this.ls.getItem<TokenStore>(tokenStorageKey)
+    const storedToken = this.localStorageService.getItem<TokenStore>(tokenStorageKey)
 
     if (storedToken?.refreshToken) {
       this.api = this.builder.getRefreshTokenClient(storedToken.refreshToken)
@@ -29,18 +29,18 @@ export class CommercetoolsHttpService {
 
   public getProject(): Observable<Project | undefined> {
     return fromPromise(this.api.get().execute()).pipe(
-      map(result => {
-        return result.body
+      map(({ body }) => {
+        return body
       }),
     )
   }
 
-  public signIn(user: UserAuthOptions): Observable<Customer> {
-    const { username: email, password } = user
+  public signIn(userAuthOptions: UserAuthOptions): Observable<Customer> {
+    const { username: email, password } = userAuthOptions
 
     return fromPromise(this.api.me().login().post({ body: { email, password } }).execute()).pipe(
       switchMap(() => {
-        this.api = this.builder.getPasswordClient(user)
+        this.api = this.builder.getPasswordClient(userAuthOptions)
 
         return this.getUserInfo()
       }),
@@ -49,8 +49,8 @@ export class CommercetoolsHttpService {
 
   public getUserInfo(): Observable<Customer> {
     return fromPromise(this.api.me().get().execute()).pipe(
-      map(result => {
-        return result.body
+      map(({ body }) => {
+        return body
       }),
     )
   }
@@ -68,7 +68,7 @@ export class CommercetoolsHttpService {
   }
 
   public logOut(): void {
-    this.ls.removeItem(tokenStorageKey)
+    this.localStorageService.removeItem(tokenStorageKey)
     this.api = this.builder.getDefaultClient()
   }
 }

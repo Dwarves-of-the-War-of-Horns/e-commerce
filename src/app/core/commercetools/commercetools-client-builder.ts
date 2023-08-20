@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment'
   providedIn: 'root',
 })
 export class CommercetoolsClientBuilder {
-  private ls: LocalStorageService = inject(LocalStorageService)
+  private localStorageService: LocalStorageService = inject(LocalStorageService)
   private activeClient!: Client
   private readonly projectKey = environment.projectKey
   private readonly authHost = environment.authHost
@@ -41,7 +41,7 @@ export class CommercetoolsClientBuilder {
   }
 
   private getTokenStorage(flowKey: CommercetoolsTokenFlow, refreshToken?: string): TokenStorage {
-    return new TokenStorage(this.ls, flowKey, refreshToken)
+    return new TokenStorage(this.localStorageService, flowKey, refreshToken)
   }
 
   public getDefaultClient(): ByProjectKeyRequestBuilder {

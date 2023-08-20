@@ -189,7 +189,7 @@
           <tui-data-list *tuiDataList>
             <tui-opt-group>
               <button
-                *ngFor="let country of countryArray"
+                *ngFor="let country of countryArray; trackBy: countryTrackByFn"
                 tuiOption
                 [value]="country"
                 (click)="updateBillingPostalCodeValidation()"

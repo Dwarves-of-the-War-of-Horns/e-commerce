@@ -3,7 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
-import { signInPageActions, signUpApiActions, signUpPageActions } from './auth.action'
+import { signInPageActions } from './sign-in-page.actions'
+import { signUpApiActions } from './sign-up-api.actions'
+import { signUpPageActions } from './sign-up-page.actions'
 import { CommercetoolsHttpService } from 'src/app/core/commercetools/services/commercetools-http.service'
 
 @Injectable()
@@ -11,7 +13,7 @@ export class AuthEffects {
   actions$ = inject(Actions)
   authHttpService = inject(CommercetoolsHttpService)
 
-  loadUser$ = createEffect(() => {
+  signUpEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(signUpPageActions.signUp),
       switchMap(({ customer }) =>
@@ -24,7 +26,7 @@ export class AuthEffects {
     )
   })
 
-  loginUser$ = createEffect(() => {
+  signInEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(signInPageActions.signIn),
       switchMap(({ customer }) =>

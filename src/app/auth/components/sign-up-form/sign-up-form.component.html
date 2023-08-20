@@ -1,7 +1,7 @@
 <form [formGroup]="singUpForm" (ngSubmit)="onSubmit()">
   <h2 class="tui-form__header sign-up-logo">Registration</h2>
 
-  <tui-error *ngIf="error | async as errorMessage" [error]="errorMessage"></tui-error>
+  <tui-error *ngIf="error$ | async as errorMessage" [error]="errorMessage"></tui-error>
 
   <div class="tui-form__row">
     <tui-input

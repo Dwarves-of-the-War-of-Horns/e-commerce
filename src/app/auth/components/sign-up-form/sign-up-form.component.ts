@@ -2,10 +2,9 @@ import { Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { TuiDay } from '@taiga-ui/cdk'
-import type { Subscription } from 'rxjs'
+import { type Subscription } from 'rxjs'
 
 import { AuthFacade } from '../../auth-store/auth.facade'
-import { selectError, selectIsLogined } from '../../auth-store/auth.selectors'
 import { transformRegistrationSubmitForm } from '../../utils/transform-registration-submit-form'
 import { toggleEnableStatusFields } from 'src/app/auth/dictionary/toggle-enable-status-fields.dictionary'
 import { subscribeToValueChangesOnForms } from 'src/app/auth/utils/subscribe-to-value-changes-on-forms.utils'
@@ -27,8 +26,8 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   styleUrls: ['./sign-up-form.component.scss'],
 })
 export class SignUpFormComponent implements OnInit, OnDestroy {
-  public isLogined = this.store.select(selectIsLogined)
-  public error = this.store.select(selectError)
+  public isLogined$ = this.authFacade.isUserLogined$
+  public error$ = this.authFacade.errorMessage$
   public isDisableBillingAddress = true
   public countryArray = [Country.Usa, Country.Canada]
   public arraySubscriptions: Subscription[] = []

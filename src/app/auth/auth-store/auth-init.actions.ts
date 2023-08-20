@@ -1,3 +1,8 @@
-import { createAction } from '@ngrx/store'
+import { createActionGroup, emptyProps } from '@ngrx/store'
 
-export const authInitAction = createAction('[Auth Init] Get Customer')
+export const authInitActions = createActionGroup({
+  source: 'Auth Init',
+  events: {
+    'Get Customer': emptyProps(),
+  },
+})

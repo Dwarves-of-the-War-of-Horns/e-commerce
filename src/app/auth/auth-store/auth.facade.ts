@@ -4,7 +4,7 @@ import type { MyCustomerDraft } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { Store } from '@ngrx/store'
 
-import { authInitAction } from './auth-init.actions'
+import { authInitActions } from './auth-init.actions'
 import { selectError, selectIsLogined } from './auth.selectors'
 import { signInPageActions } from './sign-in-page.actions'
 import { signUpPageActions } from './sign-up-page.actions'
@@ -35,6 +35,6 @@ export class AuthFacade {
   }
 
   public init(): void {
-    this.store$.dispatch(authInitAction())
+    this.store$.dispatch(authInitActions.getCustomer())
   }
 }

@@ -4,7 +4,7 @@ import { catchError, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
 import { authInitApiActions } from './auth-init-api.actions'
-import { authInitAction } from './auth-init.actions'
+import { authInitActions } from './auth-init.actions'
 import { signInApiActions } from './sign-in-api.actions'
 import { signInPageActions } from './sign-in-page.actions'
 import { signUpApiActions } from './sign-up-api.actions'
@@ -44,7 +44,7 @@ export class AuthEffects {
 
   authInitEffect$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(authInitAction),
+      ofType(authInitActions.getCustomer),
       switchMap(() =>
         this.authHttpService.getUserInfo().pipe(
           map(user => authInitApiActions.getCustomerSuccess({ customer: user })),

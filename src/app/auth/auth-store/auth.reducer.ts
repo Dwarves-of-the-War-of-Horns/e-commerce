@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store'
 
 import type { AuthState } from '../model/auth-state.model'
 import { authInitApiActions } from './auth-init-api.actions'
-import { authInitAction } from './auth-init.actions'
+import { authInitActions } from './auth-init.actions'
 import { signInApiActions } from './sign-in-api.actions'
 import { signInPageActions } from './sign-in-page.actions'
 import { signUpApiActions } from './sign-up-api.actions'
@@ -49,7 +49,7 @@ export const authReducer = createReducer(
     isLoading: false,
     error,
   })),
-  on(authInitAction, state => ({
+  on(authInitActions.getCustomer, state => ({
     ...state,
     isLoading: true,
   })),

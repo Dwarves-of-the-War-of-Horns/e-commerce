@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { inject, NgModule } from '@angular/core'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
 
@@ -17,4 +17,10 @@ import { storageKeyPrefix } from './storage/tokens/storage-key.token'
   ],
   providers: [{ provide: AuthFacade, useClass: AuthFacade }],
 })
-export class CoreModule {}
+export class CoreModule {
+  private authFacade: AuthFacade = inject(AuthFacade)
+
+  constructor() {
+    this.authFacade.init()
+  }
+}

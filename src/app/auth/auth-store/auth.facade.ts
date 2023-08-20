@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import type { MyCustomerDraft, Subscription } from '@commercetools/platform-sdk'
+import type { MyCustomerDraft } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { Store } from '@ngrx/store'
 

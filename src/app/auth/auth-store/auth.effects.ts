@@ -3,6 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
+import { authInitApiActions } from './auth-init-api.actions'
+import { authInitAction } from './auth-init.actions'
+import { signInApiActions } from './sign-in-api.actions'
 import { signInPageActions } from './sign-in-page.actions'
 import { signUpApiActions } from './sign-up-api.actions'
 import { signUpPageActions } from './sign-up-page.actions'
@@ -31,9 +34,22 @@ export class AuthEffects {
       ofType(signInPageActions.signIn),
       switchMap(({ customer }) =>
         this.authHttpService.signIn(customer).pipe(
-          map(user => signUpApiActions.signUpSuccess({ customer: user })),
+          map(user => signInApiActions.signInSuccess({ customer: user })),
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-          catchError(error => of(signUpApiActions.signUpFailure({ error: error.message as string }))),
+          catchError(error => of(signInApiActions.signInFailure({ error: error.message as string }))),
+        ),
+      ),
+    )
+  })
+
+  authInitEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authInitAction),
+      switchMap(() =>
+        this.authHttpService.getUserInfo().pipe(
+          map(user => authInitApiActions.getCustomerSuccess({ customer: user })),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+          catchError(error => of(authInitApiActions.getCustomerFailure({ error: error.message as string }))),
         ),
       ),
     )

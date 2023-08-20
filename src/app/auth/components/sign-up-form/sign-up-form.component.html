@@ -1,10 +1,11 @@
 <form [formGroup]="singUpForm" (ngSubmit)="onSubmit()">
-  <h2 class="tui-form__header tui-form__header_margin-top_none">Registration</h2>
+  <h2 class="tui-form__header sign-up-logo">Registration</h2>
+
   <tui-error *ngIf="error | async as errorMessage" [error]="errorMessage"></tui-error>
 
   <div class="tui-form__row">
     <tui-input
-      tuiTextfieldExampleText="Field placeholder"
+      tuiTextfieldSize="m"
       formControlName="email"
       tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
     >
@@ -17,7 +18,7 @@
 
   <div class="tui-form__row">
     <tui-input
-      tuiTextfieldExampleText="Field placeholder"
+      tuiTextfieldSize="m"
       formControlName="firstName"
       tuiHintContent="Must contain at least one character and no special characters or numbers"
     >
@@ -30,7 +31,7 @@
 
   <div class="tui-form__row">
     <tui-input
-      tuiTextfieldExampleText="Field placeholder"
+      tuiTextfieldSize="m"
       formControlName="lastName"
       tuiHintContent="Must contain at least one character and no special characters or numbers"
     >
@@ -43,6 +44,7 @@
 
   <div class="tui-form__row">
     <tui-input-password
+      tuiTextfieldSize="m"
       formControlName="password"
       tuiHintContent="Password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end"
       ><input tuiTextfield autocomplete="new-password" placeholder="Make it secure!" />Password
@@ -53,6 +55,7 @@
 
   <div class="tui-form__row">
     <tui-input-date
+      tuiTextfieldSize="m"
       tuiTextfieldExampleText="Placeholder"
       formControlName="dateOfBirth"
       tuiHintContent="A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)"
@@ -64,11 +67,7 @@
   </div>
 
   <div class="tui-form__row">
-    <tui-input
-      tuiTextfieldExampleText="Field placeholder"
-      formControlName="street"
-      tuiHintContent="Must contain at least one character"
-    >
+    <tui-input tuiTextfieldSize="m" formControlName="street" tuiHintContent="Must contain at least one character">
       <input tuiTextfield />
       Street
       <span class="tui-required"></span>
@@ -78,7 +77,7 @@
 
   <div class="tui-form__row">
     <tui-input
-      tuiTextfieldExampleText="Field placeholder"
+      tuiTextfieldSize="m"
       formControlName="city"
       tuiHintContent="Must contain at least one character and no special characters or numbers"
     >
@@ -91,7 +90,7 @@
 
   <div class="tui-form__row">
     <tui-input
-      tuiTextfieldExampleText="Field placeholder"
+      tuiTextfieldSize="m"
       formControlName="postalCode"
       tuiHintContent="Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)"
     >
@@ -103,7 +102,7 @@
   </div>
 
   <div class="tui-form__row">
-    <tui-select formControlName="country">
+    <tui-select formControlName="country" tuiTextfieldSize="m">
       Country
       <tui-data-list *tuiDataList>
         <tui-opt-group>
@@ -121,7 +120,12 @@
   </div>
 
   <div class="tui-form__row tui-form__row_multi-fields">
-    <tui-checkbox-block contentAlign="right" formControlName="defaultShippingAddress" class="tui-form__multi-field">
+    <tui-checkbox-block
+      size="m"
+      contentAlign="right"
+      formControlName="defaultShippingAddress"
+      class="tui-form__multi-field"
+    >
       Set as default shipping address
     </tui-checkbox-block>
   </div>
@@ -131,11 +135,10 @@
     <ng-template tuiAccordionItemContent>
       <div class="tui-form__row">
         <tui-checkbox-block
+          size="m"
           (ngModelChange)="toggleShippingAddressToBillingAddress()"
           formControlName="copyAddressCheckbox"
           contentAlign="left"
-          nativeId="example3"
-          size="l"
         >
           <div class="inner inner_flex">
             Write shipping address to billing address.
@@ -146,7 +149,7 @@
 
       <div class="tui-form__row">
         <tui-input
-          tuiTextfieldExampleText="Field placeholder"
+          tuiTextfieldSize="m"
           formControlName="billingStreet"
           tuiHintContent="Must contain at least one character"
         >
@@ -159,7 +162,7 @@
 
       <div class="tui-form__row">
         <tui-input
-          tuiTextfieldExampleText="Field placeholder"
+          tuiTextfieldSize="m"
           formControlName="billingCity"
           tuiHintContent="Must contain at least one character and no special characters or numbers"
         >
@@ -172,7 +175,7 @@
 
       <div class="tui-form__row">
         <tui-input
-          tuiTextfieldExampleText="Field placeholder"
+          tuiTextfieldSize="m"
           formControlName="billingPostalCode"
           tuiHintContent="Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)"
         >
@@ -184,7 +187,7 @@
       </div>
 
       <div class="tui-form__row">
-        <tui-select formControlName="billingCountry">
+        <tui-select formControlName="billingCountry" tuiTextfieldSize="m">
           Country
           <tui-data-list *tuiDataList>
             <tui-opt-group>
@@ -202,13 +205,19 @@
       </div>
 
       <div class="tui-form__row tui-form__row_multi-fields">
-        <tui-checkbox-block contentAlign="right" formControlName="defaultBillingAddress" class="tui-form__multi-field">
+        <tui-checkbox-block
+          size="m"
+          contentAlign="right"
+          formControlName="defaultBillingAddress"
+          class="tui-form__multi-field"
+        >
           Set as default billing address
         </tui-checkbox-block>
       </div>
     </ng-template>
   </tui-accordion-item>
-  <div class="tui-form__buttons">
-    <button tuiButton size="m" type="submit" class="tui-form__button" [disabled]="singUpForm.invalid">Submit</button>
+  <div class="tui-form__row">
+    <button tuiButton size="m" type="submit" class="tui-form__button button-center" [disabled]="singUpForm.invalid">Submit</button>
   </div>
 </form>
+<h3 class="logo-redirect">If you have an account, please <a tuiLink routerLink="/auth/sign-in">login</a>.</h3>

@@ -6,6 +6,8 @@ import { catchError, of } from 'rxjs'
 import { map, switchMap, tap } from 'rxjs/operators'
 
 import { alertsAuth } from '../dictionary/auth-alert.dictionary'
+import { authInitApiActions } from './auth-init-api.actions'
+import { authInitActions } from './auth-init.actions'
 import { signInApiActions } from './sign-in-api.actions'
 import { signInPageActions } from './sign-in-page.actions'
 import { signUpApiActions } from './sign-up-api.actions'
@@ -18,6 +20,7 @@ export class AuthEffects {
   private router = inject(Router)
   private authHttpService = inject(CommercetoolsHttpService)
   private alerts = inject(TuiAlertService)
+
   public signUpEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(signUpPageActions.signUp),
@@ -56,6 +59,19 @@ export class AuthEffects {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             return of(signInApiActions.signInFailure({ error: error.message as string }))
           }),
+        ),
+      ),
+    )
+  })
+
+  authInitEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authInitActions.getCustomer),
+      switchMap(() =>
+        this.authHttpService.getUserInfo().pipe(
+          map(user => authInitApiActions.getCustomerSuccess({ customer: user })),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+          catchError(error => of(authInitApiActions.getCustomerFailure({ error: error.message as string }))),
         ),
       ),
     )

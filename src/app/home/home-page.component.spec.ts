@@ -1,6 +1,6 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { TuiIslandModule } from '@taiga-ui/kit'
+import { TuiIslandModule, TuiMarkerIconModule } from '@taiga-ui/kit'
 
 import { HomePageComponent } from './home-page.component'
 
@@ -11,7 +11,7 @@ describe('HomePageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomePageComponent],
-      imports: [TuiIslandModule, RouterTestingModule],
+      imports: [TuiIslandModule, RouterTestingModule, TuiMarkerIconModule],
     }).compileComponents()
 
     fixture = TestBed.createComponent(HomePageComponent)

@@ -16,17 +16,19 @@
     </tui-island>
 
     <tui-island>
-      <tui-marker-icon src="tuiIconSmile" mode="link" class="icon"></tui-marker-icon>
+      <tui-marker-icon src="tuiIconGrid" mode="warning" class="icon"></tui-marker-icon>
       <h3 class="tui-island__title">Products</h3>
       <p class="tui-island__paragraph">Take a look at our products and find something that suits you best!</p>
-      <a tuiLink class="tui-island__paragraph tui-island__paragraph_link" [routerLink]="['/', 'catalog']">Our goods</a>
+      <a tuiLink class="tui-island__paragraph tui-island__paragraph_link" [routerLink]="['/', 'catalog']"
+        >Our products</a
+      >
     </tui-island>
-    
+
     <tui-island>
-      <tui-marker-icon src="tuiIconUser" mode="warning" class="icon"></tui-marker-icon>
+      <tui-marker-icon src="tuiIconUser" mode="link" class="icon"></tui-marker-icon>
       <h3 class="tui-island__title">Profile</h3>
-      <p class="tui-island__paragraph">In user settings you can change your password and more</p>
-      <a tuiLink [routerLink]="['/', 'user']">User</a>
+      <p class="tui-island__paragraph">Here you can change your password, settings and more</p>
+      <a tuiLink [routerLink]="['/', 'user']">User profile</a>
     </tui-island>
 
     <tui-island>
@@ -39,7 +41,7 @@
     <tui-island>
       <tui-marker-icon src="tuiIconUserPlus" mode="link" mode="link" class="icon"></tui-marker-icon>
       <h3 class="tui-island__title">Sign up</h3>
-      <p class="tui-island__paragraph">Register to start shopping where you finished it last time!</p>
+      <p class="tui-island__paragraph">Register to start shopping!</p>
       <a tuiLink [routerLink]="['/', 'auth', 'sign-up']">Sign up</a>
     </tui-island>
 

@@ -36,6 +36,13 @@ export const appRoutes: Routes = [
     loadChildren: () => import('./about/about.module').then(m => m.AboutModule),
     title: 'About us',
   },
+
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    title: 'User',
+  },
+
   {
     path: '**',
     loadComponent: () => import('./core/components/not-found/not-found.component').then(m => m.NotFoundComponent),

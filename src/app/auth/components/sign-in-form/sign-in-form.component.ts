@@ -18,7 +18,6 @@ import { hasOneNumber } from 'src/app/shared/validators/has-one-number.validator
   styleUrls: ['./sign-in-form.component.scss'],
 })
 export class SignInFormComponent implements OnInit, OnDestroy {
-  public errorMessage$ = this.authFacade.errorMessage$
   public arraySubscriptions: Subscription[] = []
 
   public signInForm = this.fb.group({

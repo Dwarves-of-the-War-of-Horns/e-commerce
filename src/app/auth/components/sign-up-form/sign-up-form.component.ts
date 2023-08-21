@@ -1,6 +1,5 @@
 import { Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
-import { Store } from '@ngrx/store'
 import { TuiDay } from '@taiga-ui/cdk'
 import { type Subscription } from 'rxjs'
 
@@ -26,8 +25,6 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   styleUrls: ['./sign-up-form.component.scss'],
 })
 export class SignUpFormComponent implements OnInit, OnDestroy {
-  public isLogined$ = this.authFacade.isUserLogined$
-  public error$ = this.authFacade.errorMessage$
   public isDisableBillingAddress = true
   public countryArray = [Country.Usa, Country.Canada]
   public arraySubscriptions: Subscription[] = []
@@ -59,12 +56,11 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store,
     private authFacade: AuthFacade,
   ) {}
 
   public ngOnInit(): void {
-    const arrayForms = [
+    this.arraySubscriptions = subscribeToValueChangesOnForms([
       this.singUpForm.controls.email,
       this.singUpForm.controls.firstName,
       this.singUpForm.controls.lastName,
@@ -72,9 +68,7 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
       this.singUpForm.controls.street,
       this.singUpForm.controls.city,
       this.singUpForm.controls.postalCode,
-    ]
-
-    this.arraySubscriptions = subscribeToValueChangesOnForms(arrayForms)
+    ])
     this.toggleStatusBillingAddressField()
   }
 
@@ -97,6 +91,7 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
       this.singUpForm.controls.postalCode,
       this.singUpForm.controls.country,
     ]
+
     const arrayBillingAddressControls = [
       this.singUpForm.controls.billingStreet,
       this.singUpForm.controls.billingCity,
@@ -132,15 +127,13 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
   public toggleStatusBillingAddressField = (): void => {
     this.isDisableBillingAddress = !this.isDisableBillingAddress
 
-    const arrayControls = [
+    toggleEnableStatusFields[String(this.isDisableBillingAddress)]([
       this.singUpForm.controls.billingStreet,
       this.singUpForm.controls.billingCity,
       this.singUpForm.controls.billingPostalCode,
       this.singUpForm.controls.billingCountry,
       this.singUpForm.controls.defaultBillingAddress,
-    ]
-
-    toggleEnableStatusFields[String(this.isDisableBillingAddress)](arrayControls)
+    ])
   }
 
   public ngOnDestroy(): void {

@@ -1,12 +1,24 @@
-import { inject } from '@angular/core'
-import type { CanActivateFn } from '@angular/router'
+import { inject, Injectable } from '@angular/core'
+import { type CanActivateFn, Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { map } from 'rxjs'
+import { map, tap } from 'rxjs'
 
 import { selectIsLogined } from '../auth-store/auth.selectors'
 
-export const authGuard: CanActivateFn = () => {
-  const store = inject(Store)
+@Injectable()
+export class AuthGuard {
+  private store = inject(Store)
+  private router = inject(Router)
 
-  return store.select(selectIsLogined).pipe(map(isLogined => !isLogined))
+  public canActivate: CanActivateFn = () =>
+    this.store.select(selectIsLogined).pipe(
+      map(isLogined => {
+        return !isLogined
+      }),
+      tap(isLogined => {
+        if (!isLogined) {
+          void this.router.navigate(['home'])
+        }
+      }),
+    )
 }

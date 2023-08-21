@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
@@ -33,9 +34,8 @@ export class AuthEffects {
             void this.router.navigate(['home'])
           }),
           catchError(error => {
-            alertsAuth[String(false)](this.alerts, 'sign-in')
+            alertsAuth[String(false)](this.alerts, error.message as string)
 
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             return of(signUpApiActions.signUpFailure({ error: error.message as string }))
           }),
         ),
@@ -55,9 +55,8 @@ export class AuthEffects {
           }),
 
           catchError(error => {
-            alertsAuth[String(false)](this.alerts, 'sign-in')
+            alertsAuth[String(false)](this.alerts, error.message as string)
 
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             return of(signInApiActions.signInFailure({ error: error.message as string }))
           }),
         ),
@@ -71,7 +70,6 @@ export class AuthEffects {
       switchMap(() =>
         this.authHttpService.getUserInfo().pipe(
           map(user => authInitApiActions.getCustomerSuccess({ customer: user })),
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
           catchError(error => of(authInitApiActions.getCustomerFailure({ error: error.message as string }))),
         ),
       ),

@@ -2,11 +2,10 @@
   &__header {
     max-width: 80vw;
     margin: auto;
-  }
 
-  &__heading {
-    margin-bottom: 0.5rem;
-    text-align: center;
+    * {
+      text-align: center;
+    }
   }
 
   .container {
@@ -16,6 +15,7 @@
 
     max-width: 1400px;
     margin: 4rem auto;
+    padding-bottom: 4rem;
   }
 
   .icon {
@@ -33,6 +33,16 @@
 
 @media (width <= 1000px) {
   .main {
+    .header {
+      &__heading {
+        font: var(--tui-font-heading-3);
+      }
+
+      &__text {
+        font: var(--tui-font-text-l);
+      }
+    }
+
     .container {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -41,6 +51,16 @@
 
 @media (width <= 475px) {
   .main {
+    .header {
+      &__heading {
+        font: var(--tui-font-heading-4);
+      }
+
+      &__text {
+        font: var(--tui-font-text-l-2);
+      }
+    }
+
     .container {
       grid-template-columns: 1fr;
     }

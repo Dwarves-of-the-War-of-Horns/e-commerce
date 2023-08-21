@@ -6,12 +6,12 @@
     </div>
 
     <nav class="header__navigation">
-      <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'about']">
+      <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'about']" title="About us">
         <tui-svg appearance="outline" src="tuiIconUsers"></tui-svg>
         <span class="nav-text">About us</span>
       </button>
 
-      <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'catalog']">
+      <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'catalog']" title="Products">
         <tui-svg appearance="outline" src="tuiIconGrid"></tui-svg>
         <span class="nav-text">Products</span>
       </button>
@@ -27,6 +27,7 @@
           icon="tuiIconLogOut"
           (click)="logout()"
           class="tui-space_right-1"
+          title="Log out"
         ></button>
         <button
           tuiIconButton
@@ -35,6 +36,7 @@
           [routerLink]="['/', 'user']"
           icon="tuiIconUser"
           class="tui-space_right-1"
+          title="Profile"
         ></button>
       </div>
       <ng-template #notLogined>
@@ -60,6 +62,7 @@
                 class="profile-auth__buton"
                 size="m"
                 (click)="selectAuthOption()"
+                title="Sign in"
               >
                 Sign in
               </button>
@@ -73,6 +76,7 @@
                 class="profile-auth__buton"
                 size="m"
                 (click)="selectAuthOption()"
+                title="Sign up"
               >
                 Sign up
               </button>
@@ -87,6 +91,7 @@
         [routerLink]="['/cart']"
         icon="tuiIconShoppingCart"
         class="tui-space_right-1"
+        title="Cart"
       ></button>
     </div>
   </div>

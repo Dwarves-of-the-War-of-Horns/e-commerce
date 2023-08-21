@@ -42,7 +42,7 @@
   &__navigation {
     display: flex;
     flex-grow: 1;
-    justify-content: end;
+    justify-content: flex-end;
 
     @media (width <=600px) {
       .nav-btn {

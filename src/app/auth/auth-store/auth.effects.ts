@@ -34,11 +34,7 @@ export class AuthEffects {
             void this.router.navigate(['home'])
           }),
           catchError(error => {
-            alertsAuth[String(false)](
-              this.alerts,
-              `sign-up.
-            Reason: ${error.message as string}`,
-            )
+            alertsAuth[String(false)](this.alerts, error.message as string)
 
             return of(signUpApiActions.signUpFailure({ error: error.message as string }))
           }),
@@ -59,11 +55,7 @@ export class AuthEffects {
           }),
 
           catchError(error => {
-            alertsAuth[String(false)](
-              this.alerts,
-              `sign-in.
-            Reason: ${error.message as string}`,
-            )
+            alertsAuth[String(false)](this.alerts, error.message as string)
 
             return of(signInApiActions.signInFailure({ error: error.message as string }))
           }),

@@ -2,7 +2,6 @@ import { CommonModule, NgOptimizedImage } from '@angular/common'
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule, TuiSvgModule } from '@taiga-ui/core'
-import { TuiTabsModule } from '@taiga-ui/kit'
 
 import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
 
@@ -14,7 +13,6 @@ import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
     TuiButtonModule,
     TuiSvgModule,
     CommonModule,
-    TuiTabsModule,
     NgOptimizedImage,
     TuiDataListModule,
     TuiHostedDropdownModule,

@@ -1,24 +1,20 @@
 <header class="header">
-  <div class="header__block">
-    <img class="" [routerLink]="['/']" height="60" width="60" ngSrc="/assets/icons/header.svg" />
+  <div class="header__container">
+    <div class="header__logo" [routerLink]="['/']">
+      <img class="header__logo-img" height="60" width="60" ngSrc="/assets/icons/header.svg" priority />
+      <h1 class="header__logo-title tui-text_body-m"><span>Dwarves</span><span>store</span></h1>
+    </div>
 
     <nav class="header__navigation">
-      <tui-tabs-with-more [activeItemIndex]="0" [underline]="false">
-        <button *tuiItem tuiTab [routerLink]="['/']">
-          <tui-svg appearance="outline" src="tuiIconHome"></tui-svg>
-          Home
-        </button>
+      <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'about']">
+        <tui-svg appearance="outline" src="tuiIconUsers"></tui-svg>
+        <span class="nav-text">About us</span>
+      </button>
 
-        <button *tuiItem tuiTab [routerLink]="['/', 'about']">
-          <tui-svg appearance="outline" src="tuiIconSmile"></tui-svg>
-          About us
-        </button>
-
-        <button *tuiItem tuiTab [routerLink]="['/', 'catalog']">
-          <tui-svg appearance="outline" src="tuiIconTruck"></tui-svg>
-          Catalogue
-        </button>
-      </tui-tabs-with-more>
+      <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'catalog']">
+        <tui-svg appearance="outline" src="tuiIconGrid"></tui-svg>
+        <span class="nav-text">Products</span>
+      </button>
     </nav>
 
     <div class="header__profile-container">
@@ -36,7 +32,7 @@
           tuiIconButton
           size="m"
           appearance="secondary"
-          [routerLink]="['/']"
+          [routerLink]="['/', 'user']"
           icon="tuiIconUser"
           class="tui-space_right-1"
         ></button>
@@ -49,6 +45,7 @@
             appearance="secondary"
             icon="tuiIconLogIn"
             type="button"
+            title="Log in"
             class="tui-space_right-1"
           ></button>
         </tui-hosted-dropdown>

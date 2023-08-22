@@ -8,3 +8,5 @@ const authFeature = createFeatureSelector<AuthState>(StoreFeatureNames.Auth)
 export const selectError = createSelector(authFeature, (state: AuthState) => state.error)
 
 export const selectIsLogined = createSelector(authFeature, (state: AuthState) => state.isLogined)
+
+export const selectIsLoading = createSelector(authFeature, (state: AuthState) => state.isLoading)

@@ -30,15 +30,15 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
   public arraySubscriptions: Subscription[] = []
 
   public singUpForm = this.fb.group({
-    email: new FormControl<string | null>('', [hasOneCharacter, emailValidator]),
+    email: new FormControl<string | null>('', [emailValidator, hasOneCharacter, hasNoSpaces]),
     firstName: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
     lastName: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
     password: new FormControl<string | null>('', [
-      hasNoSpaces,
-      hasOneNumber,
+      minCharacterValidator,
       hasOneUpperCaseCharacter,
       hasOneLowerCaseCharacter,
-      minCharacterValidator,
+      hasOneNumber,
+      hasNoSpaces,
     ]),
     dateOfBirth: new FormControl<TuiDay>(new TuiDay(2010, 0, 1), [birthValidator]),
     street: new FormControl<string | null>('', [hasOneCharacter]),

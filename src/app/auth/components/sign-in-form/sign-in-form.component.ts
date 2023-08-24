@@ -21,13 +21,13 @@ export class SignInFormComponent implements OnInit, OnDestroy {
   public arraySubscriptions: Subscription[] = []
 
   public signInForm = this.fb.group({
-    username: new FormControl<string | null>('', [hasNoSpaces, hasOneCharacter, emailValidator]),
+    username: new FormControl<string | null>('', [emailValidator, hasOneCharacter]),
     password: new FormControl<string | null>('', [
-      hasNoSpaces,
-      hasOneNumber,
-      hasOneUpperCaseCharacter,
-      hasOneLowerCaseCharacter,
       minCharacterValidator,
+      hasOneLowerCaseCharacter,
+      hasOneUpperCaseCharacter,
+      hasOneNumber,
+      hasNoSpaces,
     ]),
   })
   constructor(

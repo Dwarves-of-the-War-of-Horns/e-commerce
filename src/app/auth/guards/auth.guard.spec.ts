@@ -1,17 +1,18 @@
 import { TestBed } from '@angular/core/testing'
+import type { CanActivateFn } from '@angular/router'
 import { Store, StoreModule } from '@ngrx/store'
 
-import { AuthGuard } from './auth.guard'
+import { authGuard } from './auth.guard'
 
 describe('AuthGuard', () => {
-  let guard: AuthGuard
+  let guard: CanActivateFn
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
-      providers: [AuthGuard, Store],
+      providers: [Store],
     })
-    guard = TestBed.inject(AuthGuard)
+    guard = authGuard
   })
 
   it('should be created', () => {

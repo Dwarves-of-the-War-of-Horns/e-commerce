@@ -9,6 +9,7 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
+import { AuthFacade } from './auth/auth-store/auth.facade'
 import { HeaderComponent } from './core/components/header/header.component'
 import { CoreModule } from './core/core.module'
 
@@ -27,7 +28,10 @@ import { CoreModule } from './core/core.module'
     CoreModule,
     HeaderComponent,
   ],
-  providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
+  providers: [
+    { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
+    { provide: AuthFacade, useClass: AuthFacade },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

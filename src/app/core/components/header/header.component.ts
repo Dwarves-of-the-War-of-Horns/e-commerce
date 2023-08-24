@@ -23,7 +23,7 @@ import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
 })
 export class HeaderComponent {
   private authFacade = inject(AuthFacade)
-  public isUserLogined$ = this.authFacade.isUserLogined$
+  public isLoggedIn$ = this.authFacade.isLoggedIn$
   public isAuthDropdownOpen = false
 
   public logout(): void {

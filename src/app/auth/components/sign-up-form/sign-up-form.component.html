@@ -105,7 +105,7 @@
       <tui-data-list *tuiDataList>
         <tui-opt-group>
           <button
-            *ngFor="let country of countryArray"
+            *ngFor="let country of countryArray; trackBy: countryTrackByFn"
             tuiOption
             [value]="country"
             (click)="updateShippingPostalCodeValidation()"
@@ -215,7 +215,9 @@
     </ng-template>
   </tui-accordion-item>
   <div class="tui-form__row">
-    <button tuiButton size="m" type="submit" class="tui-form__button button-center" [disabled]="singUpForm.invalid">Submit</button>
+    <button tuiButton size="m" type="submit" class="tui-form__button button-center" [disabled]="singUpForm.invalid">
+      Submit
+    </button>
   </div>
 </form>
 <h3 class="logo-redirect">If you have an account, please <a tuiLink routerLink="/auth/sign-in">login</a>.</h3>

@@ -1,15 +1,14 @@
 import { Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
-import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
 import { TuiDay } from '@taiga-ui/cdk'
-import type { Subscription } from 'rxjs'
+import { type Subscription } from 'rxjs'
 
-import { signUpPageActions } from '../../auth-store/auth.action'
-import { selectError, selectIsLogined } from '../../auth-store/auth.selectors'
+import { AuthFacade } from '../../auth-store/auth.facade'
 import { transformRegistrationSubmitForm } from '../../utils/transform-registration-submit-form'
 import { toggleEnableStatusFields } from 'src/app/auth/dictionary/toggle-enable-status-fields.dictionary'
 import { subscribeToValueChangesOnForms } from 'src/app/auth/utils/subscribe-to-value-changes-on-forms.utils'
+import { Country } from 'src/app/shared/enum/country.enum'
+import { FormFields } from 'src/app/shared/enum/form-value.enum'
 import { birthValidator } from 'src/app/shared/validators/birth.validator'
 import { emailValidator } from 'src/app/shared/validators/email.validator'
 import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validation'
@@ -27,22 +26,20 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   styleUrls: ['./sign-up-form.component.scss'],
 })
 export class SignUpFormComponent implements OnInit, OnDestroy {
-  public isLogined = this.store.select(selectIsLogined)
-  public error = this.store.select(selectError)
   public isDisableBillingAddress = true
-  public countryArray = ['USA', 'Canada']
+  public countryArray = [Country.Usa, Country.Canada]
   public arraySubscriptions: Subscription[] = []
 
   public singUpForm = this.fb.group({
-    email: new FormControl<string | null>('', [hasOneCharacter, emailValidator]),
+    email: new FormControl<string | null>('', [emailValidator, hasOneCharacter]),
     firstName: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
     lastName: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
     password: new FormControl<string | null>('', [
-      hasNoSpaces,
-      hasOneNumber,
-      hasOneUpperCaseCharacter,
-      hasOneLowerCaseCharacter,
       minCharacterValidator,
+      hasOneLowerCaseCharacter,
+      hasOneUpperCaseCharacter,
+      hasOneNumber,
+      hasNoSpaces,
     ]),
     dateOfBirth: new FormControl<TuiDay>(new TuiDay(2010, 0, 1), [birthValidator]),
     street: new FormControl<string | null>('', [hasOneCharacter]),
@@ -51,7 +48,9 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     country: new FormControl(this.countryArray[0]),
     billingStreet: new FormControl<string | null>('', [hasOneCharacter]),
     billingCity: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
-    billingPostalCode: new FormControl<string | null>('', [postalCodeValidator]),
+    billingPostalCode: new FormControl<string | null>('', [
+      value => postalCodeValidator(value, FormFields.BillingCountry),
+    ]),
     billingCountry: new FormControl(this.countryArray[0]),
     copyAddressCheckbox: new FormControl(false),
     defaultShippingAddress: new FormControl(true),
@@ -60,12 +59,11 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store,
-    private router: Router,
+    private authFacade: AuthFacade,
   ) {}
 
   public ngOnInit(): void {
-    const arrayForms = [
+    this.arraySubscriptions = subscribeToValueChangesOnForms([
       this.singUpForm.controls.email,
       this.singUpForm.controls.firstName,
       this.singUpForm.controls.lastName,
@@ -73,10 +71,12 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
       this.singUpForm.controls.street,
       this.singUpForm.controls.city,
       this.singUpForm.controls.postalCode,
-    ]
-
-    this.arraySubscriptions = subscribeToValueChangesOnForms(arrayForms)
+    ])
     this.toggleStatusBillingAddressField()
+  }
+
+  public countryTrackByFn = (item: number): string => {
+    return this.countryArray[item]
   }
 
   public updateShippingPostalCodeValidation = (): void => {
@@ -87,13 +87,14 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     this.singUpForm.controls.billingPostalCode.updateValueAndValidity()
   }
 
-  private copyShippingAddressToBillingAddress(): void {
+  private copyAddressFields(): void {
     const arrayAddressControls = [
       this.singUpForm.controls.street,
       this.singUpForm.controls.city,
       this.singUpForm.controls.postalCode,
       this.singUpForm.controls.country,
     ]
+
     const arrayBillingAddressControls = [
       this.singUpForm.controls.billingStreet,
       this.singUpForm.controls.billingCity,
@@ -114,41 +115,28 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     ]
 
     arrayBillingAddressControls.forEach(formControl => {
-      formControl.setValue('')
+      formControl.reset('')
     })
   }
 
   public toggleShippingAddressToBillingAddress = (): void => {
-    this.singUpForm.controls.copyAddressCheckbox.getRawValue()
-      ? this.copyShippingAddressToBillingAddress()
-      : this.clearBillingAddress()
+    this.singUpForm.controls.copyAddressCheckbox.getRawValue() ? this.copyAddressFields() : this.clearBillingAddress()
   }
 
   public onSubmit(): void {
-    this.store.dispatch(
-      signUpPageActions.signUp({
-        customer: transformRegistrationSubmitForm(this.singUpForm, this.isDisableBillingAddress),
-      }),
-    )
-    this.isLogined.subscribe(value => {
-      if (value) {
-        void this.router.navigate(['home'])
-      }
-    })
+    this.authFacade.signUp(transformRegistrationSubmitForm(this.singUpForm, this.isDisableBillingAddress))
   }
 
   public toggleStatusBillingAddressField = (): void => {
     this.isDisableBillingAddress = !this.isDisableBillingAddress
 
-    const arrayControls = [
+    toggleEnableStatusFields[String(this.isDisableBillingAddress)]([
       this.singUpForm.controls.billingStreet,
       this.singUpForm.controls.billingCity,
       this.singUpForm.controls.billingPostalCode,
       this.singUpForm.controls.billingCountry,
       this.singUpForm.controls.defaultBillingAddress,
-    ]
-
-    toggleEnableStatusFields[String(this.isDisableBillingAddress)](arrayControls)
+    ])
   }
 
   public ngOnDestroy(): void {

@@ -48,7 +48,6 @@ export class CommercetoolsClientBuilder {
     this.activeClient = new ClientBuilder()
       .withAnonymousSessionFlow({ ...this.authOptions, tokenCache: this.getTokenStorage(CommercetoolsTokenFlow.anon) })
       .withHttpMiddleware(this.httpOptions)
-      .withLoggerMiddleware()
       .build()
 
     return createApiBuilderFromCtpClient(this.activeClient).withProjectKey({ projectKey: this.projectKey })
@@ -62,7 +61,6 @@ export class CommercetoolsClientBuilder {
         credentials: { ...this.credentials, user },
         tokenCache: this.getTokenStorage(CommercetoolsTokenFlow.password),
       })
-      .withLoggerMiddleware()
       .build()
 
     return createApiBuilderFromCtpClient(this.activeClient).withProjectKey({ projectKey: this.projectKey })
@@ -76,7 +74,6 @@ export class CommercetoolsClientBuilder {
         tokenCache: this.getTokenStorage(CommercetoolsTokenFlow.refresh, token),
       })
       .withHttpMiddleware(this.httpOptions)
-      .withLoggerMiddleware()
       .build()
 
     return createApiBuilderFromCtpClient(this.activeClient).withProjectKey({ projectKey: this.projectKey })

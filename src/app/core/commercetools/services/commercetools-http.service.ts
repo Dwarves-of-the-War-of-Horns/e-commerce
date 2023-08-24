@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core'
 import type { Customer, MyCustomerDraft, Project } from '@commercetools/platform-sdk'
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder'
 import type { TokenStore, UserAuthOptions } from '@commercetools/sdk-client-v2'
-import { map, type Observable, switchMap } from 'rxjs'
+import { map, type Observable, of, switchMap } from 'rxjs'
 import { fromPromise } from 'rxjs/internal/observable/innerFrom'
 
 import { LocalStorageService } from '../../storage/services/local-storage.service'
@@ -67,8 +67,10 @@ export class CommercetoolsHttpService {
     )
   }
 
-  public logOut(): void {
+  public logOut(): Observable<boolean> {
     this.localStorageService.removeItem(tokenStorageKey)
     this.api = this.builder.getDefaultClient()
+
+    return of(true)
   }
 }

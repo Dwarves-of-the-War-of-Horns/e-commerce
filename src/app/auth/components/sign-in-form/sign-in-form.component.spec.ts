@@ -6,6 +6,7 @@ import { provideMockStore } from '@ngrx/store/testing'
 import { TuiFieldErrorPipe } from '@taiga-ui/kit'
 
 import { AuthRoutingModule } from '../../auth-routing.module'
+import { AuthFacade } from '../../auth-store/auth.facade'
 import { SignInFormComponent } from './sign-in-form.component'
 
 describe('SignInFormComponent', () => {
@@ -17,7 +18,7 @@ describe('SignInFormComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       declarations: [SignInFormComponent, TuiFieldErrorPipe],
       imports: [CommonModule, AuthRoutingModule, RouterTestingModule],
-      providers: [provideMockStore({})],
+      providers: [provideMockStore({}), AuthFacade],
     }).compileComponents()
 
     fixture = TestBed.createComponent(SignInFormComponent)

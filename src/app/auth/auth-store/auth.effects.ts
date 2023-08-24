@@ -33,7 +33,7 @@ export class AuthEffects implements OnDestroy {
           map(user => signUpApiActions.signUpSuccess({ customer: user })),
           tap((): void => {
             this.subscriptions = [...this.subscriptions, alertsAuth[String(true)](this.alerts, 'sign-up')]
-            void this.router.navigate(['home'])
+            void this.router.navigate(['home'], { replaceUrl: true })
           }),
           catchError(error => {
             this.subscriptions = [
@@ -56,7 +56,7 @@ export class AuthEffects implements OnDestroy {
           map(user => signInApiActions.signInSuccess({ customer: user })),
           tap((): void => {
             this.subscriptions = [...this.subscriptions, alertsAuth[String(true)](this.alerts, 'sign-in')]
-            void this.router.navigate(['home'])
+            void this.router.navigate(['home'], { replaceUrl: true })
           }),
 
           catchError(error => {

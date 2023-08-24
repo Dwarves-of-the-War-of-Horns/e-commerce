@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { inject, Injectable, type OnDestroy } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { TuiAlertService } from '@taiga-ui/core'
 import { catchError, of } from 'rxjs'
-import type { Subscription } from 'rxjs/internal/Subscription'
 import { map, switchMap, tap } from 'rxjs/operators'
 
 import { alertsAuth } from '../dictionary/auth-alert.dictionary'
@@ -18,12 +17,11 @@ import { signUpPageActions } from './sign-up-page.actions'
 import { CommercetoolsHttpService } from 'src/app/core/commercetools/services/commercetools-http.service'
 
 @Injectable()
-export class AuthEffects implements OnDestroy {
+export class AuthEffects {
   private actions$ = inject(Actions)
   private router = inject(Router)
   private authHttpService = inject(CommercetoolsHttpService)
   private alerts = inject(TuiAlertService)
-  private subscriptions: Subscription[] = []
 
   public signUpEffect$ = createEffect(() => {
     return this.actions$.pipe(
@@ -32,14 +30,17 @@ export class AuthEffects implements OnDestroy {
         this.authHttpService.signUp(customer).pipe(
           map(user => signUpApiActions.signUpSuccess({ customer: user })),
           tap((): void => {
-            this.subscriptions = [...this.subscriptions, alertsAuth[String(true)](this.alerts, 'sign-up')]
-            void this.router.navigate(['home'], { replaceUrl: true })
+            alertsAuth[String(true)](this.alerts, 'sign-up')
+            this.router.navigate(['home'], { replaceUrl: true }).catch(error => {
+              if (error instanceof Error) {
+                return error.message
+              }
+
+              return null
+            })
           }),
           catchError(error => {
-            this.subscriptions = [
-              ...this.subscriptions,
-              alertsAuth[String(false)](this.alerts, error.message as string),
-            ]
+            alertsAuth[String(false)](this.alerts, error.message as string)
 
             return of(signUpApiActions.signUpFailure({ error: error.message as string }))
           }),
@@ -55,15 +56,18 @@ export class AuthEffects implements OnDestroy {
         this.authHttpService.signIn(customer).pipe(
           map(user => signInApiActions.signInSuccess({ customer: user })),
           tap((): void => {
-            this.subscriptions = [...this.subscriptions, alertsAuth[String(true)](this.alerts, 'sign-in')]
-            void this.router.navigate(['home'], { replaceUrl: true })
+            alertsAuth[String(true)](this.alerts, 'sign-in')
+            this.router.navigate(['home'], { replaceUrl: true }).catch(error => {
+              if (error instanceof Error) {
+                return error.message
+              }
+
+              return null
+            })
           }),
 
           catchError(error => {
-            this.subscriptions = [
-              ...this.subscriptions,
-              alertsAuth[String(false)](this.alerts, error.message as string),
-            ]
+            alertsAuth[String(false)](this.alerts, error.message as string)
 
             return of(signInApiActions.signInFailure({ error: error.message as string }))
           }),
@@ -90,12 +94,4 @@ export class AuthEffects implements OnDestroy {
       switchMap(() => this.authHttpService.logOut().pipe(map(() => logoutActions.logOutFinish()))),
     )
   })
-
-  public ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => {
-      subscription.unsubscribe()
-    })
-
-    this.subscriptions = []
-  }
 }

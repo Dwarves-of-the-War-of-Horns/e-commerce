@@ -20,9 +20,8 @@
             "ngxEnv": {
               "prefix": "EC_"
             },
-            "baseHref": "",
             "outputPath": "dist/",
-            "allowedCommonJsDependencies": ["dompurify"],
+            "allowedCommonJsDependencies": ["dompurify", "text-mask-core", "buffer/", "node-fetch"],
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],

@@ -9,11 +9,11 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { AuthComponent } from './auth/auth.component'
-import { CartComponent } from './cart/cart.component'
+import { HeaderComponent } from './core/components/header/header.component'
+import { CoreModule } from './core/core.module'
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, CartComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +24,8 @@ import { CartComponent } from './cart/cart.component'
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
+    CoreModule,
+    HeaderComponent,
   ],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   bootstrap: [AppComponent],

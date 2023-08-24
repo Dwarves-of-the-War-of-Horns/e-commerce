@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core'
-import { RouterModule, type Routes } from '@angular/router'
+import { RouterModule } from '@angular/router'
 
-const routes: Routes = []
+import { appRoutes } from './app.routes'
+import { AuthGuard } from './auth/guards/auth.guard'
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
+  providers: [AuthGuard],
 })
 export class AppRoutingModule {}

@@ -1,0 +1,98 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo" [routerLink]="['/']">
+      <img class="header__logo-img" height="60" width="60" ngSrc="/assets/icons/header.svg" priority />
+      <h1 class="header__logo-title tui-text_body-m"><span>Dwarves</span><span>store</span></h1>
+    </div>
+
+    <nav class="header__navigation">
+      <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'about']" title="About us">
+        <tui-svg appearance="outline" src="tuiIconUsers"></tui-svg>
+        <span class="nav-text">About us</span>
+      </button>
+
+      <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'catalog']" title="Products">
+        <tui-svg appearance="outline" src="tuiIconGrid"></tui-svg>
+        <span class="nav-text">Products</span>
+      </button>
+    </nav>
+
+    <div class="header__profile-container">
+      <div *ngIf="isUserLogined$ | async; else notLogined" class="header__profile-auth profile-auth">
+        <button
+          tuiIconButton
+          size="m"
+          appearance="secondary"
+          [routerLink]="['/']"
+          icon="tuiIconLogOut"
+          (click)="logout()"
+          class="tui-space_right-1"
+          title="Log out"
+        ></button>
+        <button
+          tuiIconButton
+          size="m"
+          appearance="secondary"
+          [routerLink]="['/', 'user']"
+          icon="tuiIconUser"
+          class="tui-space_right-1"
+          title="Profile"
+        ></button>
+      </div>
+      <ng-template #notLogined>
+        <tui-hosted-dropdown #dropdown [(open)]="isAuthDropdownOpen" [content]="authOptions">
+          <button
+            tuiIconButton
+            size="m"
+            appearance="secondary"
+            icon="tuiIconLogIn"
+            type="button"
+            title="Log in"
+            class="tui-space_right-1"
+          ></button>
+        </tui-hosted-dropdown>
+        <ng-template #authOptions>
+          <tui-data-list tuiDataListDropdownManager>
+            <button tuiOption size="m">
+              <button
+                tuiButton
+                appearance="primary"
+                icon="tuiIconUserCheck"
+                [routerLink]="['/auth/sign-in']"
+                class="profile-auth__buton"
+                size="m"
+                (click)="selectAuthOption()"
+                title="Sign in"
+              >
+                Sign in
+              </button>
+            </button>
+            <button tuiOption size="m">
+              <button
+                tuiButton
+                appearance="secondary"
+                icon="tuiIconUserPlus"
+                [routerLink]="['/auth/sign-up']"
+                class="profile-auth__buton"
+                size="m"
+                (click)="selectAuthOption()"
+                title="Sign up"
+              >
+                Sign up
+              </button>
+            </button>
+          </tui-data-list>
+        </ng-template>
+      </ng-template>
+      <button
+        tuiIconButton
+        size="m"
+        appearance="primary"
+        [routerLink]="['/cart']"
+        icon="tuiIconShoppingCart"
+        class="tui-space_right-1"
+        title="Cart"
+      ></button>
+    </div>
+  </div>
+</header>

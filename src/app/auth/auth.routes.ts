@@ -1,6 +1,6 @@
 import type { Routes } from '@angular/router'
 
-import { AuthGuard } from './guards/auth.guard'
+import { authGuard } from './guards/auth.guard'
 import { SignInComponent } from './pages/sign-in/sign-in.component'
 import { SignUpComponent } from './pages/sign-up/sign-up.component'
 
@@ -18,14 +18,14 @@ export const authRoutes: Routes = [
         path: 'sign-in',
         title: 'Sign-in',
         component: SignInComponent,
-        canActivate: [AuthGuard],
+        canMatch: [authGuard],
       },
 
       {
         path: 'sign-up',
         title: 'Sign-up',
         component: SignUpComponent,
-        canActivate: [AuthGuard],
+        canMatch: [authGuard],
       },
     ],
   },

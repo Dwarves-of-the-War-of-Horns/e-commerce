@@ -6,12 +6,16 @@ import { AlertsStatus } from 'src/app/shared/enum/alets-status.enum'
 export const alertsAuth: Record<string, (alertService: TuiAlertService, action: string) => Subscription> = {
   true: (alertService: TuiAlertService, action: string): Subscription => {
     return alertService
-      .open(`You have successfully ${action}`, { label: AlertsStatus.UpperCaseSuccess, status: AlertsStatus.Success })
+      .open(`You have successfully ${action}`, {
+        label: AlertsStatus.UpperCaseSuccess,
+        status: AlertsStatus.Success,
+        autoClose: true,
+      })
       .subscribe()
   },
   false: (alertService: TuiAlertService, action: string): Subscription => {
     return alertService
-      .open(action, { label: AlertsStatus.UpperCaseError, status: AlertsStatus.Error, autoClose: false })
+      .open(action, { label: AlertsStatus.UpperCaseError, status: AlertsStatus.Error, autoClose: true })
       .subscribe()
   },
 }

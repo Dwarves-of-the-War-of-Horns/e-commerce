@@ -12,11 +12,11 @@ export class TokenStorage implements TokenCache {
   private current: ExtendedTokenStore | Record<string, never>
   private readonly key = tokenStorageKey
   constructor(
-    private ls: LocalStorageService,
+    private localStorageService: LocalStorageService,
     private readonly flowKey: CommercetoolsTokenFlow,
     private refreshToken?: string,
   ) {
-    const storedToken = this.ls.getItem<ExtendedTokenStore>(this.key)
+    const storedToken = this.localStorageService.getItem<ExtendedTokenStore>(this.key)
     this.current = storedToken?.flowKey === this.flowKey ? storedToken : {}
   }
 
@@ -27,7 +27,7 @@ export class TokenStorage implements TokenCache {
   set(newValue: TokenStore): TokenStore {
     this.refreshToken = newValue.refreshToken ?? this.refreshToken
     this.current = { ...newValue, refreshToken: this.refreshToken, flowKey: this.flowKey }
-    this.ls.setItem(this.key, this.current)
+    this.localStorageService.setItem(this.key, this.current)
 
     return this.current
   }

@@ -3,7 +3,7 @@ import { type CanActivateFn, Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { filter, map, mergeMap } from 'rxjs'
 
-import { selectIsLoading, selectIsLogined } from '../auth-store/auth.selectors'
+import { selectIsLoading, selectIsLoggedIn } from '../auth-store/auth.selectors'
 
 export const authGuard: CanActivateFn = () => {
   const store = inject(Store)
@@ -11,9 +11,9 @@ export const authGuard: CanActivateFn = () => {
 
   return store.select(selectIsLoading).pipe(
     filter(isLoading => !isLoading),
-    mergeMap(() => store.select(selectIsLogined)),
-    map(isLogined => {
-      if (isLogined) {
+    mergeMap(() => store.select(selectIsLoggedIn)),
+    map(isLoggedIn => {
+      if (isLoggedIn) {
         router.navigate(['home']).catch(error => {
           if (error instanceof Error) {
             return error.message
@@ -25,7 +25,7 @@ export const authGuard: CanActivateFn = () => {
         return true
       }
 
-      return !isLogined
+      return !isLoggedIn
     }),
   )
 }

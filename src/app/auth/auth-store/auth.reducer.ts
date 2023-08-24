@@ -10,7 +10,7 @@ import { signUpApiActions } from './sign-up-api.actions'
 import { signUpPageActions } from './sign-up-page.actions'
 
 const authInitialState: AuthState = {
-  isLogined: false,
+  isLoggedIn: false,
   authData: null,
   isLoading: false,
   error: null,
@@ -24,13 +24,13 @@ export const authReducer = createReducer(
   })),
   on(signUpApiActions.signUpSuccess, (state, { customer }) => ({
     ...state,
-    isLogined: true,
+    isLoggedIn: true,
     isLoading: false,
     authData: customer,
   })),
   on(signUpApiActions.signUpFailure, (state, { error }) => ({
     ...state,
-    isLogined: false,
+    isLoggedIn: false,
     isLoading: false,
     error,
   })),
@@ -40,13 +40,13 @@ export const authReducer = createReducer(
   })),
   on(signInApiActions.signInSuccess, (state, { customer }) => ({
     ...state,
-    isLogined: true,
+    isLoggedIn: true,
     isLoading: false,
     authData: customer,
   })),
   on(signInApiActions.signInFailure, (state, { error }) => ({
     ...state,
-    isLogined: false,
+    isLoggedIn: false,
     isLoading: false,
     error,
   })),
@@ -56,18 +56,18 @@ export const authReducer = createReducer(
   })),
   on(authInitApiActions.getCustomerSuccess, (state, { customer }) => ({
     ...state,
-    isLogined: true,
+    isLoggedIn: true,
     isLoading: false,
     authData: customer,
   })),
   on(authInitApiActions.getCustomerFailure, state => ({
     ...state,
-    isLogined: false,
+    isLoggedIn: false,
     isLoading: false,
   })),
   on(logoutActions.logOutFinish, state => ({
     ...state,
-    isLogined: false,
+    isLoggedIn: false,
     authData: null,
   })),
 )

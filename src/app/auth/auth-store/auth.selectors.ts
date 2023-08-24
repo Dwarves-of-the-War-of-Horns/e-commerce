@@ -7,6 +7,6 @@ const authFeature = createFeatureSelector<AuthState>(StoreFeatureNames.Auth)
 
 export const selectError = createSelector(authFeature, ({ error }: AuthState) => error)
 
-export const selectIsLogined = createSelector(authFeature, ({ isLogined }: AuthState) => isLogined)
+export const selectIsLoggedIn = createSelector(authFeature, ({ isLoggedIn }: AuthState) => isLoggedIn)
 
 export const selectIsLoading = createSelector(authFeature, ({ isLoading }: AuthState) => isLoading)

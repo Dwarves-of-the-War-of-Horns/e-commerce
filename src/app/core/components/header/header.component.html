@@ -18,7 +18,7 @@
     </nav>
 
     <div class="header__profile-container">
-      <div *ngIf="isUserLogined$ | async; else notLogined" class="header__profile-auth profile-auth">
+      <div *ngIf="isLoggedIn$ | async; else notLoggedIn" class="header__profile-auth profile-auth">
         <button
           tuiIconButton
           size="m"
@@ -39,7 +39,7 @@
           title="Profile"
         ></button>
       </div>
-      <ng-template #notLogined>
+      <ng-template #notLoggedIn>
         <tui-hosted-dropdown #dropdown [(open)]="isAuthDropdownOpen" [content]="authOptions">
           <button
             tuiIconButton

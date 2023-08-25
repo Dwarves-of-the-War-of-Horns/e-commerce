@@ -28,6 +28,6 @@ export class AuthFacade {
   }
 
   public logout(): void {
-    this.store$.dispatch(logoutActions.logOutStart())
+    this.store$.dispatch(logoutActions.logoutStart())
   }
 }

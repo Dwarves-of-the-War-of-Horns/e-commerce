@@ -23,11 +23,11 @@ export class AuthFacade {
     this.store$.dispatch(signUpPageActions.signUp({ customer }))
   }
 
-  public init(): void {
+  public initAuth(): void {
     this.store$.dispatch(authInitActions.getCustomer())
   }
 
-  public logOut(): void {
+  public logout(): void {
     this.store$.dispatch(logoutActions.logOutStart())
   }
 }

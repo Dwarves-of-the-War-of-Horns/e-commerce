@@ -11,6 +11,6 @@ export class AppComponent implements OnInit {
   private authFacade = inject(AuthFacade)
 
   ngOnInit(): void {
-    this.authFacade.init()
+    this.authFacade.initAuth()
   }
 }

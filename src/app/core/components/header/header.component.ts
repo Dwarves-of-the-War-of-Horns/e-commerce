@@ -27,7 +27,7 @@ export class HeaderComponent {
   public isAuthDropdownOpen = false
 
   public logout(): void {
-    this.authFacade.logOut()
+    this.authFacade.logout()
   }
 
   public selectAuthOption(): void {

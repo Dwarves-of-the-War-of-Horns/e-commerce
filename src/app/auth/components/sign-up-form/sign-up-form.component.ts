@@ -6,9 +6,9 @@ import { type Subscription } from 'rxjs'
 import { AuthFacade } from '../../auth-store/auth.facade'
 import { transformRegistrationSubmitForm } from '../../utils/transform-registration-submit-form'
 import { toggleEnableStatusFields } from 'src/app/auth/dictionary/toggle-enable-status-fields.dictionary'
-import { subscribeToValueChangesOnForms } from 'src/app/auth/utils/subscribe-to-value-changes-on-forms.utils'
 import { Country } from 'src/app/shared/enum/country.enum'
 import { FormFields } from 'src/app/shared/enum/form-value.enum'
+import { subscribeToValueChangesOnForms } from 'src/app/shared/utils/subscribe-to-value-changes-on-forms.utils'
 import { birthValidator } from 'src/app/shared/validators/birth.validator'
 import { emailValidator } from 'src/app/shared/validators/email.validator'
 import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validation'
@@ -31,10 +31,10 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
   public arraySubscriptions: Subscription[] = []
 
   public singUpForm = this.fb.group({
-    email: new FormControl<string | null>('', [emailValidator, hasOneCharacter]),
-    firstName: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
-    lastName: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
-    password: new FormControl<string | null>('', [
+    email: new FormControl<string>('', [emailValidator, hasOneCharacter]),
+    firstName: new FormControl<string>('', [hasOneCharacter, nameValidator]),
+    lastName: new FormControl<string>('', [hasOneCharacter, nameValidator]),
+    password: new FormControl<string>('', [
       minCharacterValidator,
       hasOneLowerCaseCharacter,
       hasOneUpperCaseCharacter,
@@ -42,15 +42,13 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
       hasNoSpaces,
     ]),
     dateOfBirth: new FormControl<TuiDay>(new TuiDay(2010, 0, 1), [birthValidator]),
-    street: new FormControl<string | null>('', [hasOneCharacter]),
-    city: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
-    postalCode: new FormControl<string | null>('', [postalCodeValidator]),
+    street: new FormControl<string>('', [hasOneCharacter]),
+    city: new FormControl<string>('', [hasOneCharacter, nameValidator]),
+    postalCode: new FormControl<string>('', [postalCodeValidator]),
     country: new FormControl(this.countryArray[0]),
-    billingStreet: new FormControl<string | null>('', [hasOneCharacter]),
-    billingCity: new FormControl<string | null>('', [hasOneCharacter, nameValidator]),
-    billingPostalCode: new FormControl<string | null>('', [
-      value => postalCodeValidator(value, FormFields.BillingCountry),
-    ]),
+    billingStreet: new FormControl<string>('', [hasOneCharacter]),
+    billingCity: new FormControl<string>('', [hasOneCharacter, nameValidator]),
+    billingPostalCode: new FormControl<string>('', [value => postalCodeValidator(value, FormFields.BillingCountry)]),
     billingCountry: new FormControl(this.countryArray[0]),
     copyAddressCheckbox: new FormControl(false),
     defaultShippingAddress: new FormControl(true),

@@ -1,9 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store'
 
 export const logoutActions = createActionGroup({
-  source: 'Log Out',
+  source: 'Logout',
   events: {
-    'Log Out Start': emptyProps(),
-    'Log Out Finish': emptyProps(),
+    'Logout Start': emptyProps(),
+    'Logout Finish': emptyProps(),
   },
 })

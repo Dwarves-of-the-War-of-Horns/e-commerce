@@ -65,7 +65,7 @@ export const authReducer = createReducer(
     isLoggedIn: false,
     isLoading: false,
   })),
-  on(logoutActions.logOutFinish, state => ({
+  on(logoutActions.logoutFinish, state => ({
     ...state,
     isLoggedIn: false,
     authData: null,

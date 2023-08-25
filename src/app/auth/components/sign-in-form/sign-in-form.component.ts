@@ -9,6 +9,7 @@ import { hasOneUpperCaseCharacter } from '../../../shared/validators/has-one-upp
 import { minCharacterValidator } from '../../../shared/validators/min-character.validator'
 import { AuthFacade } from '../../auth-store/auth.facade'
 import type { SignInSubmitForm } from '../../model/sign-in-submit-form.model'
+import { subscribeToValueChangesOnForms } from 'src/app/shared/utils/subscribe-to-value-changes-on-forms.utils'
 import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validation'
 import { hasOneNumber } from 'src/app/shared/validators/has-one-number.validator'
 
@@ -21,8 +22,8 @@ export class SignInFormComponent implements OnInit, OnDestroy {
   public arraySubscriptions: Subscription[] = []
 
   public signInForm = this.fb.group({
-    username: new FormControl<string | null>('', [emailValidator, hasOneCharacter]),
-    password: new FormControl<string | null>('', [
+    username: new FormControl<string>('', [emailValidator, hasOneCharacter]),
+    password: new FormControl<string>('', [
       minCharacterValidator,
       hasOneLowerCaseCharacter,
       hasOneUpperCaseCharacter,
@@ -36,13 +37,10 @@ export class SignInFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.arraySubscriptions = [this.signInForm.controls.username, this.signInForm.controls.password].map(
-      fromControl => {
-        return fromControl.valueChanges.subscribe(() => {
-          fromControl.markAsTouched()
-        })
-      },
-    )
+    this.arraySubscriptions = subscribeToValueChangesOnForms([
+      this.signInForm.controls.username,
+      this.signInForm.controls.password,
+    ])
   }
 
   public onSubmit(): void {

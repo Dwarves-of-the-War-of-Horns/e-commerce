@@ -28,21 +28,17 @@ export class AuthEffects {
       ofType(signUpPageActions.signUp),
       switchMap(({ customer }) =>
         this.authHttpService.signUp(customer).pipe(
-          map(user => signUpApiActions.signUpSuccess({ customer: user })),
-          tap((): void => {
+          map(user => {
             alertsAuth[String(true)](this.alerts, 'sign-up')
-            this.router.navigate(['home'], { replaceUrl: true }).catch(error => {
-              if (error instanceof Error) {
-                return error.message
-              }
+            this.router.navigate(['home'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
 
-              return null
-            })
+            return signUpApiActions.signUpSuccess({ customer: user })
           }),
-          catchError(error => {
-            alertsAuth[String(false)](this.alerts, error.message as string)
 
-            return of(signUpApiActions.signUpFailure({ error: error.message as string }))
+          catchError(({ message }: Error) => {
+            alertsAuth[String(false)](this.alerts, message)
+
+            return of(signUpApiActions.signUpFailure({ error: message }))
           }),
         ),
       ),
@@ -54,22 +50,18 @@ export class AuthEffects {
       ofType(signInPageActions.signIn),
       switchMap(({ customer }) =>
         this.authHttpService.signIn(customer).pipe(
-          map(user => signInApiActions.signInSuccess({ customer: user })),
-          tap((): void => {
+          map(user => {
             alertsAuth[String(true)](this.alerts, 'sign-in')
-            this.router.navigate(['home'], { replaceUrl: true }).catch(error => {
-              if (error instanceof Error) {
-                return error.message
-              }
 
-              return null
-            })
+            return signInApiActions.signInSuccess({ customer: user })
           }),
+          tap(() => {
+            this.router.navigate(['home'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
+          }),
+          catchError(({ message }: Error) => {
+            alertsAuth[String(false)](this.alerts, message)
 
-          catchError(error => {
-            alertsAuth[String(false)](this.alerts, error.message as string)
-
-            return of(signInApiActions.signInFailure({ error: error.message as string }))
+            return of(signInApiActions.signInFailure({ error: message }))
           }),
         ),
       ),
@@ -82,7 +74,7 @@ export class AuthEffects {
       switchMap(() =>
         this.authHttpService.getUserInfo().pipe(
           map(user => authInitApiActions.getCustomerSuccess({ customer: user })),
-          catchError(error => of(authInitApiActions.getCustomerFailure({ error: error.message as string }))),
+          catchError(({ message }: Error) => of(authInitApiActions.getCustomerFailure({ error: message }))),
         ),
       ),
     )

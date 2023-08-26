@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core'
-import type { Customer, MyCustomerDraft, Project } from '@commercetools/platform-sdk'
+import type { Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder'
 import type { TokenStore, UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable, of, switchMap } from 'rxjs'
@@ -67,10 +67,18 @@ export class CommercetoolsHttpService {
     )
   }
 
-  public logOut(): Observable<boolean> {
+  public logout(): Observable<boolean> {
     this.localStorageService.removeItem(tokenStorageKey)
     this.api = this.builder.getDefaultClient()
 
     return of(true)
+  }
+
+  public updateCustomerInfo(updateInfo: MyCustomerUpdate): Observable<Customer> {
+    return fromPromise(this.api.me().post({ body: updateInfo }).execute()).pipe(
+      map(({ body }) => {
+        return body
+      }),
+    )
   }
 }

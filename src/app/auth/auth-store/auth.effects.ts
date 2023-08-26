@@ -14,20 +14,20 @@ import { signInApiActions } from './sign-in-api.actions'
 import { signInPageActions } from './sign-in-page.actions'
 import { signUpApiActions } from './sign-up-api.actions'
 import { signUpPageActions } from './sign-up-page.actions'
-import { CommercetoolsHttpService } from 'src/app/core/commercetools/services/commercetools-http.service'
+import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
 
 @Injectable()
 export class AuthEffects {
   private actions$ = inject(Actions)
   private router = inject(Router)
-  private authHttpService = inject(CommercetoolsHttpService)
+  private authService = inject(CommercetoolsService)
   private alerts = inject(TuiAlertService)
 
   public signUpEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(signUpPageActions.signUp),
       switchMap(({ customer }) =>
-        this.authHttpService.signUp(customer).pipe(
+        this.authService.signUp(customer).pipe(
           map(user => {
             alertsAuth[String(true)](this.alerts, 'sign-up')
             this.router.navigate(['home'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
@@ -49,7 +49,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(signInPageActions.signIn),
       switchMap(({ customer }) =>
-        this.authHttpService.signIn(customer).pipe(
+        this.authService.signIn(customer).pipe(
           map(user => {
             alertsAuth[String(true)](this.alerts, 'sign-in')
 
@@ -72,7 +72,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(authInitActions.getCustomer),
       switchMap(() =>
-        this.authHttpService.getUserInfo().pipe(
+        this.authService.getUserInfo().pipe(
           map(user => authInitApiActions.getCustomerSuccess({ customer: user })),
           catchError(({ message }: Error) => of(authInitApiActions.getCustomerFailure({ error: message }))),
         ),
@@ -83,7 +83,7 @@ export class AuthEffects {
   public logoutEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(logoutActions.logoutStart),
-      switchMap(() => this.authHttpService.logout().pipe(map(() => logoutActions.logoutFinish()))),
+      switchMap(() => this.authService.logout().pipe(map(() => logoutActions.logoutFinish()))),
     )
   })
 }

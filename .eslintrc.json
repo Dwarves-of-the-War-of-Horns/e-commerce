@@ -23,7 +23,8 @@
       "files": ["*.ts"],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "project": ["./tsconfig.json"]
+        "project": ["./tsconfig.json"],
+        "emitDecoratorMetadata": true
       },
       "rules": {
         "@typescript-eslint/naming-convention": [
@@ -45,7 +46,7 @@
           {
             "selector": ["variable", "property"],
             "types": ["boolean"],
-            "format": ["strictCamelCase"],
+            "format": ["PascalCase"],
             "prefix": ["is", "has", "should", "can", "will"],
             "leadingUnderscore": "forbid",
             "trailingUnderscore": "forbid"

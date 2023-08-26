@@ -80,10 +80,10 @@ export class AuthEffects {
     )
   })
 
-  public logOutEffect$ = createEffect(() => {
+  public logoutEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(logoutActions.logoutStart),
-      switchMap(() => this.authHttpService.logOut().pipe(map(() => logoutActions.logoutFinish()))),
+      switchMap(() => this.authHttpService.logout().pipe(map(() => logoutActions.logoutFinish()))),
     )
   })
 }

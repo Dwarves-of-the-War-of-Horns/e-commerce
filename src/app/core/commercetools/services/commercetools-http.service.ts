@@ -67,7 +67,7 @@ export class CommercetoolsHttpService {
     )
   }
 
-  public logOut(): Observable<boolean> {
+  public logout(): Observable<boolean> {
     this.localStorageService.removeItem(tokenStorageKey)
     this.api = this.builder.getDefaultClient()
 

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core'
-import type { Customer, MyCustomerDraft, Project } from '@commercetools/platform-sdk'
+import type { Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { type Observable } from 'rxjs'
 
@@ -29,5 +29,9 @@ export class CommercetoolsService {
 
   public logout(): Observable<boolean> {
     return this.httpService.logout()
+  }
+
+  public updateCustomerInfo(updateInfo: MyCustomerUpdate): Observable<Customer> {
+    return this.httpService.updateCustomerInfo(updateInfo)
   }
 }

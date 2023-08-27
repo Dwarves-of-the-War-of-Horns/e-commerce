@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core'
-import type { Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
+import type { Category, Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder'
 import type { TokenStore, UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable, of, switchMap } from 'rxjs'
@@ -80,5 +80,18 @@ export class CommercetoolsHttpService {
         return body
       }),
     )
+  }
+
+  public getCategories(): Observable<Category[]> {
+    return fromPromise(
+      this.api
+        .categories()
+        .get({
+          queryArgs: {
+            limit: 100,
+          },
+        })
+        .execute(),
+    ).pipe(map(({ body }) => body.results))
   }
 }

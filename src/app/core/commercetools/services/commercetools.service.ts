@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core'
-import type { Category, Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
+import type { Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable } from 'rxjs'
 
+import { arrayToTree } from '../helpers/array-to-tree.helper'
 import { CommercetoolsHttpService } from './commercetools-http.service'
-import { locale } from 'src/app/shared/constants/locale'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 
 @Injectable({
@@ -38,29 +38,6 @@ export class CommercetoolsService {
   }
 
   public getCategories(): Observable<SimpleCategory[]> {
-    return this.httpService.getCategories().pipe(
-      map(categories => {
-        return this.createCategoriesTree(categories)
-      }),
-    )
-  }
-
-  private createCategoriesTree(categories: Category[]): SimpleCategory[] {
-    const simplifyCategory = ({ id, key, name, slug, metaTitle, metaDescription }: Category): SimpleCategory => ({
-      id,
-      key,
-      name: name[locale],
-      slug: slug[locale],
-      metaTitle: metaTitle?.[locale] ?? '',
-      metaDescription: metaDescription?.[locale] ?? '',
-      children: [],
-    })
-    const arrayToTree = (array: Category[], id?: string): SimpleCategory[] =>
-      array
-        .filter(category => category.parent?.id === id)
-        .map(category => simplifyCategory(category))
-        .map(child => ({ ...child, children: arrayToTree(array, child.id) }))
-
-    return arrayToTree(categories)
+    return this.httpService.getCategories().pipe(map(categories => arrayToTree(categories)))
   }
 }

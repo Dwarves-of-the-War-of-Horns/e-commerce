@@ -1,8 +1,8 @@
 import type { FormGroup } from '@angular/forms'
 import type { MyCustomerDraft } from '@commercetools/platform-sdk'
 
-import { convertCountryFormat } from '../dictionary/convert-country-format.dictionary'
-import type { SignUpSubmitForm } from '../model/sign-up-submit-form.model'
+import { convertCountryFormat } from '../../shared/constants/convert-country-format.constant'
+import type { SignUpSubmitForm } from '../models/sign-up-submit-form.model'
 
 export function transformRegistrationSubmitForm(form: FormGroup, addedAddress: boolean): MyCustomerDraft {
   const formValue = form.getRawValue() as SignUpSubmitForm

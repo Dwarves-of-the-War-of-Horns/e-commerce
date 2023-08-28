@@ -8,9 +8,9 @@ import { hasOneLowerCaseCharacter } from '../../../shared/validators/has-one-low
 import { hasOneUpperCaseCharacter } from '../../../shared/validators/has-one-uppercase-character.validator'
 import { minCharacterValidator } from '../../../shared/validators/min-character.validator'
 import { AuthFacade } from '../../auth-store/auth.facade'
-import type { SignInSubmitForm } from '../../model/sign-in-submit-form.model'
-import { subscribeToValueChangesOnForms } from 'src/app/shared/utils/subscribe-to-value-changes-on-forms.utils'
-import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validation'
+import type { SignInSubmitForm } from '../../models/sign-in-submit-form.model'
+import { subscribeToValueChangesOnForms } from 'src/app/shared/utils/subscribe-to-value-changes-on-forms.util'
+import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validator'
 import { hasOneNumber } from 'src/app/shared/validators/has-one-number.validator'
 
 @Component({

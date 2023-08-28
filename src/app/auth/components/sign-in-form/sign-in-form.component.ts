@@ -36,7 +36,7 @@ export class SignInFormComponent implements OnInit, OnDestroy {
     private authFacade: AuthFacade,
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.arraySubscriptions = subscribeToValueChangesOnForms([
       this.signInForm.controls.username,
       this.signInForm.controls.password,

@@ -27,5 +27,5 @@ export class CategoriesListComponent implements OnInit {
     this.catalogFacade.initCatalog()
   }
 
-  public handler: TuiHandler<SimpleCategory, readonly SimpleCategory[]> = category => category.children
+  public readonly handler: TuiHandler<SimpleCategory, readonly SimpleCategory[]> = category => category.children
 }

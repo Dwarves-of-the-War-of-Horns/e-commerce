@@ -6,23 +6,20 @@
   align-items: center;
   justify-content: space-between;
 
-  height: var(--tui-height-s);
-  padding: 0.2em 0.5em;
+  padding: 0.2em;
   padding-left: 1em;
 
   border-radius: var(--tui-radius-xs);
 
-  /* stylelint-disable-next-line selector-class-pattern */
-  &._expandable {
-    &:hover {
-      cursor: pointer;
-      background: var(--tui-base-02);
-    }
+  &:hover {
+    cursor: pointer;
+    background: var(--tui-info-bg);
   }
 
   tui-svg {
     position: relative;
     z-index: 1;
-    background: inherit;
+    color: var(--tui-link);
+    background: transparent;
   }
 }

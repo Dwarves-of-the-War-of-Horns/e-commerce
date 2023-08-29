@@ -1,0 +1,12 @@
+<tui-tree
+  *ngFor="let category of categories$ | async"
+  [tuiTreeController]="true"
+  [value]="category"
+  [content]="content"
+  [childrenHandler]="handler"
+  class="categories__tree"
+></tui-tree>
+
+<ng-template #content let-category>
+  <a tuiLink class="categories__link">{{ category.name }}</a>
+</ng-template>

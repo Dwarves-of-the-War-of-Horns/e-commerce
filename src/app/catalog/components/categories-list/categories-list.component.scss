@@ -1,0 +1,12 @@
+/* stylelint-disable-next-line selector-class-pattern */
+.categories {
+  &__tree {
+    --tui-tree-item-indent: 0.7em;
+  }
+
+  &__link {
+    padding: 0.2em 0.5em;
+    font: var(--tui-font-text-m);
+    font-weight: 600;
+  }
+}

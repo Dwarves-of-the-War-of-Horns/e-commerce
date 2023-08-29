@@ -1,6 +1,7 @@
 import type { Routes } from '@angular/router'
 
-import { CatalogPageComponent } from './catalog-page.component'
+import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component'
+import { ProductDetailsComponent } from './pages/product-details/product-details.component'
 
 export const catalogRoutes: Routes = [
   {
@@ -8,5 +9,9 @@ export const catalogRoutes: Routes = [
     pathMatch: 'full',
     component: CatalogPageComponent,
     title: 'Catalog',
+  },
+  {
+    path: ':id',
+    component: ProductDetailsComponent,
   },
 ]

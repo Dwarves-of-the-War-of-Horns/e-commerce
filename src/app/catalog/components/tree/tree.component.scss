@@ -1,0 +1,25 @@
+:host {
+  position: relative;
+
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.2em;
+  padding-left: 1em;
+
+  border-radius: var(--tui-radius-xs);
+
+  &:hover {
+    cursor: pointer;
+    background: var(--tui-info-bg);
+  }
+
+  tui-svg {
+    position: relative;
+    z-index: 1;
+    color: var(--tui-link);
+    background: transparent;
+  }
+}

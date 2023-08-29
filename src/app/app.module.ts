@@ -16,7 +16,7 @@ import { HeaderComponent } from './core/components/header/header.component'
 import { CoreModule } from './core/core.module'
 import { StorageModule } from './core/storage/storage.module'
 import { storageKeyPrefix } from './core/storage/tokens/storage-key.token'
-import { StoreFeatureNames } from './shared/enum/store-feature-names.enum'
+import { StoreFeatureNames } from './shared/enums/store-feature-names.enum'
 
 @NgModule({
   declarations: [AppComponent],

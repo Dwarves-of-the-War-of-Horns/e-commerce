@@ -249,6 +249,19 @@
         "@typescript-eslint/consistent-indexed-object-style": 2,
         "@typescript-eslint/consistent-generic-constructors": 2,
         "@typescript-eslint/no-unnecessary-boolean-literal-compare": 2,
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "explicit",
+            "overrides": {
+              "accessors": "explicit",
+              "constructors": "off",
+              "methods": "explicit",
+              "parameterProperties": "explicit",
+              "properties": "explicit"
+            }
+          }
+        ],
         "@typescript-eslint/array-type": [
           2,
           {

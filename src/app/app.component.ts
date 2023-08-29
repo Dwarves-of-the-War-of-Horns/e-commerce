@@ -10,7 +10,7 @@ import { AuthFacade } from './auth/auth-store/auth.facade'
 export class AppComponent implements OnInit {
   private authFacade = inject(AuthFacade)
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.authFacade.initAuth()
   }
 }

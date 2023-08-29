@@ -1,13 +1,13 @@
 import { createReducer, on } from '@ngrx/store'
 
-import type { AuthState } from '../model/auth-state.model'
-import { authInitApiActions } from './auth-init-api.actions'
-import { authInitActions } from './auth-init.actions'
-import { logoutActions } from './logout.actions'
-import { signInApiActions } from './sign-in-api.actions'
-import { signInPageActions } from './sign-in-page.actions'
-import { signUpApiActions } from './sign-up-api.actions'
-import { signUpPageActions } from './sign-up-page.actions'
+import type { AuthState } from '../models/auth-state.model'
+import { authInitApiActions } from './actions/auth-init-api.actions'
+import { authInitActions } from './actions/auth-init.actions'
+import { logoutActions } from './actions/logout.actions'
+import { signInApiActions } from './actions/sign-in-api.actions'
+import { signInPageActions } from './actions/sign-in-page.actions'
+import { signUpApiActions } from './actions/sign-up-api.actions'
+import { signUpPageActions } from './actions/sign-up-page.actions'
 
 const authInitialState: AuthState = {
   isLoggedIn: false,

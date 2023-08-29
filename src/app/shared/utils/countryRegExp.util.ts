@@ -1,6 +1,6 @@
 import type { ValidationErrors } from '@angular/forms'
 
-import { canadaRegExp, usRegExp } from '../constants/regExp'
+import { canadaRegExp, usRegExp } from '../constants/regExp.constant'
 
 export const countryRegExpDictionary: Record<string, (country: string) => ValidationErrors | null> = {
   usa: (country: string): ValidationErrors | null => {

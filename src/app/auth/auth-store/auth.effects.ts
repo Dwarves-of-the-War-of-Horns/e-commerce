@@ -8,11 +8,15 @@ import { map, switchMap, tap } from 'rxjs/operators'
 import { alertsAuth } from '../utils/auth-alert.util'
 import { authInitApiActions } from './actions/auth-init-api.actions'
 import { authInitActions } from './actions/auth-init.actions'
+import { changePasswordApiActions } from './actions/change-password-api.action'
+import { changePasswordPageActions } from './actions/change-password-page.action'
 import { logoutActions } from './actions/logout.actions'
 import { signInApiActions } from './actions/sign-in-api.actions'
 import { signInPageActions } from './actions/sign-in-page.actions'
 import { signUpApiActions } from './actions/sign-up-api.actions'
 import { signUpPageActions } from './actions/sign-up-page.actions'
+import { updateCustomerApiActions } from './actions/update-customer-api.actions'
+import { updateCustomerPageActions } from './actions/update-customer-page.action'
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
 
 @Injectable()
@@ -61,6 +65,46 @@ export class AuthEffects {
             alertsAuth[String(false)](this.alerts, message)
 
             return of(signInApiActions.signInFailure({ error: message }))
+          }),
+        ),
+      ),
+    )
+  })
+
+  public changeUserEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateCustomerPageActions.updateCustomer),
+      switchMap(({ updateCustomer }) =>
+        this.authService.updateCustomerInfo(updateCustomer).pipe(
+          map(user => {
+            alertsAuth[String(true)](this.alerts, 'update user')
+
+            return updateCustomerApiActions.updateCustomerSuccess({ customer: user })
+          }),
+          catchError(({ message }: Error) => {
+            alertsAuth[String(false)](this.alerts, message)
+
+            return of(updateCustomerApiActions.updateCustomerFailure({ error: message }))
+          }),
+        ),
+      ),
+    )
+  })
+
+  public changePasswordEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(changePasswordPageActions.changePassword),
+      switchMap(({ newPassword }) =>
+        this.authService.changePassword(newPassword).pipe(
+          map(user => {
+            alertsAuth[String(true)](this.alerts, 'change password')
+
+            return changePasswordApiActions.changePasswordSuccess({ customer: user })
+          }),
+          catchError(({ message }: Error) => {
+            alertsAuth[String(false)](this.alerts, message)
+
+            return of(changePasswordApiActions.changePasswordFailure({ error: message }))
           }),
         ),
       ),

@@ -56,7 +56,7 @@
         First name
         <span class="tui-required"></span>
       </tui-input>
-      <tui-error formControlName="lastName" [error]="[] | tuiFieldError | async"></tui-error>
+      <tui-error formControlName="firstName" [error]="[] | tuiFieldError | async"></tui-error>
     </div>
 
     <div class="tui-form__row">
@@ -117,16 +117,17 @@
     <div class="tui-form__row">
       <tui-input-password
         formControlName="currentPassword"
-        tuiHintContent="Password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end"
-        ><input tuiTextfield autocomplete="currentPassword" placeholder="Make it secure!" />Password
+        tuiHintContent="Enter your current password"
+        ><input tuiTextfield autocomplete="currentPassword" />Current password
         <span class="tui-required"></span>
       </tui-input-password>
       <tui-error formControlName="currentPassword" [error]="[] | tuiFieldError | async"></tui-error>
     </div>
 
     <div class="tui-form__row">
-      <tui-input-password formControlName="newPassword" tuiHintContent="Passwords must match."
-        ><input tuiTextfield placeholder="Make it secure!" />Repeat password
+      <tui-input-password formControlName="newPassword" 
+      tuiHintContent="New password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end."
+        ><input tuiTextfield />New password
         <span class="tui-required"></span>
       </tui-input-password>
       <tui-error formControlName="newPassword" [error]="[] | tuiFieldError | async"></tui-error>

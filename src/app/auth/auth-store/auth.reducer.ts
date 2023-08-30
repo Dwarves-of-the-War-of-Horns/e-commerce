@@ -80,13 +80,11 @@ export const authReducer = createReducer(
   })),
   on(updateCustomerApiActions.updateCustomerSuccess, (state, { customer }) => ({
     ...state,
-    isLoggedIn: true,
     isLoading: false,
     authData: customer,
   })),
   on(updateCustomerApiActions.updateCustomerFailure, (state, { error }) => ({
     ...state,
-    isLoggedIn: false,
     isLoading: false,
     error,
   })),
@@ -96,13 +94,11 @@ export const authReducer = createReducer(
   })),
   on(changePasswordApiActions.changePasswordSuccess, (state, { customer }) => ({
     ...state,
-    isLoggedIn: true,
     isLoading: false,
     authData: customer,
   })),
   on(changePasswordApiActions.changePasswordFailure, (state, { error }) => ({
     ...state,
-    isLoggedIn: false,
     isLoading: false,
     error,
   })),

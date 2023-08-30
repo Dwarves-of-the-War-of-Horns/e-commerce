@@ -1,6 +1,6 @@
 <tui-tree
   *ngFor="let category of categories$ | async"
-  [tuiTreeController]="true"
+  [tuiTreeController]="false"
   [value]="category"
   [content]="content"
   [childrenHandler]="handler"

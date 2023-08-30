@@ -1,5 +1,12 @@
 import { inject, Injectable } from '@angular/core'
-import type { Category, Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
+import type {
+  Category,
+  Customer,
+  MyCustomerChangePassword,
+  MyCustomerDraft,
+  MyCustomerUpdate,
+  Project,
+} from '@commercetools/platform-sdk'
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder'
 import type { TokenStore, UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable, of, switchMap } from 'rxjs'
@@ -76,6 +83,14 @@ export class CommercetoolsHttpService {
 
   public updateCustomerInfo(updateInfo: MyCustomerUpdate): Observable<Customer> {
     return fromPromise(this.api.me().post({ body: updateInfo }).execute()).pipe(
+      map(({ body }) => {
+        return body
+      }),
+    )
+  }
+
+  public changePassword(newPassword: MyCustomerChangePassword): Observable<Customer> {
+    return fromPromise(this.api.me().password().post({ body: newPassword }).execute()).pipe(
       map(({ body }) => {
         return body
       }),

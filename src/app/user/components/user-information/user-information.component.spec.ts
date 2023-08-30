@@ -2,23 +2,21 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideMockStore } from '@ngrx/store/testing'
 
-import { AuthFacade } from '../auth/auth-store/auth.facade'
-import { UserAddressesComponent } from './components/user-addresses/user-addresses.component'
-import { UserInformationComponent } from './components/user-information/user-information.component'
-import { UserComponent } from './user.component'
+import { UserInformationComponent } from './user-information.component'
+import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
 
-describe('UserComponent', () => {
-  let component: UserComponent
-  let fixture: ComponentFixture<UserComponent>
+describe('UserInformationComponent', () => {
+  let component: UserInformationComponent
+  let fixture: ComponentFixture<UserInformationComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-      declarations: [UserComponent, UserAddressesComponent, UserInformationComponent],
+      declarations: [UserInformationComponent],
       providers: [provideMockStore({}), AuthFacade],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(UserComponent)
+    fixture = TestBed.createComponent(UserInformationComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

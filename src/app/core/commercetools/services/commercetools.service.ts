@@ -1,5 +1,11 @@
 import { inject, Injectable } from '@angular/core'
-import type { Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
+import type {
+  Customer,
+  MyCustomerChangePassword,
+  MyCustomerDraft,
+  MyCustomerUpdate,
+  Project,
+} from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable } from 'rxjs'
 
@@ -39,5 +45,9 @@ export class CommercetoolsService {
 
   public getCategories(): Observable<SimpleCategory[]> {
     return this.httpService.getCategories().pipe(map(categories => arrayToTree(categories)))
+  }
+
+  public changePassword(newPassword: MyCustomerChangePassword): Observable<Customer> {
+    return this.httpService.changePassword(newPassword)
   }
 }

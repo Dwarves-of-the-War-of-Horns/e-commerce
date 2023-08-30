@@ -3,11 +3,15 @@ import { createReducer, on } from '@ngrx/store'
 import type { AuthState } from '../models/auth-state.model'
 import { authInitApiActions } from './actions/auth-init-api.actions'
 import { authInitActions } from './actions/auth-init.actions'
+import { changePasswordApiActions } from './actions/change-password-api.action'
+import { changePasswordPageActions } from './actions/change-password-page.action'
 import { logoutActions } from './actions/logout.actions'
 import { signInApiActions } from './actions/sign-in-api.actions'
 import { signInPageActions } from './actions/sign-in-page.actions'
 import { signUpApiActions } from './actions/sign-up-api.actions'
 import { signUpPageActions } from './actions/sign-up-page.actions'
+import { updateCustomerApiActions } from './actions/update-customer-api.actions'
+import { updateCustomerPageActions } from './actions/update-customer-page.action'
 
 const authInitialState: AuthState = {
   isLoggedIn: false,
@@ -69,5 +73,33 @@ export const authReducer = createReducer(
     ...state,
     isLoggedIn: false,
     authData: null,
+  })),
+  on(updateCustomerPageActions.updateCustomer, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(updateCustomerApiActions.updateCustomerSuccess, (state, { customer }) => ({
+    ...state,
+    isLoading: false,
+    authData: customer,
+  })),
+  on(updateCustomerApiActions.updateCustomerFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+  })),
+  on(changePasswordPageActions.changePassword, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(changePasswordApiActions.changePasswordSuccess, (state, { customer }) => ({
+    ...state,
+    isLoading: false,
+    authData: customer,
+  })),
+  on(changePasswordApiActions.changePasswordFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
   })),
 )

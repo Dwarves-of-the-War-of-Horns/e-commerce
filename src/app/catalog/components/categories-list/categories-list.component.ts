@@ -30,4 +30,8 @@ export class CategoriesListComponent {
   public createRoute({ slugArray }: SimpleCategory): string[] {
     return ['/catalog'].concat(slugArray)
   }
+
+  public onAnchorClick(event: MouseEvent): void {
+    event.stopPropagation()
+  }
 }

@@ -16,6 +16,10 @@
     background: var(--tui-info-bg);
   }
 
+  &:has(.active) {
+    background: var(--tui-info-bg-hover);
+  }
+
   tui-svg {
     position: relative;
     z-index: 1;

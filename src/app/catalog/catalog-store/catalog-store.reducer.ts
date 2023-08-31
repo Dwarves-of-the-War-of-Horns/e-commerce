@@ -13,16 +13,16 @@ const catalogInitialState: CatalogState = {
 
 export const catalogReducer = createReducer(
   catalogInitialState,
-  on(catalogPageActions.initCatalog, state => ({
+  on(catalogPageActions.initCategories, state => ({
     ...state,
     isLoading: true,
   })),
-  on(catalogApiActions.initCatalogSuccess, (state, { categories }) => ({
+  on(catalogApiActions.initCategoriesSuccess, (state, { categories }) => ({
     ...state,
     isLoading: false,
     categories,
   })),
-  on(catalogApiActions.initCatalogFailure, (state, { message }) => ({
+  on(catalogApiActions.initCategoriesFailure, (state, { message }) => ({
     ...state,
     isLoading: false,
     message,

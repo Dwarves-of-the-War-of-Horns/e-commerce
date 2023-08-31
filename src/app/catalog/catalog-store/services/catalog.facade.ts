@@ -11,7 +11,7 @@ export class CatalogFacade {
   public categories$ = this.store$.select(selectCategories)
   constructor(private store$: Store) {}
 
-  public initCatalog(): void {
-    this.store$.dispatch(catalogPageActions.initCatalog())
+  public initCategories(): void {
+    this.store$.dispatch(catalogPageActions.initCategories())
   }
 }

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { ActivatedRoute, RouterLink } from '@angular/router'
 import type { TuiHandler } from '@taiga-ui/cdk'
 import { TUI_TREE_CONTENT } from '@taiga-ui/kit'
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus'
@@ -28,7 +27,7 @@ export class CategoriesListComponent {
   public readonly handler: TuiHandler<SimpleCategory, readonly SimpleCategory[]> = category => category.children
 
   public createRoute({ slugArray }: SimpleCategory): string[] {
-    return ['/catalog'].concat(slugArray)
+    return ['/catalog', 'category', slugArray.join('/')]
   }
 
   public onAnchorClick(event: MouseEvent): void {

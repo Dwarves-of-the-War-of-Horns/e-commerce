@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store'
 
 import { catalogPageActions } from '../actions/catalog-page.actions'
 import { selectCategories, selectErrorMessage, selectIsLoading } from '../catalog-store.selectors'
+import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 
 @Injectable()
 export class CatalogFacade {
@@ -13,5 +14,9 @@ export class CatalogFacade {
 
   public initCategories(): void {
     this.store$.dispatch(catalogPageActions.initCategories())
+  }
+
+  public getProducts(category?: SimpleCategory | null): void {
+    this.store$.dispatch(catalogPageActions.getProducts())
   }
 }

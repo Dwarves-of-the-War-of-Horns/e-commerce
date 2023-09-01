@@ -30,4 +30,16 @@ export class CatalogEffects {
       ),
     ),
   )
+
+  private getProducts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(catalogPageActions.getProducts),
+      switchMap(() =>
+        this.catalogHttpService.getProducts().pipe(
+          map(products => catalogApiActions.getProductsSuccess({ products })),
+          catchError(({ message }: Error) => of(catalogApiActions.getProductsFailure({ message }))),
+        ),
+      ),
+    ),
+  )
 }

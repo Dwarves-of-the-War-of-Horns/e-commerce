@@ -4,5 +4,4 @@ export interface CatalogState {
   isLoading: boolean
   message: string | null
   categories: SimpleCategory[] | null
-  category: SimpleCategory | null
 }

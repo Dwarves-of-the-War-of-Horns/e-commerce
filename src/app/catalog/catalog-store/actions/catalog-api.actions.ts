@@ -7,5 +7,7 @@ export const catalogApiActions = createActionGroup({
   events: {
     'Init Categories Success': props<{ categories: SimpleCategory[] }>(),
     'Init Categories Failure': props<{ message: string }>(),
+    'Get Products Success': props<{ products: unknown[] }>(),
+    'Get Products Failure': props<{ message: string }>(),
   },
 })

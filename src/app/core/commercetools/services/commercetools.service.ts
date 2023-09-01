@@ -4,6 +4,7 @@ import type {
   MyCustomerChangePassword,
   MyCustomerDraft,
   MyCustomerUpdate,
+  ProductProjection,
   Project,
 } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
@@ -49,5 +50,9 @@ export class CommercetoolsService {
 
   public changePassword(newPassword: MyCustomerChangePassword): Observable<Customer> {
     return this.httpService.changePassword(newPassword)
+  }
+
+  public getProducts(): Observable<ProductProjection[]> {
+    return this.httpService.getProducts()
   }
 }

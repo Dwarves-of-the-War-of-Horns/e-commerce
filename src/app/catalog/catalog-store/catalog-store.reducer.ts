@@ -8,7 +8,6 @@ const catalogInitialState: CatalogState = {
   isLoading: false,
   message: null,
   categories: null,
-  category: null,
 }
 
 export const catalogReducer = createReducer(

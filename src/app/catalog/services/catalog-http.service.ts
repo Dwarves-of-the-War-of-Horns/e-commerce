@@ -11,4 +11,8 @@ export class CatalogHttpService {
   public getCategories(): Observable<SimpleCategory[]> {
     return this.commercetoolsService.getCategories()
   }
+
+  public getProducts(): Observable<unknown[]> {
+    return this.commercetoolsService.getProducts()
+  }
 }

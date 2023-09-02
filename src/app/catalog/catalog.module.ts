@@ -8,6 +8,8 @@ import { CatalogStoreModule } from './catalog-store/catalog-store.module'
 import { CatalogFacade } from './catalog-store/services/catalog.facade'
 import { BreadcrumpsComponent } from './components/breadcrumps/breadcrumps.component'
 import { CategoriesListComponent } from './components/categories-list/categories-list.component'
+import { ProductCardComponent } from './components/product-card/product-card.component'
+import { ProductsListComponent } from './components/products-list/products-list.component'
 import { TreeComponent } from './components/tree/tree.component'
 import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component'
 import { ProductDetailsComponent } from './pages/product-details/product-details.component'
@@ -21,6 +23,8 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     CategoriesListComponent,
     TreeComponent,
     BreadcrumpsComponent,
+    ProductsListComponent,
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,

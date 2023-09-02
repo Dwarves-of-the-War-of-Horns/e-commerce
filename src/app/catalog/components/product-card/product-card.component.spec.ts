@@ -1,4 +1,5 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
+
 import { RouterTestingModule } from '@angular/router/testing'
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce'
 import { TuiLinkModule } from '@taiga-ui/core'

@@ -1,3 +1,4 @@
+import type { ProductProjection } from '@commercetools/platform-sdk'
 import { createActionGroup, props } from '@ngrx/store'
 
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'

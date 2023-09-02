@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import type { ProductProjection } from '@commercetools/platform-sdk'
 import type { Observable } from 'rxjs'
 
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
@@ -12,7 +13,7 @@ export class CatalogHttpService {
     return this.commercetoolsService.getCategories()
   }
 
-  public getProducts(): Observable<unknown[]> {
+  public getProducts(): Observable<ProductProjection[]> {
     return this.commercetoolsService.getProducts()
   }
 }

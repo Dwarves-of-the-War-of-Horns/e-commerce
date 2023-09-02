@@ -18,3 +18,25 @@
   width: 250px;
   padding: 0.5rem;
 }
+
+.side-bar-button {
+  display: none;
+}
+
+@media (width <= 580px) {
+  .catalog-page {
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel {
+    display: none;
+  }
+
+  .breadcrumbs {
+    grid-column: 1;
+  }
+
+  .side-bar-button {
+    display: block;
+  }
+}

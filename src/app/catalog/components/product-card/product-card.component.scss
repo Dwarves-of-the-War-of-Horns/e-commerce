@@ -56,3 +56,9 @@
     }
   }
 }
+
+@media (width <= 580px) {
+  .product {
+    max-width: none;
+  }
+}

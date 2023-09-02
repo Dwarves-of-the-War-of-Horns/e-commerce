@@ -15,6 +15,7 @@ export class CatalogPageComponent implements OnInit {
     map(([categories, params]) => ({ categories, params })),
   )
   public navigationArray$ = this.urlTreeService.getNavigationArray$()
+  public products$ = this.catalogFacade.products$
 
   constructor(
     private catalogFacade: CatalogFacade,

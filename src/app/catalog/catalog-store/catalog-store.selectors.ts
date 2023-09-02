@@ -10,3 +10,5 @@ export const selectErrorMessage = createSelector(selectCatalogFeature, ({ messag
 export const selectIsLoading = createSelector(selectCatalogFeature, ({ isLoading }: CatalogState) => isLoading)
 
 export const selectCategories = createSelector(selectCatalogFeature, ({ categories }: CatalogState) => categories)
+
+export const selectProducts = createSelector(selectCatalogFeature, ({ products }: CatalogState) => products)

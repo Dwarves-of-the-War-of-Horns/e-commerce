@@ -6,8 +6,10 @@ import { catalogPageActions } from './actions/catalog-page.actions'
 
 const catalogInitialState: CatalogState = {
   isLoading: false,
+  isProductsLoading: false,
   message: null,
   categories: null,
+  products: [],
 }
 
 export const catalogReducer = createReducer(
@@ -24,6 +26,20 @@ export const catalogReducer = createReducer(
   on(catalogApiActions.initCategoriesFailure, (state, { message }) => ({
     ...state,
     isLoading: false,
+    message,
+  })),
+  on(catalogPageActions.getProducts, state => ({
+    ...state,
+    isProductsLoading: true,
+  })),
+  on(catalogApiActions.getProductsSuccess, (state, { products }) => ({
+    ...state,
+    isProductsLoading: false,
+    products,
+  })),
+  on(catalogApiActions.getProductsFailure, (state, { message }) => ({
+    ...state,
+    isProductsLoading: false,
     message,
   })),
 )

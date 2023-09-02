@@ -12,4 +12,8 @@ import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 export class ProductsListComponent {
   @Input() public products$: Observable<SimpleProduct[]> = of([])
   @Input() public isProductsLoading$: Observable<boolean> = of(true)
+
+  public trackProduct(index: number, { key }: SimpleProduct): string {
+    return key
+  }
 }

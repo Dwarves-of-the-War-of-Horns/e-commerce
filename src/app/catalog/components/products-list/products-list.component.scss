@@ -1,0 +1,20 @@
+.products {
+  $card-width: 250px;
+
+  &__empty {
+    color: var(--tui-text-02);
+    text-align: center;
+  }
+
+  &__list {
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-template-columns: repeat(auto-fit, minmax($card-width, 1fr));
+    gap: 1em 0.5em;
+    justify-items: center;
+  }
+
+  &__card {
+    width: $card-width;
+  }
+}

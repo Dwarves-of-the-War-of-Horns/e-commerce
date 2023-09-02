@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
-import type { ProductProjection } from '@commercetools/platform-sdk'
 import type { Observable } from 'rxjs'
 
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
+import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
 @Injectable()
 export class CatalogHttpService {
@@ -13,7 +13,7 @@ export class CatalogHttpService {
     return this.commercetoolsService.getCategories()
   }
 
-  public getProducts(): Observable<ProductProjection[]> {
+  public getProducts(): Observable<SimpleProduct[]> {
     return this.commercetoolsService.getProducts()
   }
 }

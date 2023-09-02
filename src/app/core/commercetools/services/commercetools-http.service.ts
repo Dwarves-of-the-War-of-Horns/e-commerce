@@ -111,7 +111,19 @@ export class CommercetoolsHttpService {
     ).pipe(map(({ body }) => body.results))
   }
 
-  public getProducts(): Observable<ProductProjection[]> {
-    return fromPromise(this.api.productProjections().get().execute()).pipe(map(({ body }) => body.results))
+  public getProducts(category?: string): Observable<ProductProjection[]> {
+    const filterQuery: string[] = []
+
+    if (category) {
+      filterQuery.push(`categories.id: subtree("${category}")`)
+    }
+
+    const queryArgs = {
+      'filter.query': filterQuery,
+    }
+
+    return fromPromise(this.api.productProjections().search().get({ queryArgs }).execute()).pipe(
+      map(({ body }) => body.results),
+    )
   }
 }

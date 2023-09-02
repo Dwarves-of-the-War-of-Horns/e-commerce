@@ -25,6 +25,7 @@ export class CatalogFacade {
   }
 
   public getProducts(category?: SimpleCategory | null): void {
-    this.store$.dispatch(catalogPageActions.getProducts())
+    const id = category?.id
+    this.store$.dispatch(catalogPageActions.getProducts({ category: id }))
   }
 }

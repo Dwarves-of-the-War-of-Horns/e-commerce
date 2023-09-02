@@ -1,10 +1,13 @@
 .product {
-  $card-size: 300px;
+  cursor: default;
 
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  max-width: $card-size;
+  gap: 0.8em;
+
+  box-sizing: border-box;
+  max-width: 250px;
+  height: 380px;
 
   &__title {
     font-size: 1.2em;
@@ -12,19 +15,18 @@
   }
 
   &__description {
-    max-height: 200px;
+    flex-grow: 1;
   }
 
   &__image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: bottom center;
+    object-fit: cover;
 
     &-container {
       overflow: hidden;
+      aspect-ratio: 4 / 3;
       width: 100%;
-      height: $card-size;
     }
   }
 

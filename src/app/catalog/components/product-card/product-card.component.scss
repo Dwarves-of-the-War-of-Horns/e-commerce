@@ -1,0 +1,58 @@
+.product {
+  cursor: default;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+
+  box-sizing: border-box;
+  max-width: 250px;
+  height: 380px;
+
+  &__title {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  &__description {
+    flex-grow: 1;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    &-container {
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+    }
+  }
+
+  &__price {
+    &-container {
+      display: flex;
+      gap: 0.5em;
+      align-items: baseline;
+      justify-content: center;
+
+      font-size: 1.2em;
+      font-weight: bolder;
+      color: var(--tui-text-01);
+    }
+
+    &-inactive {
+      font-size: 0.8em;
+      font-weight: lighter;
+      color: var(--tui-text-03);
+      text-decoration: line-through;
+    }
+
+    &-discount {
+      margin-right: 0.3em;
+      font-weight: bolder;
+      color: var(--tui-negative);
+    }
+  }
+}

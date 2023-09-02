@@ -1,8 +1,9 @@
-import { createActionGroup, emptyProps } from '@ngrx/store'
+import { createActionGroup, emptyProps, props } from '@ngrx/store'
 
 export const catalogPageActions = createActionGroup({
   source: 'Catalog Page',
   events: {
-    'Init Catalog': emptyProps(),
+    'Init Categories': emptyProps(),
+    'Load Products': props<{ category?: string }>(),
   },
 })

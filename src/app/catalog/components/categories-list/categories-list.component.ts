@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import type { TuiHandler } from '@taiga-ui/cdk'
 import { TUI_TREE_CONTENT } from '@taiga-ui/kit'
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus'
@@ -19,13 +19,18 @@ import type { SimpleCategory } from 'src/app/shared/models/simple-category.model
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent {
   public categories$ = this.catalogFacade.categories$
 
   constructor(private catalogFacade: CatalogFacade) {}
-  public ngOnInit(): void {
-    this.catalogFacade.initCatalog()
-  }
 
   public readonly handler: TuiHandler<SimpleCategory, readonly SimpleCategory[]> = category => category.children
+
+  public createRoute({ slugArray }: SimpleCategory): string[] {
+    return ['/catalog', 'category', slugArray.join('/')]
+  }
+
+  public onAnchorClick(event: MouseEvent): void {
+    event.stopPropagation()
+  }
 }

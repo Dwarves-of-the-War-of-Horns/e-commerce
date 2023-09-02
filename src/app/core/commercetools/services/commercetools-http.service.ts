@@ -5,6 +5,7 @@ import type {
   MyCustomerChangePassword,
   MyCustomerDraft,
   MyCustomerUpdate,
+  ProductProjection,
   Project,
 } from '@commercetools/platform-sdk'
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder'
@@ -108,5 +109,21 @@ export class CommercetoolsHttpService {
         })
         .execute(),
     ).pipe(map(({ body }) => body.results))
+  }
+
+  public getProducts(category?: string): Observable<ProductProjection[]> {
+    const filterQuery: string[] = []
+
+    if (category) {
+      filterQuery.push(`categories.id: subtree("${category}")`)
+    }
+
+    const queryArgs = {
+      'filter.query': filterQuery,
+    }
+
+    return fromPromise(this.api.productProjections().search().get({ queryArgs }).execute()).pipe(
+      map(({ body }) => body.results),
+    )
   }
 }

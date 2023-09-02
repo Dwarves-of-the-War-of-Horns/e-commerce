@@ -10,8 +10,10 @@ import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable } from 'rxjs'
 
 import { arrayToTree } from '../helpers/array-to-tree.helper'
+import { convertProductProjectionToSimpleProduct } from '../helpers/convert-product-projection-to-simple-product.helper'
 import { CommercetoolsHttpService } from './commercetools-http.service'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
+import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
 @Injectable({
   providedIn: 'root',
@@ -49,5 +51,11 @@ export class CommercetoolsService {
 
   public changePassword(newPassword: MyCustomerChangePassword): Observable<Customer> {
     return this.httpService.changePassword(newPassword)
+  }
+
+  public getProducts(category?: string): Observable<SimpleProduct[]> {
+    return this.httpService
+      .getProducts(category)
+      .pipe(map(products => products.map(convertProductProjectionToSimpleProduct)))
   }
 }

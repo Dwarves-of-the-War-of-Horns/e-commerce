@@ -6,25 +6,40 @@ import { catalogPageActions } from './actions/catalog-page.actions'
 
 const catalogInitialState: CatalogState = {
   isLoading: false,
+  isProductsLoading: false,
   message: null,
   categories: null,
-  category: null,
+  products: [],
 }
 
 export const catalogReducer = createReducer(
   catalogInitialState,
-  on(catalogPageActions.initCatalog, state => ({
+  on(catalogPageActions.initCategories, state => ({
     ...state,
     isLoading: true,
   })),
-  on(catalogApiActions.initCatalogSuccess, (state, { categories }) => ({
+  on(catalogApiActions.initCategoriesSuccess, (state, { categories }) => ({
     ...state,
     isLoading: false,
     categories,
   })),
-  on(catalogApiActions.initCatalogFailure, (state, { message }) => ({
+  on(catalogApiActions.initCategoriesFailure, (state, { message }) => ({
     ...state,
     isLoading: false,
+    message,
+  })),
+  on(catalogPageActions.loadProducts, state => ({
+    ...state,
+    isProductsLoading: true,
+  })),
+  on(catalogApiActions.loadProductsSuccess, (state, { products }) => ({
+    ...state,
+    isProductsLoading: false,
+    products,
+  })),
+  on(catalogApiActions.loadProductsFailure, (state, { message }) => ({
+    ...state,
+    isProductsLoading: false,
     message,
   })),
 )

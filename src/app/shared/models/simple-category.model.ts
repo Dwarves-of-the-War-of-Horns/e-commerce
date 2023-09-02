@@ -3,6 +3,7 @@ export interface SimpleCategory {
   key?: string
   name: string
   slug: string
+  slugArray: string[]
   metaTitle: string
   metaDescription: string
   children: SimpleCategory[]

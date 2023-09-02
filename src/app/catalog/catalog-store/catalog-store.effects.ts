@@ -1,25 +1,43 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { catchError, map, of, switchMap } from 'rxjs'
+import { Store } from '@ngrx/store'
+import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs'
 
 import { CatalogHttpService } from '../services/catalog-http.service'
 import { catalogApiActions } from './actions/catalog-api.actions'
 import { catalogPageActions } from './actions/catalog-page.actions'
+import { selectCategories } from './catalog-store.selectors'
 
 @Injectable()
 export class CatalogEffects {
+  public categories$ = this.store$.select(selectCategories)
   constructor(
+    private store$: Store,
     private actions$: Actions,
     private catalogHttpService: CatalogHttpService,
   ) {}
 
-  private initCatalog$ = createEffect(() =>
+  private initCategories$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(catalogPageActions.initCatalog),
+      ofType(catalogPageActions.initCategories),
+      withLatestFrom(this.categories$),
+      filter(([, categories]) => !categories),
       switchMap(() =>
         this.catalogHttpService.getCategories().pipe(
-          map(categories => catalogApiActions.initCatalogSuccess({ categories })),
-          catchError(({ message }: Error) => of(catalogApiActions.initCatalogFailure({ message }))),
+          map(categories => catalogApiActions.initCategoriesSuccess({ categories })),
+          catchError(({ message }: Error) => of(catalogApiActions.initCategoriesFailure({ message }))),
+        ),
+      ),
+    ),
+  )
+
+  private getProducts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(catalogPageActions.loadProducts),
+      switchMap(({ category }) =>
+        this.catalogHttpService.loadProducts(category).pipe(
+          map(products => catalogApiActions.loadProductsSuccess({ products })),
+          catchError(({ message }: Error) => of(catalogApiActions.loadProductsFailure({ message }))),
         ),
       ),
     ),

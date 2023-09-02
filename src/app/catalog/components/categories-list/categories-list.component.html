@@ -8,5 +8,12 @@
 ></tui-tree>
 
 <ng-template #content let-category>
-  <a tuiLink class="categories__link">{{ category.name }}</a>
+  <a
+    tuiLink
+    [routerLink]="createRoute(category)"
+    routerLinkActive="active"
+    class="categories__link"
+    (click)="onAnchorClick($event)"
+    >{{ category.name }}</a
+  >
 </ng-template>

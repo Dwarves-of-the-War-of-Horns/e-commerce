@@ -7,6 +7,8 @@ import { of } from 'rxjs'
 import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
 import { BreadcrumpsComponent } from '../../components/breadcrumps/breadcrumps.component'
 import { CategoriesListComponent } from '../../components/categories-list/categories-list.component'
+import { ProductCardComponent } from '../../components/product-card/product-card.component'
+import { ProductsListComponent } from '../../components/products-list/products-list.component'
 import { CatalogUrlTreeService } from '../../services/catalog-url.service'
 import { CatalogPageComponent } from './catalog-page.component'
 
@@ -16,7 +18,13 @@ describe('CatalogPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CatalogPageComponent, CategoriesListComponent, BreadcrumpsComponent],
+      declarations: [
+        CatalogPageComponent,
+        CategoriesListComponent,
+        BreadcrumpsComponent,
+        ProductsListComponent,
+        ProductCardComponent,
+      ],
       imports: [TuiIslandModule, TuiBreadcrumbsModule],
       providers: [
         provideMockStore({}),

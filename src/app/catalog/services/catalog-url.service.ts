@@ -7,7 +7,7 @@ import type { SimpleCategory } from 'src/app/shared/models/simple-category.model
 export class CatalogUrlTreeService {
   private currentUrl$$ = new BehaviorSubject<string[]>([])
   private currentCategory$$ = new BehaviorSubject<SimpleCategory | null>(null)
-  private navigationArray$$ = new BehaviorSubject<Array<{ name: string; url: string }>>([])
+  private navigationArray$$ = new BehaviorSubject<Array<{ name: string; url: string[] }>>([])
 
   public getCurrentCategory$(): Observable<SimpleCategory | null> {
     return this.currentCategory$$.asObservable()
@@ -17,7 +17,7 @@ export class CatalogUrlTreeService {
     return this.currentUrl$$.asObservable()
   }
 
-  public getNavigationArray$(): Observable<Array<{ name: string; url: string }>> {
+  public getNavigationArray$(): Observable<Array<{ name: string; url: string[] }>> {
     return this.navigationArray$$.asObservable()
   }
 
@@ -62,9 +62,11 @@ export class CatalogUrlTreeService {
   public convertUrlTreeToNavigationArray(
     categories: SimpleCategory[] | null,
     urlParts: string[] = this.currentUrl$$.value,
-    navigationArray: Array<{ name: string; url: string }> = [],
-  ): Array<{ name: string; url: string }> {
+    navigationArray: Array<{ name: string; url: string[] }> = [],
+  ): Array<{ name: string; url: string[] }> {
     if (categories === null || urlParts.length === 0) {
+      this.navigationArray$$.next([])
+
       return []
     }
 
@@ -72,12 +74,14 @@ export class CatalogUrlTreeService {
     const currentCategory = categories.find(category => category.slug === currentSlug)
 
     if (currentCategory === undefined) {
+      this.navigationArray$$.next([])
+
       return []
     }
 
     navigationArray.push({
       name: currentCategory.name,
-      url: currentCategory.slug,
+      url: currentCategory.slugArray,
     })
 
     if (urlParts.length > 1) {
@@ -90,6 +94,8 @@ export class CatalogUrlTreeService {
 
       return childCategory
     }
+
+    this.navigationArray$$.next(navigationArray)
 
     return navigationArray
   }

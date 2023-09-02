@@ -1,0 +1,8 @@
+<tui-breadcrumbs>
+  <a *tuiItem tuiLink routerLink="/catalog"> Catalog </a>
+  <ng-container *ngFor="let item of navigation$ | async">
+    <a *tuiItem tuiLink [routerLink]="createRoute(item.url)">
+      {{ item.name }}
+    </a>
+  </ng-container>
+</tui-breadcrumbs>

@@ -15,6 +15,8 @@ export class CatalogPageComponent implements OnInit {
     map(([categories, params]) => ({ categories, params })),
   )
   public navigationArray$ = this.urlTreeService.getNavigationArray$()
+  public products$ = this.catalogFacade.products$
+  public isProductsLoading$ = this.catalogFacade.isProductsLoading$
 
   constructor(
     private catalogFacade: CatalogFacade,
@@ -37,7 +39,7 @@ export class CatalogPageComponent implements OnInit {
         map(category => this.urlTreeService.updateCurrentCategory(category)),
       )
       .subscribe(category => {
-        this.catalogFacade.getProducts(category)
+        this.catalogFacade.loadProducts(category)
       })
   }
 }

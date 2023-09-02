@@ -33,11 +33,11 @@ export class CatalogEffects {
 
   private getProducts$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(catalogPageActions.getProducts),
-      switchMap(() =>
-        this.catalogHttpService.getProducts().pipe(
-          map(products => catalogApiActions.getProductsSuccess({ products })),
-          catchError(({ message }: Error) => of(catalogApiActions.getProductsFailure({ message }))),
+      ofType(catalogPageActions.loadProducts),
+      switchMap(({ category }) =>
+        this.catalogHttpService.loadProducts(category).pipe(
+          map(products => catalogApiActions.loadProductsSuccess({ products })),
+          catchError(({ message }: Error) => of(catalogApiActions.loadProductsFailure({ message }))),
         ),
       ),
     ),

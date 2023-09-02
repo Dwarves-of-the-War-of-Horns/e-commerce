@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { Observable, of } from 'rxjs'
 
+import type { BreadcrumpsRoute } from '../../models/breadcrumps-route.model'
+
 @Component({
   selector: 'ec-breadcrumps',
   templateUrl: './breadcrumps.component.html',
@@ -8,9 +10,13 @@ import { Observable, of } from 'rxjs'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumpsComponent {
-  @Input() public navigation$: Observable<Array<{ name: string; url: string[] }>> = of([])
+  @Input() public navigation$: Observable<BreadcrumpsRoute[]> = of([])
 
-  public createRoute(url: string[]): string[] {
+  public createRoute({ url }: BreadcrumpsRoute): string[] {
     return ['/catalog', 'category', url.join('/')]
+  }
+
+  public trackRoutes(index: number, { name }: BreadcrumpsRoute): string {
+    return name
   }
 }

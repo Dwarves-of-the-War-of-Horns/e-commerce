@@ -16,6 +16,7 @@ export class CatalogPageComponent implements OnInit {
   )
   public navigationArray$ = this.urlTreeService.getNavigationArray$()
   public products$ = this.catalogFacade.products$
+  public isProductsLoading$ = this.catalogFacade.isProductsLoading$
 
   constructor(
     private catalogFacade: CatalogFacade,

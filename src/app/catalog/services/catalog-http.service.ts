@@ -13,7 +13,7 @@ export class CatalogHttpService {
     return this.commercetoolsService.getCategories()
   }
 
-  public getProducts(category?: string): Observable<SimpleProduct[]> {
+  public loadProducts(category?: string): Observable<SimpleProduct[]> {
     return this.commercetoolsService.getProducts(category)
   }
 }

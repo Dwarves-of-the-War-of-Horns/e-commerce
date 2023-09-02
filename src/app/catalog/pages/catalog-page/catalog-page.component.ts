@@ -39,7 +39,7 @@ export class CatalogPageComponent implements OnInit {
         map(category => this.urlTreeService.updateCurrentCategory(category)),
       )
       .subscribe(category => {
-        this.catalogFacade.getProducts(category)
+        this.catalogFacade.loadProducts(category)
       })
   }
 }

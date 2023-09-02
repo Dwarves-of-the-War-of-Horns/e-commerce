@@ -3,7 +3,7 @@ import type { ProductProjection } from '@commercetools/platform-sdk'
 import { locale } from 'src/app/shared/constants/locale'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
-export function convertProductProjectionToSimpleProduct({
+export const convertProductProjectionToSimpleProduct = ({
   name,
   description,
   slug,
@@ -11,7 +11,7 @@ export function convertProductProjectionToSimpleProduct({
   metaTitle,
   metaDescription,
   masterVariant,
-}: ProductProjection): SimpleProduct {
+}: ProductProjection): SimpleProduct => {
   const prices = masterVariant.prices?.[0]
   const defaultPrice = prices?.value?.centAmount
   const discountPrice = prices?.discounted?.value?.centAmount

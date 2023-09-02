@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, type Observable } from 'rxjs'
 
+import type { BreadcrumpsRoute } from '../models/breadcrumps-route.model'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 
 @Injectable()
 export class CatalogUrlTreeService {
   private currentUrl$$ = new BehaviorSubject<string[]>([])
   private currentCategory$$ = new BehaviorSubject<SimpleCategory | null>(null)
-  private navigationArray$$ = new BehaviorSubject<Array<{ name: string; url: string[] }>>([])
+  private navigationArray$$ = new BehaviorSubject<BreadcrumpsRoute[]>([])
 
   public getCurrentCategory$(): Observable<SimpleCategory | null> {
     return this.currentCategory$$.asObservable()
@@ -17,16 +18,12 @@ export class CatalogUrlTreeService {
     return this.currentUrl$$.asObservable()
   }
 
-  public getNavigationArray$(): Observable<Array<{ name: string; url: string[] }>> {
+  public getNavigationArray$(): Observable<BreadcrumpsRoute[]> {
     return this.navigationArray$$.asObservable()
   }
 
   public updateCurrentUrl(urlTree: string[] | null): void {
-    if (urlTree) {
-      this.currentUrl$$.next(urlTree)
-    } else {
-      this.currentUrl$$.next([])
-    }
+    this.currentUrl$$.next(urlTree ?? [])
   }
   public updateCurrentCategory(category: SimpleCategory | null): SimpleCategory | null {
     this.currentCategory$$.next(category)
@@ -62,8 +59,8 @@ export class CatalogUrlTreeService {
   public convertUrlTreeToNavigationArray(
     categories: SimpleCategory[] | null,
     urlParts: string[] = this.currentUrl$$.value,
-    navigationArray: Array<{ name: string; url: string[] }> = [],
-  ): Array<{ name: string; url: string[] }> {
+    navigationArray: BreadcrumpsRoute[] = [],
+  ): BreadcrumpsRoute[] {
     if (categories === null || urlParts.length === 0) {
       this.navigationArray$$.next([])
 

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce'
+import { TuiLetModule } from '@taiga-ui/cdk'
 import { TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core'
 import { TuiBreadcrumbsModule, TuiIslandModule, TuiTreeModule } from '@taiga-ui/kit'
 
@@ -38,6 +39,7 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     TuiBreadcrumbsModule,
     TuiCurrencyPipeModule,
     TuiLoaderModule,
+    TuiLetModule,
   ],
   providers: [CatalogFacade, CatalogHttpService, CatalogUrlTreeService],
 })

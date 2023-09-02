@@ -3,8 +3,8 @@
 </ng-container>
 
 <ng-template #productsTemplate>
-  <ng-container *ngIf="products$ | async as products">
-    <ng-container *ngIf="products.length; else noProducts">
+  <ng-container *tuiLet="products$ | async as products">
+    <ng-container *ngIf="products?.length; else noProducts">
       <div class="products__list">
         <ec-product-card
           *ngFor="let product of products; trackBy: trackProduct"

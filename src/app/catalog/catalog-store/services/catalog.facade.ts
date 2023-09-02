@@ -24,8 +24,8 @@ export class CatalogFacade {
     this.store$.dispatch(catalogPageActions.initCategories())
   }
 
-  public getProducts(category?: SimpleCategory | null): void {
+  public loadProducts(category?: SimpleCategory | null): void {
     const id = category?.id
-    this.store$.dispatch(catalogPageActions.getProducts({ category: id }))
+    this.store$.dispatch(catalogPageActions.loadProducts({ category: id }))
   }
 }

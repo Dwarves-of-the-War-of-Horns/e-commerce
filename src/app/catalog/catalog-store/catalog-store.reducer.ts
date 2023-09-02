@@ -28,16 +28,16 @@ export const catalogReducer = createReducer(
     isLoading: false,
     message,
   })),
-  on(catalogPageActions.getProducts, state => ({
+  on(catalogPageActions.loadProducts, state => ({
     ...state,
     isProductsLoading: true,
   })),
-  on(catalogApiActions.getProductsSuccess, (state, { products }) => ({
+  on(catalogApiActions.loadProductsSuccess, (state, { products }) => ({
     ...state,
     isProductsLoading: false,
     products,
   })),
-  on(catalogApiActions.getProductsFailure, (state, { message }) => ({
+  on(catalogApiActions.loadProductsFailure, (state, { message }) => ({
     ...state,
     isProductsLoading: false,
     message,

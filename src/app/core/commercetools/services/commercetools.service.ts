@@ -56,6 +56,6 @@ export class CommercetoolsService {
   public getProducts(category?: string): Observable<SimpleProduct[]> {
     return this.httpService
       .getProducts(category)
-      .pipe(map(products => products.map(product => convertProductProjectionToSimpleProduct(product))))
+      .pipe(map(products => products.map(convertProductProjectionToSimpleProduct)))
   }
 }

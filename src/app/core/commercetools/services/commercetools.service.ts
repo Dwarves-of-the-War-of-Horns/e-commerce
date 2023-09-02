@@ -53,9 +53,9 @@ export class CommercetoolsService {
     return this.httpService.changePassword(newPassword)
   }
 
-  public getProducts(): Observable<SimpleProduct[]> {
+  public getProducts(category?: string): Observable<SimpleProduct[]> {
     return this.httpService
-      .getProducts()
+      .getProducts(category)
       .pipe(map(products => products.map(product => convertProductProjectionToSimpleProduct(product))))
   }
 }

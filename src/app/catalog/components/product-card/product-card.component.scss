@@ -1,0 +1,56 @@
+.product {
+  $card-size: 300px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: $card-size;
+
+  &__title {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  &__description {
+    max-height: 200px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+
+    &-container {
+      overflow: hidden;
+      width: 100%;
+      height: $card-size;
+    }
+  }
+
+  &__price {
+    &-container {
+      display: flex;
+      gap: 0.5em;
+      align-items: baseline;
+      justify-content: center;
+
+      font-size: 1.2em;
+      font-weight: bolder;
+      color: var(--tui-text-01);
+    }
+
+    &-inactive {
+      font-size: 0.8em;
+      font-weight: lighter;
+      color: var(--tui-text-03);
+      text-decoration: line-through;
+    }
+
+    &-discount {
+      margin-right: 0.3em;
+      font-weight: bolder;
+      color: var(--tui-negative);
+    }
+  }
+}

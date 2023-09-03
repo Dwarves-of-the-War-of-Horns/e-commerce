@@ -7,6 +7,7 @@
     <ng-container *ngIf="products?.length; else noProducts">
       <div class="products__list">
         <ec-product-card
+          [routerLink]="['/', 'catalog', 'product', product.key]"
           *ngFor="let product of products; trackBy: trackProduct"
           [product]="product"
           class="products__card"

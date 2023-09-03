@@ -14,4 +14,26 @@
       <ec-product-attributes [attributes]="productDetails.attributes" />
     </ng-container>
   </div>
+
+  <div class="product-details__price">
+    <button
+      tuiButton
+      type="button"
+      appearance="outline"
+    >
+      <span>Get for</span>
+      <ng-container *ngIf="productDetails.prices.discounted; else noDiscount">
+        <span class="product-details__price--discount tui-island__paragraph"
+          >{{ productDetails.prices.discounted }}{{ 'USD' | tuiCurrency }}</span
+        >
+        <span class="product-details__price--inactive tui-island__paragraph"
+          >{{ productDetails.prices.default }}{{ 'USD' | tuiCurrency }}</span
+        >
+      </ng-container>
+
+      <ng-template #noDiscount>
+        <span class="product__price--default">{{ productDetails.prices.default }}{{ 'USD' | tuiCurrency }}</span>
+      </ng-template>
+    </button>
+  </div>
 </div>

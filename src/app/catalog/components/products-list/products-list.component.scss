@@ -18,3 +18,15 @@
     width: $card-width;
   }
 }
+
+@media (width <= 580px) {
+  .products {
+    &__list {
+      grid-template-columns: 1fr;
+    }
+
+    &__card {
+      width: auto;
+    }
+  }
+}

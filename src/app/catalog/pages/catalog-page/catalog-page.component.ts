@@ -11,6 +11,7 @@ import { CatalogUrlTreeService } from '../../services/catalog-url.service'
   styleUrls: ['./catalog-page.component.scss'],
 })
 export class CatalogPageComponent implements OnInit {
+  public isSidebarOpen = false
   private catalogData$ = combineLatest([this.catalogFacade.categories$, this.activeRoute.params]).pipe(
     map(([categories, params]) => ({ categories, params })),
   )
@@ -41,5 +42,9 @@ export class CatalogPageComponent implements OnInit {
       .subscribe(category => {
         this.catalogFacade.loadProducts(category)
       })
+  }
+
+  public toggleSidebar(isOpen: boolean): void {
+    this.isSidebarOpen = isOpen
   }
 }

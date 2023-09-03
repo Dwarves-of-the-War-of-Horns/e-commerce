@@ -3,5 +3,18 @@
   <tui-island class="side-panel" size="s">
     <ec-categories-list class="categories__list" />
   </tui-island>
+  <button
+    tuiIconButton
+    icon="tuiIconAlignJustifyLarge"
+    type="button"
+    (click)="toggleSidebar(true)"
+    (tuiActiveZoneChange)="toggleSidebar($event)"
+    class="side-bar-button"
+  >
+    Show sidebar
+    <div *tuiSidebar="isSidebarOpen; direction: 'left'" class="sidebar">
+      <ec-categories-list class="categories__list" />
+    </div>
+  </button>
   <ec-products-list [products$]="products$" [isProductsLoading$]="isProductsLoading$" class="products__list" />
 </div>

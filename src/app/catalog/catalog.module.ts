@@ -16,6 +16,7 @@ import { CatalogRoutingModule } from './catalog-routing.module'
 import { CatalogStoreModule } from './catalog-store/catalog-store.module'
 import { CatalogFacade } from './catalog-store/services/catalog.facade'
 import { BreadcrumpsComponent } from './components/breadcrumps/breadcrumps.component'
+import { CatalogFormComponent } from './components/catalog-form/catalog-form.component'
 import { CategoriesListComponent } from './components/categories-list/categories-list.component'
 import { ProductAttributesComponent } from './components/product-attributes/product-attributes.component'
 import { ProductCardComponent } from './components/product-card/product-card.component'
@@ -42,6 +43,7 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     ProductAttributesComponent,
     ProductDetailsCarouselComponent,
     ProductDetailsPriceComponent,
+    CatalogFormComponent,
   ],
   imports: [
     CommonModule,

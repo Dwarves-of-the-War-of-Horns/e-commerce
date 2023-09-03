@@ -29,6 +29,7 @@ export class CatalogPageComponent implements OnInit {
       .pipe(
         tap(() => {
           this.catalogFacade.initCategories()
+          this.catalogFacade.initFilters()
         }),
         tap(({ params, categories }) => {
           this.urlTreeService.updateCurrentUrl(

@@ -6,6 +6,7 @@ import { productDetailsPageActions } from '../actions/product-details-page.actio
 import {
   selectCategories,
   selectErrorMessage,
+  selectFilterAttributes,
   selectIsLoading,
   selectIsProductsLoading,
   selectProductDetails,
@@ -21,6 +22,7 @@ export class CatalogFacade {
   public products$ = this.store$.select(selectProducts)
   public isProductsLoading$ = this.store$.select(selectIsProductsLoading)
   public productDetails$ = this.store$.select(selectProductDetails)
+  public filterAttributes$ = this.store$.select(selectFilterAttributes)
   constructor(private store$: Store) {}
 
   public initCategories(): void {
@@ -34,5 +36,9 @@ export class CatalogFacade {
 
   public loadProductByKey(productKey: string): void {
     this.store$.dispatch(productDetailsPageActions.loadProductDetails({ productKey }))
+  }
+
+  public initFilters(): void {
+    this.store$.dispatch(catalogPageActions.initFilters())
   }
 }

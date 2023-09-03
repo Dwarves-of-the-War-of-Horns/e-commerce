@@ -6,6 +6,7 @@ import type {
   MyCustomerDraft,
   MyCustomerUpdate,
   ProductProjection,
+  ProductType,
   Project,
 } from '@commercetools/platform-sdk'
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder'
@@ -131,5 +132,9 @@ export class CommercetoolsHttpService {
     return fromPromise(this.api.productProjections().withKey({ key: productKey }).get().execute()).pipe(
       map(({ body }) => body),
     )
+  }
+
+  public getProductTypes(): Observable<ProductType[]> {
+    return fromPromise(this.api.productTypes().get().execute()).pipe(map(({ body }) => body.results))
   }
 }

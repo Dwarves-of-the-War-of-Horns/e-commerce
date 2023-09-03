@@ -5,5 +5,6 @@ export const catalogPageActions = createActionGroup({
   events: {
     'Init Categories': emptyProps(),
     'Load Products': props<{ category?: string }>(),
+    'Init Filters': emptyProps(),
   },
 })

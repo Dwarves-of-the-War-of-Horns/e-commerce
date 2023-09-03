@@ -10,8 +10,10 @@ import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable } from 'rxjs'
 
 import { arrayToTree } from '../helpers/array-to-tree.helper'
+import { convertAttributeToSimpleAttribute } from '../helpers/convert-attribute-to-simple-attribute.helper'
 import { convertProductProjectionToSimpleProduct } from '../helpers/convert-product-projection-to-simple-product.helper'
 import { CommercetoolsHttpService } from './commercetools-http.service'
+import type { SimpleAttribute } from 'src/app/shared/models/simple-attribute.model'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
@@ -61,5 +63,12 @@ export class CommercetoolsService {
 
   public getProductByKey(productKey: string): Observable<SimpleProduct> {
     return this.httpService.getProductByKey(productKey).pipe(map(convertProductProjectionToSimpleProduct))
+  }
+
+  public getFilterAttributes(): Observable<SimpleAttribute[]> {
+    return this.httpService.getProductTypes().pipe(
+      map(types => types[0].attributes ?? []),
+      map(attributes => attributes.map(convertAttributeToSimpleAttribute)),
+    )
   }
 }

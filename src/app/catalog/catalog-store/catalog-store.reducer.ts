@@ -13,6 +13,7 @@ const catalogInitialState: CatalogState = {
   categories: null,
   products: [],
   productDetails: null,
+  filterAttributes: null,
 }
 
 export const catalogReducer = createReducer(
@@ -59,5 +60,19 @@ export const catalogReducer = createReducer(
     ...state,
     isLoading: false,
     message: errorMessage,
+  })),
+  on(catalogPageActions.initFilters, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(catalogApiActions.loadFilterAttributesSuccess, (state, { filterAttributes }) => ({
+    ...state,
+    isLoading: false,
+    filterAttributes,
+  })),
+  on(catalogApiActions.loadFilterAttributesFailure, (state, { message }) => ({
+    ...state,
+    isLoading: false,
+    message,
   })),
 )

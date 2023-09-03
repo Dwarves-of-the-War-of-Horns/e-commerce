@@ -115,6 +115,7 @@ export class UserInformationComponent implements OnInit, OnDestroy {
     this.userInfoForm.controls.lastName.setValue(this.userData.lastName || '')
     this.userInfoForm.controls.email.setValue(this.userData.email || '')
     this.userInfoForm.controls.dateOfBirth.setValue(new TuiDay(Number(year), Number(mount) - 1, Number(date)))
+    this.userInfoForm.controls.dateOfBirth.markAsUntouched()
   }
 
   public onSubmit(): void {

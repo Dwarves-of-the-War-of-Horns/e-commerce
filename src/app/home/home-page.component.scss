@@ -23,6 +23,10 @@
   }
 }
 
+.shadow-block {
+  box-shadow: 0 0.25rem 1.5rem #0000001f;
+}
+
 @media (width <= 1400px) {
   .main {
     .container {

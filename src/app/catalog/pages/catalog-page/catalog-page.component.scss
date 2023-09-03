@@ -27,6 +27,10 @@
   padding: 1rem;
 }
 
+.shadow-block {
+  box-shadow: 0 0.25rem 1.5rem #0000001f;
+}
+
 @media (width <= 580px) {
   .catalog-page {
     grid-template-columns: 1fr;

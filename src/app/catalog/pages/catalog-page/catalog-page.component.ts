@@ -1,6 +1,6 @@
 import { Component, type OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { combineLatest, map, tap } from 'rxjs'
+import { combineLatest, filter, map, tap } from 'rxjs'
 
 import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
 import { CatalogUrlTreeService } from '../../services/catalog-url.service'
@@ -31,6 +31,7 @@ export class CatalogPageComponent implements OnInit {
           this.catalogFacade.initCategories()
           this.catalogFacade.initFilters()
         }),
+        filter(({ categories }) => Boolean(categories)),
         tap(({ params, categories }) => {
           this.urlTreeService.updateCurrentUrl(
             typeof params['category'] === 'string' ? params['category'].split('/') : null,

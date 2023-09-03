@@ -16,4 +16,8 @@ export class CatalogHttpService {
   public loadProducts(category?: string): Observable<SimpleProduct[]> {
     return this.commercetoolsService.getProducts(category)
   }
+
+  public getProductByKey(productKey: string): Observable<SimpleProduct> {
+    return this.commercetoolsService.getProductByKey(productKey)
+  }
 }

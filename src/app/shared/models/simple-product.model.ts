@@ -1,3 +1,5 @@
+import type { Attribute } from '@commercetools/platform-sdk'
+
 export interface SimpleProduct {
   name: string
   slug: string
@@ -10,4 +12,5 @@ export interface SimpleProduct {
     default: number
     discounted?: number
   }
+  attributes: Attribute[]
 }

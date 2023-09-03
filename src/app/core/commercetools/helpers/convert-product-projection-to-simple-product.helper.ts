@@ -13,6 +13,7 @@ export const convertProductProjectionToSimpleProduct = ({
   masterVariant,
 }: ProductProjection): SimpleProduct => {
   const prices = masterVariant.prices?.[0]
+  const { attributes } = masterVariant
   const defaultPrice = prices?.value?.centAmount
   const discountPrice = prices?.discounted?.value?.centAmount
 
@@ -28,5 +29,6 @@ export const convertProductProjectionToSimpleProduct = ({
       default: defaultPrice ? defaultPrice / 100 : 0,
       discounted: discountPrice ? discountPrice / 100 : undefined,
     },
+    attributes: attributes ?? [],
   }
 }

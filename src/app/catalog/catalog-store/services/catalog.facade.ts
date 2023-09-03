@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
 
 import { catalogPageActions } from '../actions/catalog-page.actions'
+import { productDetailsPageActions } from '../actions/product-details-page.actions'
 import {
   selectCategories,
   selectErrorMessage,
   selectIsLoading,
   selectIsProductsLoading,
+  selectProductDetails,
   selectProducts,
 } from '../catalog-store.selectors'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
@@ -18,10 +20,13 @@ export class CatalogFacade {
   public categories$ = this.store$.select(selectCategories)
   public products$ = this.store$.select(selectProducts)
   public isProductsLoading$ = this.store$.select(selectIsProductsLoading)
+  public productDetails = this.store$.select(selectProductDetails)
   constructor(private store$: Store) {}
 
   public initCategories(): void {
     this.store$.dispatch(catalogPageActions.initCategories())
+
+    this.store$.dispatch(productDetailsPageActions.loadProductDetails({ productKey: 'ram-helmet' }))
   }
 
   public loadProducts(category?: SimpleCategory | null): void {

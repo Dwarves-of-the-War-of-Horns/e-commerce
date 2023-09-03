@@ -5,6 +5,7 @@ import type {
   MyCustomerChangePassword,
   MyCustomerDraft,
   MyCustomerUpdate,
+  ProductData,
   ProductProjection,
   Project,
 } from '@commercetools/platform-sdk'
@@ -124,6 +125,12 @@ export class CommercetoolsHttpService {
 
     return fromPromise(this.api.productProjections().search().get({ queryArgs }).execute()).pipe(
       map(({ body }) => body.results),
+    )
+  }
+
+  public getProductByKey(productKey: string): Observable<ProductProjection> {
+    return fromPromise(this.api.productProjections().withKey({ key: productKey }).get().execute()).pipe(
+      map(({ body }) => body),
     )
   }
 }

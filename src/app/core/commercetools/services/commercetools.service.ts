@@ -4,10 +4,12 @@ import type {
   MyCustomerChangePassword,
   MyCustomerDraft,
   MyCustomerUpdate,
+  ProductData,
+  ProductProjection,
   Project,
 } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
-import { map, type Observable } from 'rxjs'
+import { map, type Observable, tap } from 'rxjs'
 
 import { arrayToTree } from '../helpers/array-to-tree.helper'
 import { convertProductProjectionToSimpleProduct } from '../helpers/convert-product-projection-to-simple-product.helper'
@@ -57,5 +59,11 @@ export class CommercetoolsService {
     return this.httpService
       .getProducts(category)
       .pipe(map(products => products.map(convertProductProjectionToSimpleProduct)))
+  }
+
+  public getProductByKey(productKey: string): Observable<SimpleProduct> {
+    return this.httpService
+      .getProductByKey(productKey)
+      .pipe(tap(console.log), map(convertProductProjectionToSimpleProduct))
   }
 }

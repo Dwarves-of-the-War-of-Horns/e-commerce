@@ -33,4 +33,8 @@ export class CatalogFacade {
     const id = category?.id
     this.store$.dispatch(catalogPageActions.loadProducts({ category: id }))
   }
+
+  public loadProductByKey(productKey: string): void {
+    this.store$.dispatch(productDetailsPageActions.loadProductDetails({ productKey }))
+  }
 }

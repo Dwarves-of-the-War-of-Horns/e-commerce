@@ -1,0 +1,17 @@
+<div class="product-details" *ngIf="productDetails$ | async as productDetails">
+  <div class="product-details__photos" *ngIf="productDetails.images">
+    <ec-product-details-carousel [images]="productDetails.images" />
+  </div>
+
+  <h3 class="tui-text_h3 product-details__heading">{{ productDetails.name }}</h3>
+
+  <p class="tui-text_body-xl product-details__description" *ngIf="productDetails.description">
+    {{ productDetails.description }}
+  </p>
+
+  <div class="product-details__info">
+    <ng-container *ngIf="productDetails.attributes && productDetails.attributes.length">
+      <!-- <ec-product-attributes [attributes]="productDetails.attributes" /> -->
+    </ng-container>
+  </div>
+</div>

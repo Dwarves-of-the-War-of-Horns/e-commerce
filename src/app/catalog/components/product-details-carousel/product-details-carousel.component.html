@@ -1,0 +1,50 @@
+<div class="carousel">
+  <button
+    tuiIconButton
+    size="s"
+    appearance="mono"
+    icon="tuiIconChevronLeft"
+    title="Previous"
+    (click)="carousel.prev()"
+  ></button>
+
+  <tui-carousel #carousel [itemsCount]="1" [(index)]="carouselActiveIndex">
+    <ng-container *ngFor="let image of images; let i = index">
+      <img
+        (click)="openDialog(template)"
+        *tuiItem
+        alt="product photo"
+        draggable="false"
+        [src]="image"
+        class="item"
+        [class.item_active]="i === carouselActiveIndex + 1"
+      />
+    </ng-container>
+  </tui-carousel>
+
+  <button
+    tuiIconButton
+    size="s"
+    appearance="mono"
+    icon="tuiIconChevronRight"
+    title="Next"
+    (click)="carousel.next()"
+  ></button>
+</div>
+
+<ng-template #template let-observer>
+  <div class="carousel">
+    <tui-carousel #carousel [draggable]="true" [itemsCount]="1" [(index)]="carouselActiveIndex">
+      <ng-container *ngFor="let image of images; let i = index">
+        <img
+          *tuiItem
+          alt="product photo"
+          draggable="false"
+          [src]="image"
+          class="item"
+          [class.item_active]="i === carouselActiveIndex + 1"
+        />
+      </ng-container>
+    </tui-carousel>
+  </div>
+</ng-template>

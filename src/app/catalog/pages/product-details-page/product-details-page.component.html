@@ -1,0 +1,10 @@
+<ng-container *ngIf="isLoading$ | async; else notLoading">Loading...</ng-container>
+
+<ng-template #notLoading>
+ <ng-container *ngIf="errorMessage$ | async; else noError">
+  <p>Sorry, we could not find the product you desire</p>
+ </ng-container> 
+ <ng-template #noError>
+  <ec-product-details></ec-product-details>
+ </ng-template>
+</ng-template>

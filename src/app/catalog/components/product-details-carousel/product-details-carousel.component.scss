@@ -1,0 +1,9 @@
+.carousel {
+  display: flex;
+  align-items: center;
+
+  .item {
+    max-height: 35rem;
+    object-fit: cover;
+  }
+}

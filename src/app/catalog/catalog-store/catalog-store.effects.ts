@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
-import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs'
+import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs'
 
 import { CatalogHttpService } from '../services/catalog-http.service'
 import { catalogApiActions } from './actions/catalog-api.actions'
@@ -51,7 +51,6 @@ export class CatalogEffects {
       switchMap(({ productKey }) =>
         this.catalogHttpService.getProductByKey(productKey).pipe(
           map(productDetails => productDetailsApiActions.productDetailsLoadSuccess({ productDetails })),
-          tap(console.log),
           catchError(({ message }: Error) =>
             of(productDetailsApiActions.productDetailsLoadFailure({ errorMessage: message })),
           ),

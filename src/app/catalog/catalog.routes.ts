@@ -2,6 +2,7 @@ import type { Routes } from '@angular/router'
 
 import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component'
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component'
+import { productResolver } from './resolver/product.resolver'
 
 export const catalogRoutes: Routes = [
   {
@@ -20,5 +21,6 @@ export const catalogRoutes: Routes = [
     path: 'product/:key',
     component: ProductDetailsPageComponent,
     title: 'Product Details',
+    resolve: { product: productResolver },
   },
 ]

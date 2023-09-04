@@ -1,10 +1,9 @@
-<ng-container *ngIf="isLoading$ | async; else notLoading">Loading...</ng-container>
+<ng-container *ngIf="isLoading$ | async; else notLoading">
+  <tui-loader [showLoader]="true" size="xl"></tui-loader>
+</ng-container>
 
 <ng-template #notLoading>
- <ng-container *ngIf="errorMessage$ | async; else noError">
-  <p>Sorry, we could not find the product you desire</p>
- </ng-container> 
- <ng-template #noError>
-  <ec-product-details></ec-product-details>
- </ng-template>
+  <tui-island class="shadow-block product-container">
+    <ec-product-details></ec-product-details>
+  </tui-island>
 </ng-template>

@@ -10,7 +10,7 @@
   ></button>
 </div>
 <div class="address-form-container">
-  <div *ngFor="let address of userAddresses; let i = index">
+  <div *ngFor="let address of userAddresses; let i = index; trackBy: addressesTrackByFn">
     <tui-island class="shadow-block">
       <div *ngIf="address.id === defaultBillingAddressId">
         <div class="tui-island__content">

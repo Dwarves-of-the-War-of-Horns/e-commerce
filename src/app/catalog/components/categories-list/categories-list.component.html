@@ -1,5 +1,5 @@
 <tui-tree
-  *ngFor="let category of categories$ | async"
+  *ngFor="let category of categories$ | async; trackBy: categoriesTrackByFn"
   [tuiTreeController]="true"
   [value]="category"
   [content]="content"

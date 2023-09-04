@@ -1,10 +1,16 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce'
+import { TuiCurrencyPipeModule, TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile'
 import { TuiActiveZoneModule, TuiLetModule } from '@taiga-ui/cdk'
 import { TuiButtonModule, TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core'
-import { TuiBreadcrumbsModule, TuiCarouselModule, TuiIslandModule, TuiTreeModule } from '@taiga-ui/kit'
+import {
+  TuiBreadcrumbsModule,
+  TuiCarouselModule,
+  TuiIslandModule,
+  TuiPaginationModule,
+  TuiTreeModule,
+} from '@taiga-ui/kit'
 
 import { CatalogRoutingModule } from './catalog-routing.module'
 import { CatalogStoreModule } from './catalog-store/catalog-store.module'
@@ -51,6 +57,8 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     TuiButtonModule,
     TuiActiveZoneModule,
     TuiCarouselModule,
+    TuiPaginationModule,
+    TuiMoneyModule,
   ],
   providers: [CatalogFacade, CatalogHttpService, CatalogUrlTreeService],
 })

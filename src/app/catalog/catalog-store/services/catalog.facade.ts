@@ -20,13 +20,11 @@ export class CatalogFacade {
   public categories$ = this.store$.select(selectCategories)
   public products$ = this.store$.select(selectProducts)
   public isProductsLoading$ = this.store$.select(selectIsProductsLoading)
-  public productDetails = this.store$.select(selectProductDetails)
+  public productDetails$ = this.store$.select(selectProductDetails)
   constructor(private store$: Store) {}
 
   public initCategories(): void {
     this.store$.dispatch(catalogPageActions.initCategories())
-
-    this.store$.dispatch(productDetailsPageActions.loadProductDetails({ productKey: 'ram-helmet' }))
   }
 
   public loadProducts(category?: SimpleCategory | null): void {

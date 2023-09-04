@@ -5,7 +5,6 @@ import type {
   MyCustomerChangePassword,
   MyCustomerDraft,
   MyCustomerUpdate,
-  ProductData,
   ProductProjection,
   Project,
 } from '@commercetools/platform-sdk'

@@ -1,5 +1,3 @@
-import type { ProductData } from '@commercetools/platform-sdk'
-
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 

@@ -45,7 +45,7 @@ export class CatalogEffects {
     ),
   )
 
-  private getProductByKey = createEffect(() =>
+  private getProductByKey$ = createEffect(() =>
     this.actions$.pipe(
       ofType(productDetailsPageActions.loadProductDetails),
       switchMap(({ productKey }) =>

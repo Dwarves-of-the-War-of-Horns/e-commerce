@@ -9,5 +9,5 @@ import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
 })
 export class ProductDetailsComponent {
   private catalogFacade = inject(CatalogFacade)
-  public productDetails$ = this.catalogFacade.productDetails
+  public productDetails$ = this.catalogFacade.productDetails$
 }

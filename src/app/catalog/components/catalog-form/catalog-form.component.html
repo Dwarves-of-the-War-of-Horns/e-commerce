@@ -1,9 +1,21 @@
-<form [formGroup]="form">
-  <tui-select tuiTextfieldSize="s" formControlName="sort" [stringify]="stringify">
-    Sort by
-    <input tuiTextfield />
-    <tui-data-list-wrapper [itemContent]="optionContent" [items]="sortItems" *tuiDataList> </tui-data-list-wrapper>
-  </tui-select>
+<form [formGroup]="form" class="tui-form form">
+  <div class="tui-form__row_multi-fields">
+    <tui-input
+      [tuiTextfieldCleaner]="true"
+      formControlName="search"
+      tuiTextfieldIconLeft="tuiIconSearch"
+      class="tui-form__multi-field"
+    >
+      Search
+      <input tuiTextfield />
+    </tui-input>
+
+    <tui-select formControlName="sort" [stringify]="stringify" class="tui-form__multi-field">
+      Sort by
+      <input tuiTextfield />
+      <tui-data-list-wrapper [itemContent]="optionContent" [items]="sortItems" *tuiDataList> </tui-data-list-wrapper>
+    </tui-select>
+  </div>
 </form>
 
 <ng-template #optionContent let-option> {{ option.label }}</ng-template>

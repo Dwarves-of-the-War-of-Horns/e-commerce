@@ -15,6 +15,7 @@ import type { AttributeValue } from 'src/app/shared/models/attribute-value.model
 export class CatalogFormComponent implements OnInit {
   public filterAttributes$ = this.catalogFacade.filterAttributes$
   public stringify: TuiStringHandler<AttributeValue> = item => item.label
+
   public sortItems = [
     {
       key: 'createdAt asc',
@@ -40,6 +41,7 @@ export class CatalogFormComponent implements OnInit {
 
   public form = this.fb.group({
     sort: new FormControl<AttributeValue>(this.sortItems[0]),
+    search: new FormControl<string>(''),
   })
 
   constructor(

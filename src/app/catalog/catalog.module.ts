@@ -4,11 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TuiCurrencyPipeModule, TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile'
 import { TuiActiveZoneModule, TuiLetModule } from '@taiga-ui/cdk'
-import { TuiButtonModule, TuiDataListModule, TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core'
+import {
+  TuiButtonModule,
+  TuiDataListModule,
+  TuiLinkModule,
+  TuiLoaderModule,
+  TuiSvgModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core'
 import {
   TuiBreadcrumbsModule,
   TuiCarouselModule,
   TuiDataListWrapperModule,
+  TuiInputModule,
   TuiIslandModule,
   TuiPaginationModule,
   TuiSelectModule,
@@ -71,6 +79,8 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     TuiSelectModule,
     TuiDataListModule,
     TuiDataListWrapperModule,
+    TuiInputModule,
+    TuiTextfieldControllerModule,
   ],
   providers: [CatalogFacade, CatalogHttpService, CatalogUrlTreeService],
 })

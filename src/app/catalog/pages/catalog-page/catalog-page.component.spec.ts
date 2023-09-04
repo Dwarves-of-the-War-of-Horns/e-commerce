@@ -9,6 +9,7 @@ import { of } from 'rxjs'
 
 import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
 import { BreadcrumpsComponent } from '../../components/breadcrumps/breadcrumps.component'
+import { CatalogFormComponent } from '../../components/catalog-form/catalog-form.component'
 import { CategoriesListComponent } from '../../components/categories-list/categories-list.component'
 import { ProductCardComponent } from '../../components/product-card/product-card.component'
 import { ProductsListComponent } from '../../components/products-list/products-list.component'
@@ -27,6 +28,7 @@ describe('CatalogPageComponent', () => {
         BreadcrumpsComponent,
         ProductsListComponent,
         ProductCardComponent,
+        CatalogFormComponent,
       ],
       imports: [
         TuiIslandModule,

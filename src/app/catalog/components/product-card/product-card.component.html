@@ -1,15 +1,7 @@
 <tui-island size="s" textAlign="center" class="product" [hoverable]="true">
   <h3 class="tui-island__title product__title">
-    <a tuiLink [routerLink]="['/product', product.key]" class="product__link">{{ product.name }} </a>
+    <a tuiLink class="product__link">{{ product.name }} </a>
   </h3>
-  <ng-container *ngIf="product.description.length; else noDescription">
-    <p
-      *ngIf="product.description.length < maxDescriptionLength; else longDescription"
-      class="tui-island__paragraph product__description"
-    >
-      {{ cutDescription(product.description) }}
-    </p>
-  </ng-container>
 
   <div class="tui-island__paragraph product__image-container">
     <img
@@ -19,6 +11,15 @@
       [alt]="product.name + ' photo'"
     />
   </div>
+
+  <ng-container *ngIf="product.description.length; else noDescription">
+    <p
+      *ngIf="product.description.length < maxDescriptionLength; else longDescription"
+      class="tui-island__paragraph product__description"
+    >
+      {{ cutDescription(product.description) }}
+    </p>
+  </ng-container>
 
   <div class="tui-island__paragraph product__price-container">
     <span>Price:</span>
@@ -38,7 +39,7 @@
 <ng-template #longDescription>
   <p class="tui-island__paragraph product__description">
     {{ cutDescription(product.description) }}
-    <a tuiLink [routerLink]="['/product', product.key]"> ...read more</a>
+    <a tuiLink> ...read more</a>
   </p>
 </ng-template>
 

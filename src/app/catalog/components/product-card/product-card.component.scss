@@ -1,16 +1,16 @@
 .product {
-  cursor: default;
-
   display: flex;
   flex-direction: column;
-  gap: 0.8em;
+  gap: 1em;
 
   box-sizing: border-box;
-  max-width: 250px;
-  height: 380px;
+  max-width: 330px;
+  height: 430px;
+
+  font-size: 1.2em;
 
   &__title {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
   }
 

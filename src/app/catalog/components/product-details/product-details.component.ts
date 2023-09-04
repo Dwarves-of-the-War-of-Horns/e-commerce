@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component } from '@angular/core'
 
 import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
 
@@ -8,6 +8,7 @@ import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent {
-  private catalogFacade = inject(CatalogFacade)
   public productDetails$ = this.catalogFacade.productDetails$
+
+  constructor(private catalogFacade: CatalogFacade) {}
 }

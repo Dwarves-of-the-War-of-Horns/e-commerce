@@ -1,1 +1,9 @@
-<p>catalog-form works!</p>
+<form [formGroup]="form">
+  <tui-select tuiTextfieldSize="s" formControlName="sort" [stringify]="stringify">
+    Sort by
+    <input tuiTextfield />
+    <tui-data-list-wrapper [itemContent]="optionContent" [items]="sortItems" *tuiDataList> </tui-data-list-wrapper>
+  </tui-select>
+</form>
+
+<ng-template #optionContent let-option> {{ option.label }}</ng-template>

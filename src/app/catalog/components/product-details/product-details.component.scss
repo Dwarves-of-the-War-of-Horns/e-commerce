@@ -2,9 +2,10 @@
   display: grid;
   grid-template-areas:
     'photos heading'
-    'photos  info'
+    'photos price'
+    'photos info'
     'description description '
-    'price price';
+    'button button';
   grid-template-columns: 1.5fr 1fr;
   row-gap: 1rem;
 
@@ -21,6 +22,7 @@
 
   &__heading {
     grid-area: heading;
+    margin-bottom: 0;
   }
 
   &__info {
@@ -36,30 +38,13 @@
 
   &__price {
     grid-area: price;
-    margin: 2rem auto;
+  }
 
-    * {
-      margin-left: 0.5rem;
-    }
-
-    &--inactive {
-      font-size: 1rem;
-      font-weight: lighter;
-      color: var(--tui-text-01);
-      text-decoration: line-through;
-    }
-
-    &--discount {
-      font-size: 1.4rem;
-      font-weight: bolder;
-      color: var(--tui-text-04);
-    }
-
-    &--default {
-      font-size: 1.4rem;
-      font-weight: bolder;
-      color: var(--tui-text-04);
-    }
+  &__button {
+    grid-area: button;
+    max-width: 15rem;
+    margin: auto;
+    margin-top: 1rem;
   }
 }
 
@@ -67,10 +52,11 @@
   .product-details {
     grid-template-areas:
       'heading '
+      'price'
       'photos'
       'description'
       'info'
-      'price';
+      'button';
     grid-template-columns: 1fr;
 
     &__heading {
@@ -81,12 +67,17 @@
       text-align: left;
     }
 
+    &__price {
+      margin: auto;
+    }
+
     &__info {
       margin: auto;
     }
 
     &__photos {
       width: 90vw;
+      margin-top: 2rem;
     }
   }
 }

@@ -1,5 +1,7 @@
 import type { Attribute } from '@commercetools/platform-sdk'
 
+import type { SimpleProductPrices } from './simple-product-prices'
+
 export interface SimpleProduct {
   name: string
   slug: string
@@ -8,9 +10,6 @@ export interface SimpleProduct {
   metaTitle: string
   metaDescription: string
   images: string[]
-  prices: {
-    default: number
-    discounted?: number
-  }
+  prices: SimpleProductPrices
   attributes: Attribute[]
 }

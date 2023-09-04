@@ -36,7 +36,7 @@
 
 <ng-template #template let-observer>
   <div class="carousel dialog">
-    <div class="carousel__container">
+    <div class="carousel-container">
       <tui-carousel #carousel [draggable]="true" [itemsCount]="1" [(index)]="carouselActiveIndex">
         <ng-container *ngFor="let image of images; let i = index; trackBy: trackByImage">
           <img

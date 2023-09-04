@@ -20,6 +20,7 @@ import { CategoriesListComponent } from './components/categories-list/categories
 import { ProductAttributesComponent } from './components/product-attributes/product-attributes.component'
 import { ProductCardComponent } from './components/product-card/product-card.component'
 import { ProductDetailsCarouselComponent } from './components/product-details-carousel/product-details-carousel.component'
+import { ProductDetailsPriceComponent } from './components/product-details-price/product-details-price.component'
 import { ProductDetailsComponent } from './components/product-details/product-details.component'
 import { ProductsListComponent } from './components/products-list/products-list.component'
 import { TreeComponent } from './components/tree/tree.component'
@@ -40,6 +41,7 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     ProductDetailsComponent,
     ProductAttributesComponent,
     ProductDetailsCarouselComponent,
+    ProductDetailsPriceComponent,
   ],
   imports: [
     CommonModule,

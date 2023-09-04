@@ -45,20 +45,20 @@
     &--inactive {
       font-size: 1rem;
       font-weight: lighter;
-      color: var(--tui-text-03);
+      color: var(--tui-text-01);
       text-decoration: line-through;
     }
 
     &--discount {
       font-size: 1.4rem;
       font-weight: bolder;
-      color: var(--tui-negative);
+      color: var(--tui-text-04);
     }
 
     &--default {
       font-size: 1.4rem;
       font-weight: bolder;
-      color: var(--tui-text-01);
+      color: var(--tui-text-04);
     }
   }
 }

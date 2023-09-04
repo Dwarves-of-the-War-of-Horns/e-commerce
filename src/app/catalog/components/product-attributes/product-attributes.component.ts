@@ -8,4 +8,8 @@ import type { Attribute } from '@commercetools/platform-sdk'
 })
 export class ProductAttributesComponent {
   @Input() public attributes!: Attribute[]
+
+  public trackByName(index: number, attribute: Attribute): string {
+    return attribute.name
+  }
 }

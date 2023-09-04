@@ -16,23 +16,25 @@
   </div>
 
   <div class="product-details__price">
-    <button
-      tuiButton
-      type="button"
-      appearance="outline"
-    >
+    <button tuiButton type="button" appearance="primary">
       <span>Get for</span>
       <ng-container *ngIf="productDetails.prices.discounted; else noDiscount">
-        <span class="product-details__price--discount tui-island__paragraph"
-          >{{ productDetails.prices.discounted }}{{ 'USD' | tuiCurrency }}</span
+        <tui-money
+          class="product-details__price--discount tui-island__paragraph"
+          currency="USD"
+          [value]="productDetails.prices.discounted"
         >
-        <span class="product-details__price--inactive tui-island__paragraph"
-          >{{ productDetails.prices.default }}{{ 'USD' | tuiCurrency }}</span
+        </tui-money>
+        <tui-money
+          class="product-details__price--inactive tui-island__paragraph"
+          currency="USD"
+          [value]="productDetails.prices.default"
         >
+        </tui-money>
       </ng-container>
 
       <ng-template #noDiscount>
-        <span class="product__price--default">{{ productDetails.prices.default }}{{ 'USD' | tuiCurrency }}</span>
+        <tui-money class="product__price--default" currency="USD" [value]="productDetails.prices.default"> </tui-money>
       </ng-template>
     </button>
   </div>

@@ -1,5 +1,4 @@
 import { Component, Inject, Input } from '@angular/core'
-import type { Image } from '@commercetools/platform-sdk'
 import { type TuiDialogContext, TuiDialogService } from '@taiga-ui/core'
 import type { PolymorpheusContent } from '@tinkoff/ng-polymorpheus'
 
@@ -14,6 +13,10 @@ export class ProductDetailsCarouselComponent {
   public carouselActiveIndex = 0
 
   constructor(@Inject(TuiDialogService) private readonly dialogs: TuiDialogService) {}
+
+  public trackByImage(index: number, image: string): string {
+    return image
+  }
 
   public openDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogs

@@ -21,6 +21,16 @@
   .icon {
     margin-bottom: 1rem;
   }
+
+  .island {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__paragraph {
+      flex-grow: 1;
+    }
+  }
 }
 
 @media (width <= 1400px) {

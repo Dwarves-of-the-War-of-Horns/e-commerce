@@ -1,5 +1,4 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
-
 import { RouterTestingModule } from '@angular/router/testing'
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce'
 import { TuiLinkModule } from '@taiga-ui/core'
@@ -20,6 +19,7 @@ const mockProduct: SimpleProduct = {
     discounted: 50,
   },
   description: 'Product 1 description',
+  attributes: [{ name: 'test name', value: [{ key: 'testKey', label: 'test-label' }] }],
 }
 
 describe('ProductCardComponent', () => {

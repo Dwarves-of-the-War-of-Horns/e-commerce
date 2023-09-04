@@ -126,4 +126,10 @@ export class CommercetoolsHttpService {
       map(({ body }) => body.results),
     )
   }
+
+  public getProductByKey(productKey: string): Observable<ProductProjection> {
+    return fromPromise(this.api.productProjections().withKey({ key: productKey }).get().execute()).pipe(
+      map(({ body }) => body),
+    )
+  }
 }

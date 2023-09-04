@@ -1,0 +1,26 @@
+.carousel {
+  display: flex;
+  align-items: center;
+
+  .item {
+    max-height: 35rem;
+    object-fit: contain;
+  }
+}
+
+.carousel.dialog {
+  justify-content: center;
+
+  .carousel-container {
+    width: 100vw;
+  }
+
+  .item {
+    max-height: 40rem;
+    object-fit: contain;
+  }
+
+  .pagination {
+    margin-top: 1rem;
+  }
+}

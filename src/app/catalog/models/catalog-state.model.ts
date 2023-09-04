@@ -7,4 +7,5 @@ export interface CatalogState {
   categories: SimpleCategory[] | null
   isProductsLoading: boolean
   products: SimpleProduct[]
+  productDetails: SimpleProduct | null
 }

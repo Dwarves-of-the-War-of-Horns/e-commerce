@@ -6,6 +6,8 @@ import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs'
 import { CatalogHttpService } from '../services/catalog-http.service'
 import { catalogApiActions } from './actions/catalog-api.actions'
 import { catalogPageActions } from './actions/catalog-page.actions'
+import { productDetailsApiActions } from './actions/product-details-api.actions'
+import { productDetailsPageActions } from './actions/product-details-page.actions'
 import { selectCategories } from './catalog-store.selectors'
 
 @Injectable()
@@ -38,6 +40,20 @@ export class CatalogEffects {
         this.catalogHttpService.loadProducts(category).pipe(
           map(products => catalogApiActions.loadProductsSuccess({ products })),
           catchError(({ message }: Error) => of(catalogApiActions.loadProductsFailure({ message }))),
+        ),
+      ),
+    ),
+  )
+
+  private getProductByKey$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(productDetailsPageActions.loadProductDetails),
+      switchMap(({ productKey }) =>
+        this.catalogHttpService.getProductByKey(productKey).pipe(
+          map(productDetails => productDetailsApiActions.productDetailsLoadSuccess({ productDetails })),
+          catchError(({ message }: Error) =>
+            of(productDetailsApiActions.productDetailsLoadFailure({ errorMessage: message })),
+          ),
         ),
       ),
     ),

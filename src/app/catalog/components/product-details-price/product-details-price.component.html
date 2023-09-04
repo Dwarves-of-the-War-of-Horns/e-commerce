@@ -1,0 +1,18 @@
+<div class="price" *ngIf="prices">
+
+    <ng-container *ngIf="prices.discounted; else noDiscount">
+      <tui-money
+        class="price--discount tui-island__paragraph"
+        currency="USD"
+        [value]="prices.discounted"
+      >
+      </tui-money>
+      <tui-money class="price--inactive tui-island__paragraph" currency="USD" [value]="prices.default">
+      </tui-money>
+    </ng-container>
+
+    <ng-template #noDiscount>
+      <tui-money class="price--default" currency="USD" [value]="prices.default"> </tui-money>
+    </ng-template>
+
+</div>

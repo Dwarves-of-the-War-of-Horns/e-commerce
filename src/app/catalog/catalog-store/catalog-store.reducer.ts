@@ -3,6 +3,8 @@ import { createReducer, on } from '@ngrx/store'
 import type { CatalogState } from '../models/catalog-state.model'
 import { catalogApiActions } from './actions/catalog-api.actions'
 import { catalogPageActions } from './actions/catalog-page.actions'
+import { productDetailsApiActions } from './actions/product-details-api.actions'
+import { productDetailsPageActions } from './actions/product-details-page.actions'
 
 const catalogInitialState: CatalogState = {
   isLoading: false,
@@ -10,6 +12,7 @@ const catalogInitialState: CatalogState = {
   message: null,
   categories: null,
   products: [],
+  productDetails: null,
 }
 
 export const catalogReducer = createReducer(
@@ -41,5 +44,20 @@ export const catalogReducer = createReducer(
     ...state,
     isProductsLoading: false,
     message,
+  })),
+  on(productDetailsPageActions.loadProductDetails, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(productDetailsApiActions.productDetailsLoadSuccess, (state, { productDetails }) => ({
+    ...state,
+    isLoading: false,
+    productDetails,
+  })),
+
+  on(productDetailsApiActions.productDetailsLoadFailure, (state, { errorMessage }) => ({
+    ...state,
+    isLoading: false,
+    message: errorMessage,
   })),
 )

@@ -4,8 +4,7 @@
   gap: 1em;
 
   box-sizing: border-box;
-  max-width: 330px;
-  height: 430px;
+  height: 100%;
 
   font-size: 1.2em;
 
@@ -54,11 +53,5 @@
       font-weight: bolder;
       color: var(--tui-negative);
     }
-  }
-}
-
-@media (width <= 580px) {
-  .product {
-    max-width: none;
   }
 }

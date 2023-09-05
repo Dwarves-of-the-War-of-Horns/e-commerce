@@ -14,7 +14,7 @@ export const userGuard: CanActivateFn = () => {
         return isLoggedIn
       }
 
-      router.navigate(['home']).catch(({ message }: Error) => message || null)
+      router.navigate(['auth/sign-in'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
 
       return !isLoggedIn
     }),

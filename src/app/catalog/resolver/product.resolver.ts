@@ -11,7 +11,7 @@ export const productResolver: ResolveFn<boolean> = () => {
 
   errorMessage$.subscribe(errorMessage => {
     if (errorMessage) {
-      router.navigate(['**'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
+      router.navigate(['not-found'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
     }
   })
 

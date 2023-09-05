@@ -13,6 +13,7 @@ import { arrayToTree } from '../helpers/array-to-tree.helper'
 import { convertAttributeToSimpleAttribute } from '../helpers/convert-attribute-to-simple-attribute.helper'
 import { convertProductProjectionToSimpleProduct } from '../helpers/convert-product-projection-to-simple-product.helper'
 import { CommercetoolsHttpService } from './commercetools-http.service'
+import type { QueryParams } from 'src/app/shared/models/query-params.model'
 import type { SimpleAttribute } from 'src/app/shared/models/simple-attribute.model'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
@@ -55,9 +56,9 @@ export class CommercetoolsService {
     return this.httpService.changePassword(newPassword)
   }
 
-  public getProducts(category?: string): Observable<SimpleProduct[]> {
+  public getProducts(queryParams: QueryParams): Observable<SimpleProduct[]> {
     return this.httpService
-      .getProducts(category)
+      .getProducts(queryParams)
       .pipe(map(products => products.map(convertProductProjectionToSimpleProduct)))
   }
 

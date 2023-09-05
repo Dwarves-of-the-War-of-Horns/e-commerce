@@ -1,7 +1,7 @@
 <tui-breadcrumbs class="breadcrumps">
-  <a *tuiItem tuiLink routerLink="/catalog"> Catalog </a>
+  <a *tuiItem tuiLink routerLink="/catalog" queryParamsHandling="merge"> Catalog </a>
   <ng-container *ngFor="let route of navigation$ | async; trackBy: trackRoutes">
-    <a *tuiItem tuiLink [routerLink]="createRoute(route)">
+    <a *tuiItem tuiLink [routerLink]="createRoute(route)" queryParamsHandling="merge">
       {{ route.name }}
     </a>
   </ng-container>

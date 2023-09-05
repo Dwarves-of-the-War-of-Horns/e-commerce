@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import type { TuiStringHandler } from '@taiga-ui/cdk'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs'
 
+import { CatalogQueryParamsService } from '../../services/catalog-query-params.service'
 import type { AttributeValue } from 'src/app/shared/models/attribute-value.model'
 
 @Component({
@@ -47,15 +48,15 @@ export class CatalogFormComponent implements OnInit {
     search: new FormControl<string>(this.initialFormValues.search),
   })
 
+  // eslint-disable-next-line max-params
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private queryParamsService: CatalogQueryParamsService,
   ) {}
 
   public ngOnInit(): void {
-    this.restoreFormValues(this.route.snapshot.queryParams)
-
     this.form.valueChanges
       .pipe(
         map(({ search, sort }) => ({ search: search?.trim(), sort: sort?.key })),
@@ -64,12 +65,16 @@ export class CatalogFormComponent implements OnInit {
         distinctUntilChanged((prev, current) => prev?.search === current.search && prev?.sort === current.sort),
       )
       .subscribe(formValue => {
+        const clearedParams = this.removeEmptyFormValues(formValue)
         void this.router.navigate([], {
           relativeTo: this.route,
           replaceUrl: true,
-          queryParams: this.removeEmptyFormValues(formValue),
+          queryParams: clearedParams,
         })
+        this.queryParamsService.updateQueryParams(clearedParams)
       })
+
+    this.restoreFormValues(this.route.snapshot.queryParams)
   }
 
   private removeEmptyFormValues(formValues: Record<string, string | undefined>): Record<string, string> {

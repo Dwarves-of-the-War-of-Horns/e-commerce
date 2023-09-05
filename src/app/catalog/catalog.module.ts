@@ -39,6 +39,7 @@ import { TreeComponent } from './components/tree/tree.component'
 import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component'
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component'
 import { CatalogHttpService } from './services/catalog-http.service'
+import { CatalogQueryParamsService } from './services/catalog-query-params.service'
 import { CatalogUrlTreeService } from './services/catalog-url.service'
 
 @NgModule({
@@ -82,6 +83,6 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     TuiInputModule,
     TuiTextfieldControllerModule,
   ],
-  providers: [CatalogFacade, CatalogHttpService, CatalogUrlTreeService],
+  providers: [CatalogFacade, CatalogHttpService, CatalogUrlTreeService, CatalogQueryParamsService],
 })
 export class CatalogModule {}

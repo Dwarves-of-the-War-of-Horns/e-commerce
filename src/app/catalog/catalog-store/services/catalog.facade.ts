@@ -12,7 +12,7 @@ import {
   selectProductDetails,
   selectProducts,
 } from '../catalog-store.selectors'
-import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
+import type { QueryParams } from 'src/app/shared/models/query-params.model'
 
 @Injectable()
 export class CatalogFacade {
@@ -29,9 +29,8 @@ export class CatalogFacade {
     this.store$.dispatch(catalogPageActions.initCategories())
   }
 
-  public loadProducts(category?: SimpleCategory | null): void {
-    const id = category?.id
-    this.store$.dispatch(catalogPageActions.loadProducts({ category: id }))
+  public loadProducts(queryParams: QueryParams): void {
+    this.store$.dispatch(catalogPageActions.loadProducts({ queryParams }))
   }
 
   public loadProductByKey(productKey: string): void {

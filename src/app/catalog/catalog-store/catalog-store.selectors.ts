@@ -22,3 +22,8 @@ export const selectProductDetails = createSelector(
   selectCatalogFeature,
   ({ productDetails }: CatalogState) => productDetails,
 )
+
+export const selectFilterAttributes = createSelector(
+  selectCatalogFeature,
+  ({ filterAttributes }: CatalogState) => filterAttributes,
+)

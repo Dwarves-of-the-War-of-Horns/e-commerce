@@ -7,12 +7,7 @@ import type { SimpleCategory } from 'src/app/shared/models/simple-category.model
 @Injectable()
 export class CatalogUrlTreeService {
   private currentUrl$$ = new BehaviorSubject<string[]>([])
-  private currentCategory$$ = new BehaviorSubject<SimpleCategory | null>(null)
   private navigationArray$$ = new BehaviorSubject<BreadcrumpsRoute[]>([])
-
-  public getCurrentCategory$(): Observable<SimpleCategory | null> {
-    return this.currentCategory$$.asObservable()
-  }
 
   public getCurrentUrl$(): Observable<string[]> {
     return this.currentUrl$$.asObservable()
@@ -24,11 +19,6 @@ export class CatalogUrlTreeService {
 
   public updateCurrentUrl(urlTree: string[] | null): void {
     this.currentUrl$$.next(urlTree ?? [])
-  }
-  public updateCurrentCategory(category: SimpleCategory | null): SimpleCategory | null {
-    this.currentCategory$$.next(category)
-
-    return category
   }
 
   public convertUrlTreeToSimpleCategory(

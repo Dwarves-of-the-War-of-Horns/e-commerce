@@ -16,5 +16,8 @@
       <ec-categories-list class="categories__list" />
     </div>
   </button>
-  <ec-products-list [products$]="products$" [isProductsLoading$]="isProductsLoading$" class="products__list" />
+  <div class="catalog-main">
+    <ec-catalog-form></ec-catalog-form>
+    <ec-products-list [products$]="products$" [isProductsLoading$]="isProductsLoading$" class="products__list" />
+  </div>
 </div>

@@ -1,14 +1,25 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TuiCurrencyPipeModule, TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile'
 import { TuiActiveZoneModule, TuiLetModule } from '@taiga-ui/cdk'
-import { TuiButtonModule, TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core'
+import {
+  TuiButtonModule,
+  TuiDataListModule,
+  TuiLinkModule,
+  TuiLoaderModule,
+  TuiSvgModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core'
 import {
   TuiBreadcrumbsModule,
   TuiCarouselModule,
+  TuiDataListWrapperModule,
+  TuiInputModule,
   TuiIslandModule,
   TuiPaginationModule,
+  TuiSelectModule,
   TuiTreeModule,
 } from '@taiga-ui/kit'
 
@@ -16,6 +27,7 @@ import { CatalogRoutingModule } from './catalog-routing.module'
 import { CatalogStoreModule } from './catalog-store/catalog-store.module'
 import { CatalogFacade } from './catalog-store/services/catalog.facade'
 import { BreadcrumpsComponent } from './components/breadcrumps/breadcrumps.component'
+import { CatalogFormComponent } from './components/catalog-form/catalog-form.component'
 import { CategoriesListComponent } from './components/categories-list/categories-list.component'
 import { ProductAttributesComponent } from './components/product-attributes/product-attributes.component'
 import { ProductCardComponent } from './components/product-card/product-card.component'
@@ -27,6 +39,7 @@ import { TreeComponent } from './components/tree/tree.component'
 import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component'
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component'
 import { CatalogHttpService } from './services/catalog-http.service'
+import { CatalogQueryParamsService } from './services/catalog-query-params.service'
 import { CatalogUrlTreeService } from './services/catalog-url.service'
 
 @NgModule({
@@ -42,6 +55,7 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     ProductAttributesComponent,
     ProductDetailsCarouselComponent,
     ProductDetailsPriceComponent,
+    CatalogFormComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +75,14 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     TuiCarouselModule,
     TuiPaginationModule,
     TuiMoneyModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TuiSelectModule,
+    TuiDataListModule,
+    TuiDataListWrapperModule,
+    TuiInputModule,
+    TuiTextfieldControllerModule,
   ],
-  providers: [CatalogFacade, CatalogHttpService, CatalogUrlTreeService],
+  providers: [CatalogFacade, CatalogHttpService, CatalogUrlTreeService, CatalogQueryParamsService],
 })
 export class CatalogModule {}

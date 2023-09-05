@@ -8,11 +8,12 @@ import { catalogApiActions } from './actions/catalog-api.actions'
 import { catalogPageActions } from './actions/catalog-page.actions'
 import { productDetailsApiActions } from './actions/product-details-api.actions'
 import { productDetailsPageActions } from './actions/product-details-page.actions'
-import { selectCategories } from './catalog-store.selectors'
+import { selectCategories, selectFilterAttributes } from './catalog-store.selectors'
 
 @Injectable()
 export class CatalogEffects {
-  public categories$ = this.store$.select(selectCategories)
+  private categories$ = this.store$.select(selectCategories)
+  private filterAttributes$ = this.store$.select(selectFilterAttributes)
   constructor(
     private store$: Store,
     private actions$: Actions,
@@ -36,8 +37,8 @@ export class CatalogEffects {
   private getProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(catalogPageActions.loadProducts),
-      switchMap(({ category }) =>
-        this.catalogHttpService.loadProducts(category).pipe(
+      switchMap(({ queryParams }) =>
+        this.catalogHttpService.loadProducts(queryParams).pipe(
           map(products => catalogApiActions.loadProductsSuccess({ products })),
           catchError(({ message }: Error) => of(catalogApiActions.loadProductsFailure({ message }))),
         ),
@@ -54,6 +55,20 @@ export class CatalogEffects {
           catchError(({ message }: Error) =>
             of(productDetailsApiActions.productDetailsLoadFailure({ errorMessage: message })),
           ),
+        ),
+      ),
+    ),
+  )
+
+  private loadFilterAttributes$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(catalogPageActions.initFilters),
+      withLatestFrom(this.filterAttributes$),
+      filter(([, filterAttributes]) => !filterAttributes),
+      switchMap(() =>
+        this.catalogHttpService.loadFilterAttributes().pipe(
+          map(filterAttributes => catalogApiActions.loadFilterAttributesSuccess({ filterAttributes })),
+          catchError(({ message }: Error) => of(catalogApiActions.loadFilterAttributesFailure({ message }))),
         ),
       ),
     ),

@@ -30,6 +30,10 @@ export class CategoriesListComponent {
     return ['/catalog', 'category', slugArray.join('/')]
   }
 
+  public categoriesTrackByFn = <Index, Categories>(_: Index, value: Categories): Categories => {
+    return value
+  }
+
   public onAnchorClick(event: MouseEvent): void {
     event.stopPropagation()
   }

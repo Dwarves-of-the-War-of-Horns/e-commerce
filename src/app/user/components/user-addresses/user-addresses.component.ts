@@ -64,6 +64,10 @@ export class UserAddressesComponent implements OnInit, OnDestroy {
     return this.countryArray[item]
   }
 
+  public addressesTrackByFn = (_: number, value: Address): Address => {
+    return value
+  }
+
   public updatePostalCodeValidation = (): void => {
     this.userAddressesForm.controls.postalCode.updateValueAndValidity()
   }

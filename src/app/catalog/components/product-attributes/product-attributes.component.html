@@ -2,10 +2,10 @@
   <tbody>
     <tr class="tui-table__tr" *ngFor="let attribute of attributes; trackBy: trackByName">
       <td class="tui-table__td">
-        {{ attribute.name | slice:1}}
+        {{ attribute.name | slice: 1 }}
       </td>
       <td class="tui-table__td">
-        {{ attribute.value[0] ? attribute.value[0].label: attribute.value.label }}
+        {{ attribute.value[0] ? attribute.value[0].label : attribute.value.label }}
       </td>
     </tr>
   </tbody>

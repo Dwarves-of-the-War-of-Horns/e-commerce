@@ -115,9 +115,7 @@
 <ng-template let-observer [tuiDialogOptions]="{ label: 'Edit Password', size: 'l' }" [(tuiDialog)]="isShowPasswordForm">
   <form [formGroup]="userPasswordForm" (ngSubmit)="onSubmitNewPassword()" class="form-container">
     <div class="tui-form__row">
-      <tui-input-password
-        formControlName="currentPassword"
-        tuiHintContent="Enter your current password"
+      <tui-input-password formControlName="currentPassword" tuiHintContent="Enter your current password"
         ><input tuiTextfield autocomplete="currentPassword" />Current password
         <span class="tui-required"></span>
       </tui-input-password>
@@ -125,8 +123,9 @@
     </div>
 
     <div class="tui-form__row">
-      <tui-input-password formControlName="newPassword" 
-      tuiHintContent="New password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end."
+      <tui-input-password
+        formControlName="newPassword"
+        tuiHintContent="New password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end."
         ><input tuiTextfield />New password
         <span class="tui-required"></span>
       </tui-input-password>

@@ -2,7 +2,7 @@
   <div class="main__header">
     <h2 class="tui-text_h2 header__heading">Welcome to our store!</h2>
     <p class="tui-text_body-xl header__text">
-      We are happy that you visited us! Take a look around – we've got some cool stuff to share that we think you'll
+      We are happy that you visited us! Take a look around - we've got some cool stuff to share that we think you'll
       love.
     </p>
   </div>
@@ -11,14 +11,18 @@
     <tui-island class="island shadow-block">
       <tui-marker-icon src="tuiIconUsers" mode="error" class="icon"></tui-marker-icon>
       <h3 class="tui-island__title">About us</h3>
-      <p class="tui-island__paragraph island__paragraph">Check some info about who we are and what are we standing for.</p>
+      <p class="tui-island__paragraph island__paragraph">
+        Check some info about who we are and what are we standing for.
+      </p>
       <a tuiLink [routerLink]="['/', 'about']">About us</a>
     </tui-island>
 
     <tui-island class="island shadow-block">
       <tui-marker-icon src="tuiIconGrid" mode="warning" class="icon"></tui-marker-icon>
       <h3 class="tui-island__title">Products</h3>
-      <p class="tui-island__paragraph island__paragraph">Take a look at our products and find something that suits you best!</p>
+      <p class="tui-island__paragraph island__paragraph">
+        Take a look at our products and find something that suits you best!
+      </p>
       <a tuiLink class="tui-island__paragraph tui-island__paragraph_link" [routerLink]="['/', 'catalog']"
         >Our products</a
       >
@@ -34,7 +38,9 @@
     <tui-island class="island shadow-block">
       <tui-marker-icon src="tuiIconUserCheck" mode="success" class="icon"></tui-marker-icon>
       <h3 class="tui-island__title">Sign in</h3>
-      <p class="tui-island__paragraph island__paragraph">Sign in to see the products that you added to the cart before</p>
+      <p class="tui-island__paragraph island__paragraph">
+        Sign in to see the products that you added to the cart before
+      </p>
       <a tuiLink [routerLink]="['/', 'auth', 'sign-in']">Sign in</a>
     </tui-island>
 
@@ -48,7 +54,9 @@
     <tui-island class="island shadow-block">
       <tui-marker-icon src="tuiIconShoppingCart" mode="error" class="icon"></tui-marker-icon>
       <h3 class="tui-island__title">Cart</h3>
-      <p class="tui-island__paragraph island__paragraph">We can only imagine what kind of wonderful goods you store there</p>
+      <p class="tui-island__paragraph island__paragraph">
+        We can only imagine what kind of wonderful goods you store there
+      </p>
       <a tuiLink [routerLink]="['/', 'cart']">Shopping cart</a>
     </tui-island>
   </div>

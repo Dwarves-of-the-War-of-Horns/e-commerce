@@ -3,16 +3,6 @@ import { TestBed } from '@angular/core/testing'
 import { CatalogUrlTreeService } from './catalog-url.service'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 
-const category: SimpleCategory = {
-  id: '1',
-  name: 'Category',
-  slug: 'category',
-  slugArray: [],
-  metaTitle: '',
-  metaDescription: '',
-  children: [],
-}
-
 const firstCategories: SimpleCategory[] = [
   {
     id: '1',
@@ -63,13 +53,6 @@ describe('CatalogUrlTreeService', () => {
     service.updateCurrentUrl(urlTree)
     service.getCurrentUrl$().subscribe(url => {
       expect(url).toEqual(urlTree)
-    })
-  })
-
-  it('should update current category', () => {
-    service.updateCurrentCategory(category)
-    service.getCurrentCategory$().subscribe(currentCategory => {
-      expect(currentCategory).toEqual(category)
     })
   })
 

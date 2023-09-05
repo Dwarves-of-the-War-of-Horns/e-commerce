@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core'
-import type { MyCustomerChangePassword, MyCustomerDraft, MyCustomerUpdate } from '@commercetools/platform-sdk'
+import type { MyCustomerDraft, MyCustomerUpdate } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { Store } from '@ngrx/store'
 
@@ -10,6 +10,7 @@ import { signInPageActions } from './actions/sign-in-page.actions'
 import { signUpPageActions } from './actions/sign-up-page.actions'
 import { updateCustomerPageActions } from './actions/update-customer-page.action'
 import { selectAuthData, selectError, selectIsLoading, selectIsLoggedIn } from './auth.selectors'
+import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
 
 @Injectable()
 export class AuthFacade {
@@ -39,7 +40,7 @@ export class AuthFacade {
     this.store$.dispatch(updateCustomerPageActions.updateCustomer({ updateCustomer: changedCustomer }))
   }
 
-  public changePassword(newPassword: MyCustomerChangePassword): void {
+  public changePassword(newPassword: ChangePasswordProps): void {
     this.store$.dispatch(changePasswordPageActions.changePassword({ newPassword }))
   }
 }

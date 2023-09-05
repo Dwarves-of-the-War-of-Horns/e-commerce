@@ -87,6 +87,7 @@ export class UserInformationComponent implements OnInit, OnDestroy {
       version: this.userData.version,
       currentPassword: passwordForm.currentPassword,
       newPassword: passwordForm.newPassword,
+      username: this.userData.email,
     })
 
     this.isShowPasswordForm = false

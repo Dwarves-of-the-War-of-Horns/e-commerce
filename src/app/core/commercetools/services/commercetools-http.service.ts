@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core'
 import type {
   Category,
   Customer,
-  MyCustomerChangePassword,
   MyCustomerDraft,
   MyCustomerUpdate,
   ProductProjection,
@@ -11,12 +10,13 @@ import type {
 } from '@commercetools/platform-sdk'
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder'
 import type { TokenStore, UserAuthOptions } from '@commercetools/sdk-client-v2'
-import { map, type Observable, of, switchMap } from 'rxjs'
+import { map, type Observable, of, switchMap, tap } from 'rxjs'
 import { fromPromise } from 'rxjs/internal/observable/innerFrom'
 
 import { LocalStorageService } from '../../storage/services/local-storage.service'
 import { CommercetoolsClientBuilder } from '../commercetools-client-builder'
 import { tokenStorageKey } from '../constants/commercetools-token-storage-key'
+import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
 import type { QueryParams } from 'src/app/shared/models/query-params.model'
 
 @Injectable({
@@ -92,11 +92,18 @@ export class CommercetoolsHttpService {
     )
   }
 
-  public changePassword(newPassword: MyCustomerChangePassword): Observable<Customer> {
-    return fromPromise(this.api.me().password().post({ body: newPassword }).execute()).pipe(
-      map(({ body }) => {
-        return body
-      }),
+  public changePassword({
+    version,
+    currentPassword,
+    newPassword,
+    username,
+  }: ChangePasswordProps): Observable<Customer> {
+    return fromPromise(
+      this.api.me().password().post({ body: { version, currentPassword, newPassword } }).execute(),
+    ).pipe(
+      map(({ body }) => body),
+      tap(() => this.logout()),
+      switchMap(() => this.signIn({ username, password: newPassword })),
     )
   }
 

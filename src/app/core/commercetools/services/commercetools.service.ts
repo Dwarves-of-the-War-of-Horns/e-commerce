@@ -1,11 +1,5 @@
 import { inject, Injectable } from '@angular/core'
-import type {
-  Customer,
-  MyCustomerChangePassword,
-  MyCustomerDraft,
-  MyCustomerUpdate,
-  Project,
-} from '@commercetools/platform-sdk'
+import type { Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable } from 'rxjs'
 
@@ -13,6 +7,7 @@ import { arrayToTree } from '../helpers/array-to-tree.helper'
 import { convertAttributeToSimpleAttribute } from '../helpers/convert-attribute-to-simple-attribute.helper'
 import { convertProductProjectionToSimpleProduct } from '../helpers/convert-product-projection-to-simple-product.helper'
 import { CommercetoolsHttpService } from './commercetools-http.service'
+import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
 import type { QueryParams } from 'src/app/shared/models/query-params.model'
 import type { SimpleAttribute } from 'src/app/shared/models/simple-attribute.model'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
@@ -52,7 +47,7 @@ export class CommercetoolsService {
     return this.httpService.getCategories().pipe(map(categories => arrayToTree(categories)))
   }
 
-  public changePassword(newPassword: MyCustomerChangePassword): Observable<Customer> {
+  public changePassword(newPassword: ChangePasswordProps): Observable<Customer> {
     return this.httpService.changePassword(newPassword)
   }
 

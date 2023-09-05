@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
 import type { TuiStringHandler } from '@taiga-ui/cdk'
-import { filter, map } from 'rxjs'
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs'
 
-import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
 import type { AttributeValue } from 'src/app/shared/models/attribute-value.model'
 
 @Component({
@@ -13,8 +13,11 @@ import type { AttributeValue } from 'src/app/shared/models/attribute-value.model
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CatalogFormComponent implements OnInit {
-  public filterAttributes$ = this.catalogFacade.filterAttributes$
   public stringify: TuiStringHandler<AttributeValue> = item => item.label
+  private initialFormValues = {
+    search: '',
+    sort: { key: '', label: '' },
+  }
 
   public sortItems = [
     {
@@ -40,23 +43,51 @@ export class CatalogFormComponent implements OnInit {
   ]
 
   public form = this.fb.group({
-    sort: new FormControl<AttributeValue>(this.sortItems[0]),
-    search: new FormControl<string>(''),
+    sort: new FormControl<AttributeValue>(this.initialFormValues.sort),
+    search: new FormControl<string>(this.initialFormValues.search),
   })
 
   constructor(
     private fb: FormBuilder,
-    private catalogFacade: CatalogFacade,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   public ngOnInit(): void {
-    this.filterAttributes$
-      .pipe(
-        filter(attributes => Boolean(attributes)),
-        map(attributes => attributes?.map(({ name }) => name)),
-      )
-      .subscribe()
+    this.restoreFormValues(this.route.snapshot.queryParams)
 
-    this.form.valueChanges.subscribe(console.log)
+    this.form.valueChanges
+      .pipe(
+        map(({ search, sort }) => ({ search: search?.trim(), sort: sort?.key })),
+        filter(({ search }) => (search?.length ? search.length >= 3 : true)),
+        debounceTime(500),
+        distinctUntilChanged((prev, current) => prev?.search === current.search && prev?.sort === current.sort),
+      )
+      .subscribe(formValue => {
+        void this.router.navigate([], {
+          relativeTo: this.route,
+          replaceUrl: true,
+          queryParams: this.removeEmptyFormValues(formValue),
+        })
+      })
+  }
+
+  private removeEmptyFormValues(formValues: Record<string, string | undefined>): Record<string, string> {
+    return Object.keys(formValues).reduce((acc: Record<string, string>, key) => {
+      const value = formValues[key]
+
+      if (value && value !== '') {
+        acc[key] = value
+      }
+
+      return acc
+    }, {})
+  }
+
+  private restoreFormValues(queryParams: { search?: string; sort?: string }): void {
+    this.form.patchValue({
+      search: queryParams?.search ?? this.initialFormValues.search,
+      sort: queryParams.sort ? this.sortItems.find(item => item.key === queryParams.sort) : this.initialFormValues.sort,
+    })
   }
 }

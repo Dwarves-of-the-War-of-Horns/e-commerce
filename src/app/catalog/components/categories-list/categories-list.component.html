@@ -11,6 +11,7 @@
   <a
     tuiLink
     [routerLink]="createRoute(category)"
+    queryParamsHandling="merge"
     routerLinkActive="active"
     class="categories__link"
     (click)="onAnchorClick($event)"

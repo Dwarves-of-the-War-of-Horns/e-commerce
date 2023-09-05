@@ -5,6 +5,10 @@
   .item {
     object-fit: contain;
   }
+
+  &:not(.dialog) .item {
+    cursor: pointer;
+  }
 }
 
 .carousel.dialog {

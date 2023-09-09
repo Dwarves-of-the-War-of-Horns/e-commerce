@@ -1,6 +1,7 @@
 import { Component, inject, type OnInit } from '@angular/core'
 
 import { AuthFacade } from './auth/auth-store/auth.facade'
+import { CartFacade } from './cart/cart-store copy/cart.facade'
 
 @Component({
   selector: 'ec-root',
@@ -9,8 +10,10 @@ import { AuthFacade } from './auth/auth-store/auth.facade'
 })
 export class AppComponent implements OnInit {
   private authFacade = inject(AuthFacade)
+  private cartFacade = inject(CartFacade)
 
   public ngOnInit(): void {
     this.authFacade.initAuth()
+    this.cartFacade.initCart()
   }
 }

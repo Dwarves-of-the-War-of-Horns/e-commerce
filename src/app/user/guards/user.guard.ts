@@ -1,22 +1,14 @@
 import { inject } from '@angular/core'
-import { type CanActivateFn, Router } from '@angular/router'
+import { type CanMatchFn, Router, type UrlTree } from '@angular/router'
 import { map } from 'rxjs'
 
 import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
 
-export const userGuard: CanActivateFn = () => {
-  const facade = inject(AuthFacade)
+export const userGuard: CanMatchFn = () => {
+  const authFacade = inject(AuthFacade)
   const router = inject(Router)
 
-  return facade.isLoggedIn$.pipe(
-    map(isLoggedIn => {
-      if (isLoggedIn) {
-        return isLoggedIn
-      }
-
-      router.navigate(['auth/sign-in'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
-
-      return !isLoggedIn
-    }),
+  return authFacade.isLoggedIn$.pipe(
+    map((isLoggedIn): boolean | UrlTree => (isLoggedIn ? true : router.createUrlTree(['auth/sign-in']))),
   )
 }

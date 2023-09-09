@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing'
-import type { CanActivateFn } from '@angular/router'
+import type { CanMatchFn } from '@angular/router'
 
 import { userGuard } from './user.guard'
 
 describe('userGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) =>
+  const executeGuard: CanMatchFn = (...guardParameters) =>
     TestBed.runInInjectionContext(() => userGuard(...guardParameters))
 
   beforeEach(() => {

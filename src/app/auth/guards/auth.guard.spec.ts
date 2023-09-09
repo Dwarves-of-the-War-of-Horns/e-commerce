@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing'
-import type { CanActivateFn } from '@angular/router'
+import type { CanMatchFn } from '@angular/router'
 import { Store, StoreModule } from '@ngrx/store'
 
 import { authGuard } from './auth.guard'
 
 describe('AuthGuard', () => {
-  let guard: CanActivateFn
+  let guard: CanMatchFn
 
   beforeEach(() => {
     TestBed.configureTestingModule({

@@ -1,9 +1,19 @@
 import { CommonModule } from '@angular/common'
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing'
 import { provideMockStore } from '@ngrx/store/testing'
-import { TuiFieldErrorPipe } from '@taiga-ui/kit'
+import { TuiDataListModule, TuiErrorModule } from '@taiga-ui/core'
+import {
+  TuiAccordionModule,
+  TuiCheckboxBlockModule,
+  TuiFieldErrorPipe,
+  TuiInputDateModule,
+  TuiInputModule,
+  TuiInputPasswordModule,
+  TuiSelectModule,
+} from '@taiga-ui/kit'
 
 import { AuthRoutingModule } from '../../auth-routing.module'
 import { AuthFacade } from '../../auth-store/service/auth.facade'
@@ -15,9 +25,23 @@ describe('SingUpFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       declarations: [SignUpFormComponent, TuiFieldErrorPipe],
-      imports: [CommonModule, AuthRoutingModule, RouterTestingModule],
+      imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        AuthRoutingModule,
+        RouterTestingModule,
+        TuiInputModule,
+        TuiErrorModule,
+        TuiInputPasswordModule,
+        FormsModule,
+        TuiAccordionModule,
+        TuiInputDateModule,
+        TuiSelectModule,
+        TuiDataListModule,
+        TuiCheckboxBlockModule,
+        NoopAnimationsModule,
+      ],
       providers: [provideMockStore({}), AuthFacade],
     }).compileComponents()
 

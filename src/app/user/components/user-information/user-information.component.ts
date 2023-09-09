@@ -4,7 +4,7 @@ import type { Customer } from '@commercetools/platform-sdk'
 import { TuiDay } from '@taiga-ui/cdk'
 import type { Subscription } from 'rxjs'
 
-import { changeInformationSubmitForm } from '../../helpers/change-information-submit-form.util'
+import { changeInformationSubmitForm } from '../../helpers/change-information-submit-form.helper'
 import type { NewPassword } from '../../models/new-password.model'
 import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
 import { subscribeToValueChangesOnForms } from 'src/app/shared/utils/subscribe-to-value-changes-on-forms.util'

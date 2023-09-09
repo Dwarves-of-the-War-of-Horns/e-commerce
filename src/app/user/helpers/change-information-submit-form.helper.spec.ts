@@ -1,7 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms'
 import type { Customer, MyCustomerUpdate } from '@commercetools/platform-sdk'
 
-import { changeInformationSubmitForm } from './change-information-submit-form.util'
+import { changeInformationSubmitForm } from './change-information-submit-form.helper'
 
 describe('changeInformationSubmitForm', () => {
   it('should transform form values into MyCustomerUpdate with changed fields', () => {

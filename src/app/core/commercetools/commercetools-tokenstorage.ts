@@ -20,11 +20,11 @@ export class TokenStorage implements TokenCache {
     this.current = storedToken?.flowKey === this.flowKey ? storedToken : {}
   }
 
-  get(): TokenStore {
+  public get(): TokenStore {
     return this.current as TokenStore
   }
 
-  set(newValue: TokenStore): TokenStore {
+  public set(newValue: TokenStore): TokenStore {
     this.refreshToken = newValue.refreshToken ?? this.refreshToken
     this.current = { ...newValue, refreshToken: this.refreshToken, flowKey: this.flowKey }
     this.localStorageService.setItem(this.key, this.current)

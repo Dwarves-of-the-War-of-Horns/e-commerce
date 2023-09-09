@@ -1,8 +1,8 @@
 import type { AbstractControl, ValidationErrors } from '@angular/forms'
 
-import { countryRegExpDictionary } from '../dictionary/countryRegExpDictionary'
-import { Country } from '../enum/country.enum'
-import { FormFields } from '../enum/form-value.enum'
+import { Country } from '../enums/country.enum'
+import { FormFields } from '../enums/form-value.enum'
+import { countryRegExpDictionary } from '../utils/countryRegExp.util'
 
 export const postalCodeValidator = (
   control: AbstractControl,

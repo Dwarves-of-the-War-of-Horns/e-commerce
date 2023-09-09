@@ -1,0 +1,9 @@
+<ng-container *ngIf="isLoading$ | async; else notLoading">
+  <tui-loader [showLoader]="true" size="xl"></tui-loader>
+</ng-container>
+
+<ng-template #notLoading>
+  <tui-island class="shadow-block product-container">
+    <ec-product-details />
+  </tui-island>
+</ng-template>

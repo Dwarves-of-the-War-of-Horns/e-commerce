@@ -1,6 +1,7 @@
 import type { Routes } from '@angular/router'
 
 import { authGuard } from './auth/guards/auth.guard'
+import { userGuard } from './user/guards/user.guard'
 
 export const appRoutes: Routes = [
   {
@@ -43,6 +44,7 @@ export const appRoutes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    canMatch: [userGuard],
     title: 'User',
   },
 

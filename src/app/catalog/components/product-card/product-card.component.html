@@ -1,0 +1,58 @@
+<tui-island size="s" textAlign="center" class="product" [hoverable]="true">
+  <h3 class="tui-island__title product__title">
+    <a tuiLink class="product__link">{{ product.name }} </a>
+  </h3>
+
+  <div class="tui-island__paragraph product__image-container">
+    <img
+      *ngIf="product.images.length"
+      class="product__image"
+      [src]="product.images[0]"
+      [alt]="product.name + ' photo'"
+    />
+  </div>
+
+  <ng-container *ngIf="product.description.length; else noDescription">
+    <p
+      *ngIf="product.description.length < maxDescriptionLength; else longDescription"
+      class="tui-island__paragraph product__description"
+    >
+      {{ cutDescription(product.description) }}
+    </p>
+  </ng-container>
+
+  <div class="tui-island__paragraph product__price-container">
+    <span>Price:</span>
+    <ng-container *ngIf="product.prices.discounted; else noDiscount">
+      <div>
+        <tui-money
+          [singleColor]="true"
+          class="product__price-discount"
+          currency="USD"
+          [value]="product.prices.discounted"
+        />
+        <tui-money
+          [singleColor]="true"
+          class="product__price-inactive"
+          currency="USD"
+          [value]="product.prices.default"
+        />
+      </div>
+    </ng-container>
+  </div>
+</tui-island>
+
+<ng-template #noDescription>
+  <p class="tui-island__paragraph product__description">Sorry, we don't have any description for this product.</p>
+</ng-template>
+
+<ng-template #longDescription>
+  <p class="tui-island__paragraph product__description">
+    {{ cutDescription(product.description) }}
+    <a tuiLink> ...read more</a>
+  </p>
+</ng-template>
+
+<ng-template #noDiscount>
+  <tui-money [singleColor]="true" class="product__price-default" currency="USD" [value]="product.prices.default" />
+</ng-template>

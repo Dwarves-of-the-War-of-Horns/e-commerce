@@ -1,0 +1,19 @@
+<tui-tree
+  *ngFor="let category of categories$ | async; trackBy: categoriesTrackByFn"
+  [tuiTreeController]="true"
+  [value]="category"
+  [content]="content"
+  [childrenHandler]="handler"
+  class="categories__tree"
+/>
+<ng-template #content let-category>
+  <a
+    tuiLink
+    [routerLink]="createRoute(category)"
+    queryParamsHandling="merge"
+    routerLinkActive="active"
+    class="categories__link"
+    (click)="onAnchorClick($event)"
+    >{{ category.name }}</a
+  >
+</ng-template>

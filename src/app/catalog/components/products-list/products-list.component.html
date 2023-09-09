@@ -1,0 +1,24 @@
+<ng-container *ngIf="productsData?.isProductsLoading; else productsTemplate">
+  <tui-loader [showLoader]="true" size="xl" />
+</ng-container>
+
+<ng-template #productsTemplate>
+  <ng-container *tuiLet="productsData?.products as products">
+    <ng-container *ngIf="products?.length; else noProducts">
+      <div class="products__list">
+        <ec-product-card
+          [routerLink]="['/', 'catalog', 'product', product.key]"
+          *ngFor="let product of products; trackBy: trackProduct"
+          [product]="product"
+          class="products__card"
+        />
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #noProducts>
+  <div class="products__empty">
+    <p class="tui-text_h4">No products found :(</p>
+  </div>
+</ng-template>

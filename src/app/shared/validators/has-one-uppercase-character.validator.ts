@@ -1,6 +1,6 @@
 import type { AbstractControl, ValidationErrors } from '@angular/forms'
 
-import { upperCharacterRegExp } from '../constants/regExp'
+import { upperCharacterRegExp } from '../constants/regExp.constant'
 
 export const hasOneUpperCaseCharacter = (control: AbstractControl): ValidationErrors | null => {
   const isValid = upperCharacterRegExp.test(control.value as string)

@@ -1,9 +1,9 @@
 import { FormControl, FormGroup } from '@angular/forms'
 import type { Customer, MyCustomerUpdate } from '@commercetools/platform-sdk'
 
-import { transformInformationSubmitForm } from './transform-information-submit-form.util'
+import { changeInformationSubmitForm } from './change-information-submit-form.util'
 
-describe('transformInformationSubmitForm', () => {
+describe('changeInformationSubmitForm', () => {
   it('should transform form values into MyCustomerUpdate with changed fields', () => {
     const customer: Customer = {
       dateOfBirth: '1990-01-01',
@@ -26,7 +26,7 @@ describe('transformInformationSubmitForm', () => {
       dateOfBirth: new FormControl('1995-05-05'),
     })
 
-    const result = transformInformationSubmitForm(form, customer)
+    const result = changeInformationSubmitForm(form, customer)
 
     const expected: MyCustomerUpdate = {
       version: 1,
@@ -63,7 +63,7 @@ describe('transformInformationSubmitForm', () => {
       dateOfBirth: new FormControl('1990-01-01'),
     })
 
-    const result = transformInformationSubmitForm(form, customer)
+    const result = changeInformationSubmitForm(form, customer)
 
     const expected: MyCustomerUpdate = {
       version: 2,

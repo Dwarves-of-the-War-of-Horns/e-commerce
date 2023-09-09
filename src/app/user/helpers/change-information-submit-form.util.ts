@@ -4,7 +4,7 @@ import type { Customer, MyCustomerUpdate, MyCustomerUpdateAction } from '@commer
 import { commercetoolsActions } from '../constants/commercetools-actions.constant'
 import type { UserInformation } from '../models/user-information.model'
 
-export const transformInformationSubmitForm = (
+export const changeInformationSubmitForm = (
   form: FormGroup,
   { dateOfBirth, lastName, firstName, email, version }: Customer,
 ): MyCustomerUpdate => {

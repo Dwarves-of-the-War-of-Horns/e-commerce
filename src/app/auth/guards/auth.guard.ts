@@ -2,7 +2,7 @@ import { inject } from '@angular/core'
 import { type CanMatchFn, Router } from '@angular/router'
 import { filter, map, mergeMap } from 'rxjs'
 
-import { AuthFacade } from '../auth-store/auth.facade'
+import { AuthFacade } from '../auth-store/service/auth.facade'
 
 export const authGuard: CanMatchFn = () => {
   const authFacade = inject(AuthFacade)

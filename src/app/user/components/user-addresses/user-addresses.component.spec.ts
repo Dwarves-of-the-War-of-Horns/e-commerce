@@ -3,7 +3,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideMockStore } from '@ngrx/store/testing'
 
 import { UserAddressesComponent } from './user-addresses.component'
-import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
+import { AuthFacade } from 'src/app/auth/auth-store/service/auth.facade'
 
 describe('UserAddressesComponent', () => {
   let component: UserAddressesComponent

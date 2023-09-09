@@ -5,7 +5,7 @@ import { provideMockStore } from '@ngrx/store/testing'
 import { TuiButtonModule, TuiSvgModule } from '@taiga-ui/core'
 
 import { HeaderComponent } from './header.component'
-import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
+import { AuthFacade } from 'src/app/auth/auth-store/service/auth.facade'
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent

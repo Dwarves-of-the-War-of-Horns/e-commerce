@@ -6,7 +6,7 @@ import { provideMockStore } from '@ngrx/store/testing'
 import { TuiFieldErrorPipe } from '@taiga-ui/kit'
 
 import { AuthRoutingModule } from '../../auth-routing.module'
-import { AuthFacade } from '../../auth-store/auth.facade'
+import { AuthFacade } from '../../auth-store/service/auth.facade'
 import { SignUpFormComponent } from './sign-up-form.component'
 
 describe('SingUpFormComponent', () => {

@@ -7,7 +7,7 @@ import { commercetoolsActions } from '../../constants/commercetools-actions.cons
 import { changeAddressSubmitForm } from '../../helpers/change-address-submit-form.helper'
 import type { UserAddressData } from '../../models/user-address-data.model'
 import type { AddressActionSubmitForm } from '../../types/address-action-submit-form.type'
-import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
+import { AuthFacade } from 'src/app/auth/auth-store/service/auth.facade'
 import { Country } from 'src/app/shared/enums/country.enum'
 import { hasOneCharacter } from 'src/app/shared/validators/has-one-character.validator'
 import { nameValidator } from 'src/app/shared/validators/name.validator'

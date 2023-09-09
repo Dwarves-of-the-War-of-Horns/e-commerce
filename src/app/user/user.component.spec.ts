@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideMockStore } from '@ngrx/store/testing'
 
-import { AuthFacade } from '../auth/auth-store/auth.facade'
+import { AuthFacade } from '../auth/auth-store/service/auth.facade'
 import { UserAddressesComponent } from './components/user-addresses/user-addresses.component'
 import { UserInformationComponent } from './components/user-information/user-information.component'
 import { UserComponent } from './user.component'

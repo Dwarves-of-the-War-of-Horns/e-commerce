@@ -3,7 +3,7 @@ import { FormBuilder, FormControl } from '@angular/forms'
 import { TuiDay } from '@taiga-ui/cdk'
 import { type Subscription } from 'rxjs'
 
-import { AuthFacade } from '../../auth-store/auth.facade'
+import { AuthFacade } from '../../auth-store/service/auth.facade'
 import { transformRegistrationSubmitForm } from '../../utils/transform-registration-submit-form.util'
 import { toggleEnableStatusFields } from 'src/app/auth/utils/toggle-enable-status-fields.util'
 import { Country } from 'src/app/shared/enums/country.enum'

@@ -3,11 +3,12 @@ import { provideMockStore } from '@ngrx/store/testing'
 
 import { AppComponent } from './app.component'
 import { AuthFacade } from './auth/auth-store/auth.facade'
+import { CartFacade } from './cart/cart-store copy/cart.facade'
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [provideMockStore({}), AuthFacade],
+      providers: [provideMockStore({}), AuthFacade, CartFacade],
     }).compileComponents()
   })
 

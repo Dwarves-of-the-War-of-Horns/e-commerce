@@ -19,8 +19,7 @@ export class CatalogPageComponent implements OnInit, OnDestroy {
     this.queryParamsService.getQueryParams$(),
   ]).pipe(map(([categories, params, queryParams]) => ({ categories, params, queryParams })))
   public navigationArray$ = this.urlTreeService.getNavigationArray$()
-  public products$ = this.catalogFacade.products$
-  public isProductsLoading$ = this.catalogFacade.isProductsLoading$
+  public productsData$ = this.catalogFacade.productsData$
   private subscription!: Subscription
 
   // eslint-disable-next-line max-params

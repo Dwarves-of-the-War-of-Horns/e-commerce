@@ -25,8 +25,18 @@
     <span>Price:</span>
     <ng-container *ngIf="product.prices.discounted; else noDiscount">
       <div>
-        <span class="product__price-discount">{{ product.prices.discounted }}{{ 'USD' | tuiCurrency }}</span>
-        <span class="product__price-inactive">{{ product.prices.default }}{{ 'USD' | tuiCurrency }}</span>
+        <tui-money
+          [singleColor]="true"
+          class="product__price-discount"
+          currency="USD"
+          [value]="product.prices.discounted"
+        />
+        <tui-money
+          [singleColor]="true"
+          class="product__price-inactive"
+          currency="USD"
+          [value]="product.prices.default"
+        />
       </div>
     </ng-container>
   </div>
@@ -44,5 +54,5 @@
 </ng-template>
 
 <ng-template #noDiscount>
-  <span class="product__price-default">{{ product.prices.default }}{{ 'USD' | tuiCurrency }}</span>
+  <tui-money [singleColor]="true" class="product__price-default" currency="USD" [value]="product.prices.default" />
 </ng-template>

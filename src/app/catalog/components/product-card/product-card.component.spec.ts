@@ -1,6 +1,6 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce'
+import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLinkModule } from '@taiga-ui/core'
 import { TuiIslandModule } from '@taiga-ui/kit'
 
@@ -29,7 +29,7 @@ describe('ProductCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductCardComponent],
-      imports: [TuiIslandModule, TuiLinkModule, TuiCurrencyPipeModule, RouterTestingModule],
+      imports: [TuiIslandModule, TuiLinkModule, TuiMoneyModule, RouterTestingModule],
     }).compileComponents()
 
     fixture = TestBed.createComponent(ProductCardComponent)

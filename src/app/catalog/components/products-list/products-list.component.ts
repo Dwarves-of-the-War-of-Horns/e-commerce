@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
-import { Observable, of } from 'rxjs'
 
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
@@ -10,8 +9,7 @@ import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent {
-  @Input() public products$: Observable<SimpleProduct[]> = of([])
-  @Input() public isProductsLoading$: Observable<boolean> = of(true)
+  @Input() public productsData!: { products: SimpleProduct[]; isProductsLoading: boolean } | null
 
   public trackProduct(index: number, { key }: SimpleProduct): string {
     return key

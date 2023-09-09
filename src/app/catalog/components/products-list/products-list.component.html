@@ -1,9 +1,9 @@
-<ng-container *ngIf="isProductsLoading$ | async; else productsTemplate">
+<ng-container *ngIf="productsData?.isProductsLoading; else productsTemplate">
   <tui-loader [showLoader]="true" size="xl" />
 </ng-container>
 
 <ng-template #productsTemplate>
-  <ng-container *tuiLet="products$ | async as products">
+  <ng-container *tuiLet="productsData?.products as products">
     <ng-container *ngIf="products?.length; else noProducts">
       <div class="products__list">
         <ec-product-card

@@ -10,9 +10,9 @@
   ></button>
 </div>
 <div class="address-form-container">
-  <div *ngFor="let address of userAddresses; let i = index; trackBy: addressesTrackByFn">
+  <div *ngFor="let address of userAddressData.userAddresses; let i = index; trackBy: addressesTrackByFn">
     <tui-island class="shadow-block">
-      <div *ngIf="address.id === defaultBillingAddressId">
+      <div *ngIf="address.id === userAddressData.defaultBillingAddressId">
         <div class="tui-island__content">
           <figure class="tui-island__figure">
             <tui-marker-icon src="tuiIconBriefcase" mode="warning" class="icon" size="xs"></tui-marker-icon>
@@ -20,7 +20,7 @@
           <h3 class="tui-space_left-3">Default billing address</h3>
         </div>
       </div>
-      <div *ngIf="address.id === defaultShippingAddressId">
+      <div *ngIf="address.id === userAddressData.defaultShippingAddressId">
         <div class="tui-island__content">
           <figure class="tui-island__figure">
             <tui-marker-icon src="tuiIconTruck" mode="success" class="icon" size="xs"></tui-marker-icon>
@@ -28,7 +28,12 @@
           <h3 class="tui-space_left-3">Default shipping address</h3>
         </div>
       </div>
-      <div *ngIf="address.id !== defaultShippingAddressId && address.id !== defaultBillingAddressId">
+      <div
+        *ngIf="
+          address.id !== userAddressData.defaultShippingAddressId &&
+          address.id !== userAddressData.defaultBillingAddressId
+        "
+      >
         <div class="tui-island__content">
           <h3 class="tui-space_left-3">Address #{{ i + 1 }}</h3>
         </div>
@@ -67,7 +72,7 @@
         <button tuiButton icon="tuiIconEdit" (click)="showAddressForm('changeAddress', i)" size="s">Edit</button>
         <button tuiButton icon="tuiIconDelete" (click)="onSubmitRemoveAddress(address.id)" size="s">Remove</button>
         <button
-          *ngIf="!(address.id === defaultBillingAddressId)"
+          *ngIf="!(address.id === userAddressData.defaultBillingAddressId)"
           tuiButton
           icon="tuiIconBriefcase"
           (click)="setDefaultBillingAddress(address.id)"
@@ -77,7 +82,7 @@
         </button>
 
         <button
-          *ngIf="!(address.id === defaultShippingAddressId)"
+          *ngIf="!(address.id === userAddressData.defaultShippingAddressId)"
           tuiButton
           icon="tuiIconTruck"
           (click)="setDefaultShippingAddress(address.id)"

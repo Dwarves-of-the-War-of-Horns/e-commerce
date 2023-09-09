@@ -2,4 +2,5 @@
 export const enum Country {
   Canada = 'Canada',
   Usa = 'USA',
+  US = 'US',
 }

@@ -4,6 +4,7 @@ import type { Address } from '@commercetools/platform-sdk'
 import type { Subscription } from 'rxjs'
 
 import { submitFormActionDictionary } from '../../constants/submit-form-actions.constant'
+import type { UserAddressData } from '../../models/user-address-data.model'
 import type { AddressActionSubmitForm } from '../../types/address-action-submit-form.type'
 import { transformAddressSubmitForm } from '../../utils/transform-address-submit-form.util'
 import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
@@ -20,11 +21,15 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
 export class UserAddressesComponent implements OnInit, OnDestroy {
   public isShowEditingForm = false
   private actionAddressForm: AddressActionSubmitForm = submitFormActionDictionary.changeAddress
-  private userAddressId: string | null | undefined = null
-  public userAddresses: Address[] | null = null
-  public defaultBillingAddressId: string | null = null
-  public defaultShippingAddressId: string | null = null
-  public userVersion: number | null = null
+
+  public userAddressData: UserAddressData = {
+    userAddressId: null,
+    userAddresses: null,
+    defaultBillingAddressId: null,
+    defaultShippingAddressId: null,
+    userVersion: null,
+  }
+
   public countryArray = [Country.Usa, Country.Canada]
   public subscription: Subscription | null = null
 
@@ -43,19 +48,19 @@ export class UserAddressesComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscription = this.authFacade.userData$.subscribe(userDate => {
       if (userDate?.addresses) {
-        this.userAddresses = userDate.addresses
+        this.userAddressData.userAddresses = userDate.addresses
       }
 
       if (userDate?.defaultBillingAddressId) {
-        this.defaultBillingAddressId = userDate.defaultBillingAddressId
+        this.userAddressData.defaultBillingAddressId = userDate.defaultBillingAddressId
       }
 
       if (userDate?.defaultShippingAddressId) {
-        this.defaultShippingAddressId = userDate.defaultShippingAddressId
+        this.userAddressData.defaultShippingAddressId = userDate.defaultShippingAddressId
       }
 
       if (userDate?.version) {
-        this.userVersion = userDate.version
+        this.userAddressData.userVersion = userDate.version
       }
     })
   }
@@ -83,14 +88,14 @@ export class UserAddressesComponent implements OnInit, OnDestroy {
     this.isShowEditingForm = !this.isShowEditingForm
     this.actionAddressForm = action
 
-    if (this.userAddresses && index !== undefined) {
-      this.userAddressId = this.userAddresses[index].id
+    if (this.userAddressData.userAddresses && index !== undefined) {
+      this.userAddressData.userAddressId = this.userAddressData.userAddresses[index].id
 
-      this.userAddressesForm.controls.city.setValue(this.userAddresses[index].city || '')
-      this.userAddressesForm.controls.postalCode.setValue(this.userAddresses[index].postalCode || '')
-      this.userAddressesForm.controls.streetName.setValue(this.userAddresses[index].streetName || '')
+      this.userAddressesForm.controls.city.setValue(this.userAddressData.userAddresses[index].city || '')
+      this.userAddressesForm.controls.postalCode.setValue(this.userAddressData.userAddresses[index].postalCode || '')
+      this.userAddressesForm.controls.streetName.setValue(this.userAddressData.userAddresses[index].streetName || '')
       this.userAddressesForm.controls.country.setValue(
-        this.userAddresses[index].country === 'US' ? this.countryArray[0] : this.countryArray[1],
+        this.userAddressData.userAddresses[index].country === Country.US ? this.countryArray[0] : this.countryArray[1],
       )
 
       return
@@ -100,48 +105,48 @@ export class UserAddressesComponent implements OnInit, OnDestroy {
   }
 
   public setDefaultShippingAddress(addressId?: string): void {
-    if (this.userVersion === null) {
+    if (this.userAddressData.userVersion === null) {
       return
     }
 
     this.authFacade.updateCustomer({
-      version: this.userVersion,
+      version: this.userAddressData.userVersion,
       actions: [{ action: submitFormActionDictionary.shippingAddress, addressId }],
     })
   }
 
   public setDefaultBillingAddress(addressId?: string): void {
-    if (this.userVersion === null) {
+    if (this.userAddressData.userVersion === null) {
       return
     }
 
     this.authFacade.updateCustomer({
-      version: this.userVersion,
+      version: this.userAddressData.userVersion,
       actions: [{ action: submitFormActionDictionary.billingAddress, addressId }],
     })
   }
   public onSubmitRemoveAddress(addressId?: string): void {
-    if (!(this.userAddresses && this.userVersion !== null)) {
+    if (!(this.userAddressData.userAddresses && this.userAddressData.userVersion !== null)) {
       return
     }
 
     this.authFacade.updateCustomer({
-      version: this.userVersion,
+      version: this.userAddressData.userVersion,
       actions: [{ action: submitFormActionDictionary.removeAddress, addressId }],
     })
   }
 
   public onSubmit(): void {
-    if (!(this.userAddresses && this.userVersion !== null)) {
+    if (!(this.userAddressData.userAddresses && this.userAddressData.userVersion !== null)) {
       return
     }
 
     this.authFacade.updateCustomer(
       transformAddressSubmitForm[this.actionAddressForm]({
         form: this.userAddressesForm,
-        version: this.userVersion,
+        version: this.userAddressData.userVersion,
         action: this.actionAddressForm,
-        addressId: this.userAddressId,
+        addressId: this.userAddressData.userAddressId,
       }),
     )
 

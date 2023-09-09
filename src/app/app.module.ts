@@ -12,6 +12,9 @@ import { AppComponent } from './app.component'
 import { AuthEffects } from './auth/auth-store/auth.effects'
 import { AuthFacade } from './auth/auth-store/auth.facade'
 import { authReducer } from './auth/auth-store/auth.reducer'
+import { CartEffects } from './cart/cart-store/cart-store.effects'
+import { cartReducer } from './cart/cart-store/cart-store.reducer'
+import { CartFacade } from './cart/cart-store/cart.facade'
 import { HeaderComponent } from './core/components/header/header.component'
 import { CoreModule } from './core/core.module'
 import { StorageModule } from './core/storage/storage.module'
@@ -23,8 +26,9 @@ import { StoreFeatureNames } from './shared/enums/store-feature-names.enum'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    EffectsModule.forFeature([AuthEffects]),
+    EffectsModule.forFeature([AuthEffects, CartEffects]),
     StoreModule.forFeature(StoreFeatureNames.Auth, authReducer),
+    StoreModule.forFeature(StoreFeatureNames.Carts, cartReducer),
     StorageModule.forRoot({ config: { prefix: storageKeyPrefix.toString() } }),
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
@@ -40,6 +44,7 @@ import { StoreFeatureNames } from './shared/enums/store-feature-names.enum'
   providers: [
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
     { provide: AuthFacade, useClass: AuthFacade },
+    { provide: CartFacade, useClass: CartFacade },
   ],
   bootstrap: [AppComponent],
 })

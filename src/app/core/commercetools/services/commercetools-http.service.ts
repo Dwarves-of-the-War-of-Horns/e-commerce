@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core'
 import type {
+  Cart,
+  CartPagedQueryResponse,
   Category,
   Customer,
   MyCustomerDraft,
@@ -141,5 +143,19 @@ export class CommercetoolsHttpService {
 
   public getProductTypes(): Observable<ProductType[]> {
     return fromPromise(this.api.productTypes().get().execute()).pipe(map(({ body }) => body.results))
+  }
+
+  public getCart(): Observable<CartPagedQueryResponse> {
+    return fromPromise(this.api.me().carts().get().execute()).pipe(map(({ body }) => body))
+  }
+
+  public createCart(): Observable<Cart> {
+    return fromPromise(
+      this.api
+        .me()
+        .carts()
+        .post({ body: { currency: 'USD' } })
+        .execute(),
+    ).pipe(map(({ body }) => body))
   }
 }

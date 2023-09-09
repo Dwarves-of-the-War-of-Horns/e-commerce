@@ -6,5 +6,5 @@ export interface ChangeAddressForm {
   form: FormGroup
   version: number
   action: AddressActionSubmitForm
-  addressId: string | null | undefined
+  addressId?: string | null | undefined
 }

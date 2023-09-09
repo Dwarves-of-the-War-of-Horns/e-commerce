@@ -4,7 +4,7 @@ import type { Address } from '@commercetools/platform-sdk'
 import type { Subscription } from 'rxjs'
 
 import { commercetoolsActions } from '../../constants/commercetools-actions.constant'
-import { transformAddressSubmitForm } from '../../helpers/transform-address-submit-form.util'
+import { changeAddressSubmitForm } from '../../helpers/change-address-submit-form.util'
 import type { UserAddressData } from '../../models/user-address-data.model'
 import type { AddressActionSubmitForm } from '../../types/address-action-submit-form.type'
 import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
@@ -142,7 +142,7 @@ export class UserAddressesComponent implements OnInit, OnDestroy {
     }
 
     this.authFacade.updateCustomer(
-      transformAddressSubmitForm[this.actionAddressForm]({
+      changeAddressSubmitForm[this.actionAddressForm]({
         form: this.userAddressesForm,
         version: this.userAddressData.userVersion,
         action: this.actionAddressForm,

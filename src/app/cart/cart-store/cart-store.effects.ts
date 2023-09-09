@@ -5,9 +5,9 @@ import { catchError, of } from 'rxjs'
 import { map, switchMap, tap } from 'rxjs/operators'
 
 import { createCartActions } from './actions/cart-create.action'
-import { createCartsApiActions } from './actions/cart-create.api.action'
-import { cartsInitActions } from './actions/carts-init.actions'
-import { cartsApiActions } from './actions/carts-init.api.actions'
+import { createCartApiActions } from './actions/cart-create.api.action'
+import { cartInitActions } from './actions/cart-init.actions'
+import { cartApiActions } from './actions/cart-init.api.actions'
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
 
 @Injectable()
@@ -16,30 +16,30 @@ export class CartEffects {
   private actions$ = inject(Actions)
   private store$ = inject(Store)
 
-  public cartsInitEffect$ = createEffect(() => {
+  public cartInitEffect$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(cartsInitActions.getCarts),
+      ofType(cartInitActions.getCart),
       switchMap(() =>
         this.cartService.getCart().pipe(
-          map(carts => cartsApiActions.cartsLoadSuccess({ carts })),
+          map(carts => cartApiActions.cartLoadSuccess({ carts })),
           tap(({ carts }) => {
             if (carts.count === 0) {
               this.store$.dispatch(createCartActions.createCart())
             }
           }),
-          catchError(({ message }: Error) => of(cartsApiActions.cartsLoadFailure({ error: message }))),
+          catchError(({ message }: Error) => of(cartApiActions.cartLoadFailure({ error: message }))),
         ),
       ),
     )
   })
 
-  public createCartsEffect$ = createEffect(() => {
+  public createCartEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(createCartActions.createCart),
       switchMap(() =>
         this.cartService.createCart().pipe(
-          map(cart => createCartsApiActions.createCartLoadSuccess({ cart })),
-          catchError(({ message }: Error) => of(createCartsApiActions.createCartLoadFailure({ error: message }))),
+          map(cart => createCartApiActions.createCartSuccess({ cart })),
+          catchError(({ message }: Error) => of(createCartApiActions.createCartFailure({ error: message }))),
         ),
       ),
     )

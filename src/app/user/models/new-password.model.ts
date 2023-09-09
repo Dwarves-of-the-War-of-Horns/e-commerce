@@ -1,4 +1,4 @@
-export interface PasswordForm {
+export interface NewPassword {
   currentPassword: string
   newPassword: string
 }

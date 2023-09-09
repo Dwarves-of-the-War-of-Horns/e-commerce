@@ -5,7 +5,7 @@ import { TuiDay } from '@taiga-ui/cdk'
 import type { Subscription } from 'rxjs'
 
 import { transformInformationSubmitForm } from '../../helpers/transform-information-submit-form.util'
-import type { PasswordForm } from '../../models/passwordForm.model'
+import type { NewPassword } from '../../models/new-password.model'
 import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
 import { subscribeToValueChangesOnForms } from 'src/app/shared/utils/subscribe-to-value-changes-on-forms.util'
 import { birthValidator } from 'src/app/shared/validators/birth.validator'
@@ -81,7 +81,7 @@ export class UserInformationComponent implements OnInit, OnDestroy {
       return
     }
 
-    const passwordForm = this.userPasswordForm.getRawValue() as PasswordForm
+    const passwordForm = this.userPasswordForm.getRawValue() as NewPassword
 
     this.authFacade.changePassword({
       version: this.userData.version,

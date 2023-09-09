@@ -5,11 +5,15 @@ import type { UserAddress } from '../models/user-address.model'
 import type { AddressActionSubmitForm } from '../types/address-action-submit-form.type'
 import { convertCountryFormat } from 'src/app/shared/constants/convert-country-format.constant'
 
+// изменить на хелпер
+// переиминовать на конверт
 export const transformAddressSubmitForm: Record<
+  // вынести в отедбный тип
   AddressActionSubmitForm,
   ({ form, version, action, addressId }: TransformAddressSubmitForm) => MyCustomerUpdate
 > = {
   changeAddress: ({ form, version, action, addressId }: TransformAddressSubmitForm): MyCustomerUpdate => {
+    // переписать
     const submitForm = form.getRawValue() as UserAddress
 
     return {

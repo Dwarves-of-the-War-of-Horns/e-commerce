@@ -3,7 +3,7 @@ import { FormBuilder, FormControl } from '@angular/forms'
 import type { Address } from '@commercetools/platform-sdk'
 import type { Subscription } from 'rxjs'
 
-import { submitFormActionDictionary } from '../../constants/submit-form-actions.constant'
+import { commercetoolsActions } from '../../constants/commercetools-actions.constant'
 import { transformAddressSubmitForm } from '../../helpers/transform-address-submit-form.util'
 import type { UserAddressData } from '../../models/user-address-data.model'
 import type { AddressActionSubmitForm } from '../../types/address-action-submit-form.type'
@@ -20,7 +20,7 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
 })
 export class UserAddressesComponent implements OnInit, OnDestroy {
   public isShowEditingForm = false
-  private actionAddressForm: AddressActionSubmitForm = submitFormActionDictionary.changeAddress
+  private actionAddressForm: AddressActionSubmitForm = commercetoolsActions.changeAddress
 
   public userAddressData: UserAddressData = {
     userAddressId: null,
@@ -111,7 +111,7 @@ export class UserAddressesComponent implements OnInit, OnDestroy {
 
     this.authFacade.updateCustomer({
       version: this.userAddressData.userVersion,
-      actions: [{ action: submitFormActionDictionary.shippingAddress, addressId }],
+      actions: [{ action: commercetoolsActions.shippingAddress, addressId }],
     })
   }
 
@@ -122,7 +122,7 @@ export class UserAddressesComponent implements OnInit, OnDestroy {
 
     this.authFacade.updateCustomer({
       version: this.userAddressData.userVersion,
-      actions: [{ action: submitFormActionDictionary.billingAddress, addressId }],
+      actions: [{ action: commercetoolsActions.billingAddress, addressId }],
     })
   }
   public onSubmitRemoveAddress(addressId?: string): void {
@@ -132,7 +132,7 @@ export class UserAddressesComponent implements OnInit, OnDestroy {
 
     this.authFacade.updateCustomer({
       version: this.userAddressData.userVersion,
-      actions: [{ action: submitFormActionDictionary.removeAddress, addressId }],
+      actions: [{ action: commercetoolsActions.removeAddress, addressId }],
     })
   }
 

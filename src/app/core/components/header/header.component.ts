@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule, TuiSvgModule } from '@taiga-ui/core'
 
-import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
+import { AuthFacade } from 'src/app/auth/auth-store/service/auth.facade'
 
 @Component({
   selector: 'ec-header',

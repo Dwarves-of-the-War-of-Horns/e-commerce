@@ -6,7 +6,7 @@ import type { Subscription } from 'rxjs'
 
 import { changeInformationSubmitForm } from '../../helpers/change-information-submit-form.helper'
 import type { NewPassword } from '../../models/new-password.model'
-import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
+import { AuthFacade } from 'src/app/auth/auth-store/service/auth.facade'
 import { subscribeToValueChangesOnForms } from 'src/app/shared/utils/subscribe-to-value-changes-on-forms.util'
 import { birthValidator } from 'src/app/shared/validators/birth.validator'
 import { emailValidator } from 'src/app/shared/validators/email.validator'

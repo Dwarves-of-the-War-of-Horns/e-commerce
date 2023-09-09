@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common'
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
 import { provideMockStore } from '@ngrx/store/testing'
-import { TuiFieldErrorPipe } from '@taiga-ui/kit'
+import { TuiErrorModule } from '@taiga-ui/core'
+import { TuiFieldErrorPipe, TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit'
 
 import { AuthRoutingModule } from '../../auth-routing.module'
-import { AuthFacade } from '../../auth-store/auth.facade'
+import { AuthFacade } from '../../auth-store/service/auth.facade'
 import { SignInFormComponent } from './sign-in-form.component'
 
 describe('SignInFormComponent', () => {
@@ -15,9 +16,17 @@ describe('SignInFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       declarations: [SignInFormComponent, TuiFieldErrorPipe],
-      imports: [CommonModule, AuthRoutingModule, RouterTestingModule],
+      imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        AuthRoutingModule,
+        RouterTestingModule,
+        TuiInputModule,
+        TuiErrorModule,
+        TuiInputPasswordModule,
+        FormsModule,
+      ],
       providers: [provideMockStore({}), AuthFacade],
     }).compileComponents()
 

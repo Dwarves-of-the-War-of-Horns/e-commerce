@@ -5,7 +5,7 @@ import { TuiAlertService } from '@taiga-ui/core'
 import { catchError, of } from 'rxjs'
 import { map, switchMap, tap } from 'rxjs/operators'
 
-import { alertsAuth } from '../utils/auth-alert.util'
+import { alertsAuth } from '../helpers/auth-alert.helper'
 import { authInitApiActions } from './actions/auth-init-api.actions'
 import { authInitActions } from './actions/auth-init.actions'
 import { changePasswordApiActions } from './actions/change-password-api.action'

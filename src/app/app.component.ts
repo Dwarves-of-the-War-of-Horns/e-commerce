@@ -1,7 +1,7 @@
 import { Component, inject, type OnInit } from '@angular/core'
 
 import { AuthFacade } from './auth/auth-store/auth.facade'
-import { CartFacade } from './cart/cart-store copy/cart.facade'
+import { CartFacade } from './cart/cart-store/cart.facade'
 
 @Component({
   selector: 'ec-root',

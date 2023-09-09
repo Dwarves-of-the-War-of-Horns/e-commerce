@@ -9,6 +9,7 @@ export class CartFacade {
   private store$ = inject(Store)
   public errorMessage$ = this.store$.select(selectError)
   public currentCart$ = this.store$.select(selectCurrentCart)
+  // public isLoading$ = this.store$.select(selectIsLoading)
 
   public initCart(): void {
     this.store$.dispatch(cartsInitActions.getCarts())

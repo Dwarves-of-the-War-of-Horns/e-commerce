@@ -1,6 +1,6 @@
-import type { SubmitFormActionDictionary } from '../models/submit-form-action-dictionary.model'
+import type { CommercetoolsActions } from '../models/commercetools-action.model'
 
-export const submitFormActionDictionary: SubmitFormActionDictionary = {
+export const commercetoolsActions: CommercetoolsActions = {
   firstName: 'setFirstName',
   lastName: 'setLastName',
   dateOfBirth: 'setDateOfBirth',

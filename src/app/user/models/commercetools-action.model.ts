@@ -1,4 +1,4 @@
-export interface SubmitFormActionDictionary {
+export interface CommercetoolsActions {
   firstName: 'setFirstName'
   lastName: 'setLastName'
   dateOfBirth: 'setDateOfBirth'

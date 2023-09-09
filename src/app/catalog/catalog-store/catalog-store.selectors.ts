@@ -11,11 +11,9 @@ export const selectIsLoading = createSelector(selectCatalogFeature, ({ isLoading
 
 export const selectCategories = createSelector(selectCatalogFeature, ({ categories }: CatalogState) => categories)
 
-export const selectProducts = createSelector(selectCatalogFeature, ({ products }: CatalogState) => products)
-
-export const selectIsProductsLoading = createSelector(
+export const selectProductsData = createSelector(
   selectCatalogFeature,
-  ({ isProductsLoading }: CatalogState) => isProductsLoading,
+  ({ products, isProductsLoading }: CatalogState) => ({ products, isProductsLoading }),
 )
 
 export const selectProductDetails = createSelector(

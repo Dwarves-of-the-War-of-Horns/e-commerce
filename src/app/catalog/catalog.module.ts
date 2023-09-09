@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { TuiCurrencyPipeModule, TuiMoneyModule } from '@taiga-ui/addon-commerce'
+import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile'
 import { TuiActiveZoneModule, TuiLetModule } from '@taiga-ui/cdk'
 import {
@@ -66,7 +66,6 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     TuiSvgModule,
     TuiIslandModule,
     TuiBreadcrumbsModule,
-    TuiCurrencyPipeModule,
     TuiLoaderModule,
     TuiLetModule,
     TuiSidebarModule,

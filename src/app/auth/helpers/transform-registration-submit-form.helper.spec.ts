@@ -1,7 +1,7 @@
 import type { FormGroup } from '@angular/forms'
 import type { MyCustomerDraft } from '@commercetools/platform-sdk'
 
-import { transformRegistrationSubmitForm } from './transform-registration-submit-form.util'
+import { transformRegistrationSubmitForm } from './transform-registration-submit-form.helper'
 
 describe('transformRegistrationSubmitForm', () => {
   it('should transform registration submit form with default shipping address', () => {

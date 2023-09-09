@@ -37,6 +37,16 @@
 <ng-template #template let-observer>
   <div class="carousel dialog">
     <div class="carousel-container">
+      <button
+        *ngIf="images.length > 1"
+        tuiIconButton
+        size="s"
+        appearance="mono"
+        icon="tuiIconChevronLeft"
+        title="Previous"
+        (click)="carousel.prev()"
+      ></button>
+
       <tui-carousel #carousel [draggable]="true" [itemsCount]="1" [(index)]="carouselActiveIndex">
         <ng-container *ngFor="let image of images; let i = index; trackBy: trackByImage">
           <img
@@ -49,13 +59,23 @@
           />
         </ng-container>
       </tui-carousel>
-      <tui-pagination
+
+      <button
         *ngIf="images.length > 1"
+        tuiIconButton
         size="s"
-        class="pagination"
-        [length]="images.length"
-        [(index)]="carouselActiveIndex"
-      ></tui-pagination>
+        appearance="mono"
+        icon="tuiIconChevronRight"
+        title="Next"
+        (click)="carousel.next()"
+      ></button>
     </div>
+    <tui-pagination
+      *ngIf="images.length > 1"
+      size="s"
+      class="pagination"
+      [length]="images.length"
+      [(index)]="carouselActiveIndex"
+    ></tui-pagination>
   </div>
 </ng-template>

@@ -75,7 +75,7 @@ export class CommercetoolsService {
     )
   }
 
-  public getCart(): Observable<CartPagedQueryResponse> {
+  public getCart(): Observable<Cart> {
     return this.httpService.getCart()
   }
 

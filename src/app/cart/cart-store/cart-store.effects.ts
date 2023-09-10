@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
 import { catchError, of } from 'rxjs'
-import { map, switchMap, tap } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 
 import { createCartActions } from './actions/cart-create.action'
 import { createCartApiActions } from './actions/cart-create.api.action'
@@ -21,13 +21,12 @@ export class CartEffects {
       ofType(cartInitActions.getCart),
       switchMap(() =>
         this.cartService.getCart().pipe(
-          map(carts => cartApiActions.cartLoadSuccess({ carts })),
-          tap(({ carts }) => {
-            if (carts.count === 0) {
-              this.store$.dispatch(createCartActions.createCart())
-            }
+          map(cart => cartApiActions.cartLoadSuccess({ cart })),
+          catchError(({ message }: Error) => {
+            this.store$.dispatch(cartApiActions.cartLoadFailure({ error: message }))
+
+            return of(createCartActions.createCart())
           }),
-          catchError(({ message }: Error) => of(cartApiActions.cartLoadFailure({ error: message }))),
         ),
       ),
     )

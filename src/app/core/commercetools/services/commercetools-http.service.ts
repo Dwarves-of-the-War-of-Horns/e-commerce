@@ -145,8 +145,8 @@ export class CommercetoolsHttpService {
     return fromPromise(this.api.productTypes().get().execute()).pipe(map(({ body }) => body.results))
   }
 
-  public getCart(): Observable<CartPagedQueryResponse> {
-    return fromPromise(this.api.me().carts().get().execute()).pipe(map(({ body }) => body))
+  public getCart(): Observable<Cart> {
+    return fromPromise(this.api.me().activeCart().get().execute()).pipe(map(({ body }) => body))
   }
 
   public createCart(): Observable<Cart> {

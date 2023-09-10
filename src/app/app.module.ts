@@ -28,7 +28,7 @@ import { StoreFeatureNames } from './shared/enums/store-feature-names.enum'
     AppRoutingModule,
     EffectsModule.forFeature([AuthEffects, CartEffects]),
     StoreModule.forFeature(StoreFeatureNames.Auth, authReducer),
-    StoreModule.forFeature(StoreFeatureNames.Carts, cartReducer),
+    StoreModule.forFeature(StoreFeatureNames.Cart, cartReducer),
     StorageModule.forRoot({ config: { prefix: storageKeyPrefix.toString() } }),
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),

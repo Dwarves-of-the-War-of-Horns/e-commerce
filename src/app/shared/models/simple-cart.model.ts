@@ -8,4 +8,5 @@ export interface SimpleCart {
   discountCodes: DiscountCodeInfo[]
   products: CartProduct[]
   totalPrice: number
+  totalProducts: number
 }

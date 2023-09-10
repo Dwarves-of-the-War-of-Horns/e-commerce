@@ -1,10 +1,8 @@
 import { createReducer, on } from '@ngrx/store'
 
 import type { CartState } from '../models/cart-state'
-import { createCartActions } from './actions/cart-create.action'
-import { createCartApiActions } from './actions/cart-create.api.action'
+import { cartApiActions } from './actions/cart-api.actions'
 import { cartInitActions } from './actions/cart-init.actions'
-import { cartApiActions } from './actions/cart-init.api.actions'
 
 const cartInitialState: CartState = {
   isLoading: false,
@@ -18,26 +16,26 @@ export const cartReducer = createReducer(
     ...state,
     isLoading: true,
   })),
-  on(cartApiActions.cartLoadSuccess, (state, { cart }) => ({
+  on(cartApiActions.loadCartSuccess, (state, { cart }) => ({
     ...state,
     isLoading: false,
     currentCart: cart,
   })),
-  on(cartApiActions.cartLoadFailure, (state, { error }) => ({
+  on(cartApiActions.loadCartFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
     error,
   })),
-  on(createCartActions.createCart, state => ({
+  on(cartInitActions.createCart, state => ({
     ...state,
     isLoading: true,
   })),
-  on(createCartApiActions.createCartSuccess, (state, { cart }) => ({
+  on(cartApiActions.createCartSuccess, (state, { cart }) => ({
     ...state,
     isLoading: false,
     currentCart: cart,
   })),
-  on(createCartApiActions.createCartFailure, (state, { error }) => ({
+  on(cartApiActions.createCartFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
     error,

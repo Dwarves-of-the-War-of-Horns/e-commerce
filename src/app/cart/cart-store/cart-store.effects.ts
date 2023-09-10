@@ -1,13 +1,10 @@
 import { inject, Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
-import { catchError, of } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { catchError, map, of, switchMap } from 'rxjs'
 
-import { createCartActions } from './actions/cart-create.action'
-import { createCartApiActions } from './actions/cart-create.api.action'
+import { cartApiActions } from './actions/cart-api.actions'
 import { cartInitActions } from './actions/cart-init.actions'
-import { cartApiActions } from './actions/cart-init.api.actions'
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
 
 @Injectable()
@@ -21,11 +18,11 @@ export class CartEffects {
       ofType(cartInitActions.getCart),
       switchMap(() =>
         this.cartService.getCart().pipe(
-          map(cart => cartApiActions.cartLoadSuccess({ cart })),
+          map(cart => cartApiActions.loadCartSuccess({ cart })),
           catchError(({ message }: Error) => {
-            this.store$.dispatch(cartApiActions.cartLoadFailure({ error: message }))
+            this.store$.dispatch(cartApiActions.loadCartFailure({ error: message }))
 
-            return of(createCartActions.createCart())
+            return of(cartInitActions.createCart())
           }),
         ),
       ),
@@ -34,11 +31,11 @@ export class CartEffects {
 
   public createCartEffect$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(createCartActions.createCart),
+      ofType(cartInitActions.createCart),
       switchMap(() =>
         this.cartService.createCart().pipe(
-          map(cart => createCartApiActions.createCartSuccess({ cart })),
-          catchError(({ message }: Error) => of(createCartApiActions.createCartFailure({ error: message }))),
+          map(cart => cartApiActions.createCartSuccess({ cart })),
+          catchError(({ message }: Error) => of(cartApiActions.createCartFailure({ error: message }))),
         ),
       ),
     )

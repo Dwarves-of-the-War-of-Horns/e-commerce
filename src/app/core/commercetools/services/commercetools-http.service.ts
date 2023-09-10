@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core'
 import type {
   Cart,
-  CartPagedQueryResponse,
   Category,
   Customer,
+  MyCartUpdate,
   MyCustomerDraft,
   MyCustomerUpdate,
   ProductProjection,
@@ -157,5 +157,11 @@ export class CommercetoolsHttpService {
         .post({ body: { currency: 'USD' } })
         .execute(),
     ).pipe(map(({ body }) => body))
+  }
+
+  public updateCart(cartId: string, cart: MyCartUpdate): Observable<Cart> {
+    return fromPromise(this.api.me().carts().withId({ ID: cartId }).post({ body: cart }).execute()).pipe(
+      map(({ body }) => body),
+    )
   }
 }

@@ -9,5 +9,7 @@ export const cartApiActions = createActionGroup({
     'Create Cart Failure': props<{ error: string }>(),
     'Load Cart Success': props<{ cart: SimpleCart }>(),
     'Load Cart Failure': props<{ error: string }>(),
+    'Update Cart Success': props<{ cart: SimpleCart }>(),
+    'Update Cart Failure': props<{ error: string }>(),
   },
 })

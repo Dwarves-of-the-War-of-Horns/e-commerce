@@ -11,6 +11,7 @@ export const convertProductProjectionToSimpleProduct = ({
   metaTitle,
   metaDescription,
   masterVariant,
+  id,
 }: ProductProjection): SimpleProduct => {
   const prices = masterVariant.prices?.[0]
   const { attributes } = masterVariant
@@ -20,6 +21,8 @@ export const convertProductProjectionToSimpleProduct = ({
   return {
     key: key ?? '',
     name: name[locale],
+    id,
+    variantId: masterVariant.id,
     description: description?.[locale] ?? '',
     slug: slug[locale],
     metaTitle: metaTitle?.[locale] ?? '',

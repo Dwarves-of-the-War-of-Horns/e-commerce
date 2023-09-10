@@ -13,4 +13,8 @@ export class CartFacade {
   public initCart(): void {
     this.store$.dispatch(cartInitActions.getCart())
   }
+
+  public createCart(): void {
+    this.store$.dispatch(cartInitActions.createCart())
+  }
 }

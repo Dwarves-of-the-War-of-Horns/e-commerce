@@ -17,6 +17,7 @@ import { signUpApiActions } from './actions/sign-up-api.actions'
 import { signUpPageActions } from './actions/sign-up-page.actions'
 import { updateCustomerApiActions } from './actions/update-customer-api.actions'
 import { updateCustomerPageActions } from './actions/update-customer-page.action'
+import { CartFacade } from 'src/app/cart/cart-store/services/cart.facade'
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
 
 @Injectable()
@@ -25,6 +26,7 @@ export class AuthEffects {
   private router = inject(Router)
   private authService = inject(CommercetoolsService)
   private alerts = inject(TuiAlertService)
+  private cartFacade = inject(CartFacade)
 
   public signUpEffect$ = createEffect(() => {
     return this.actions$.pipe(
@@ -34,6 +36,7 @@ export class AuthEffects {
           map(user => {
             alertsAuth[String(true)](this.alerts, 'sign-up')
             this.router.navigate(['home'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
+            this.cartFacade.initCart()
 
             return signUpApiActions.signUpSuccess({ customer: user })
           }),
@@ -55,6 +58,7 @@ export class AuthEffects {
         this.authService.signIn(customer).pipe(
           map(user => {
             alertsAuth[String(true)](this.alerts, 'sign-in')
+            this.cartFacade.initCart()
 
             return signInApiActions.signInSuccess({ customer: user })
           }),
@@ -126,7 +130,15 @@ export class AuthEffects {
   public logoutEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(logoutActions.logoutStart),
-      switchMap(() => this.authService.logout().pipe(map(() => logoutActions.logoutFinish()))),
+      switchMap(() =>
+        this.authService.logout().pipe(
+          map(() => {
+            this.cartFacade.createCart()
+
+            return logoutActions.logoutFinish()
+          }),
+        ),
+      ),
     )
   })
 }

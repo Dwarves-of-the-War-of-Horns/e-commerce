@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { combineLatest, map } from 'rxjs'
 
 import { catalogPageActions } from '../actions/catalog-page.actions'
 import { productDetailsPageActions } from '../actions/product-details-page.actions'

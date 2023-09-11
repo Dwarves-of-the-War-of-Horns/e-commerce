@@ -13,3 +13,5 @@ export const selectProductsInCart = createSelector(
   selectCartFeature,
   ({ currentCart }: CartState) => currentCart?.products,
 )
+
+export const selectIsLoading = createSelector(selectCartFeature, ({ isLoading }: CartState) => isLoading)

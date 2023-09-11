@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
+import { TuiAlertService } from '@taiga-ui/core'
 import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs'
 
 import { propertyIsNotNullOrUndefined } from '../helpers/propertyIsNotNullOrUndefined.helper'
@@ -9,12 +10,14 @@ import { cartInitActions } from './actions/cart-init.actions'
 import { catalogPageCartActions } from './actions/catalog-page.actions'
 import { selectCurrentCart } from './cart-store.selectors'
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
+import { alertsHelper } from 'src/app/shared/helpers/alerts.helper'
 
 @Injectable()
 export class CartEffects {
   private cartService = inject(CommercetoolsService)
   private actions$ = inject(Actions)
   private store$ = inject(Store)
+  private alertService = inject(TuiAlertService)
   private currentCart$ = this.store$.select(selectCurrentCart)
 
   public cartInitEffect$ = createEffect(() => {
@@ -91,8 +94,16 @@ export class CartEffects {
             actions: [{ action: 'removeLineItem', lineItemId }],
           })
           .pipe(
-            map(cart => cartApiActions.updateCartSuccess({ cart })),
-            catchError(({ message }: Error) => of(cartApiActions.updateCartFailure({ error: message }))),
+            map(cart => {
+              alertsHelper[String(true)](this.alertService, 'remove this product')
+
+              return cartApiActions.updateCartSuccess({ cart })
+            }),
+            catchError(({ message }: Error) => {
+              alertsHelper[String(false)](this.alertService, message)
+
+              return of(cartApiActions.updateCartFailure({ error: message }))
+            }),
           ),
       ),
     )

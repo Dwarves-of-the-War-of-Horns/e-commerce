@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core'
-import type { Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
+import type { Customer, MyCartUpdate, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable } from 'rxjs'
 
@@ -76,5 +76,9 @@ export class CommercetoolsService {
 
   public createCart(): Observable<SimpleCart> {
     return this.httpService.createCart().pipe(map(convertCartToSimpleCart))
+  }
+
+  public updateCart(cartId: string, cart: MyCartUpdate): Observable<SimpleCart> {
+    return this.httpService.updateCart(cartId, cart).pipe(map(convertCartToSimpleCart))
   }
 }

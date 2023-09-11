@@ -6,6 +6,8 @@ export interface SimpleProduct {
   name: string
   slug: string
   key: string
+  id: string
+  variantId: number
   description: string
   metaTitle: string
   metaDescription: string

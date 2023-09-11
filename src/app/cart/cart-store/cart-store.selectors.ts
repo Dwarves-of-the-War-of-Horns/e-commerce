@@ -8,3 +8,10 @@ const selectCartFeature = createFeatureSelector<CartState>(StoreFeatureNames.Car
 export const selectError = createSelector(selectCartFeature, ({ error }: CartState) => error)
 
 export const selectCurrentCart = createSelector(selectCartFeature, ({ currentCart }: CartState) => currentCart)
+
+export const selectProductsInCart = createSelector(
+  selectCartFeature,
+  ({ currentCart }: CartState) => currentCart?.products,
+)
+
+export const selectIsLoading = createSelector(selectCartFeature, ({ isLoading }: CartState) => isLoading)

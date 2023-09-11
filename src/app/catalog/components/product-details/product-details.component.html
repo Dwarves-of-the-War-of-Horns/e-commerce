@@ -19,5 +19,29 @@
     <ec-product-details-price [prices]="productDetails.prices" />
   </div>
 
-  <button tuiButton type="button" class="product-details__button" appearance="primary">Add to cart</button>
+  <button
+    *ngIf="!isInCart; else removeFromCart"
+    tuiButton
+    type="button"
+    class="product-details__button"
+    appearance="primary"
+    icon="tuiIconShoppingCart"
+    [showLoader]="!!(isCartLoading$ | async)"
+    (click)="addToCart()"
+  >
+    Add to cart
+  </button>
 </div>
+
+<ng-template #removeFromCart>
+  <button
+    tuiButton
+    type="button"
+    class="product-details__button"
+    appearance="secondary-destructive"
+    icon="tuiIconShoppingCart"
+    [showLoader]="!!(isCartLoading$ | async)"
+  >
+    Remove from cart
+  </button>
+</ng-template>

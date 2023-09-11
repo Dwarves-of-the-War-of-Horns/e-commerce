@@ -40,6 +40,18 @@
       </div>
     </ng-container>
   </div>
+  <button
+    tuiButton
+    type="button"
+    class="product__button"
+    appearance="primary"
+    icon="tuiIconShoppingCart"
+    [disabled]="!!isInCart"
+    (click)="addToCart($event)"
+    [showLoader]="isLoading && !isInCart"
+  >
+    Add to cart
+  </button>
 </tui-island>
 
 <ng-template #noDescription>

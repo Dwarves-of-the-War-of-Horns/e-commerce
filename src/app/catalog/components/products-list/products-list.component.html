@@ -11,6 +11,8 @@
           *ngFor="let product of products; trackBy: trackProduct"
           [product]="product"
           class="products__card"
+          [addToCartHandler]="addToCart"
+          [isInCart]="isInCart(product) | async"
         />
       </div>
     </ng-container>

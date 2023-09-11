@@ -24,4 +24,8 @@ export class CartFacade {
   public addProductToCart({ productId, variantId }: { productId: string; variantId: number }): void {
     this.store$.dispatch(catalogPageCartActions.addProduct({ productId, variantId }))
   }
+
+  public removeProductFromCart({ productId, variantId }: { productId: string; variantId: number }): void {
+    this.store$.dispatch(catalogPageCartActions.removeProduct({ productId, variantId }))
+  }
 }

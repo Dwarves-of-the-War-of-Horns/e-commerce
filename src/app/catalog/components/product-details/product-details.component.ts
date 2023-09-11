@@ -43,4 +43,8 @@ export class ProductDetailsComponent {
   public addToCart(): void {
     this.cartFacade.addProductToCart(this.productIds)
   }
+
+  public removeFromCart(): void {
+    this.cartFacade.removeProductFromCart(this.productIds)
+  }
 }

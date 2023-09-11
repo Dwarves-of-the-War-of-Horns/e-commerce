@@ -5,7 +5,6 @@ import { TuiAlertService } from '@taiga-ui/core'
 import { catchError, of } from 'rxjs'
 import { map, switchMap, tap } from 'rxjs/operators'
 
-import { alertsAuth } from '../helpers/auth-alert.helper'
 import { authInitApiActions } from './actions/auth-init-api.actions'
 import { authInitActions } from './actions/auth-init.actions'
 import { changePasswordApiActions } from './actions/change-password-api.action'
@@ -19,6 +18,7 @@ import { updateCustomerApiActions } from './actions/update-customer-api.actions'
 import { updateCustomerPageActions } from './actions/update-customer-page.action'
 import { CartFacade } from 'src/app/cart/cart-store/services/cart.facade'
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
+import { alertsHelper } from 'src/app/shared/helpers/alerts.helper'
 
 @Injectable()
 export class AuthEffects {
@@ -34,7 +34,7 @@ export class AuthEffects {
       switchMap(({ customer }) =>
         this.authService.signUp(customer).pipe(
           map(user => {
-            alertsAuth[String(true)](this.alerts, 'sign-up')
+            alertsHelper[String(true)](this.alerts, 'sign-up')
             this.router.navigate(['home'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
             this.cartFacade.initCart()
 
@@ -42,7 +42,7 @@ export class AuthEffects {
           }),
 
           catchError(({ message }: Error) => {
-            alertsAuth[String(false)](this.alerts, message)
+            alertsHelper[String(false)](this.alerts, message)
 
             return of(signUpApiActions.signUpFailure({ error: message }))
           }),
@@ -57,7 +57,7 @@ export class AuthEffects {
       switchMap(({ customer }) =>
         this.authService.signIn(customer).pipe(
           map(user => {
-            alertsAuth[String(true)](this.alerts, 'sign-in')
+            alertsHelper[String(true)](this.alerts, 'sign-in')
             this.cartFacade.initCart()
 
             return signInApiActions.signInSuccess({ customer: user })
@@ -66,7 +66,7 @@ export class AuthEffects {
             this.router.navigate(['home'], { replaceUrl: true }).catch(({ message }: Error) => message || null)
           }),
           catchError(({ message }: Error) => {
-            alertsAuth[String(false)](this.alerts, message)
+            alertsHelper[String(false)](this.alerts, message)
 
             return of(signInApiActions.signInFailure({ error: message }))
           }),
@@ -81,12 +81,12 @@ export class AuthEffects {
       switchMap(({ updateCustomer }) =>
         this.authService.updateCustomerInfo(updateCustomer).pipe(
           map(user => {
-            alertsAuth[String(true)](this.alerts, 'update user')
+            alertsHelper[String(true)](this.alerts, 'update user')
 
             return updateCustomerApiActions.updateCustomerSuccess({ customer: user })
           }),
           catchError(({ message }: Error) => {
-            alertsAuth[String(false)](this.alerts, message)
+            alertsHelper[String(false)](this.alerts, message)
 
             return of(updateCustomerApiActions.updateCustomerFailure({ error: message }))
           }),
@@ -101,12 +101,12 @@ export class AuthEffects {
       switchMap(({ newPassword }) =>
         this.authService.changePassword(newPassword).pipe(
           map(user => {
-            alertsAuth[String(true)](this.alerts, 'change password')
+            alertsHelper[String(true)](this.alerts, 'change password')
 
             return changePasswordApiActions.changePasswordSuccess({ customer: user })
           }),
           catchError(({ message }: Error) => {
-            alertsAuth[String(false)](this.alerts, message)
+            alertsHelper[String(false)](this.alerts, message)
 
             return of(changePasswordApiActions.changePasswordFailure({ error: message }))
           }),

@@ -23,6 +23,7 @@ import { ProductsListComponent } from '../../components/products-list/products-l
 import { CatalogQueryParamsService } from '../../services/catalog-query-params.service'
 import { CatalogUrlTreeService } from '../../services/catalog-url.service'
 import { CatalogPageComponent } from './catalog-page.component'
+import { CartFacade } from 'src/app/cart/cart-store/services/cart.facade'
 
 describe('CatalogPageComponent', () => {
   let component: CatalogPageComponent
@@ -55,6 +56,7 @@ describe('CatalogPageComponent', () => {
       providers: [
         provideMockStore({}),
         CatalogFacade,
+        CartFacade,
         CatalogUrlTreeService,
         CatalogQueryParamsService,
         {

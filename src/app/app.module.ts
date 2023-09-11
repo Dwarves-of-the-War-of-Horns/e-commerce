@@ -14,7 +14,7 @@ import { authReducer } from './auth/auth-store/auth.reducer'
 import { AuthFacade } from './auth/auth-store/service/auth.facade'
 import { CartEffects } from './cart/cart-store/cart-store.effects'
 import { cartReducer } from './cart/cart-store/cart-store.reducer'
-import { CartFacade } from './cart/cart-store/cart.facade'
+import { CartFacade } from './cart/cart-store/services/cart.facade'
 import { HeaderComponent } from './core/components/header/header.component'
 import { CoreModule } from './core/core.module'
 import { StorageModule } from './core/storage/storage.module'
@@ -28,7 +28,7 @@ import { StoreFeatureNames } from './shared/enums/store-feature-names.enum'
     AppRoutingModule,
     EffectsModule.forFeature([AuthEffects, CartEffects]),
     StoreModule.forFeature(StoreFeatureNames.Auth, authReducer),
-    StoreModule.forFeature(StoreFeatureNames.Carts, cartReducer),
+    StoreModule.forFeature(StoreFeatureNames.Cart, cartReducer),
     StorageModule.forRoot({ config: { prefix: storageKeyPrefix.toString() } }),
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),

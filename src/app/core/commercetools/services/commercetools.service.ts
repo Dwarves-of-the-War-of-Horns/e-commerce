@@ -1,22 +1,17 @@
 import { inject, Injectable } from '@angular/core'
-import type {
-  Cart,
-  CartPagedQueryResponse,
-  Customer,
-  MyCustomerDraft,
-  MyCustomerUpdate,
-  Project,
-} from '@commercetools/platform-sdk'
+import type { Customer, MyCustomerDraft, MyCustomerUpdate, Project } from '@commercetools/platform-sdk'
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { map, type Observable } from 'rxjs'
 
 import { arrayToTree } from '../helpers/array-to-tree.helper'
 import { convertAttributeToSimpleAttribute } from '../helpers/convert-attribute-to-simple-attribute.helper'
+import { convertCartToSimpleCart } from '../helpers/convert-cart-to-simple-cart.helper'
 import { convertProductProjectionToSimpleProduct } from '../helpers/convert-product-projection-to-simple-product.helper'
 import { CommercetoolsHttpService } from './commercetools-http.service'
 import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
 import type { QueryParams } from 'src/app/shared/models/query-params.model'
 import type { SimpleAttribute } from 'src/app/shared/models/simple-attribute.model'
+import type { SimpleCart } from 'src/app/shared/models/simple-cart.model'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
@@ -75,11 +70,11 @@ export class CommercetoolsService {
     )
   }
 
-  public getCart(): Observable<CartPagedQueryResponse> {
-    return this.httpService.getCart()
+  public getCart(): Observable<SimpleCart> {
+    return this.httpService.getCart().pipe(map(convertCartToSimpleCart))
   }
 
-  public createCart(): Observable<Cart> {
-    return this.httpService.createCart()
+  public createCart(): Observable<SimpleCart> {
+    return this.httpService.createCart().pipe(map(convertCartToSimpleCart))
   }
 }

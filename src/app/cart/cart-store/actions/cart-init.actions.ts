@@ -1,8 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store'
 
-export const createCartActions = createActionGroup({
-  source: 'Create Cart',
+export const cartInitActions = createActionGroup({
+  source: 'Cart Init',
   events: {
+    'Get Cart': emptyProps(),
     'Create Cart': emptyProps(),
   },
 })

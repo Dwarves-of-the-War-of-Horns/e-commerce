@@ -70,4 +70,32 @@ export class CartEffects {
       ),
     )
   })
+
+  public removeProductFromCartEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(catalogPageCartActions.removeProduct),
+      withLatestFrom(this.currentCart$),
+      filter(([, cart]) => cart !== null),
+      map(([{ productId, variantId }, cart]) => ({
+        lineItemId: cart?.products.find(product => product.productId === productId && product.variantId === variantId)
+          ?.id,
+        cartId: cart?.id,
+        cartVersion: cart?.version,
+      })),
+      filter(({ lineItemId }) => Boolean(lineItemId)),
+      switchMap(({ cartId, cartVersion, lineItemId }) =>
+        this.cartService
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          .updateCart(cartId!, {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            version: cartVersion!,
+            actions: [{ action: 'removeLineItem', lineItemId }],
+          })
+          .pipe(
+            map(cart => cartApiActions.updateCartSuccess({ cart })),
+            catchError(({ message }: Error) => of(cartApiActions.updateCartFailure({ error: message }))),
+          ),
+      ),
+    )
+  })
 }

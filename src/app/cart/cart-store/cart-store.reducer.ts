@@ -55,4 +55,8 @@ export const cartReducer = createReducer(
     isLoading: false,
     error,
   })),
+  on(catalogPageCartActions.removeProduct, state => ({
+    ...state,
+    isLoading: true,
+  })),
 )

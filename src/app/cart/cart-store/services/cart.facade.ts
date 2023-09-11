@@ -26,6 +26,6 @@ export class CartFacade {
   }
 
   public removeProductFromCart({ productId, variantId }: { productId: string; variantId: number }): void {
-    console.log('remove')
+    this.store$.dispatch(catalogPageCartActions.removeProduct({ productId, variantId }))
   }
 }

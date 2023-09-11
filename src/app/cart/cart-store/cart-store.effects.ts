@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
-import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs'
+import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs'
 
+import { propertyIsNotNullOrUndefined } from '../helpers/propertyIsNotNullOrUndefined.helper'
 import { cartApiActions } from './actions/cart-api.actions'
 import { cartInitActions } from './actions/cart-init.actions'
 import { catalogPageCartActions } from './actions/catalog-page.actions'
@@ -48,19 +49,18 @@ export class CartEffects {
     return this.actions$.pipe(
       ofType(catalogPageCartActions.addProduct),
       withLatestFrom(this.currentCart$),
-      filter(([, cart]) => cart !== null),
-      map(([{ productId, variantId }, cart]) => ({
+      map(([{ productId, variantId }, cart]) => ({ productId, variantId, cart })),
+      propertyIsNotNullOrUndefined('cart'),
+      map(({ productId, variantId, cart }) => ({
         productId,
         variantId,
-        cartId: cart?.id,
-        cartVersion: cart?.version,
+        cartId: cart.id,
+        cartVersion: cart.version,
       })),
       switchMap(({ productId, variantId, cartId, cartVersion }) =>
         this.cartService
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          .updateCart(cartId!, {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            version: cartVersion!,
+          .updateCart(cartId, {
+            version: cartVersion,
             actions: [{ action: 'addLineItem', productId, variantId, quantity: 1 }],
           })
           .pipe(

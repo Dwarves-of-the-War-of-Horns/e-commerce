@@ -20,7 +20,7 @@
   </div>
 
   <button
-    *ngIf="!isInCart; else removeFromCart"
+    *ngIf="!isInCart; else removeFromCartButton"
     tuiButton
     type="button"
     class="product-details__button"
@@ -33,7 +33,7 @@
   </button>
 </div>
 
-<ng-template #removeFromCart>
+<ng-template #removeFromCartButton>
   <button
     tuiButton
     type="button"
@@ -41,6 +41,7 @@
     appearance="secondary-destructive"
     icon="tuiIconShoppingCart"
     [showLoader]="!!(isCartLoading$ | async)"
+    (click)="removeFromCart()"
   >
     Remove from cart
   </button>

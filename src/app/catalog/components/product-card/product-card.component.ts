@@ -13,6 +13,8 @@ export class ProductCardComponent {
   @Input() public addToCartHandler!: ({ productId, variantId }: { productId: string; variantId: number }) => void
   @Input() public isInCart!: boolean | null
 
+  public isLoading = false
+
   public maxDescriptionLength = 100
 
   public cutDescription(description: string): string {
@@ -21,6 +23,7 @@ export class ProductCardComponent {
 
   public addToCart(event: MouseEvent): void {
     event.stopPropagation()
+    this.isLoading = true
     this.addToCartHandler({ productId: this.product.id, variantId: this.product.variantId })
   }
 }

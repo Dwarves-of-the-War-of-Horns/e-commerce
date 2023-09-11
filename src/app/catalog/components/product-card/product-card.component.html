@@ -48,6 +48,7 @@
     icon="tuiIconShoppingCart"
     [disabled]="!!isInCart"
     (click)="addToCart($event)"
+    [showLoader]="isLoading && !isInCart"
   >
     Add to cart
   </button>

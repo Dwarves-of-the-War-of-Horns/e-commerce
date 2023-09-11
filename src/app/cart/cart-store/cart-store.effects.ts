@@ -55,12 +55,12 @@ export class CartEffects {
         productId,
         variantId,
         cartId: cart.id,
-        cartVersion: cart.version,
+        version: cart.version,
       })),
-      switchMap(({ productId, variantId, cartId, cartVersion }) =>
+      switchMap(({ productId, variantId, cartId, version }) =>
         this.cartService
           .updateCart(cartId, {
-            version: cartVersion,
+            version,
             actions: [{ action: 'addLineItem', productId, variantId, quantity: 1 }],
           })
           .pipe(
@@ -75,20 +75,19 @@ export class CartEffects {
     return this.actions$.pipe(
       ofType(catalogPageCartActions.removeProduct),
       withLatestFrom(this.currentCart$),
-      filter(([, cart]) => cart !== null),
-      map(([{ productId, variantId }, cart]) => ({
-        lineItemId: cart?.products.find(product => product.productId === productId && product.variantId === variantId)
+      map(([{ productId, variantId }, cart]) => ({ productId, variantId, cart })),
+      propertyIsNotNullOrUndefined('cart'),
+      map(({ productId, variantId, cart }) => ({
+        lineItemId: cart.products.find(product => product.productId === productId && product.variantId === variantId)
           ?.id,
-        cartId: cart?.id,
-        cartVersion: cart?.version,
+        cartId: cart.id,
+        version: cart.version,
       })),
-      filter(({ lineItemId }) => Boolean(lineItemId)),
-      switchMap(({ cartId, cartVersion, lineItemId }) =>
+      propertyIsNotNullOrUndefined('lineItemId'),
+      switchMap(({ cartId, version, lineItemId }) =>
         this.cartService
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          .updateCart(cartId!, {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            version: cartVersion!,
+          .updateCart(cartId, {
+            version,
             actions: [{ action: 'removeLineItem', lineItemId }],
           })
           .pipe(

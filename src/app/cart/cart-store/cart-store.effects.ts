@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store'
 import { TuiAlertService } from '@taiga-ui/core'
 import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs'
 
-import { propertyIsNotNullOrUndefined } from '../helpers/propertyIsNotNullOrUndefined.helper'
+import { propertyIsNotNullOrUndefined } from '../../shared/helpers/propertyIsNotNullOrUndefined.helper'
 import { cartApiActions } from './actions/cart-api.actions'
 import { cartInitActions } from './actions/cart-init.actions'
 import { catalogPageCartActions } from './actions/catalog-page.actions'

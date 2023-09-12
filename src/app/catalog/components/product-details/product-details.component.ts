@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, Inject, Self } from '@angular/core'
 import { TuiDestroyService } from '@taiga-ui/cdk'
-import { combineLatest, filter, map, takeUntil } from 'rxjs'
+import { combineLatest, map, takeUntil } from 'rxjs'
 
 import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
 import { CartFacade } from 'src/app/cart/cart-store/services/cart.facade'
+import { propertyIsNotNullOrUndefined } from 'src/app/shared/helpers/propertyIsNotNullOrUndefined.helper'
 
 @Component({
   selector: 'ec-product-details',
@@ -30,13 +31,12 @@ export class ProductDetailsComponent {
       .pipe(map(([productDetails, productsInCart]) => ({ productDetails, productsInCart })))
       .pipe(
         takeUntil(this.destroy$),
-        filter(({ productDetails, productsInCart }) => Boolean(productDetails) && Boolean(productsInCart)),
+        propertyIsNotNullOrUndefined('productDetails'),
+        propertyIsNotNullOrUndefined('productsInCart'),
       )
       .subscribe(({ productDetails, productsInCart }) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.productIds = { productId: productDetails!.id, variantId: productDetails!.variantId }
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.isInCart = productsInCart!.some(product => product.productId === this.productIds.productId)
+        this.productIds = { productId: productDetails.id, variantId: productDetails.variantId }
+        this.isInCart = productsInCart.some(product => product.productId === this.productIds.productId)
       })
   }
 

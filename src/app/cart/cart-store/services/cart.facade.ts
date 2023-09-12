@@ -3,7 +3,13 @@ import { Store } from '@ngrx/store'
 
 import { cartInitActions } from '../actions/cart-init.actions'
 import { catalogPageCartActions } from '../actions/catalog-page.actions'
-import { selectCurrentCart, selectError, selectIsLoading, selectProductsInCart } from '../cart-store.selectors'
+import {
+  selectCurrentCart,
+  selectError,
+  selectIsLoading,
+  selectProductsCount,
+  selectProductsInCart,
+} from '../cart-store.selectors'
 
 @Injectable()
 export class CartFacade {
@@ -12,6 +18,7 @@ export class CartFacade {
   public currentCart$ = this.store$.select(selectCurrentCart)
   public productsInCart$ = this.store$.select(selectProductsInCart)
   public isLoading$ = this.store$.select(selectIsLoading)
+  public productsCount$ = this.store$.select(selectProductsCount)
 
   public initCart(): void {
     this.store$.dispatch(cartInitActions.getCart())

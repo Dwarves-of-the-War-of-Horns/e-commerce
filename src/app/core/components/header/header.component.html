@@ -84,15 +84,20 @@
           </tui-data-list>
         </ng-template>
       </ng-template>
-      <button
-        tuiIconButton
-        size="m"
-        appearance="primary"
-        [routerLink]="['/cart']"
-        icon="tuiIconShoppingCart"
-        class="tui-space_right-1"
-        title="Cart"
-      ></button>
+      <tui-badged-content *tuiLet="productsInCart$ | async as count" [contentTop]="count && count > 0 ? badge : ''">
+        <ng-template #badge>
+          <div class="cart-badge">{{ count }}</div>
+        </ng-template>
+        <button
+          tuiIconButton
+          size="m"
+          appearance="primary"
+          [routerLink]="['/cart']"
+          icon="tuiIconShoppingCart"
+          class="tui-space_right-1"
+          title="Cart"
+        ></button>
+      </tui-badged-content>
     </div>
   </div>
 </header>

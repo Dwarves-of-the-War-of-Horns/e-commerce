@@ -1,0 +1,24 @@
+.container {
+  width: 90vw;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+}
+
+.cart-container {
+  display: flex;
+  gap: 1rem;
+
+  &__cost {
+    flex: 2;
+    height: auto;
+  }
+
+  &__items {
+    flex: 5;
+  }
+
+  @media (width <= 1000px) {
+    flex-direction: column;
+  }
+}

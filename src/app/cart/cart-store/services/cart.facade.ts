@@ -9,6 +9,7 @@ import {
   selectIsLoading,
   selectProductsCount,
   selectProductsInCart,
+  selectTotalPrice,
 } from '../cart-store.selectors'
 
 @Injectable()
@@ -19,6 +20,7 @@ export class CartFacade {
   public productsInCart$ = this.store$.select(selectProductsInCart)
   public isLoading$ = this.store$.select(selectIsLoading)
   public productsCount$ = this.store$.select(selectProductsCount)
+  public totalPrice$ = this.store$.select(selectTotalPrice)
 
   public initCart(): void {
     this.store$.dispatch(cartInitActions.getCart())

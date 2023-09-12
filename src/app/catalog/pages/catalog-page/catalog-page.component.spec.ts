@@ -10,6 +10,7 @@ import {
   TuiDataListWrapperModule,
   TuiInputModule,
   TuiIslandModule,
+  TuiPaginationModule,
   TuiSelectModule,
 } from '@taiga-ui/kit'
 import { of } from 'rxjs'
@@ -52,6 +53,7 @@ describe('CatalogPageComponent', () => {
         TuiDataListWrapperModule,
         FormsModule,
         ReactiveFormsModule,
+        TuiPaginationModule,
       ],
       providers: [
         provideMockStore({}),

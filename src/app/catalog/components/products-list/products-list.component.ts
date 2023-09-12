@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { map, type Observable } from 'rxjs'
 
+import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
+import { CatalogPagination } from '../../enums/pagination.enum'
+import { getChunk } from '../../helpers/get-chunk.helper'
+import { setPaginationState } from '../../helpers/set-pagination-state.helper'
+import type { PaginationState } from '../../models/pagination-state.model'
 import { CartFacade } from 'src/app/cart/cart-store/services/cart.facade'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
@@ -15,8 +20,23 @@ export class ProductsListComponent {
 
   private productsInCart$ = this.cartFacade.productsInCart$
 
-  constructor(private cartFacade: CartFacade) {}
-  public trackProduct(index: number, { key }: SimpleProduct): string {
+  public paginationState: PaginationState = {
+    index: CatalogPagination.Index,
+    length: CatalogPagination.InitLength,
+    paginationProducts: [],
+    products: [],
+  }
+
+  constructor(
+    private cartFacade: CartFacade,
+    private catalogFacade: CatalogFacade,
+  ) {
+    this.catalogFacade.productsData$.subscribe(({ products }) => {
+      this.paginationState = setPaginationState(products)
+    })
+  }
+
+  public trackProduct(_: number, { key }: SimpleProduct): string {
     return key
   }
 
@@ -27,6 +47,15 @@ export class ProductsListComponent {
   public isInCart = ({ id }: SimpleProduct): Observable<boolean> => {
     return this.productsInCart$.pipe(
       map(products => (products ? products.some(product => product.productId === id) : false)),
+    )
+  }
+
+  public goToPage(index: number): void {
+    this.paginationState.index = index
+    this.paginationState.paginationProducts = getChunk(
+      this.paginationState.products,
+      index,
+      CatalogPagination.QuantityProducts,
     )
   }
 }

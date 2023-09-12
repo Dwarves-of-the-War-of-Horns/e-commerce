@@ -7,19 +7,17 @@ import { TuiLetModule } from '@taiga-ui/cdk'
 import { TuiButtonModule } from '@taiga-ui/core'
 import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
 
-import { CartPageComponent } from './cart-page.component'
-import { CartRoutingModule } from './cart-routing.module'
-import { CartFacade } from './cart-store/services/cart.facade'
-import { OrderInputsComponent } from './components/order-inputs/order-inputs.component'
-import { OrderItemsComponent } from './components/order-items/order-items.component'
+import { CartRoutingModule } from '../../cart-routing.module'
+import { CartFacade } from '../../cart-store/services/cart.facade'
+import { OrderInputsComponent } from './order-inputs.component'
 
-describe('CartPageComponent', () => {
-  let component: CartPageComponent
-  let fixture: ComponentFixture<CartPageComponent>
+describe('OrderInputsComponent', () => {
+  let component: OrderInputsComponent
+  let fixture: ComponentFixture<OrderInputsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartPageComponent, OrderInputsComponent, OrderItemsComponent],
+      declarations: [OrderInputsComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -37,7 +35,7 @@ describe('CartPageComponent', () => {
       providers: [provideMockStore({}), CartFacade],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(CartPageComponent)
+    fixture = TestBed.createComponent(OrderInputsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

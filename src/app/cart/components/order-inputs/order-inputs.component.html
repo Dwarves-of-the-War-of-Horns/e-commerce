@@ -1,0 +1,14 @@
+<tui-island class="shadow-block">
+  <div class="total-cost-container">
+    <p class="tui-island__paragraph">Total:</p>
+    <tui-money currency="USD" [value]="(totalPrice$ | async) || 0"></tui-money>
+  </div>
+  <form class="cost-form tui-space_top-3" [formGroup]="discountForm">
+    <tui-input class="cost-form__input" formControlName="discountValue">
+      Type an discount
+      <input tuiTextfield />
+    </tui-input>
+    <button icon="tuiIconPlusLarge" tuiIconButton type="button" class="tui-space_left-3"></button>
+  </form>
+  <button appearance="flat" size="m" tuiButton type="button" class="tui-island__footer-button">To order</button>
+</tui-island>

@@ -1,0 +1,155 @@
+<!-- <table class="tui-table">
+  <tbody>
+    <tr *ngFor="let product of products$ | async" class="tui-table__tr tui-table__tr_border_none order-item">
+      <td class="tui-table__td_font-size_s tui-table__td_first">
+        <img [src]="product.productImageUrl" alt="{{ product.productName }}" class="order-item__img" />
+      </td>
+      <td class="tui-table__td tui-table__td_font-size_s tui-table__td_first">
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <th class="tui-table__th tui-table__th_first">Product name:</th>
+        </tr>
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <td class="tui-table__td tui-table__td_font-size_s tui-table__td_first">
+            {{ product.productName }}
+          </td>
+        </tr>
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <th class="tui-table__th tui-table__th_first">Product price:</th>
+        </tr>
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <td class="tui-table__td tui-table__td_font-size_s tui-table__td_first">
+            <tui-money currency="USD" [value]="product.productPrices.discounted || product.productPrices.default" />
+          </td>
+        </tr>
+      </td>
+      <td class="tui-table__td tui-table__td_font-size_s tui-table__td_first">
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <th class="tui-table__th tui-table__th_first">Quantity</th>
+        </tr>
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <td class="tui-table__td tui-table__td_font-size_s tui-table__td_first">
+            <div class="order-item__quantity-container">
+              <button
+                appearance="accent"
+                icon="tuiIconMinus"
+                size="xs"
+                tuiIconButton
+                type="button"
+                class="tui-space_right-1"
+              ></button>
+              <span>{{ product.quantity }}</span>
+              <button icon="tuiIconPlus" size="xs" tuiIconButton type="button" class="tui-space_left-1"></button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <th class="tui-table__th tui-table__th_first">Product price</th>
+        </tr>
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <td class="tui-table__td tui-table__td_font-size_s tui-table__td_first">
+            <tui-money currency="USD" [value]="product.productPrices.discounted || product.productPrices.default" />
+          </td>
+        </tr>
+      </td>
+      <td
+        class="tui-table__td tui-table__td_font-size_s tui-table__td_text_center tui-table__td_align_center tui-table__td_first tui-table__td_last"
+      >
+        <button icon="tuiIconTrashLarge" size="s" tuiIconButton type="button"></button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+<div *tuiLet="(breakpoint$ | async) === 'mobile' as isMobile">
+  <table class="tui-table">
+    <tbody>
+      <tr class="tui-table__tr">
+        <th class="tui-table__th tui-table__th_first"></th>
+        <th class="tui-table__th tui-table__th_text_center">Product</th>
+        <th *ngIf="!isMobile" class="tui-table__th tui-table__th_text_right">Price</th>
+        <th *ngIf="!isMobile" class="tui-table__th tui-table__th_text_center">Quantity</th>
+        <th class="tui-table__th tui-table__th_text_right">Total</th>
+        <th class="tui-table__th tui-table__th_last"></th>
+      </tr>
+
+      <tr *ngFor="let product of products$ | async" class="tui-table__tr product__row">
+        <td class="tui-table__td tui-table__td_first">
+          <ng-container *ngTemplateOutlet="image; context: { product: product }"></ng-container>
+        </td>
+
+        <td class="tui-table__td">
+          <ng-container *ngTemplateOutlet="productColumn; context: { product: product }"></ng-container>
+        </td>
+
+        <td *ngIf="!isMobile" class="tui-table__td tui-table__td_align_center">
+          <ng-container
+            *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'column' }"
+          ></ng-container>
+        </td>
+
+        <td *ngIf="!isMobile" class="tui-table__td tui-table__td_align_center">
+          <ng-container *ngTemplateOutlet="quantity; context: { product: product }"></ng-container>
+        </td>
+
+        <td class="tui-table__td tui-table__td_align_center">
+          <div class="product__price-container right">
+            <tui-money
+              [singleColor]="true"
+              class="product__price-default"
+              currency="USD"
+              [value]="product.totalPrice"
+            ></tui-money>
+          </div>
+        </td>
+
+        <td class="tui-table__td tui-table__td_align_center tui-table__td_last">
+          <button tuiIconButton size="m" appearance="flat" icon="tuiIconTrash2"></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #productPrice let-prices="prices" let-style="style">
+    <div class="product__price-container" [class]="style">
+      <tui-money
+        *ngIf="prices.discounted"
+        [singleColor]="true"
+        class="product__price-discount"
+        currency="USD"
+        [value]="prices.discounted"
+      ></tui-money>
+      <tui-money
+        [singleColor]="true"
+        [class]="prices.discounted ? 'product__price-inactive' : 'product__price-default'"
+        currency="USD"
+        [value]="prices.default"
+      ></tui-money>
+    </div>
+  </ng-template>
+
+  <ng-template #quantity let-product="product" [formGroup]="quantityForm">
+    <tui-input-number
+      class="product__quantity"
+      tuiTextfieldSize="m"
+      [formControlName]="product.id"
+      [step]="1"
+      [min]="1"
+     />
+  </ng-template>
+
+  <ng-template #image let-product="product">
+    <div class="product__image-container">
+      <img class="product__image" [src]="product.productImageUrl" />
+    </div>
+  </ng-template>
+
+  <ng-template #productColumn let-product="product">
+    <a tuiLink>{{ product.productName }}</a>
+    <div *ngIf="isMobile" class="product__mobile-container">
+      <ng-container
+        *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'row' }"
+      ></ng-container>
+      <ng-container *ngTemplateOutlet="quantity; context: { product: product }"></ng-container>
+    </div>
+  </ng-template>
+</div>

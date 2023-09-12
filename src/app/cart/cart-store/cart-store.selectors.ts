@@ -16,6 +16,11 @@ export const selectProductsInCart = createSelector(
 
 export const selectIsLoading = createSelector(selectCartFeature, ({ isLoading }: CartState) => isLoading)
 
+export const selectTotalPrice = createSelector(
+  selectCartFeature,
+  ({ currentCart }: CartState) => currentCart?.totalPrice,
+)
+
 export const selectProductsCount = createSelector(
   selectCartFeature,
   ({ currentCart }: CartState) => currentCart?.totalProducts,

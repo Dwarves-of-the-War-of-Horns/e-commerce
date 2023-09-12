@@ -1,0 +1,13 @@
+.cost-form {
+  display: flex;
+  row-gap: 1rem;
+
+  &__input {
+    flex-grow: 1;
+  }
+}
+
+.total-cost-container {
+  display: flex;
+  justify-content: space-between;
+}

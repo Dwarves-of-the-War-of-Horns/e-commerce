@@ -1,7 +1,7 @@
 <div *tuiLet="(breakpoint$ | async) === 'mobile' as isMobile">
   <table class="tui-table">
     <tbody>
-      <tr class="tui-table__tr">
+      <tr class="tui-table__tr tui-table__tr_border_none">
         <th class="tui-table__th tui-table__th_first"></th>
         <th class="tui-table__th tui-table__th_text_center">Product</th>
         <th *ngIf="!isMobile" class="tui-table__th tui-table__th_text_right">Price</th>
@@ -10,7 +10,10 @@
         <th class="tui-table__th tui-table__th_last"></th>
       </tr>
 
-      <tr *ngFor="let product of products$ | async; trackBy: productsTrackByFn" class="tui-table__tr product__row">
+      <tr
+        *ngFor="let product of products$ | async; trackBy: productsTrackByFn"
+        class="tui-table__tr tui-table__tr_border_none tui-table__tr_border_top"
+      >
         <td class="tui-table__td tui-table__td_first">
           <ng-container *ngTemplateOutlet="image; context: { product: product }"></ng-container>
         </td>
@@ -70,19 +73,20 @@
       class="product__quantity"
       tuiTextfieldSize="m"
       [formControlName]="product.id"
+      [tuiTextfieldLabelOutside]="true"
       [step]="1"
       [min]="1"
     />
   </ng-template>
 
   <ng-template #image let-product="product">
-    <div class="product__image-container">
-      <img class="product__image" [src]="product.productImageUrl" />
+    <div class="product__image-container" [routerLink]="['/', 'catalog', 'product', product.productKey]">
+      <img class="product__image" [ngSrc]="product.productImageUrl" fill />
     </div>
   </ng-template>
 
   <ng-template #productColumn let-product="product">
-    <a tuiLink>{{ product.productName }}</a>
+    <a [routerLink]="['/', 'catalog', 'product', product.productKey]" tuiLink>{{ product.productName }}</a>
     <div *ngIf="isMobile" class="product__mobile-container">
       <ng-container
         *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'row' }"

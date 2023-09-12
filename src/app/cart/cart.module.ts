@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
-import { TuiButtonModule } from '@taiga-ui/core'
+import { TuiButtonModule, TuiLinkModule, TuiTextfieldControllerModule } from '@taiga-ui/core'
 import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
 
 import { CartPageComponent } from './cart-page.component'
@@ -26,6 +26,8 @@ import { OrderItemsComponent } from './components/order-items/order-items.compon
     NgOptimizedImage,
     TuiInputNumberModule,
     TuiLetModule,
+    TuiLinkModule,
+    TuiTextfieldControllerModule,
   ],
 })
 export class CartModule {}

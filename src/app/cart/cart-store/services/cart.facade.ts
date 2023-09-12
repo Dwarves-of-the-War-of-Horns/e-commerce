@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
 
 import { cartInitActions } from '../actions/cart-init.actions'
+import { cartPageActions } from '../actions/cart-page.actions'
 import { catalogPageCartActions } from '../actions/catalog-page.actions'
 import {
   selectCurrentCart,
@@ -36,5 +37,9 @@ export class CartFacade {
 
   public removeProductFromCart({ productId, variantId }: { productId: string; variantId: number }): void {
     this.store$.dispatch(catalogPageCartActions.removeProduct({ productId, variantId }))
+  }
+
+  public clearCart(): void {
+    this.store$.dispatch(cartPageActions.clearCart())
   }
 }

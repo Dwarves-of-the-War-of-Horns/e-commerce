@@ -1,5 +1,5 @@
-<div *tuiLet="(breakpoint$ | async) === 'mobile' as isMobile">
-  <table class="tui-table">
+<div *tuiLet="products$ | async as products">
+  <table class="tui-table" *tuiLet="(breakpoint$ | async) === 'mobile' as isMobile">
     <tbody>
       <tr class="tui-table__tr tui-table__tr_border_none">
         <th class="tui-table__th tui-table__th_first"></th>
@@ -11,7 +11,7 @@
       </tr>
 
       <tr
-        *ngFor="let product of products$ | async; trackBy: productsTrackByFn"
+        *ngFor="let product of products; trackBy: productsTrackByFn"
         class="tui-table__tr tui-table__tr_border_none tui-table__tr_border_top"
       >
         <td class="tui-table__td tui-table__td_first">
@@ -48,50 +48,56 @@
         </td>
       </tr>
     </tbody>
+
+    <ng-template #productPrice let-prices="prices" let-style="style">
+      <div class="product__price-container" [class]="style">
+        <tui-money
+          *ngIf="prices.discounted"
+          [singleColor]="true"
+          class="product__price-discount"
+          currency="USD"
+          [value]="prices.discounted"
+        ></tui-money>
+        <tui-money
+          [singleColor]="true"
+          [class]="prices.discounted ? 'product__price-inactive' : 'product__price-default'"
+          currency="USD"
+          [value]="prices.default"
+        ></tui-money>
+      </div>
+    </ng-template>
+
+    <ng-template #quantity let-product="product" [formGroup]="quantityForm">
+      <tui-input-number
+        class="product__quantity"
+        tuiTextfieldSize="m"
+        [formControlName]="product.id"
+        [tuiTextfieldLabelOutside]="true"
+        [step]="1"
+        [min]="1"
+      />
+    </ng-template>
+
+    <ng-template #image let-product="product">
+      <div class="product__image-container" [routerLink]="['/', 'catalog', 'product', product.productKey]">
+        <img class="product__image" [ngSrc]="product.productImageUrl" fill />
+      </div>
+    </ng-template>
+
+    <ng-template #productColumn let-product="product">
+      <a [routerLink]="['/', 'catalog', 'product', product.productKey]" tuiLink>{{ product.productName }}</a>
+      <div *ngIf="isMobile" class="product__mobile-container">
+        <ng-container
+          *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'row' }"
+        ></ng-container>
+        <ng-container *ngTemplateOutlet="quantity; context: { product: product }"></ng-container>
+      </div>
+    </ng-template>
   </table>
 
-  <ng-template #productPrice let-prices="prices" let-style="style">
-    <div class="product__price-container" [class]="style">
-      <tui-money
-        *ngIf="prices.discounted"
-        [singleColor]="true"
-        class="product__price-discount"
-        currency="USD"
-        [value]="prices.discounted"
-      ></tui-money>
-      <tui-money
-        [singleColor]="true"
-        [class]="prices.discounted ? 'product__price-inactive' : 'product__price-default'"
-        currency="USD"
-        [value]="prices.default"
-      ></tui-money>
-    </div>
-  </ng-template>
-
-  <ng-template #quantity let-product="product" [formGroup]="quantityForm">
-    <tui-input-number
-      class="product__quantity"
-      tuiTextfieldSize="m"
-      [formControlName]="product.id"
-      [tuiTextfieldLabelOutside]="true"
-      [step]="1"
-      [min]="1"
-    />
-  </ng-template>
-
-  <ng-template #image let-product="product">
-    <div class="product__image-container" [routerLink]="['/', 'catalog', 'product', product.productKey]">
-      <img class="product__image" [ngSrc]="product.productImageUrl" fill />
-    </div>
-  </ng-template>
-
-  <ng-template #productColumn let-product="product">
-    <a [routerLink]="['/', 'catalog', 'product', product.productKey]" tuiLink>{{ product.productName }}</a>
-    <div *ngIf="isMobile" class="product__mobile-container">
-      <ng-container
-        *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'row' }"
-      ></ng-container>
-      <ng-container *ngTemplateOutlet="quantity; context: { product: product }"></ng-container>
-    </div>
-  </ng-template>
+  <div class="clear-cart__container">
+    <button tuiButton class="tui-space_top-3" (click)="clearCart()" appearance="secondary-destructive">
+      Clear cart
+    </button>
+  </div>
 </div>

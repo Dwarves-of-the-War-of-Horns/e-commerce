@@ -35,4 +35,8 @@ export class CartItemsComponent {
   public productsTrackByFn = (_: number, value: CartProduct): CartProduct => {
     return value
   }
+
+  public clearCart(): void {
+    this.cartFacade.clearCart()
+  }
 }

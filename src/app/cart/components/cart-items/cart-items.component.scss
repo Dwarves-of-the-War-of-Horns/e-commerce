@@ -63,6 +63,13 @@
   }
 }
 
+.clear-cart {
+  &__container {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
 @media screen and (width <= 500px) {
   .tui-table {
     &__td,

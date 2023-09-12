@@ -10,7 +10,7 @@
         <th class="tui-table__th tui-table__th_last"></th>
       </tr>
 
-      <tr *ngFor="let product of products$ | async" class="tui-table__tr product__row">
+      <tr *ngFor="let product of products$ | async; trackBy: productsTrackByFn" class="tui-table__tr product__row">
         <td class="tui-table__td tui-table__td_first">
           <ng-container *ngTemplateOutlet="image; context: { product: product }"></ng-container>
         </td>

@@ -4,6 +4,7 @@ import { TuiBreakpointService } from '@taiga-ui/core'
 import { tap } from 'rxjs'
 
 import { CartFacade } from '../../cart-store/services/cart.facade'
+import type { CartProduct } from 'src/app/shared/models/cart-product.model'
 
 @Component({
   selector: 'ec-order-items',
@@ -29,5 +30,9 @@ export class OrderItemsComponent {
         }),
       )
       .subscribe()
+  }
+
+  public productsTrackByFn = (_: number, value: CartProduct): CartProduct => {
+    return value
   }
 }

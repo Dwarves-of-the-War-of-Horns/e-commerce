@@ -4,20 +4,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { provideMockStore } from '@ngrx/store/testing'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
-import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core'
+import { TuiBreakpointService, TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core'
 import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
 
 import { CartRoutingModule } from '../../cart-routing.module'
 import { CartFacade } from '../../cart-store/services/cart.facade'
-import { OrderItemsComponent } from './order-items.component'
+import { CartItemsComponent } from './cart-items.component'
 
-describe('OrderItemsComponent', () => {
-  let component: OrderItemsComponent
-  let fixture: ComponentFixture<OrderItemsComponent>
+describe('CartItemsComponent', () => {
+  let component: CartItemsComponent
+  let fixture: ComponentFixture<CartItemsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OrderItemsComponent],
+      declarations: [CartItemsComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -33,10 +33,10 @@ describe('OrderItemsComponent', () => {
         TuiLetModule,
         TuiTextfieldControllerModule,
       ],
-      providers: [provideMockStore({}), CartFacade],
+      providers: [provideMockStore({}), CartFacade, TuiBreakpointService],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(OrderItemsComponent)
+    fixture = TestBed.createComponent(CartItemsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

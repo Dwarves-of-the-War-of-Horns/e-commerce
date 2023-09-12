@@ -10,8 +10,8 @@ import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandMo
 import { CartPageComponent } from './cart-page.component'
 import { CartRoutingModule } from './cart-routing.module'
 import { CartFacade } from './cart-store/services/cart.facade'
+import { CartItemsComponent } from './components/cart-items/cart-items.component'
 import { OrderInputsComponent } from './components/order-inputs/order-inputs.component'
-import { OrderItemsComponent } from './components/order-items/order-items.component'
 
 describe('CartPageComponent', () => {
   let component: CartPageComponent
@@ -19,7 +19,7 @@ describe('CartPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartPageComponent, OrderInputsComponent, OrderItemsComponent],
+      declarations: [CartPageComponent, OrderInputsComponent, CartItemsComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,

@@ -7,11 +7,11 @@ import { CartFacade } from '../../cart-store/services/cart.facade'
 import type { CartProduct } from 'src/app/shared/models/cart-product.model'
 
 @Component({
-  selector: 'ec-order-items',
-  templateUrl: './order-items.component.html',
-  styleUrls: ['./order-items.component.scss'],
+  selector: 'ec-cart-items',
+  templateUrl: './cart-items.component.html',
+  styleUrls: ['./cart-items.component.scss'],
 })
-export class OrderItemsComponent {
+export class CartItemsComponent {
   public products$ = this.cartFacade.productsInCart$
 
   public quantityForm = this.fb.group({})

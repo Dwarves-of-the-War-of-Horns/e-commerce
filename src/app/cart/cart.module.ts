@@ -8,11 +8,11 @@ import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandMo
 
 import { CartPageComponent } from './cart-page.component'
 import { CartRoutingModule } from './cart-routing.module'
+import { CartItemsComponent } from './components/cart-items/cart-items.component'
 import { OrderInputsComponent } from './components/order-inputs/order-inputs.component'
-import { OrderItemsComponent } from './components/order-items/order-items.component'
 
 @NgModule({
-  declarations: [CartPageComponent, OrderInputsComponent, OrderItemsComponent],
+  declarations: [CartPageComponent, OrderInputsComponent, CartItemsComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,

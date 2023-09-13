@@ -8,7 +8,7 @@
       <div class="products__list">
         <ec-product-card
           [routerLink]="['/', 'catalog', 'product', product.key]"
-          *ngFor="let product of paginationState.paginationProducts; trackBy: trackProduct"
+          *ngFor="let product of products; trackBy: trackProduct"
           [product]="product"
           class="products__card"
           [addToCartHandler]="addToCart"
@@ -21,8 +21,8 @@
 
 <tui-pagination
   class="tui-space_top-5"
-  [index]="paginationState.index"
-  [length]="paginationState.length"
+  [index]="paginationIndex"
+  [length]="filterState.total || 1"
   (indexChange)="goToPage($event)"
 ></tui-pagination>
 

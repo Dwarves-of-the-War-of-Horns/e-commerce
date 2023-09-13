@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { map, type Observable } from 'rxjs'
 
+import { CatalogPagination } from '../../../core/commercetools/enums/catalog-pagination.enum'
 import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
-import { CatalogPagination } from '../../enums/pagination.enum'
-import { getChunk } from '../../helpers/get-chunk.helper'
-import { setPaginationState } from '../../helpers/set-pagination-state.helper'
-import type { PaginationState } from '../../models/pagination-state.model'
+import { calculateChunk } from '../../utils/calculate-chunk.util'
+import { calculatePaginationLength } from '../../utils/calculate-pagination-length.util'
 import { CartFacade } from 'src/app/cart/cart-store/services/cart.facade'
+import type { FilterParams } from 'src/app/shared/models/filter-params.model'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
 @Component({
@@ -20,19 +20,23 @@ export class ProductsListComponent {
 
   private productsInCart$ = this.cartFacade.productsInCart$
 
-  public paginationState: PaginationState = {
-    index: CatalogPagination.Index,
-    length: CatalogPagination.InitLength,
-    paginationProducts: [],
-    products: [],
+  public paginationIndex = CatalogPagination.Index
+
+  public filterState: FilterParams = {
+    offset: CatalogPagination.Index,
+    total: CatalogPagination.Total,
+    limit: CatalogPagination.QuantityProducts,
   }
 
   constructor(
     private cartFacade: CartFacade,
     private catalogFacade: CatalogFacade,
   ) {
-    this.catalogFacade.productsData$.subscribe(({ products }) => {
-      this.paginationState = setPaginationState(products)
+    this.catalogFacade.filterState$.subscribe(filterState => {
+      this.filterState = {
+        ...filterState,
+        total: calculatePaginationLength(filterState?.total || 1, filterState?.limit || 1),
+      }
     })
   }
 
@@ -51,11 +55,10 @@ export class ProductsListComponent {
   }
 
   public goToPage(index: number): void {
-    this.paginationState.index = index
-    this.paginationState.paginationProducts = getChunk(
-      this.paginationState.products,
-      index,
-      CatalogPagination.QuantityProducts,
-    )
+    this.paginationIndex = index
+    Object.assign(this.filterState, {
+      offset: calculateChunk(index, this.filterState.limit || CatalogPagination.QuantityProducts),
+    })
+    this.catalogFacade.loadProducts(this.filterState)
   }
 }

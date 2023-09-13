@@ -18,8 +18,10 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom'
 import { LocalStorageService } from '../../storage/services/local-storage.service'
 import { CommercetoolsClientBuilder } from '../commercetools-client-builder'
 import { tokenStorageKey } from '../constants/commercetools-token-storage-key'
+import { CatalogPagination } from '../enums/catalog-pagination.enum'
 import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
-import type { QueryParams } from 'src/app/shared/models/query-params.model'
+import type { FilterParams } from 'src/app/shared/models/filter-params.model'
+import type { ProductsStateResponse } from 'src/app/shared/models/products-state-response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -122,16 +124,21 @@ export class CommercetoolsHttpService {
     ).pipe(map(({ body }) => body.results))
   }
 
-  public getProducts({ category, sort, search }: QueryParams): Observable<ProductProjection[]> {
+  public getProducts({ category, sort, search, offset }: FilterParams): Observable<ProductsStateResponse> {
     const queryArgs = {
       fuzzy: search ? true : undefined,
+      offset,
       sort,
+      limit: CatalogPagination.QuantityProducts,
       'text.en-US': search,
       'filter.query': category ? [`categories.id: subtree("${category}")`] : undefined,
     }
 
     return fromPromise(this.api.productProjections().search().get({ queryArgs }).execute()).pipe(
-      map(({ body }) => body.results),
+      map(({ body }) => ({
+        answerQueryParams: { category, sort, search },
+        productProjectionPagedQueryResponse: body,
+      })),
     )
   }
 

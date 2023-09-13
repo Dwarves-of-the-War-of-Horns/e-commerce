@@ -7,11 +7,12 @@ import {
   selectCategories,
   selectErrorMessage,
   selectFilterAttributes,
+  selectFilterState,
   selectIsLoading,
   selectProductDetails,
   selectProductsData,
 } from '../catalog-store.selectors'
-import type { QueryParams } from 'src/app/shared/models/query-params.model'
+import type { FilterParams } from 'src/app/shared/models/filter-params.model'
 
 @Injectable()
 export class CatalogFacade {
@@ -21,13 +22,15 @@ export class CatalogFacade {
   public productDetails$ = this.store$.select(selectProductDetails)
   public filterAttributes$ = this.store$.select(selectFilterAttributes)
   public productsData$ = this.store$.select(selectProductsData)
+  public filterState$ = this.store$.select(selectFilterState)
+
   constructor(private store$: Store) {}
 
   public initCategories(): void {
     this.store$.dispatch(catalogPageActions.initCategories())
   }
 
-  public loadProducts(queryParams: QueryParams): void {
+  public loadProducts(queryParams: FilterParams): void {
     this.store$.dispatch(catalogPageActions.loadProducts({ queryParams }))
   }
 

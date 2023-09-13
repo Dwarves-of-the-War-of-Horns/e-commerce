@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
 
+import { initPaginationState } from '../constants/init-pagination-state.constant'
 import type { CatalogState } from '../models/catalog-state.model'
 import { catalogApiActions } from './actions/catalog-api.actions'
 import { catalogPageActions } from './actions/catalog-page.actions'
@@ -14,6 +15,7 @@ const catalogInitialState: CatalogState = {
   products: [],
   productDetails: null,
   filterAttributes: null,
+  filterState: initPaginationState,
 }
 
 export const catalogReducer = createReducer(
@@ -36,10 +38,11 @@ export const catalogReducer = createReducer(
     ...state,
     isProductsLoading: true,
   })),
-  on(catalogApiActions.loadProductsSuccess, (state, { products }) => ({
+  on(catalogApiActions.loadProductsSuccess, (state, { productsState }) => ({
     ...state,
     isProductsLoading: false,
-    products,
+    products: productsState.products,
+    filterState: productsState.filterParams,
   })),
   on(catalogApiActions.loadProductsFailure, (state, { message }) => ({
     ...state,

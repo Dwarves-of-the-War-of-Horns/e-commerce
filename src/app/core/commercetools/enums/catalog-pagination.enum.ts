@@ -2,5 +2,5 @@
 export enum CatalogPagination {
   Index = 0,
   QuantityProducts = 6,
-  InitLength = 1,
+  Total = 1,
 }

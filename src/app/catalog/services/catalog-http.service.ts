@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core'
 import type { Observable } from 'rxjs'
 
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
-import type { QueryParams } from 'src/app/shared/models/query-params.model'
+import type { ConvertedProductState } from 'src/app/shared/models/converted-products-state.model'
+import type { FilterParams } from 'src/app/shared/models/filter-params.model'
 import type { SimpleAttribute } from 'src/app/shared/models/simple-attribute.model'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
@@ -15,7 +16,7 @@ export class CatalogHttpService {
     return this.commercetoolsService.getCategories()
   }
 
-  public loadProducts(queryParams: QueryParams): Observable<SimpleProduct[]> {
+  public loadProducts(queryParams: FilterParams): Observable<ConvertedProductState> {
     return this.commercetoolsService.getProducts(queryParams)
   }
 

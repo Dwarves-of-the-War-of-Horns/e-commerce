@@ -39,7 +39,7 @@ export class CatalogEffects {
       ofType(catalogPageActions.loadProducts),
       switchMap(({ queryParams }) =>
         this.catalogHttpService.loadProducts(queryParams).pipe(
-          map(products => catalogApiActions.loadProductsSuccess({ products })),
+          map(productsState => catalogApiActions.loadProductsSuccess({ productsState })),
           catchError(({ message }: Error) => of(catalogApiActions.loadProductsFailure({ message }))),
         ),
       ),

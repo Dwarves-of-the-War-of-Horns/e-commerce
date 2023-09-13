@@ -6,6 +6,7 @@ import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
 import { TuiButtonModule, TuiLoaderModule } from '@taiga-ui/core'
 import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
+import { TuiBlockStatusModule } from '@taiga-ui/layout'
 
 import { CartPageComponent } from './cart-page.component'
 import { CartRoutingModule } from './cart-routing.module'
@@ -34,6 +35,7 @@ describe('CartPageComponent', () => {
         TuiInputNumberModule,
         TuiLetModule,
         TuiLoaderModule,
+        TuiBlockStatusModule,
       ],
       providers: [provideMockStore({}), CartFacade],
     }).compileComponents()

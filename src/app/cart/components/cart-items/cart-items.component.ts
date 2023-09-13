@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { TuiBreakpointService } from '@taiga-ui/core'
 import { tap } from 'rxjs'
@@ -10,6 +10,7 @@ import type { CartProduct } from 'src/app/shared/models/cart-product.model'
   selector: 'ec-cart-items',
   templateUrl: './cart-items.component.html',
   styleUrls: ['./cart-items.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartItemsComponent {
   public products$ = this.cartFacade.productsInCart$

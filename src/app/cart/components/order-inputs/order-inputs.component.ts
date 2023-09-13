@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 
 import { CartFacade } from '../../cart-store/services/cart.facade'
@@ -7,6 +7,7 @@ import { CartFacade } from '../../cart-store/services/cart.facade'
   selector: 'ec-order-inputs',
   templateUrl: './order-inputs.component.html',
   styleUrls: ['./order-inputs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderInputsComponent {
   public isEditing = false

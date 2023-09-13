@@ -3,6 +3,7 @@ import { createReducer, on } from '@ngrx/store'
 import type { CartState } from '../models/cart-state'
 import { cartApiActions } from './actions/cart-api.actions'
 import { cartInitActions } from './actions/cart-init.actions'
+import { cartPageActions } from './actions/cart-page.actions'
 import { catalogPageCartActions } from './actions/catalog-page.actions'
 
 const cartInitialState: CartState = {
@@ -56,6 +57,14 @@ export const cartReducer = createReducer(
     error,
   })),
   on(catalogPageCartActions.removeProduct, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(cartPageActions.removeItem, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(cartPageActions.clearCart, state => ({
     ...state,
     isLoading: true,
   })),

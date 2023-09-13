@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { provideMockStore } from '@ngrx/store/testing'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
-import { TuiButtonModule } from '@taiga-ui/core'
+import { TuiButtonModule, TuiLoaderModule } from '@taiga-ui/core'
 import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
 
 import { CartPageComponent } from './cart-page.component'
@@ -33,6 +33,7 @@ describe('CartPageComponent', () => {
         NgOptimizedImage,
         TuiInputNumberModule,
         TuiLetModule,
+        TuiLoaderModule,
       ],
       providers: [provideMockStore({}), CartFacade],
     }).compileComponents()

@@ -144,4 +144,29 @@ export class CartEffects {
       ),
     )
   })
+
+  public removeItemFromCartEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(cartPageActions.removeItem),
+      withLatestFrom(this.currentCart$),
+      map(([{ itemId }, cart]) => ({ lineItemId: itemId, cart })),
+      propertyIsNotNullOrUndefined('cart'),
+      map(({ lineItemId, cart }) => ({
+        lineItemId,
+        cartId: cart.id,
+        version: cart.version,
+      })),
+      switchMap(({ cartId, version, lineItemId }) =>
+        this.cartService
+          .updateCart(cartId, {
+            version,
+            actions: [{ action: 'removeLineItem', lineItemId }],
+          })
+          .pipe(
+            map(cart => cartApiActions.updateCartSuccess({ cart })),
+            catchError(({ message }: Error) => of(cartApiActions.updateCartFailure({ error: message }))),
+          ),
+      ),
+    )
+  })
 }

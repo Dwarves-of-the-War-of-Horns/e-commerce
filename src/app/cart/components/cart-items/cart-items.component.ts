@@ -39,4 +39,8 @@ export class CartItemsComponent {
   public clearCart(): void {
     this.cartFacade.clearCart()
   }
+
+  public removeItem(itemId: string): void {
+    this.cartFacade.removeItemFromCart(itemId)
+  }
 }

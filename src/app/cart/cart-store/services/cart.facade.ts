@@ -42,4 +42,8 @@ export class CartFacade {
   public clearCart(): void {
     this.store$.dispatch(cartPageActions.clearCart())
   }
+
+  public removeItemFromCart(itemId: string): void {
+    this.store$.dispatch(cartPageActions.removeItem({ itemId }))
+  }
 }

@@ -1,11 +1,14 @@
 <div class="container">
   <h2 class="tui-form__header tui-space_left-3">Cart</h2>
-  <div class="cart-container">
-    <tui-island class="shadow-block cart-container__items">
-      <ec-cart-items />
-    </tui-island>
-    <div class="cart-container__cost">
-      <ec-order-inputs />
+  <tui-loader class="loader" [overlay]="true" [showLoader]="!!(isLoading$ | async)">
+    <div *ngIf="(products$ | async)?.length; else emptyCart" class="cart-container">
+      <tui-island class="shadow-block cart-container__items">
+        <ec-cart-items />
+      </tui-island>
+      <div class="cart-container__totals">
+        <ec-order-inputs />
+      </div>
     </div>
-  </div>
+  </tui-loader>
+  <ng-template #emptyCart> EMPTY </ng-template>
 </div>

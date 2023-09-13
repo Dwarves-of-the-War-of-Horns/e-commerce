@@ -44,7 +44,13 @@
         </td>
 
         <td class="tui-table__td tui-table__td_align_center tui-table__td_last">
-          <button tuiIconButton size="m" appearance="flat" icon="tuiIconTrash2"></button>
+          <button
+            tuiIconButton
+            size="m"
+            appearance="flat"
+            icon="tuiIconTrash2"
+            (click)="removeItem(product.id)"
+          ></button>
         </td>
       </tr>
     </tbody>

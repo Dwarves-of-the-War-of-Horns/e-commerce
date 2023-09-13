@@ -1,4 +1,6 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
+import { RouterTestingModule } from '@angular/router/testing'
+import { TuiButtonModule } from '@taiga-ui/core'
 import { TuiBlockStatusModule } from '@taiga-ui/layout'
 
 import { EmptyCartComponent } from './empty-cart.component'
@@ -10,7 +12,7 @@ describe('EmptyCartComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EmptyCartComponent],
-      imports: [TuiBlockStatusModule],
+      imports: [TuiBlockStatusModule, TuiButtonModule, RouterTestingModule],
     }).compileComponents()
 
     fixture = TestBed.createComponent(EmptyCartComponent)

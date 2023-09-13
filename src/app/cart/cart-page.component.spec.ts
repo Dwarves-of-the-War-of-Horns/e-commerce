@@ -1,6 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { RouterTestingModule } from '@angular/router/testing'
 import { provideMockStore } from '@ngrx/store/testing'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
@@ -12,6 +13,7 @@ import { CartPageComponent } from './cart-page.component'
 import { CartRoutingModule } from './cart-routing.module'
 import { CartFacade } from './cart-store/services/cart.facade'
 import { CartItemsComponent } from './components/cart-items/cart-items.component'
+import { EmptyCartComponent } from './components/empty-cart/empty-cart.component'
 import { OrderInputsComponent } from './components/order-inputs/order-inputs.component'
 
 describe('CartPageComponent', () => {
@@ -20,7 +22,7 @@ describe('CartPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartPageComponent, OrderInputsComponent, CartItemsComponent],
+      declarations: [CartPageComponent, OrderInputsComponent, CartItemsComponent, EmptyCartComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -36,6 +38,7 @@ describe('CartPageComponent', () => {
         TuiLetModule,
         TuiLoaderModule,
         TuiBlockStatusModule,
+        RouterTestingModule,
       ],
       providers: [provideMockStore({}), CartFacade],
     }).compileComponents()

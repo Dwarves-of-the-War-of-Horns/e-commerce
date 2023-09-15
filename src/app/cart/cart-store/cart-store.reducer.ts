@@ -10,6 +10,8 @@ const cartInitialState: CartState = {
   isLoading: false,
   error: null,
   currentCart: null,
+  discounts: {},
+  isDiscountsLoading: false,
 }
 
 export const cartReducer = createReducer(
@@ -69,6 +71,24 @@ export const cartReducer = createReducer(
     isLoading: true,
   })),
   on(cartPageActions.changeItemAmount, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(cartPageActions.getDiscountCodes, state => ({
+    ...state,
+    isDiscountsLoading: true,
+  })),
+  on(cartApiActions.loadDiscountsSuccess, (state, { discounts }) => ({
+    ...state,
+    isDiscountsLoading: false,
+    discounts,
+  })),
+  on(cartApiActions.loadDiscountsFailure, (state, { error }) => ({
+    ...state,
+    isDiscountsLoading: false,
+    error,
+  })),
+  on(cartPageActions.removeDiscountCode, state => ({
     ...state,
     isLoading: true,
   })),

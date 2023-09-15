@@ -9,15 +9,15 @@ import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandMo
 
 import { CartRoutingModule } from '../../cart-routing.module'
 import { CartFacade } from '../../cart-store/services/cart.facade'
-import { OrderInputsComponent } from './order-inputs.component'
+import { CartTotalComponent } from './cart-total.component'
 
 describe('OrderInputsComponent', () => {
-  let component: OrderInputsComponent
-  let fixture: ComponentFixture<OrderInputsComponent>
+  let component: CartTotalComponent
+  let fixture: ComponentFixture<CartTotalComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OrderInputsComponent],
+      declarations: [CartTotalComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -35,7 +35,7 @@ describe('OrderInputsComponent', () => {
       providers: [provideMockStore({}), CartFacade],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(OrderInputsComponent)
+    fixture = TestBed.createComponent(CartTotalComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

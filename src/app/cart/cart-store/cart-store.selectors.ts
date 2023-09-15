@@ -25,3 +25,10 @@ export const selectProductsCount = createSelector(
   selectCartFeature,
   ({ currentCart }: CartState) => currentCart?.totalProducts,
 )
+
+export const selectDiscounts = createSelector(selectCartFeature, ({ discounts }: CartState) => discounts)
+
+export const selectCartDiscounts = createSelector(
+  selectCartFeature,
+  ({ currentCart }: CartState) => currentCart?.discountCodes,
+)

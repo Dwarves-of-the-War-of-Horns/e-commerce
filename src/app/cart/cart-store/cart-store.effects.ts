@@ -1,5 +1,9 @@
 import { inject, Injectable } from '@angular/core'
-import type { MyCartChangeLineItemQuantityAction, MyCartRemoveLineItemAction } from '@commercetools/platform-sdk'
+import type {
+  MyCartChangeLineItemQuantityAction,
+  MyCartRemoveDiscountCodeAction,
+  MyCartRemoveLineItemAction,
+} from '@commercetools/platform-sdk'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
 import { TuiAlertService } from '@taiga-ui/core'
@@ -186,6 +190,47 @@ export class CartEffects {
             quantity,
           }),
         ),
+      })),
+      switchMap(({ id, version, actions }) =>
+        this.cartService.updateCart(id, { version, actions }).pipe(
+          map(cart => cartApiActions.updateCartSuccess({ cart })),
+          catchError(({ message }: Error) => of(cartApiActions.updateCartFailure({ error: message }))),
+        ),
+      ),
+    )
+  })
+
+  public getDiscountsEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(cartPageActions.getDiscountCodes),
+      switchMap(({ ids }) =>
+        this.cartService.getDiscountCodesById(ids).pipe(
+          map(discounts => cartApiActions.loadDiscountsSuccess({ discounts })),
+          catchError(({ message }: Error) => of(cartApiActions.loadDiscountsFailure({ error: message }))),
+        ),
+      ),
+    )
+  })
+
+  public removeDiscountCodeEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(cartPageActions.removeDiscountCode),
+      withLatestFrom(this.currentCart$),
+      map(([{ discountId }, cart]) => ({ discountId, cart })),
+      propertyIsNotNullOrUndefined('cart'),
+      map(({ discountId, cart }) => ({
+        id: cart.id,
+        version: cart.version,
+        actions: [
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          {
+            action: 'removeDiscountCode',
+            discountCode: {
+              typeId: 'discount-code',
+              id: discountId,
+            },
+          } as MyCartRemoveDiscountCodeAction,
+        ],
       })),
       switchMap(({ id, version, actions }) =>
         this.cartService.updateCart(id, { version, actions }).pipe(

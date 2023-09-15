@@ -13,8 +13,8 @@ import { CartPageComponent } from './cart-page.component'
 import { CartRoutingModule } from './cart-routing.module'
 import { CartFacade } from './cart-store/services/cart.facade'
 import { CartItemsComponent } from './components/cart-items/cart-items.component'
+import { CartTotalComponent } from './components/cart-total/cart-total.component'
 import { EmptyCartComponent } from './components/empty-cart/empty-cart.component'
-import { OrderInputsComponent } from './components/order-inputs/order-inputs.component'
 
 describe('CartPageComponent', () => {
   let component: CartPageComponent
@@ -22,7 +22,7 @@ describe('CartPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartPageComponent, OrderInputsComponent, CartItemsComponent, EmptyCartComponent],
+      declarations: [CartPageComponent, CartTotalComponent, CartItemsComponent, EmptyCartComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,

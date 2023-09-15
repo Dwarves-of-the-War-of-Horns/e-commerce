@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core'
-import type { MyCartRemoveLineItemAction } from '@commercetools/platform-sdk'
+import type { MyCartChangeLineItemQuantityAction, MyCartRemoveLineItemAction } from '@commercetools/platform-sdk'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
 import { TuiAlertService } from '@taiga-ui/core'
@@ -166,6 +166,32 @@ export class CartEffects {
             map(cart => cartApiActions.updateCartSuccess({ cart })),
             catchError(({ message }: Error) => of(cartApiActions.updateCartFailure({ error: message }))),
           ),
+      ),
+    )
+  })
+
+  public changeItemsAmountInCart$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(cartPageActions.changeItemAmount),
+      withLatestFrom(this.currentCart$),
+      map(([{ items }, cart]) => ({ items, cart })),
+      propertyIsNotNullOrUndefined('cart'),
+      map(({ items, cart }) => ({
+        id: cart.id,
+        version: cart.version,
+        actions: items.map(
+          ([id, quantity]): MyCartChangeLineItemQuantityAction => ({
+            action: 'changeLineItemQuantity',
+            lineItemId: id,
+            quantity,
+          }),
+        ),
+      })),
+      switchMap(({ id, version, actions }) =>
+        this.cartService.updateCart(id, { version, actions }).pipe(
+          map(cart => cartApiActions.updateCartSuccess({ cart })),
+          catchError(({ message }: Error) => of(cartApiActions.updateCartFailure({ error: message }))),
+        ),
       ),
     )
   })

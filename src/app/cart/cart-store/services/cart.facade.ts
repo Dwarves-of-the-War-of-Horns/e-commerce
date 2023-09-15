@@ -46,4 +46,8 @@ export class CartFacade {
   public removeItemFromCart(itemId: string): void {
     this.store$.dispatch(cartPageActions.removeItem({ itemId }))
   }
+
+  public changeItemAmount(items: Array<[string, number]>): void {
+    this.store$.dispatch(cartPageActions.changeItemAmount({ items }))
+  }
 }

@@ -68,4 +68,8 @@ export const cartReducer = createReducer(
     ...state,
     isLoading: true,
   })),
+  on(cartPageActions.changeItemAmount, state => ({
+    ...state,
+    isLoading: true,
+  })),
 )

@@ -62,4 +62,8 @@ export class CartFacade {
   public removeDiscountCode(discountId: string): void {
     this.store$.dispatch(cartPageActions.removeDiscountCode({ discountId }))
   }
+
+  public addDiscountCode(code: string): void {
+    this.store$.dispatch(cartPageActions.addDiscountCode({ code }))
+  }
 }

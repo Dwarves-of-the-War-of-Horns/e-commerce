@@ -3,12 +3,23 @@
     <p class="tui-island__paragraph">Total:</p>
     <tui-money currency="USD" [value]="(totalPrice$ | async) || 0"></tui-money>
   </div>
-  <form class="cost-form tui-space_top-3" [formGroup]="discountForm">
-    <tui-input class="cost-form__input" formControlName="discountValue">
-      Discount code
-      <input tuiTextfield />
-    </tui-input>
-    <button tuiButton appearance="secondary" type="button" class="tui-space_left-3">Apply</button>
+  <form class="discount-form tui-space_top-3" [formGroup]="discountForm" (ngSubmit)="addDiscountCode()">
+    <div class="discount-form__input-wrapper">
+      <tui-input #discountInput class="discount-form__input" formControlName="discountValue">
+        Discount code
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error formControlName="discountValue" [error]="[] | tuiFieldError | async"></tui-error>
+    </div>
+    <button
+      tuiButton
+      appearance="secondary"
+      type="submit"
+      class="tui-space_left-3"
+      [disabled]="discountInput.invalid || discountInput.value.length < 3"
+    >
+      Apply
+    </button>
   </form>
 
   <div *tuiLet="discountsData$ | async as discountsData">

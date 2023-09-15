@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core'
 import type {
+  MyCartAddDiscountCodeAction,
   MyCartChangeLineItemQuantityAction,
   MyCartRemoveDiscountCodeAction,
   MyCartRemoveLineItemAction,
@@ -236,6 +237,40 @@ export class CartEffects {
         this.cartService.updateCart(id, { version, actions }).pipe(
           map(cart => cartApiActions.updateCartSuccess({ cart })),
           catchError(({ message }: Error) => of(cartApiActions.updateCartFailure({ error: message }))),
+        ),
+      ),
+    )
+  })
+
+  public addDiscountCodeEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(cartPageActions.addDiscountCode),
+      withLatestFrom(this.currentCart$),
+      map(([{ code }, cart]) => ({ code, cart })),
+      propertyIsNotNullOrUndefined('cart'),
+      map(({ code, cart }) => ({
+        id: cart.id,
+        version: cart.version,
+        actions: [
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          {
+            action: 'addDiscountCode',
+            code,
+          } as MyCartAddDiscountCodeAction,
+        ],
+      })),
+      switchMap(({ id, version, actions }) =>
+        this.cartService.updateCart(id, { version, actions }).pipe(
+          map(cart => {
+            alertsHelper[String(true)](this.alertService, 'apply the code')
+
+            return cartApiActions.updateCartSuccess({ cart })
+          }),
+          catchError(({ message }: Error) => {
+            alertsHelper[String(false)](this.alertService, 'Code is invalid')
+
+            return of(cartApiActions.updateCartFailure({ error: message }))
+          }),
         ),
       ),
     )

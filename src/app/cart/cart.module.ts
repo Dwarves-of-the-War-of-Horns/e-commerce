@@ -6,12 +6,14 @@ import { TuiLetModule } from '@taiga-ui/cdk'
 import {
   TuiButtonModule,
   TuiDropdownModule,
+  TuiErrorModule,
   TuiLinkModule,
   TuiLoaderModule,
   TuiSvgModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core'
 import {
+  TuiFieldErrorPipeModule,
   TuiInputInlineModule,
   TuiInputModule,
   TuiInputNumberModule,
@@ -48,6 +50,8 @@ import { EmptyCartComponent } from './components/empty-cart/empty-cart.component
     TuiTagModule,
     TuiSvgModule,
     TuiDropdownModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
   ],
 })
 export class CartModule {}

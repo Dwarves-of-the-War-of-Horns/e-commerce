@@ -92,4 +92,8 @@ export const cartReducer = createReducer(
     ...state,
     isLoading: true,
   })),
+  on(cartPageActions.addDiscountCode, state => ({
+    ...state,
+    isLoading: true,
+  })),
 )

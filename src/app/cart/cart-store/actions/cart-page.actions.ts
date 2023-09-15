@@ -8,5 +8,6 @@ export const cartPageActions = createActionGroup({
     'Change Item Amount': props<{ items: Array<[string, number]> }>(),
     'Get Discount Codes': props<{ ids: string[] }>(),
     'Remove Discount Code': props<{ discountId: string }>(),
+    'Add Discount Code': props<{ code: string }>(),
   },
 })

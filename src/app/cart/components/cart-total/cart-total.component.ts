@@ -5,6 +5,7 @@ import { combineLatest, filter, map, takeUntil } from 'rxjs'
 
 import { CartFacade } from '../../cart-store/services/cart.facade'
 import { propertyIsNotNullOrUndefined } from 'src/app/shared/helpers/propertyIsNotNullOrUndefined.helper'
+import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validator'
 
 @Component({
   selector: 'ec-cart-total',
@@ -22,7 +23,7 @@ export class CartTotalComponent implements OnInit {
   )
 
   public discountForm = this.fb.group({
-    discountValue: new FormControl(''),
+    discountValue: new FormControl('', [hasNoSpaces]),
   })
   constructor(
     private cartFacade: CartFacade,
@@ -48,5 +49,12 @@ export class CartTotalComponent implements OnInit {
 
   public removeDiscountCode(discountId: string): void {
     this.cartFacade.removeDiscountCode(discountId)
+  }
+
+  public addDiscountCode(): void {
+    // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
+    const code = this.discountForm.getRawValue().discountValue as string
+    this.cartFacade.addDiscountCode(code)
+    this.discountForm.reset()
   }
 }

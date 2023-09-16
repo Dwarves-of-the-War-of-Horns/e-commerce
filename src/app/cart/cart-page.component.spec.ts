@@ -6,7 +6,13 @@ import { provideMockStore } from '@ngrx/store/testing'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
 import { TuiButtonModule, TuiLoaderModule } from '@taiga-ui/core'
-import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
+import {
+  TuiInputInlineModule,
+  TuiInputModule,
+  TuiInputNumberModule,
+  TuiIslandModule,
+  TuiPromptModule,
+} from '@taiga-ui/kit'
 import { TuiBlockStatusModule } from '@taiga-ui/layout'
 
 import { CartPageComponent } from './cart-page.component'
@@ -39,6 +45,7 @@ describe('CartPageComponent', () => {
         TuiLoaderModule,
         TuiBlockStatusModule,
         RouterTestingModule,
+        TuiPromptModule,
       ],
       providers: [provideMockStore({}), CartFacade],
     }).compileComponents()

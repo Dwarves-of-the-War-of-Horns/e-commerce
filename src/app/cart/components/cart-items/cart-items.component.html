@@ -81,6 +81,7 @@
         [tuiTextfieldLabelOutside]="true"
         [step]="1"
         [min]="1"
+        [max]="999"
         [precision]="0"
       />
     </ng-template>
@@ -103,7 +104,7 @@
   </table>
 
   <div class="clear-cart__container">
-    <button tuiButton class="tui-space_top-3" (click)="clearCart()" appearance="secondary-destructive">
+    <button tuiButton class="tui-space_top-3" (click)="showPrompt()" appearance="secondary-destructive">
       Clear cart
     </button>
   </div>

@@ -18,6 +18,7 @@ import {
   TuiInputModule,
   TuiInputNumberModule,
   TuiIslandModule,
+  TuiPromptModule,
   TuiTagModule,
 } from '@taiga-ui/kit'
 import { TuiBlockStatusModule } from '@taiga-ui/layout'
@@ -52,6 +53,7 @@ import { EmptyCartComponent } from './components/empty-cart/empty-cart.component
     TuiDropdownModule,
     TuiErrorModule,
     TuiFieldErrorPipeModule,
+    TuiPromptModule,
   ],
 })
 export class CartModule {}

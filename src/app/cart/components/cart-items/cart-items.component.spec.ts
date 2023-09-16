@@ -4,8 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { provideMockStore } from '@ngrx/store/testing'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
-import { TuiBreakpointService, TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core'
-import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
+import { TuiBreakpointService, TuiButtonModule, TuiDialogService, TuiTextfieldControllerModule } from '@taiga-ui/core'
+import {
+  TuiInputInlineModule,
+  TuiInputModule,
+  TuiInputNumberModule,
+  TuiIslandModule,
+  TuiPromptModule,
+} from '@taiga-ui/kit'
 
 import { CartRoutingModule } from '../../cart-routing.module'
 import { CartFacade } from '../../cart-store/services/cart.facade'
@@ -32,8 +38,9 @@ describe('CartItemsComponent', () => {
         TuiInputNumberModule,
         TuiLetModule,
         TuiTextfieldControllerModule,
+        TuiPromptModule,
       ],
-      providers: [provideMockStore({}), CartFacade, TuiBreakpointService],
+      providers: [provideMockStore({}), CartFacade, TuiBreakpointService, TuiDialogService],
     }).compileComponents()
 
     fixture = TestBed.createComponent(CartItemsComponent)

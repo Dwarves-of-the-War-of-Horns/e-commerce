@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, type OnInit, Self } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { TuiDestroyService } from '@taiga-ui/cdk'
-import { TuiBreakpointService } from '@taiga-ui/core'
+import { TuiBreakpointService, TuiDialogService } from '@taiga-ui/core'
+import { TUI_PROMPT, type TuiPromptData } from '@taiga-ui/kit'
 import { debounceTime, filter, map, pairwise, startWith, takeUntil, tap } from 'rxjs'
 
 import { CartFacade } from '../../cart-store/services/cart.facade'
@@ -25,6 +26,7 @@ export class CartItemsComponent implements OnInit {
     private cartFacade: CartFacade,
     private fb: FormBuilder,
     @Inject(TuiBreakpointService) public readonly breakpoint$: TuiBreakpointService,
+    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     @Self()
     @Inject(TuiDestroyService)
     private destroy$: TuiDestroyService,
@@ -85,5 +87,25 @@ export class CartItemsComponent implements OnInit {
 
   public changeItemAmount(items: Array<[string, number]>): void {
     this.cartFacade.changeItemAmount(items)
+  }
+
+  public showPrompt(): void {
+    const data: TuiPromptData = {
+      content: 'Are you sure you want to remove all products from your cart?',
+      yes: 'Yes',
+      no: 'Cancel',
+    }
+
+    this.dialogs
+      .open<boolean>(TUI_PROMPT, {
+        size: 's',
+        data,
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
+        if (response) {
+          this.clearCart()
+        }
+      })
   }
 }

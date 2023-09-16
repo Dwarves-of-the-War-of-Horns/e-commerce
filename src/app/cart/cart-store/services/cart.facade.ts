@@ -8,6 +8,7 @@ import {
   selectCartDiscounts,
   selectCurrentCart,
   selectDiscounts,
+  selectDiscountValue,
   selectError,
   selectIsLoading,
   selectProductsCount,
@@ -26,6 +27,7 @@ export class CartFacade {
   public totalPrice$ = this.store$.select(selectTotalPrice)
   public cartDiscounts$ = this.store$.select(selectCartDiscounts)
   public discounts$ = this.store$.select(selectDiscounts)
+  public discountValue$ = this.store$.select(selectDiscountValue)
 
   public initCart(): void {
     this.store$.dispatch(cartInitActions.getCart())

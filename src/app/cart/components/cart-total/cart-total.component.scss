@@ -7,7 +7,31 @@
   }
 }
 
-.total-cost-container {
-  display: flex;
-  justify-content: space-between;
+.total-price {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__subtotal {
+    .money {
+      color: var(--tui-text-03);
+      text-decoration: line-through;
+    }
+  }
+
+  &__discount {
+    color: var(--tui-negative);
+  }
+
+  &__total {
+    font-size: 1.2em;
+    font-weight: bolder;
+  }
 }

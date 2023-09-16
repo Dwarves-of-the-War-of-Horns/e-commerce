@@ -17,13 +17,21 @@ import { hasNoSpaces } from 'src/app/shared/validators/has-no-spaces.validator'
 export class CartTotalComponent implements OnInit {
   public isEditing = false
   public totalPrice$ = this.cartFacade.totalPrice$
-  public discounts$ = this.cartFacade.discounts$
+  public discount$ = this.cartFacade.discounts$
+  public discountValue$ = this.cartFacade.discountValue$
   public discountsData$ = combineLatest([this.cartFacade.cartDiscounts$, this.cartFacade.discounts$]).pipe(
     map(([cartDiscounts, discounts]) => ({ cartDiscounts, discounts })),
   )
+  public totals$ = combineLatest([this.totalPrice$, this.discountValue$]).pipe(
+    map(([totalPrice, discountValue]) => ({
+      totalPrice,
+      discountValue,
+      subTotal: totalPrice && discountValue ? totalPrice + discountValue : undefined,
+    })),
+  )
 
   public discountForm = this.fb.group({
-    discountValue: new FormControl('', [hasNoSpaces]),
+    discountValue: new FormControl('', { nonNullable: true, validators: [hasNoSpaces] }),
   })
   constructor(
     private cartFacade: CartFacade,
@@ -52,8 +60,7 @@ export class CartTotalComponent implements OnInit {
   }
 
   public addDiscountCode(): void {
-    // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
-    const code = this.discountForm.getRawValue().discountValue as string
+    const code = this.discountForm.getRawValue().discountValue
     this.cartFacade.addDiscountCode(code)
     this.discountForm.reset()
   }

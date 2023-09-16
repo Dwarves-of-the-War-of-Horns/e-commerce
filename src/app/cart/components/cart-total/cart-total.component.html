@@ -1,15 +1,27 @@
 <tui-island class="shadow-block">
-  <div class="total-cost-container">
-    <p class="tui-island__paragraph">Total:</p>
-    <tui-money currency="USD" [value]="(totalPrice$ | async) || 0"></tui-money>
+  <div class="total-price__container" *tuiLet="totals$ | async as totals">
+    <ng-container *ngIf="totals?.discountValue">
+      <p class="tui-island__paragraph total-price__item total-price__subtotal">
+        Subtotal:
+        <tui-money currency="USD" [singleColor]="true" [value]="totals?.subTotal || 0" class="money" />
+      </p>
+      <p class="tui-island__paragraph total-price__item total-price__discount">
+        Discount:
+        <tui-money currency="USD" [singleColor]="true" [value]="totals?.discountValue || 0" class="money" />
+      </p>
+    </ng-container>
+    <p class="tui-island__paragraph total-price__item total-price__total">
+      Total:
+      <tui-money currency="USD" [singleColor]="true" [value]="totals?.totalPrice || 0" class="money" />
+    </p>
   </div>
-  <form class="discount-form tui-space_top-3" [formGroup]="discountForm" (ngSubmit)="addDiscountCode()">
+  <form class="discount-form tui-space_top-4" [formGroup]="discountForm" (ngSubmit)="addDiscountCode()">
     <div class="discount-form__input-wrapper">
       <tui-input #discountInput class="discount-form__input" formControlName="discountValue">
         Discount code
         <input tuiTextfield />
       </tui-input>
-      <tui-error formControlName="discountValue" [error]="[] | tuiFieldError | async"></tui-error>
+      <tui-error formControlName="discountValue" [error]="[] | tuiFieldError | async" />
     </div>
     <button
       tuiButton
@@ -35,7 +47,7 @@
           [tuiDropdown]="codeInfo.description"
           (edited)="removeDiscountCode(discount.id)"
           size="l"
-          class="tui-space_left-3 tui-space_top-3"
+          class="tui-space_left-3 tui-space_top-4"
         />
       </ng-container>
     </ng-container>

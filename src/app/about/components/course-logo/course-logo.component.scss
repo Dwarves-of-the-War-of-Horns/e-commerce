@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+.course-link {
+  width: 16rem;
+  margin: 2rem auto 0;
+
+  &__logo {
+    height: 4rem;
+    margin: auto;
+    object-fit: contain;
+  }
+}

@@ -1,12 +1,1 @@
-<div class="about">
-  <tui-island class="about-island shadow-block" *ngFor="let collaborator of collaborators">
-    <h3 class="tui-island__title about__heading">
-      {{ collaborator.name }}
-      <a class="about__github-link" [href]="collaborator.githubLink">{{ collaborator.githubLink | extractGithubNick }}</a>
-    </h3>
-    <img class="about__image" [src]="collaborator.img" alt="helo" />
-    <p class="tui-island__paragraph about__paragraph">
-      {{ collaborator.info }}
-    </p>
-  </tui-island>
-</div>
+<ec-collaborators-list>

@@ -1,0 +1,6 @@
+<tui-pagination
+  class="tui-space_top-5"
+  [index]="paginationIndex"
+  [length]="queryState.total || 1"
+  (indexChange)="goToPage($event)"
+></tui-pagination>

@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store'
 import { cartInitActions } from '../actions/cart-init.actions'
 import { cartPageActions } from '../actions/cart-page.actions'
 import { catalogPageCartActions } from '../actions/catalog-page.actions'
+import { homePageCartActions } from '../actions/home-page.actions'
 import {
   selectCartDiscounts,
   selectCurrentCart,
@@ -67,5 +68,9 @@ export class CartFacade {
 
   public addDiscountCode(code: string): void {
     this.store$.dispatch(cartPageActions.addDiscountCode({ code }))
+  }
+
+  public getAllDiscountCodes(): void {
+    this.store$.dispatch(homePageCartActions.getAllDiscountCodes())
   }
 }

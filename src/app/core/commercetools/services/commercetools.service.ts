@@ -87,4 +87,8 @@ export class CommercetoolsService {
   public getDiscountCodesById(ids: string[]): Observable<SimpleDiscounts> {
     return this.httpService.getDiscountCodesById(...ids).pipe(map(convertDiscountCodesToSimpleDiscounts))
   }
+
+  public getAllDiscountCodes(): Observable<SimpleDiscounts> {
+    return this.httpService.getAllDiscountCodes().pipe(map(convertDiscountCodesToSimpleDiscounts))
+  }
 }

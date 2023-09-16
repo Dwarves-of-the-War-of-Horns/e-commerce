@@ -5,6 +5,7 @@ import { cartApiActions } from './actions/cart-api.actions'
 import { cartInitActions } from './actions/cart-init.actions'
 import { cartPageActions } from './actions/cart-page.actions'
 import { catalogPageCartActions } from './actions/catalog-page.actions'
+import { homePageCartActions } from './actions/home-page.actions'
 
 const cartInitialState: CartState = {
   isLoading: false,
@@ -95,5 +96,9 @@ export const cartReducer = createReducer(
   on(cartPageActions.addDiscountCode, state => ({
     ...state,
     isLoading: true,
+  })),
+  on(homePageCartActions.getAllDiscountCodes, state => ({
+    ...state,
+    isDiscountsLoading: true,
   })),
 )

@@ -174,4 +174,8 @@ export class CommercetoolsHttpService {
         .execute(),
     ).pipe(map(({ body }) => body.results))
   }
+
+  public getAllDiscountCodes(): Observable<DiscountCode[]> {
+    return fromPromise(this.api.discountCodes().get().execute()).pipe(map(({ body }) => body.results))
+  }
 }

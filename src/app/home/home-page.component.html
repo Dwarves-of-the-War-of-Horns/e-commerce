@@ -5,6 +5,22 @@
       We are happy that you visited us! Take a look around - we've got some cool stuff to share that we think you'll
       love.
     </p>
+    <p class="tui-text_body-xl header__text">Find something suitable? Check out our discounts:</p>
+    <ul class="discounts__list">
+      <li *ngFor="let discount of discounts$ | async">
+        <tui-tag
+          [value]="discount.code"
+          status="primary"
+          [cdkCopyToClipboard]="discount.code"
+          [hoverable]="true"
+          tuiDropdownHover
+          tuiDropdown="click to copy"
+          size="l"
+          class="tui-space_left-3 tui-space_right-3 tui-space_top-3"
+        />
+        {{ discount.description }}
+      </li>
+    </ul>
   </div>
 
   <div class="container">

@@ -15,6 +15,7 @@ import { cartApiActions } from './actions/cart-api.actions'
 import { cartInitActions } from './actions/cart-init.actions'
 import { cartPageActions } from './actions/cart-page.actions'
 import { catalogPageCartActions } from './actions/catalog-page.actions'
+import { homePageCartActions } from './actions/home-page.actions'
 import { selectCurrentCart } from './cart-store.selectors'
 import { CommercetoolsService } from 'src/app/core/commercetools/services/commercetools.service'
 import { alertsHelper } from 'src/app/shared/helpers/alerts.helper'
@@ -271,6 +272,18 @@ export class CartEffects {
 
             return of(cartApiActions.updateCartFailure({ error: message }))
           }),
+        ),
+      ),
+    )
+  })
+
+  public getAllDiscountsEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(homePageCartActions.getAllDiscountCodes),
+      switchMap(() =>
+        this.cartService.getAllDiscountCodes().pipe(
+          map(discounts => cartApiActions.loadDiscountsSuccess({ discounts })),
+          catchError(({ message }: Error) => of(cartApiActions.loadDiscountsFailure({ error: message }))),
         ),
       ),
     )

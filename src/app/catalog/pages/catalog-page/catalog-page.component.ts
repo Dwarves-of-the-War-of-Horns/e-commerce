@@ -13,11 +13,13 @@ import { CatalogUrlTreeService } from '../../services/catalog-url.service'
 })
 export class CatalogPageComponent implements OnInit, OnDestroy {
   public isSidebarOpen = false
+
   private catalogData$ = combineLatest([
     this.catalogFacade.categories$,
     this.activeRoute.params,
     this.queryParamsService.getQueryParams$(),
   ]).pipe(map(([categories, params, queryParams]) => ({ categories, params, queryParams })))
+
   public navigationArray$ = this.urlTreeService.getNavigationArray$()
   public productsData$ = this.catalogFacade.productsData$
   private subscription!: Subscription
@@ -38,9 +40,9 @@ export class CatalogPageComponent implements OnInit, OnDestroy {
         }),
         filter(({ categories, queryParams }) => Boolean(categories) && !queryParams.isInitial),
         tap(({ params, categories }) => {
-          this.urlTreeService.updateCurrentUrl(
-            typeof params['category'] === 'string' ? params['category'].split('/') : null,
-          )
+          const convertParams = typeof params['category'] === 'string' ? params['category'].split('/') : null
+
+          this.urlTreeService.updateCurrentUrl(convertParams)
           this.urlTreeService.convertUrlTreeToNavigationArray(categories)
         }),
         map(({ categories, queryParams }) => {

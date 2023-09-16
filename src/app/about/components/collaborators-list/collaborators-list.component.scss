@@ -8,16 +8,19 @@
   padding-bottom: 3rem;
 
   &-island {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+
+    max-width: 19rem;
   }
 
   &__image {
-    height: 25rem;
+    aspect-ratio: 1/1.5;
+    width: 17rem;
     margin: 0 auto;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   &__github-link {

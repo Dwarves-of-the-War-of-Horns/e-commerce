@@ -3,4 +3,7 @@ export interface QueryParams {
   sort?: string
   search?: string
   isInitial?: boolean
+  limit?: number
+  offset?: number
+  total?: number
 }

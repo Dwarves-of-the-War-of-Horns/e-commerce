@@ -61,4 +61,29 @@ describe('CatalogUrlTreeService', () => {
     const result = service.convertUrlTreeToSimpleCategory(firstCategories)
     expect(result).toEqual(firstCategories[1].children[0])
   })
+
+  it('should return null if received an empty array', () => {
+    const result = service.convertUrlTreeToSimpleCategory(firstCategories, [])
+    expect(result).toBeNull()
+  })
+
+  it('should return null if the first parameter is null', () => {
+    const result = service.convertUrlTreeToSimpleCategory(null, ['category2', 'subcategory1'])
+    expect(result).toBeNull()
+  })
+
+  it('should return null if the firstCategories[0].slug !== category2', () => {
+    const result = service.convertUrlTreeToSimpleCategory(firstCategories, ['category3', 'subcategory1'])
+    expect(result).toBeNull()
+  })
+
+  it('should return null if the first parameter is null', () => {
+    const result = service.convertUrlTreeToNavigationArray(null, ['category2', 'subcategory1'])
+    expect(result).toEqual([])
+  })
+
+  it('should return null if the firstCategories[0].slug !== category2', () => {
+    const result = service.convertUrlTreeToNavigationArray(firstCategories, ['category3', 'subcategory1'])
+    expect(result).toEqual([])
+  })
 })

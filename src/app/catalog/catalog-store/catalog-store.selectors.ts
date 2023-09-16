@@ -16,7 +16,7 @@ export const selectProductsData = createSelector(
   ({ products, isProductsLoading }: CatalogState) => ({ products, isProductsLoading }),
 )
 
-export const selectFilterState = createSelector(selectCatalogFeature, ({ filterState }: CatalogState) => filterState)
+export const selectQueryState = createSelector(selectCatalogFeature, ({ queryState }: CatalogState) => queryState)
 
 export const selectProductDetails = createSelector(
   selectCatalogFeature,

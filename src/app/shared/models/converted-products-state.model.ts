@@ -1,7 +1,7 @@
-import type { FilterParams } from './filter-params.model'
+import type { QueryParams } from './query-params.model'
 import type { SimpleProduct } from './simple-product.model'
 
 export interface ConvertedProductState {
-  filterParams: FilterParams
+  queryParams: QueryParams
   products: SimpleProduct[]
 }

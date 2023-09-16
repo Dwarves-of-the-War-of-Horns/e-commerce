@@ -1,10 +1,10 @@
-import type { FilterParams } from 'src/app/shared/models/filter-params.model'
 import type { ProductsStateResponse } from 'src/app/shared/models/products-state-response.model'
+import type { QueryParams } from 'src/app/shared/models/query-params.model'
 
-export function convertResponseParamsToFilterParams({
+export function convertResponseParamsToQueryParams({
   answerQueryParams,
   productProjectionPagedQueryResponse,
-}: ProductsStateResponse): FilterParams {
+}: ProductsStateResponse): QueryParams {
   return {
     category: answerQueryParams.category,
     search: answerQueryParams.search,

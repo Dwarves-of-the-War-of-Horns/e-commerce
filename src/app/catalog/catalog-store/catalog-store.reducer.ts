@@ -15,7 +15,7 @@ const catalogInitialState: CatalogState = {
   products: [],
   productDetails: null,
   filterAttributes: null,
-  filterState: initPaginationState,
+  queryState: initPaginationState,
 }
 
 export const catalogReducer = createReducer(
@@ -42,7 +42,7 @@ export const catalogReducer = createReducer(
     ...state,
     isProductsLoading: false,
     products: productsState.products,
-    filterState: productsState.filterParams,
+    queryState: productsState.queryParams,
   })),
   on(catalogApiActions.loadProductsFailure, (state, { message }) => ({
     ...state,

@@ -19,6 +19,7 @@ import { CatalogFacade } from '../../catalog-store/services/catalog.facade'
 import { BreadcrumpsComponent } from '../../components/breadcrumps/breadcrumps.component'
 import { CatalogFormComponent } from '../../components/catalog-form/catalog-form.component'
 import { CategoriesListComponent } from '../../components/categories-list/categories-list.component'
+import { PaginationComponent } from '../../components/pagination/pagination.component'
 import { ProductCardComponent } from '../../components/product-card/product-card.component'
 import { ProductsListComponent } from '../../components/products-list/products-list.component'
 import { CatalogQueryParamsService } from '../../services/catalog-query-params.service'
@@ -39,6 +40,7 @@ describe('CatalogPageComponent', () => {
         ProductsListComponent,
         ProductCardComponent,
         CatalogFormComponent,
+        PaginationComponent,
       ],
       imports: [
         TuiIslandModule,

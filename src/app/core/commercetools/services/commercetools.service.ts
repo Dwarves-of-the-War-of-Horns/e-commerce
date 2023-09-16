@@ -7,11 +7,11 @@ import { arrayToTree } from '../helpers/array-to-tree.helper'
 import { convertAttributeToSimpleAttribute } from '../helpers/convert-attribute-to-simple-attribute.helper'
 import { convertCartToSimpleCart } from '../helpers/convert-cart-to-simple-cart.helper'
 import { convertProductProjectionToSimpleProduct } from '../helpers/convert-product-projection-to-simple-product.helper'
-import { convertResponseParamsToFilterParams } from '../helpers/convert-response-params-to-filter-params.helper'
+import { convertResponseParamsToQueryParams } from '../helpers/convert-response-params-to-filter-params.helper'
 import { CommercetoolsHttpService } from './commercetools-http.service'
 import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
 import type { ConvertedProductState } from 'src/app/shared/models/converted-products-state.model'
-import type { FilterParams } from 'src/app/shared/models/filter-params.model'
+import type { QueryParams } from 'src/app/shared/models/query-params.model'
 import type { SimpleAttribute } from 'src/app/shared/models/simple-attribute.model'
 import type { SimpleCart } from 'src/app/shared/models/simple-cart.model'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
@@ -55,11 +55,11 @@ export class CommercetoolsService {
     return this.httpService.changePassword(newPassword)
   }
 
-  public getProducts(queryParams: FilterParams): Observable<ConvertedProductState> {
+  public getProducts(queryParams: QueryParams): Observable<ConvertedProductState> {
     return this.httpService.getProducts(queryParams).pipe(
       map(({ answerQueryParams, productProjectionPagedQueryResponse }) => {
         return {
-          filterParams: convertResponseParamsToFilterParams({ answerQueryParams, productProjectionPagedQueryResponse }),
+          queryParams: convertResponseParamsToQueryParams({ answerQueryParams, productProjectionPagedQueryResponse }),
           products: productProjectionPagedQueryResponse.results.map(convertProductProjectionToSimpleProduct),
         }
       }),

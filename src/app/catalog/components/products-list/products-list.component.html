@@ -19,12 +19,7 @@
   </ng-container>
 </ng-template>
 
-<tui-pagination
-  class="tui-space_top-5"
-  [index]="paginationIndex"
-  [length]="filterState.total || 1"
-  (indexChange)="goToPage($event)"
-></tui-pagination>
+<ec-pagination />
 
 <ng-template #noProducts>
   <div class="products__empty">

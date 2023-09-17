@@ -64,4 +64,8 @@ export class CartTotalComponent implements OnInit {
     this.cartFacade.addDiscountCode(code)
     this.discountForm.reset()
   }
+
+  public trackDiscounts(_: number, { id }: { id: string }): string {
+    return id
+  }
 }

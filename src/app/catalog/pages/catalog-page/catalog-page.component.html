@@ -17,7 +17,15 @@
     </div>
   </button>
   <div class="catalog-main">
-    <ec-catalog-form></ec-catalog-form>
+    <ec-catalog-form />
     <ec-products-list [productsData]="productsData$ | async" class="products__list" />
+    <tui-pagination
+      [focusable]="true"
+      [(index)]="currentPageIndex"
+      [length]="(pages$ | async) || 1"
+      [sidePadding]="2"
+      [activePadding]="2"
+      (indexChange)="goToPage($event)"
+    />
   </div>
 </div>

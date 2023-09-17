@@ -19,6 +19,7 @@ import { fromPromise } from 'rxjs/internal/observable/innerFrom'
 import { LocalStorageService } from '../../storage/services/local-storage.service'
 import { CommercetoolsClientBuilder } from '../commercetools-client-builder'
 import { tokenStorageKey } from '../constants/commercetools-token-storage-key'
+import { locale } from 'src/app/shared/constants/locale'
 import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
 import type { QueryParams } from 'src/app/shared/models/query-params.model'
 
@@ -123,16 +124,22 @@ export class CommercetoolsHttpService {
     ).pipe(map(({ body }) => body.results))
   }
 
-  public getProducts({ category, sort, search }: QueryParams): Observable<ProductProjection[]> {
+  public getProducts(
+    limit: number,
+    offset: number,
+    { category, sort, search }: QueryParams,
+  ): Observable<{ total: number; products: ProductProjection[] }> {
     const queryArgs = {
+      limit,
+      offset,
       fuzzy: search ? true : undefined,
-      sort,
-      'text.en-US': search,
+      sort: sort ?? 'createdAt desc',
+      [`text.${locale}`]: search,
       'filter.query': category ? [`categories.id: subtree("${category}")`] : undefined,
     }
 
     return fromPromise(this.api.productProjections().search().get({ queryArgs }).execute()).pipe(
-      map(({ body }) => body.results),
+      map(({ body }) => ({ products: body.results, total: body.total || 0 })),
     )
   }
 

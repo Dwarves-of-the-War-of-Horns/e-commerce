@@ -25,3 +25,5 @@ export const selectFilterAttributes = createSelector(
   selectCatalogFeature,
   ({ filterAttributes }: CatalogState) => filterAttributes,
 )
+
+export const selectPages = createSelector(selectCatalogFeature, ({ pages }: CatalogState) => pages)

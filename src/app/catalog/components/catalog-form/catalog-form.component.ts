@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Inject, type OnInit, Self } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import type { TuiStringHandler } from '@taiga-ui/cdk'
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs'
+import { TuiDestroyService, type TuiStringHandler } from '@taiga-ui/cdk'
+import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs'
 
 import { CatalogQueryParamsService } from '../../services/catalog-query-params.service'
+import { locale } from 'src/app/shared/constants/locale'
 import type { AttributeValue } from 'src/app/shared/models/attribute-value.model'
 
 @Component({
@@ -12,17 +13,21 @@ import type { AttributeValue } from 'src/app/shared/models/attribute-value.model
   templateUrl: './catalog-form.component.html',
   styleUrls: ['./catalog-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TuiDestroyService],
 })
 export class CatalogFormComponent implements OnInit {
   public stringify: TuiStringHandler<AttributeValue> = item => item.label
   private initialFormValues = {
     search: '',
-    sort: { key: '', label: '' },
+    sort: {
+      key: '',
+      label: 'Newest',
+    },
   }
 
-  public sortItems = [
+  public sortItems: AttributeValue[] = [
     {
-      key: 'createdAt asc',
+      key: '',
       label: 'Newest',
     },
     {
@@ -34,56 +39,60 @@ export class CatalogFormComponent implements OnInit {
       label: 'Price ascending',
     },
     {
-      key: 'name.en-US asc',
+      key: `name.${locale} asc`,
       label: 'Name ascending',
     },
     {
-      key: 'name.en-US desc',
+      key: `name.${locale} desc`,
       label: 'Name descending',
     },
   ]
 
   public form = this.fb.group({
-    sort: new FormControl<AttributeValue>(this.initialFormValues.sort),
-    search: new FormControl<string>(this.initialFormValues.search),
+    sort: new FormControl<AttributeValue>(this.initialFormValues.sort, { nonNullable: true }),
+    search: new FormControl<string>(this.initialFormValues.search, { nonNullable: true }),
   })
 
   // eslint-disable-next-line max-params
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private route: ActivatedRoute,
+    private router: Router,
     private queryParamsService: CatalogQueryParamsService,
+    @Self()
+    @Inject(TuiDestroyService)
+    private destroy$: TuiDestroyService,
   ) {}
 
   public ngOnInit(): void {
     this.form.valueChanges
       .pipe(
+        takeUntil(this.destroy$),
+        debounceTime(500),
         map(({ search, sort }) => ({ search: search?.trim(), sort: sort?.key })),
         filter(({ search }) => (search?.length ? search.length >= 3 : true)),
-        debounceTime(500),
         distinctUntilChanged((prev, current) => prev?.search === current.search && prev?.sort === current.sort),
+        map(formValue => this.replaceEmptyStrings(formValue)),
+        tap(clearedParams => {
+          void this.router.navigate([], {
+            relativeTo: this.route,
+            replaceUrl: true,
+            queryParams: clearedParams,
+            queryParamsHandling: 'merge',
+          })
+        }),
       )
-      .subscribe(formValue => {
-        const clearedParams = this.removeEmptyFormValues(formValue)
-        void this.router.navigate([], {
-          relativeTo: this.route,
-          replaceUrl: true,
-          queryParams: clearedParams,
-        })
+      .subscribe(clearedParams => {
         this.queryParamsService.updateQueryParams(clearedParams)
       })
 
     this.restoreFormValues(this.route.snapshot.queryParams)
   }
 
-  private removeEmptyFormValues(formValues: Record<string, string | undefined>): Record<string, string> {
-    return Object.keys(formValues).reduce((acc: Record<string, string>, key) => {
+  private replaceEmptyStrings(formValues: Record<string, string | undefined>): Record<string, string | undefined> {
+    return Object.keys(formValues).reduce((acc: Record<string, string | undefined>, key) => {
       const value = formValues[key]
-
-      if (value && value !== '') {
-        acc[key] = value
-      }
+      acc[key] = value === '' ? undefined : value
 
       return acc
     }, {})

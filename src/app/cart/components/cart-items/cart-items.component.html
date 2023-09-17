@@ -15,21 +15,19 @@
         class="tui-table__tr tui-table__tr_border_none tui-table__tr_border_top"
       >
         <td class="tui-table__td tui-table__td_first">
-          <ng-container *ngTemplateOutlet="image; context: { product: product }"></ng-container>
+          <ng-container *ngTemplateOutlet="image; context: { product: product }" />
         </td>
 
         <td class="tui-table__td">
-          <ng-container *ngTemplateOutlet="productColumn; context: { product: product }"></ng-container>
+          <ng-container *ngTemplateOutlet="productColumn; context: { product: product }" />
         </td>
 
         <td *ngIf="!isMobile" class="tui-table__td tui-table__td_align_center">
-          <ng-container
-            *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'column' }"
-          ></ng-container>
+          <ng-container *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'column' }" />
         </td>
 
         <td *ngIf="!isMobile" class="tui-table__td tui-table__td_align_center">
-          <ng-container *ngTemplateOutlet="quantity; context: { product: product }"></ng-container>
+          <ng-container *ngTemplateOutlet="quantity; context: { product: product }" />
         </td>
 
         <td class="tui-table__td tui-table__td_align_center">
@@ -39,7 +37,7 @@
               class="product__price-default"
               currency="USD"
               [value]="product.totalPrice"
-            ></tui-money>
+            />
           </div>
         </td>
 
@@ -63,13 +61,13 @@
           class="product__price-discount"
           currency="USD"
           [value]="prices.discounted"
-        ></tui-money>
+        />
         <tui-money
           [singleColor]="true"
           [class]="prices.discounted ? 'product__price-inactive' : 'product__price-default'"
           currency="USD"
           [value]="prices.default"
-        ></tui-money>
+        />
       </div>
     </ng-template>
 
@@ -95,10 +93,8 @@
     <ng-template #productColumn let-product="product">
       <a [routerLink]="['/', 'catalog', 'product', product.productKey]" tuiLink>{{ product.productName }}</a>
       <div *ngIf="isMobile" class="product__mobile-container">
-        <ng-container
-          *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'row' }"
-        ></ng-container>
-        <ng-container *ngTemplateOutlet="quantity; context: { product: product }"></ng-container>
+        <ng-container *ngTemplateOutlet="productPrice; context: { prices: product.productPrices, style: 'row' }" />
+        <ng-container *ngTemplateOutlet="quantity; context: { product: product }" />
       </div>
     </ng-template>
   </table>

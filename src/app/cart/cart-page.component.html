@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="tui-form__header tui-space_left-3">Cart</h2>
+  <h2 class="header tui-text_h4">Cart</h2>
   <tui-loader class="loader" [overlay]="true" [showLoader]="!!(isLoading$ | async)">
     <div *ngIf="(products$ | async)?.length; else emptyCart" class="cart-container">
       <tui-island class="shadow-block cart-container__items">

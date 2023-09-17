@@ -24,11 +24,11 @@ export class SignInFormComponent implements OnInit, OnDestroy {
   public signInForm = this.fb.group({
     username: new FormControl<string>('', [emailValidator, hasOneCharacter]),
     password: new FormControl<string>('', [
-      minCharacterValidator,
       hasOneLowerCaseCharacter,
       hasOneUpperCaseCharacter,
       hasOneNumber,
       hasNoSpaces,
+      minCharacterValidator,
     ]),
   })
   constructor(

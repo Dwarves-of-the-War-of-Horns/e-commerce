@@ -10,6 +10,7 @@
   <a
     tuiLink
     [routerLink]="createRoute(category)"
+    [queryParams]="{ page: undefined }"
     queryParamsHandling="merge"
     routerLinkActive="active"
     class="categories__link"

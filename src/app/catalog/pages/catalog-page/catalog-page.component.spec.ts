@@ -1,6 +1,7 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
+import { RouterTestingModule } from '@angular/router/testing'
 import { provideMockStore } from '@ngrx/store/testing'
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile'
 import { TuiActiveZoneModule, TuiLetModule } from '@taiga-ui/cdk'
@@ -10,6 +11,7 @@ import {
   TuiDataListWrapperModule,
   TuiInputModule,
   TuiIslandModule,
+  TuiPaginationModule,
   TuiSelectModule,
 } from '@taiga-ui/kit'
 import { of } from 'rxjs'
@@ -52,6 +54,8 @@ describe('CatalogPageComponent', () => {
         TuiDataListWrapperModule,
         FormsModule,
         ReactiveFormsModule,
+        TuiPaginationModule,
+        RouterTestingModule,
       ],
       providers: [
         provideMockStore({}),

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import type { TuiStringHandler } from '@taiga-ui/cdk'
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs'
 
@@ -48,10 +48,8 @@ export class CatalogFormComponent implements OnInit {
     search: new FormControl<string>(this.initialFormValues.search),
   })
 
-  // eslint-disable-next-line max-params
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private route: ActivatedRoute,
     private queryParamsService: CatalogQueryParamsService,
   ) {}
@@ -66,11 +64,6 @@ export class CatalogFormComponent implements OnInit {
       )
       .subscribe(formValue => {
         const clearedParams = this.removeEmptyFormValues(formValue)
-        void this.router.navigate([], {
-          relativeTo: this.route,
-          replaceUrl: true,
-          queryParams: clearedParams,
-        })
         this.queryParamsService.updateQueryParams(clearedParams)
       })
 

@@ -2,7 +2,7 @@
   <tui-island class="about-island shadow-block" *ngFor="let collaborator of collaborators">
     <h3 class="tui-island__title about__heading">
       {{ collaborator.name }}
-      <a class="about__github-link" [href]="collaborator.githubLink">{{
+      <a tuiLink class="about__github-link" [href]="collaborator.githubLink">{{
         collaborator.githubLink | extractGithubNick
       }}</a>
     </h3>

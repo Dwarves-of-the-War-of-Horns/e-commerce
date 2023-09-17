@@ -1,11 +1,15 @@
-<tui-tree
-  *ngFor="let category of categories$ | async; trackBy: categoriesTrackByFn"
-  [tuiTreeController]="true"
-  [value]="category"
-  [content]="content"
-  [childrenHandler]="handler"
-  class="categories__tree"
-/>
+<div class="categories__container" *tuiLet="categories$ | async as categories">
+  <tui-loader [showLoader]="categories === null" [overlay]="true" size="l">
+    <tui-tree
+      *ngFor="let category of categories; trackBy: categoriesTrackByFn"
+      [tuiTreeController]="true"
+      [value]="category"
+      [content]="content"
+      [childrenHandler]="handler"
+      class="categories__tree"
+    />
+  </tui-loader>
+</div>
 <ng-template #content let-category>
   <a
     tuiLink

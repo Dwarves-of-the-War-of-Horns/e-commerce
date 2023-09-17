@@ -1,4 +1,8 @@
 .categories {
+  &__container {
+    padding: 0.5rem 0;
+  }
+
   &__tree {
     --tui-tree-item-indent: 0.7em;
   }

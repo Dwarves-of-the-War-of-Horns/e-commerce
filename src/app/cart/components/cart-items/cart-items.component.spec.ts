@@ -4,20 +4,26 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { provideMockStore } from '@ngrx/store/testing'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
-import { TuiButtonModule } from '@taiga-ui/core'
-import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
+import { TuiBreakpointService, TuiButtonModule, TuiDialogService, TuiTextfieldControllerModule } from '@taiga-ui/core'
+import {
+  TuiInputInlineModule,
+  TuiInputModule,
+  TuiInputNumberModule,
+  TuiIslandModule,
+  TuiPromptModule,
+} from '@taiga-ui/kit'
 
 import { CartRoutingModule } from '../../cart-routing.module'
 import { CartFacade } from '../../cart-store/services/cart.facade'
-import { OrderInputsComponent } from './order-inputs.component'
+import { CartItemsComponent } from './cart-items.component'
 
-describe('OrderInputsComponent', () => {
-  let component: OrderInputsComponent
-  let fixture: ComponentFixture<OrderInputsComponent>
+describe('CartItemsComponent', () => {
+  let component: CartItemsComponent
+  let fixture: ComponentFixture<CartItemsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OrderInputsComponent],
+      declarations: [CartItemsComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -31,11 +37,13 @@ describe('OrderInputsComponent', () => {
         NgOptimizedImage,
         TuiInputNumberModule,
         TuiLetModule,
+        TuiTextfieldControllerModule,
+        TuiPromptModule,
       ],
-      providers: [provideMockStore({}), CartFacade],
+      providers: [provideMockStore({}), CartFacade, TuiBreakpointService, TuiDialogService],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(OrderInputsComponent)
+    fixture = TestBed.createComponent(CartItemsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

@@ -3,6 +3,7 @@ import type {
   Cart,
   Category,
   Customer,
+  DiscountCode,
   MyCartUpdate,
   MyCustomerDraft,
   MyCustomerUpdate,
@@ -163,5 +164,18 @@ export class CommercetoolsHttpService {
     return fromPromise(this.api.me().carts().withId({ ID: cartId }).post({ body: cart }).execute()).pipe(
       map(({ body }) => body),
     )
+  }
+
+  public getDiscountCodesById(...codeIds: string[]): Observable<DiscountCode[]> {
+    return fromPromise(
+      this.api
+        .discountCodes()
+        .get({ queryArgs: { where: `id in (${codeIds.map(id => `"${id}"`).join(',')})` } })
+        .execute(),
+    ).pipe(map(({ body }) => body.results))
+  }
+
+  public getAllDiscountCodes(): Observable<DiscountCode[]> {
+    return fromPromise(this.api.discountCodes().get().execute()).pipe(map(({ body }) => body.results))
   }
 }

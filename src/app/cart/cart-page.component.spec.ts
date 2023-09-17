@@ -1,17 +1,26 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common'
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { RouterTestingModule } from '@angular/router/testing'
 import { provideMockStore } from '@ngrx/store/testing'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
 import { TuiLetModule } from '@taiga-ui/cdk'
-import { TuiButtonModule } from '@taiga-ui/core'
-import { TuiInputInlineModule, TuiInputModule, TuiInputNumberModule, TuiIslandModule } from '@taiga-ui/kit'
+import { TuiButtonModule, TuiLoaderModule } from '@taiga-ui/core'
+import {
+  TuiInputInlineModule,
+  TuiInputModule,
+  TuiInputNumberModule,
+  TuiIslandModule,
+  TuiPromptModule,
+} from '@taiga-ui/kit'
+import { TuiBlockStatusModule } from '@taiga-ui/layout'
 
 import { CartPageComponent } from './cart-page.component'
 import { CartRoutingModule } from './cart-routing.module'
 import { CartFacade } from './cart-store/services/cart.facade'
-import { OrderInputsComponent } from './components/order-inputs/order-inputs.component'
-import { OrderItemsComponent } from './components/order-items/order-items.component'
+import { CartItemsComponent } from './components/cart-items/cart-items.component'
+import { CartTotalComponent } from './components/cart-total/cart-total.component'
+import { EmptyCartComponent } from './components/empty-cart/empty-cart.component'
 
 describe('CartPageComponent', () => {
   let component: CartPageComponent
@@ -19,7 +28,7 @@ describe('CartPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartPageComponent, OrderInputsComponent, OrderItemsComponent],
+      declarations: [CartPageComponent, CartTotalComponent, CartItemsComponent, EmptyCartComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -33,6 +42,10 @@ describe('CartPageComponent', () => {
         NgOptimizedImage,
         TuiInputNumberModule,
         TuiLetModule,
+        TuiLoaderModule,
+        TuiBlockStatusModule,
+        RouterTestingModule,
+        TuiPromptModule,
       ],
       providers: [provideMockStore({}), CartFacade],
     }).compileComponents()

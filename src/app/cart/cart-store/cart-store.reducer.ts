@@ -3,12 +3,16 @@ import { createReducer, on } from '@ngrx/store'
 import type { CartState } from '../models/cart-state'
 import { cartApiActions } from './actions/cart-api.actions'
 import { cartInitActions } from './actions/cart-init.actions'
+import { cartPageActions } from './actions/cart-page.actions'
 import { catalogPageCartActions } from './actions/catalog-page.actions'
+import { homePageCartActions } from './actions/home-page.actions'
 
 const cartInitialState: CartState = {
   isLoading: false,
   error: null,
   currentCart: null,
+  discounts: {},
+  isDiscountsLoading: false,
 }
 
 export const cartReducer = createReducer(
@@ -58,5 +62,43 @@ export const cartReducer = createReducer(
   on(catalogPageCartActions.removeProduct, state => ({
     ...state,
     isLoading: true,
+  })),
+  on(cartPageActions.removeItem, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(cartPageActions.clearCart, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(cartPageActions.changeItemAmount, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(cartPageActions.getDiscountCodes, state => ({
+    ...state,
+    isDiscountsLoading: true,
+  })),
+  on(cartApiActions.loadDiscountsSuccess, (state, { discounts }) => ({
+    ...state,
+    isDiscountsLoading: false,
+    discounts,
+  })),
+  on(cartApiActions.loadDiscountsFailure, (state, { error }) => ({
+    ...state,
+    isDiscountsLoading: false,
+    error,
+  })),
+  on(cartPageActions.removeDiscountCode, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(cartPageActions.addDiscountCode, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(homePageCartActions.getAllDiscountCodes, state => ({
+    ...state,
+    isDiscountsLoading: true,
   })),
 )

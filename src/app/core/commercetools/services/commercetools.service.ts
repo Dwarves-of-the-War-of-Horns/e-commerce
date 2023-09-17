@@ -6,6 +6,7 @@ import { map, type Observable } from 'rxjs'
 import { arrayToTree } from '../helpers/array-to-tree.helper'
 import { convertAttributeToSimpleAttribute } from '../helpers/convert-attribute-to-simple-attribute.helper'
 import { convertCartToSimpleCart } from '../helpers/convert-cart-to-simple-cart.helper'
+import { convertDiscountCodesToSimpleDiscounts } from '../helpers/convert-discount-code-to-simple-discount.helper'
 import { convertProductProjectionToSimpleProduct } from '../helpers/convert-product-projection-to-simple-product.helper'
 import { CommercetoolsHttpService } from './commercetools-http.service'
 import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
@@ -13,6 +14,7 @@ import type { QueryParams } from 'src/app/shared/models/query-params.model'
 import type { SimpleAttribute } from 'src/app/shared/models/simple-attribute.model'
 import type { SimpleCart } from 'src/app/shared/models/simple-cart.model'
 import type { SimpleCategory } from 'src/app/shared/models/simple-category.model'
+import type { SimpleDiscounts } from 'src/app/shared/models/simple-discounts.model'
 import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
 
 @Injectable({
@@ -80,5 +82,13 @@ export class CommercetoolsService {
 
   public updateCart(cartId: string, cart: MyCartUpdate): Observable<SimpleCart> {
     return this.httpService.updateCart(cartId, cart).pipe(map(convertCartToSimpleCart))
+  }
+
+  public getDiscountCodesById(ids: string[]): Observable<SimpleDiscounts> {
+    return this.httpService.getDiscountCodesById(...ids).pipe(map(convertDiscountCodesToSimpleDiscounts))
+  }
+
+  public getAllDiscountCodes(): Observable<SimpleDiscounts> {
+    return this.httpService.getAllDiscountCodes().pipe(map(convertDiscountCodesToSimpleDiscounts))
   }
 }

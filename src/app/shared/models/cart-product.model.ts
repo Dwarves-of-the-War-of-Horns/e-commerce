@@ -10,4 +10,5 @@ export interface CartProduct {
   productName: string
   productImageUrl: string
   productPrices: SimpleProductPrices
+  discountPerItem: number | undefined
 }

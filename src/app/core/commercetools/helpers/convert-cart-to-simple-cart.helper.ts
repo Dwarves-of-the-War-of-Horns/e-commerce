@@ -13,7 +13,10 @@ export const convertCartToSimpleCart = ({
 }: Cart): SimpleCart => ({
   id,
   version,
-  discountCodes,
+  discountCodes: discountCodes.map(({ state, discountCode }) => ({
+    isActive: state === 'MatchesCart',
+    id: discountCode.id,
+  })),
   totalPrice: totalPrice.centAmount / 100,
   products: lineItems.map(convertLineItemToCartProduct),
   totalProducts: totalLineItemQuantity ?? 0,

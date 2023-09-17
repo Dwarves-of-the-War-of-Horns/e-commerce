@@ -25,3 +25,19 @@ export const selectProductsCount = createSelector(
   selectCartFeature,
   ({ currentCart }: CartState) => currentCart?.totalProducts,
 )
+
+export const selectDiscounts = createSelector(selectCartFeature, ({ discounts }: CartState) => discounts)
+
+export const selectCartDiscounts = createSelector(
+  selectCartFeature,
+  ({ currentCart }: CartState) => currentCart?.discountCodes,
+)
+
+export const selectDiscountValue = createSelector(
+  selectCartFeature,
+  ({ currentCart }: CartState) =>
+    currentCart?.products
+      ?.filter(product => product?.discountPerItem)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      .reduce((sum, { discountPerItem, quantity }) => sum + discountPerItem! * quantity, 0),
+)

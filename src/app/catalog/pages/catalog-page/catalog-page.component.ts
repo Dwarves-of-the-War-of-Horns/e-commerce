@@ -51,7 +51,7 @@ export class CatalogPageComponent implements OnInit, OnDestroy {
         distinctUntilChanged((prev, current) => prev === current),
       )
       .subscribe(queryParams => {
-        this.catalogFacade.loadProducts(queryParams)
+        this.catalogFacade.loadProducts({ page: 0, queryParams })
       })
   }
 

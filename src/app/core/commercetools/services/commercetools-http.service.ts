@@ -123,8 +123,14 @@ export class CommercetoolsHttpService {
     ).pipe(map(({ body }) => body.results))
   }
 
-  public getProducts({ category, sort, search }: QueryParams): Observable<ProductProjection[]> {
+  public getProducts(
+    limit: number,
+    offset: number,
+    { category, sort, search }: QueryParams,
+  ): Observable<{ total: number; products: ProductProjection[] }> {
     const queryArgs = {
+      limit,
+      offset,
       fuzzy: search ? true : undefined,
       sort,
       'text.en-US': search,
@@ -132,7 +138,7 @@ export class CommercetoolsHttpService {
     }
 
     return fromPromise(this.api.productProjections().search().get({ queryArgs }).execute()).pipe(
-      map(({ body }) => body.results),
+      map(({ body }) => ({ products: body.results, total: body.total || 0 })),
     )
   }
 

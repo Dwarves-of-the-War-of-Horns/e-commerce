@@ -37,9 +37,9 @@ export class CatalogEffects {
   private getProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(catalogPageActions.loadProducts),
-      switchMap(({ queryParams }) =>
-        this.catalogHttpService.loadProducts(queryParams).pipe(
-          map(products => catalogApiActions.loadProductsSuccess({ products })),
+      switchMap(({ page, queryParams }) =>
+        this.catalogHttpService.loadProducts({ page, queryParams }).pipe(
+          map(pagedProducts => catalogApiActions.loadProductsSuccess({ pagedProducts })),
           catchError(({ message }: Error) => of(catalogApiActions.loadProductsFailure({ message }))),
         ),
       ),

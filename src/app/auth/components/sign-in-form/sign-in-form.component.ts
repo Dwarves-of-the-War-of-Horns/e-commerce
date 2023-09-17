@@ -1,4 +1,4 @@
-import { Component, type OnDestroy, type OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { type Subscription } from 'rxjs'
 
@@ -17,6 +17,7 @@ import { hasOneNumber } from 'src/app/shared/validators/has-one-number.validator
   selector: 'ec-sign-in-form',
   templateUrl: './sign-in-form.component.html',
   styleUrls: ['./sign-in-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInFormComponent implements OnInit, OnDestroy {
   public arraySubscriptions: Subscription[] = []

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 import type { Collaborator } from '../../models/collaborator.model'
 
@@ -6,6 +6,7 @@ import type { Collaborator } from '../../models/collaborator.model'
   selector: 'ec-collaborators-list',
   templateUrl: './collaborators-list.component.html',
   styleUrls: ['./collaborators-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollaboratorsListComponent {
   public collaborators: Collaborator[] = [

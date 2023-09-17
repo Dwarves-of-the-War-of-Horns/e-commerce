@@ -1,4 +1,4 @@
-import { Component, type OnDestroy, type OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import type { Customer } from '@commercetools/platform-sdk'
 import { TuiDay } from '@taiga-ui/cdk'
@@ -22,6 +22,7 @@ import { nameValidator } from 'src/app/shared/validators/name.validator'
   selector: 'ec-user-information',
   templateUrl: './user-information.component.html',
   styleUrls: ['./user-information.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserInformationComponent implements OnInit, OnDestroy {
   public isShowEditingForm = false

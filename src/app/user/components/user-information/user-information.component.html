@@ -75,7 +75,7 @@
       <tui-input-date
         tuiTextfieldExampleText="Placeholder"
         formControlName="dateOfBirth"
-        tuiHintContent="A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)"
+        tuiHintContent="Please enter your date of birth. We are serving customers over 13 years old"
       >
         Date of birth
         <span class="tui-required"></span>
@@ -86,7 +86,7 @@
     <div class="tui-form__row">
       <tui-input
         formControlName="email"
-        tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
+        tuiHintContent="Email address must be properly formatted (e.g., user@example.com)"
       >
         <input tuiTextfield type="email" autocomplete="username" />
         Email
@@ -125,7 +125,7 @@
     <div class="tui-form__row">
       <tui-input-password
         formControlName="newPassword"
-        tuiHintContent="New password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end."
+        tuiHintContent="New password must be at least 8 characters long and have 1 latin uppercase letter, 1 lowercase letter, 1 number, and no leading or trailing spaces"
         ><input tuiTextfield />New password
         <span class="tui-required"></span>
       </tui-input-password>

@@ -5,7 +5,7 @@
     <div class="tui-form__row">
       <tui-input
         formControlName="username"
-        tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
+        tuiHintContent="Email address must be properly formatted (e.g., user@example.com)"
       >
         <input tuiTextfield type="email" autocomplete="username" />
         Email
@@ -17,7 +17,7 @@
     <div class="tui-form__row">
       <tui-input-password
         formControlName="password"
-        tuiHintContent="Password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end"
+        tuiHintContent="Password must be at least 8 characters long and have 1 latin uppercase letter, 1 lowercase letter, 1 number, and no leading or trailing spaces"
         ><input tuiTextfield autocomplete="new-password" placeholder="Make it secure!" />Password
         <span class="tui-required"></span>
       </tui-input-password>
@@ -30,7 +30,5 @@
       </button>
     </div>
   </form>
-  <h3 class="logo-redirect">
-    If you don't have an account, please <a tuiLink routerLink="/auth/sign-up">register</a>.
-  </h3>
+  <h3 class="logo-redirect">If you don't have an account, please <a tuiLink routerLink="/auth/sign-up">register</a></h3>
 </tui-island>

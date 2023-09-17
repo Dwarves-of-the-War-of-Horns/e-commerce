@@ -1,6 +1,6 @@
 import { Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
-import { TuiDay } from '@taiga-ui/cdk'
+import type { TuiDay } from '@taiga-ui/cdk'
 import { type Subscription } from 'rxjs'
 
 import { AuthFacade } from '../../auth-store/service/auth.facade'
@@ -35,21 +35,21 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     firstName: new FormControl<string>('', [hasOneCharacter, nameValidator]),
     lastName: new FormControl<string>('', [hasOneCharacter, nameValidator]),
     password: new FormControl<string>('', [
-      minCharacterValidator,
       hasOneLowerCaseCharacter,
       hasOneUpperCaseCharacter,
       hasOneNumber,
       hasNoSpaces,
+      minCharacterValidator,
     ]),
-    dateOfBirth: new FormControl<TuiDay>(new TuiDay(2010, 0, 1), [birthValidator]),
+    dateOfBirth: new FormControl<TuiDay | null>(null, [birthValidator]),
     street: new FormControl<string>('', [hasOneCharacter]),
     city: new FormControl<string>('', [hasOneCharacter, nameValidator]),
     postalCode: new FormControl<string>('', [postalCodeValidator]),
-    country: new FormControl(this.countryArray[0]),
+    country: new FormControl(),
     billingStreet: new FormControl<string>('', [hasOneCharacter]),
     billingCity: new FormControl<string>('', [hasOneCharacter, nameValidator]),
     billingPostalCode: new FormControl<string>('', [value => postalCodeValidator(value, FormFields.BillingCountry)]),
-    billingCountry: new FormControl(this.countryArray[0]),
+    billingCountry: new FormControl(),
     copyAddressCheckbox: new FormControl(false),
     defaultShippingAddress: new FormControl(true),
     defaultBillingAddress: new FormControl(false),

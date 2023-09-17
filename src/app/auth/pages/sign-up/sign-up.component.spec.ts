@@ -12,6 +12,7 @@ import {
   TuiInputDateModule,
   TuiInputModule,
   TuiInputPasswordModule,
+  TuiIslandModule,
   TuiSelectModule,
 } from '@taiga-ui/kit'
 
@@ -28,6 +29,7 @@ describe('SignUpComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SignUpComponent, SignUpFormComponent, TuiFieldErrorPipe],
       imports: [
+        TuiIslandModule,
         ReactiveFormsModule,
         CommonModule,
         AuthRoutingModule,

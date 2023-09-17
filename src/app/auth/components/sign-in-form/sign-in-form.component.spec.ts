@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
 import { provideMockStore } from '@ngrx/store/testing'
 import { TuiErrorModule } from '@taiga-ui/core'
-import { TuiFieldErrorPipe, TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit'
+import { TuiFieldErrorPipe, TuiInputModule, TuiInputPasswordModule, TuiIslandModule } from '@taiga-ui/kit'
 
 import { AuthRoutingModule } from '../../auth-routing.module'
 import { AuthFacade } from '../../auth-store/service/auth.facade'
@@ -18,6 +18,7 @@ describe('SignInFormComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SignInFormComponent, TuiFieldErrorPipe],
       imports: [
+        TuiIslandModule,
         ReactiveFormsModule,
         CommonModule,
         AuthRoutingModule,

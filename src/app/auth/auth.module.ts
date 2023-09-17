@@ -6,6 +6,7 @@ import {
   TuiDataListModule,
   TuiErrorModule,
   TuiHintModule,
+  TuiLinkModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core'
 import {
@@ -19,7 +20,7 @@ import {
   TuiInputPasswordModule,
   TuiSelectModule,
 } from '@taiga-ui/kit'
-import { TuiAccordionModule } from '@taiga-ui/kit/components'
+import { TuiAccordionModule, TuiIslandModule } from '@taiga-ui/kit/components'
 
 import { AuthRoutingModule } from './auth-routing.module'
 import { SignInFormComponent } from './components/sign-in-form/sign-in-form.component'
@@ -31,6 +32,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component'
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [SignInComponent, SignUpComponent, SignUpFormComponent, SignInFormComponent],
   imports: [
+    TuiIslandModule,
     TuiHintModule,
     TuiTextfieldControllerModule,
     TuiAccordionModule,
@@ -51,6 +53,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component'
     TuiFilterByInputPipeModule,
     TuiDataListWrapperModule,
     TuiInputDateModule,
+    TuiLinkModule,
   ],
 })
 export class AuthModule {}

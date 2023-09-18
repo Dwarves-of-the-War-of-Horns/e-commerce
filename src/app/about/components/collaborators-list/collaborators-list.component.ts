@@ -11,13 +11,6 @@ import type { Collaborator } from '../../models/collaborator.model'
 export class CollaboratorsListComponent {
   public collaborators: Collaborator[] = [
     {
-      name: 'Egor',
-      info: 'Our leader and mentor. He seems severe and ruthless. But in reality he is adorable and kind. ',
-      img: '/assets/icons/egor-supra.webp',
-      githubLink: 'https://github.com/JiriSimonov',
-    },
-
-    {
       name: 'Kristina',
       info: 'Looking for a nearest mental health clinic. Was doing SDK integration, catalog page and cart page. Collaboration method: power. True teamlead',
       img: '/assets/icons/kristina.webp',

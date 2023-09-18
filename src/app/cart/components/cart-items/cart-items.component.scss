@@ -74,7 +74,16 @@
   .tui-table {
     &__td,
     &__th {
-      padding: 0.6rem 0.3rem;
+      padding: 0.6rem 0.2rem;
+    }
+  }
+}
+
+@media screen and (width <= 430px) {
+  .product {
+    &__image-container {
+      width: 60px;
+      height: 60px;
     }
   }
 }

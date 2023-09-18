@@ -87,3 +87,15 @@
     }
   }
 }
+
+@media screen and (width > 780px) {
+  .desktop-hide {
+    display: none;
+  }
+}
+
+@media screen and (width <= 780px) {
+  .mobile-hide {
+    display: none;
+  }
+}

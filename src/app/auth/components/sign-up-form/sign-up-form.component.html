@@ -6,7 +6,7 @@
       <tui-input
         tuiTextfieldSize="m"
         formControlName="email"
-        tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
+        tuiHintContent="Email address must be properly formatted (e.g., user@example.com)"
       >
         <input tuiTextfield type="email" autocomplete="username" />
         Email
@@ -45,7 +45,7 @@
       <tui-input-password
         tuiTextfieldSize="m"
         formControlName="password"
-        tuiHintContent="Password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end"
+        tuiHintContent="Password must be at least 8 characters long and have 1 latin uppercase letter, 1 lowercase letter, 1 number, and no leading or trailing spaces"
         ><input tuiTextfield autocomplete="new-password" placeholder="Make it secure!" />Password
         <span class="tui-required"></span>
       </tui-input-password>
@@ -57,7 +57,7 @@
         tuiTextfieldSize="m"
         tuiTextfieldExampleText="Placeholder"
         formControlName="dateOfBirth"
-        tuiHintContent="A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)"
+        tuiHintContent="Please enter your date of birth. We are serving customers over 13 years old"
       >
         Date of birth
         <span class="tui-required"></span>
@@ -130,7 +130,7 @@
     </div>
 
     <tui-accordion-item class="container" (openChange)="toggleStatusBillingAddressField()" class="tui-form__row">
-      Set billing address.
+      Set billing address
       <ng-template tuiAccordionItemContent>
         <div class="tui-form__row">
           <tui-checkbox-block
@@ -139,10 +139,7 @@
             formControlName="copyAddressCheckbox"
             contentAlign="left"
           >
-            <div class="inner inner_flex">
-              Write shipping address to billing address.
-              <tui-tooltip describeId="example3" content="some tooltip content" />
-            </div>
+            <div class="inner inner_flex">Write shipping address to billing address</div>
           </tui-checkbox-block>
         </div>
 
@@ -221,5 +218,5 @@
       </button>
     </div>
   </form>
-  <h3 class="logo-redirect">If you have an account, please <a tuiLink routerLink="/auth/sign-in">login</a>.</h3>
+  <h3 class="logo-redirect">If you have an account, please <a tuiLink routerLink="/auth/sign-in">login</a></h3>
 </tui-island>

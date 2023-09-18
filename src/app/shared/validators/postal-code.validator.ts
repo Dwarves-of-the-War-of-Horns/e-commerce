@@ -11,7 +11,7 @@ export const postalCodeValidator = (
   const isValid = Boolean(control.value)
 
   if (!isValid) {
-    return isValid ? null : { error: "The postcode can't be empty." }
+    return isValid ? null : { error: "The postcode can't be empty" }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

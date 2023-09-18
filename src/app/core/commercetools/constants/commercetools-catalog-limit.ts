@@ -1,1 +1,1 @@
-export const catalogLimit = 10
+export const catalogLimit = 12

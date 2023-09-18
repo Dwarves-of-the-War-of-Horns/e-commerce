@@ -11,7 +11,7 @@ const catalogInitialState: CatalogState = {
   isProductsLoading: false,
   message: null,
   categories: null,
-  products: [],
+  products: null,
   pages: 0,
   productDetails: null,
   filterAttributes: null,

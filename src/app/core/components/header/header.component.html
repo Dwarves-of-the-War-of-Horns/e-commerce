@@ -1,18 +1,18 @@
 <header class="header">
   <div class="header__container">
     <div class="header__logo" [routerLink]="['/']">
-      <img class="header__logo-img" height="60" width="60" ngSrc="/assets/icons/header.svg" priority alt="page-logo"/>
+      <img class="header__logo-img" height="60" width="60" ngSrc="/assets/icons/header.svg" priority alt="page-logo" />
       <h1 class="header__logo-title tui-text_body-m"><span>Dwarves</span><span>store</span></h1>
     </div>
 
     <nav class="header__navigation">
       <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'about']" title="About us">
-        <tui-svg appearance="outline" src="tuiIconUsers"></tui-svg>
+        <tui-svg appearance="outline" src="tuiIconUsers" />
         <span class="nav-text">About us</span>
       </button>
 
       <button tuiButton appearance="flat" class="nav-btn" size="m" [routerLink]="['/', 'catalog']" title="Products">
-        <tui-svg appearance="outline" src="tuiIconGrid"></tui-svg>
+        <tui-svg appearance="outline" src="tuiIconGrid" />
         <span class="nav-text">Products</span>
       </button>
     </nav>

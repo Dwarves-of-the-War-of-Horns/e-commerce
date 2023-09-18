@@ -1,4 +1,4 @@
-import { Component, type OnDestroy, type OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import type { Address } from '@commercetools/platform-sdk'
 import type { Subscription } from 'rxjs'
@@ -17,6 +17,7 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   selector: 'ec-user-addresses',
   templateUrl: './user-addresses.component.html',
   styleUrls: ['./user-addresses.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserAddressesComponent implements OnInit, OnDestroy {
   public isShowEditingForm = false

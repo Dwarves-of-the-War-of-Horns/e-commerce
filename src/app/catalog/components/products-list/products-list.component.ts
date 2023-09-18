@@ -11,7 +11,7 @@ import type { SimpleProduct } from 'src/app/shared/models/simple-product.model'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent {
-  @Input() public productsData!: { products: SimpleProduct[]; isProductsLoading: boolean } | null
+  @Input() public productsData!: { products: SimpleProduct[] | null; isProductsLoading: boolean } | null
 
   private productsInCart$ = this.cartFacade.productsInCart$
 

@@ -1,4 +1,4 @@
-import { Component, type OnDestroy, type OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import type { TuiDay } from '@taiga-ui/cdk'
 import { type Subscription } from 'rxjs'
@@ -24,6 +24,7 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   selector: 'ec-sign-up-form',
   templateUrl: './sign-up-form.component.html',
   styleUrls: ['./sign-up-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpFormComponent implements OnInit, OnDestroy {
   public isDisableBillingAddress = true

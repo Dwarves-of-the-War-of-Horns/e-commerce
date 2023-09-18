@@ -7,7 +7,7 @@ export interface CatalogState {
   message: string | null
   categories: SimpleCategory[] | null
   isProductsLoading: boolean
-  products: SimpleProduct[]
+  products: SimpleProduct[] | null
   pages: number
   productDetails: SimpleProduct | null
   filterAttributes: SimpleAttribute[] | null

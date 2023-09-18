@@ -1,23 +1,25 @@
-<ng-container *ngIf="productsData?.isProductsLoading; else productsTemplate">
-  <tui-loader [showLoader]="true" size="xl" />
-</ng-container>
-
-<ng-template #productsTemplate>
-  <ng-container *tuiLet="productsData?.products as products">
-    <ng-container *ngIf="products?.length; else noProducts">
-      <div class="products__list">
-        <ec-product-card
-          [routerLink]="['/', 'catalog', 'product', product.key]"
-          *ngFor="let product of products; trackBy: trackProduct"
-          [product]="product"
-          class="products__card"
-          [addToCartHandler]="addToCart"
-          [isInCart]="isInCart(product) | async"
-        />
-      </div>
+<ng-container>
+  <tui-loader
+    [showLoader]="!!(productsData?.isProductsLoading || productsData?.products === null)"
+    [overlay]="true"
+    size="xl"
+  >
+    <ng-container *tuiLet="productsData?.products as products">
+      <ng-container *ngIf="products === null || products?.length; else noProducts">
+        <div class="products__list">
+          <ec-product-card
+            [routerLink]="['/', 'catalog', 'product', product.key]"
+            *ngFor="let product of products; trackBy: trackProduct"
+            [product]="product"
+            class="products__card"
+            [addToCartHandler]="addToCart"
+            [isInCart]="isInCart(product) | async"
+          />
+        </div>
+      </ng-container>
     </ng-container>
-  </ng-container>
-</ng-template>
+  </tui-loader>
+</ng-container>
 
 <ng-template #noProducts>
   <div class="products__empty">

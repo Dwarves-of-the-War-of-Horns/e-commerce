@@ -10,10 +10,12 @@
     "Dwarven",
     "ngrx",
     "plusplus",
+    "Polymorpheus",
     "proto",
     "recompiles",
     "Stonebeard",
     "tinkoff",
     "trivago"
-  ]
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

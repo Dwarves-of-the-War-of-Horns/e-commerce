@@ -7,5 +7,5 @@ export const birthValidator = (control: AbstractControl): ValidationErrors | nul
   const isValidYear = dateNow.getFullYear() - dateValue?.year >= 13
   const isValidDate = dateNow.getMonth() + 1 + dateNow.getDate() > dateValue?.month + dateValue?.day
 
-  return isValidYear && isValidDate ? null : { error: 'You should be 13 years old or older' }
+  return isValidYear && isValidDate ? null : { error: 'You should be at least 13 years old' }
 }

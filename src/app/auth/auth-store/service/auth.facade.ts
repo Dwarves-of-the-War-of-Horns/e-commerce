@@ -3,13 +3,13 @@ import type { MyCustomerDraft, MyCustomerUpdate } from '@commercetools/platform-
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { Store } from '@ngrx/store'
 
-import { authInitActions } from './actions/auth-init.actions'
-import { changePasswordPageActions } from './actions/change-password-page.action'
-import { logoutActions } from './actions/logout.actions'
-import { signInPageActions } from './actions/sign-in-page.actions'
-import { signUpPageActions } from './actions/sign-up-page.actions'
-import { updateCustomerPageActions } from './actions/update-customer-page.action'
-import { selectAuthData, selectError, selectIsLoading, selectIsLoggedIn } from './auth.selectors'
+import { authInitActions } from '../actions/auth-init.actions'
+import { changePasswordPageActions } from '../actions/change-password-page.action'
+import { logoutActions } from '../actions/logout.actions'
+import { signInPageActions } from '../actions/sign-in-page.actions'
+import { signUpPageActions } from '../actions/sign-up-page.actions'
+import { updateCustomerPageActions } from '../actions/update-customer-page.action'
+import { selectAuthData, selectError, selectIsLoading, selectIsLoggedIn } from '../auth.selectors'
 import type { ChangePasswordProps } from 'src/app/shared/models/change-password-props.model'
 
 @Injectable()

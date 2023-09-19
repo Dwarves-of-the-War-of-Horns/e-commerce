@@ -1,0 +1,41 @@
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+
+  width: 100%;
+  padding: 1rem 0;
+
+  &-island {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 19rem;
+  }
+
+  &__image {
+    aspect-ratio: 1/1.5;
+    width: 17rem;
+    margin: 0 auto;
+    object-fit: cover;
+  }
+
+  &__github-link {
+    margin-left: 0.3rem;
+  }
+
+  &__paragraph {
+    max-width: 20rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
+
+@media (width <= 1200px) {
+  .about {
+    gap: 1rem;
+  }
+}

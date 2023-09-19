@@ -1,11 +1,11 @@
-import { Component, type OnDestroy, type OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
-import { TuiDay } from '@taiga-ui/cdk'
+import type { TuiDay } from '@taiga-ui/cdk'
 import { type Subscription } from 'rxjs'
 
-import { AuthFacade } from '../../auth-store/auth.facade'
-import { transformRegistrationSubmitForm } from '../../utils/transform-registration-submit-form.util'
-import { toggleEnableStatusFields } from 'src/app/auth/utils/toggle-enable-status-fields.util'
+import { AuthFacade } from '../../auth-store/service/auth.facade'
+import { transformRegistrationSubmitForm } from '../../helpers/transform-registration-submit-form.helper'
+import { toggleEnableStatusFields } from 'src/app/auth/helpers/toggle-enable-status-fields.helper'
 import { Country } from 'src/app/shared/enums/country.enum'
 import { FormFields } from 'src/app/shared/enums/form-value.enum'
 import { subscribeToValueChangesOnForms } from 'src/app/shared/utils/subscribe-to-value-changes-on-forms.util'
@@ -24,6 +24,7 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   selector: 'ec-sign-up-form',
   templateUrl: './sign-up-form.component.html',
   styleUrls: ['./sign-up-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpFormComponent implements OnInit, OnDestroy {
   public isDisableBillingAddress = true
@@ -35,21 +36,21 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     firstName: new FormControl<string>('', [hasOneCharacter, nameValidator]),
     lastName: new FormControl<string>('', [hasOneCharacter, nameValidator]),
     password: new FormControl<string>('', [
-      minCharacterValidator,
       hasOneLowerCaseCharacter,
       hasOneUpperCaseCharacter,
       hasOneNumber,
       hasNoSpaces,
+      minCharacterValidator,
     ]),
-    dateOfBirth: new FormControl<TuiDay>(new TuiDay(2010, 0, 1), [birthValidator]),
+    dateOfBirth: new FormControl<TuiDay | null>(null, [birthValidator]),
     street: new FormControl<string>('', [hasOneCharacter]),
     city: new FormControl<string>('', [hasOneCharacter, nameValidator]),
     postalCode: new FormControl<string>('', [postalCodeValidator]),
-    country: new FormControl(this.countryArray[0]),
+    country: new FormControl(),
     billingStreet: new FormControl<string>('', [hasOneCharacter]),
     billingCity: new FormControl<string>('', [hasOneCharacter, nameValidator]),
     billingPostalCode: new FormControl<string>('', [value => postalCodeValidator(value, FormFields.BillingCountry)]),
-    billingCountry: new FormControl(this.countryArray[0]),
+    billingCountry: new FormControl(),
     copyAddressCheckbox: new FormControl(false),
     defaultShippingAddress: new FormControl(true),
     defaultBillingAddress: new FormControl(false),

@@ -7,5 +7,5 @@ export function repeatPasswordValidator(control: AbstractControl): ValidationErr
 
   const isValid = repeatPassword !== '' && repeatPassword === password
 
-  return isValid ? null : { error: 'Passwords must match.' }
+  return isValid ? null : { error: 'Passwords must match' }
 }

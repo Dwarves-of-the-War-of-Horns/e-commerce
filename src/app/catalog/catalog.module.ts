@@ -81,6 +81,7 @@ import { CatalogUrlTreeService } from './services/catalog-url.service'
     TuiDataListWrapperModule,
     TuiInputModule,
     TuiTextfieldControllerModule,
+    TuiPaginationModule,
   ],
   providers: [CatalogFacade, CatalogHttpService, CatalogUrlTreeService, CatalogQueryParamsService],
 })

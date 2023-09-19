@@ -15,7 +15,7 @@
       <div *ngIf="address.id === userAddressData.defaultBillingAddressId">
         <div class="tui-island__content">
           <figure class="tui-island__figure">
-            <tui-marker-icon src="tuiIconBriefcase" mode="warning" class="icon" size="xs"></tui-marker-icon>
+            <tui-marker-icon src="tuiIconBriefcase" mode="warning" class="icon" size="xs" />
           </figure>
           <h3 class="tui-space_left-3">Default billing address</h3>
         </div>
@@ -23,7 +23,7 @@
       <div *ngIf="address.id === userAddressData.defaultShippingAddressId">
         <div class="tui-island__content">
           <figure class="tui-island__figure">
-            <tui-marker-icon src="tuiIconTruck" mode="success" class="icon" size="xs"></tui-marker-icon>
+            <tui-marker-icon src="tuiIconTruck" mode="success" class="icon" size="xs" />
           </figure>
           <h3 class="tui-space_left-3">Default shipping address</h3>
         </div>
@@ -42,26 +42,26 @@
         <table class="tui-table">
           <tbody>
             <tr class="tui-table__tr">
-              <td class="tui-table__td td-container"><b>City</b>:</td>
-              <td class="tui-table__td">
+              <td class="tui-table__td user-td td-container"><b>City</b>:</td>
+              <td class="tui-table__td user-td">
                 {{ address.city }}
               </td>
             </tr>
             <tr class="tui-table__tr">
-              <td class="tui-table__td"><b>Street</b>:</td>
-              <td class="tui-table__td">
+              <td class="tui-table__td user-td"><b>Street</b>:</td>
+              <td class="tui-table__td user-td">
                 {{ address.streetName }}
               </td>
             </tr>
             <tr class="tui-table__tr">
-              <td class="tui-table__td"><b>Postal code</b>:</td>
-              <td class="tui-table__td">
+              <td class="tui-table__td user-td"><b>Postal code</b>:</td>
+              <td class="tui-table__td user-td">
                 {{ address.postalCode }}
               </td>
             </tr>
             <tr class="tui-table__tr tui-table__tr_border_none">
-              <td class="tui-table__td"><b>Country</b>:</td>
-              <td class="tui-table__td">
+              <td class="tui-table__td user-td"><b>Country</b>:</td>
+              <td class="tui-table__td user-td">
                 {{ address.country === 'US' ? 'USA' : 'Canada' }}
               </td>
             </tr>
@@ -110,7 +110,7 @@
         City
         <span class="tui-required"></span>
       </tui-input>
-      <tui-error formControlName="city" [error]="[] | tuiFieldError | async"></tui-error>
+      <tui-error formControlName="city" [error]="[] | tuiFieldError | async" />
     </div>
 
     <div class="tui-form__row">
@@ -119,7 +119,7 @@
         Street
         <span class="tui-required"></span>
       </tui-input>
-      <tui-error formControlName="streetName" [error]="[] | tuiFieldError | async"></tui-error>
+      <tui-error formControlName="streetName" [error]="[] | tuiFieldError | async" />
     </div>
 
     <div class="tui-form__row">
@@ -131,7 +131,7 @@
         Postal code
         <span class="tui-required"></span>
       </tui-input>
-      <tui-error formControlName="postalCode" [error]="[] | tuiFieldError | async"></tui-error>
+      <tui-error formControlName="postalCode" [error]="[] | tuiFieldError | async" />
     </div>
 
     <div class="tui-form__row">

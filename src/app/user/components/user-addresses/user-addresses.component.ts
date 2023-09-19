@@ -1,4 +1,4 @@
-import { Component, type OnDestroy, type OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, type OnDestroy, type OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import type { Address } from '@commercetools/platform-sdk'
 import type { Subscription } from 'rxjs'
@@ -7,7 +7,7 @@ import { commercetoolsActions } from '../../constants/commercetools-actions.cons
 import { changeAddressSubmitForm } from '../../helpers/change-address-submit-form.helper'
 import type { UserAddressData } from '../../models/user-address-data.model'
 import type { AddressActionSubmitForm } from '../../types/address-action-submit-form.type'
-import { AuthFacade } from 'src/app/auth/auth-store/auth.facade'
+import { AuthFacade } from 'src/app/auth/auth-store/service/auth.facade'
 import { Country } from 'src/app/shared/enums/country.enum'
 import { hasOneCharacter } from 'src/app/shared/validators/has-one-character.validator'
 import { nameValidator } from 'src/app/shared/validators/name.validator'
@@ -17,6 +17,7 @@ import { postalCodeValidator } from 'src/app/shared/validators/postal-code.valid
   selector: 'ec-user-addresses',
   templateUrl: './user-addresses.component.html',
   styleUrls: ['./user-addresses.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserAddressesComponent implements OnInit, OnDestroy {
   public isShowEditingForm = false

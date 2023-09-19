@@ -1,7 +1,9 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
+import { RouterTestingModule } from '@angular/router/testing'
 import { provideMockStore } from '@ngrx/store/testing'
+import { TuiDestroyService } from '@taiga-ui/cdk'
 import { TuiTextfieldControllerModule } from '@taiga-ui/core'
 import { TuiDataListWrapperModule, TuiInputModule, TuiSelectModule } from '@taiga-ui/kit'
 
@@ -12,6 +14,9 @@ import { CatalogFormComponent } from './catalog-form.component'
 describe('CatalogFormComponent', () => {
   let component: CatalogFormComponent
   let fixture: ComponentFixture<CatalogFormComponent>
+  const routerStub = {
+    navigate: jest.fn(),
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,12 +28,17 @@ describe('CatalogFormComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         TuiTextfieldControllerModule,
+        RouterTestingModule,
       ],
       providers: [
         provideMockStore({}),
         CatalogFacade,
         CatalogQueryParamsService,
-        Router,
+        TuiDestroyService,
+        {
+          provide: Router,
+          useValue: routerStub,
+        },
         {
           provide: ActivatedRoute,
           useValue: {

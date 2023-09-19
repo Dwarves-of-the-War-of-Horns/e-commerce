@@ -22,17 +22,24 @@
 }
 
 .side-panel {
+  position: relative;
   grid-column: 1 / 2;
   width: 250px;
   padding: 0.5rem;
-}
 
-.side-bar-button {
-  display: none;
+  .categories-list {
+    position: sticky;
+    top: 0;
+    width: 100%;
+  }
 }
 
 .sidebar {
   padding: 1rem;
+
+  &__button {
+    display: none;
+  }
 }
 
 @media (width <= 680px) {
@@ -48,7 +55,9 @@
     grid-column: 1;
   }
 
-  .side-bar-button {
-    display: block;
+  .sidebar {
+    &__button {
+      display: block;
+    }
   }
 }

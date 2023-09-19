@@ -1,6 +1,6 @@
 .products {
   $card-width: 300px;
-  $card-height: $card-width * 1.4;
+  $card-height: $card-width * 1.6;
 
   &__empty {
     color: var(--tui-text-02);
@@ -20,7 +20,7 @@
 @media (width <= 1000px) {
   .products {
     $card-width: 250px;
-    $card-height: $card-width * 1.5;
+    $card-height: $card-width * 1.8;
 
     &__list {
       grid-auto-rows: $card-height;

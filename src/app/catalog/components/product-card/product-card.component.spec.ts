@@ -1,7 +1,6 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
-import { RouterTestingModule } from '@angular/router/testing'
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce'
-import { TuiLinkModule } from '@taiga-ui/core'
+import { TuiButtonModule, TuiLinkModule } from '@taiga-ui/core'
 import { TuiIslandModule } from '@taiga-ui/kit'
 
 import { ProductCardComponent } from './product-card.component'
@@ -13,6 +12,8 @@ const mockProduct: SimpleProduct = {
   slug: 'slug',
   metaTitle: 'string',
   metaDescription: 'string',
+  id: 'id',
+  variantId: 1,
   images: ['url1'],
   prices: {
     default: 100,
@@ -29,12 +30,14 @@ describe('ProductCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductCardComponent],
-      imports: [TuiIslandModule, TuiLinkModule, TuiMoneyModule, RouterTestingModule],
+      imports: [TuiIslandModule, TuiLinkModule, TuiMoneyModule, TuiButtonModule],
     }).compileComponents()
 
     fixture = TestBed.createComponent(ProductCardComponent)
     component = fixture.componentInstance
     component.product = mockProduct
+    component.isInCart = true
+    component.addToCartHandler = jest.fn()
     fixture.detectChanges()
   })
 

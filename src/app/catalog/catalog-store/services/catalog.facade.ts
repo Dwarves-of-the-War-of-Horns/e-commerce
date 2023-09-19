@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { combineLatest, map } from 'rxjs'
 
 import { catalogPageActions } from '../actions/catalog-page.actions'
 import { productDetailsPageActions } from '../actions/product-details-page.actions'
@@ -9,6 +8,7 @@ import {
   selectErrorMessage,
   selectFilterAttributes,
   selectIsLoading,
+  selectPages,
   selectProductDetails,
   selectProductsData,
 } from '../catalog-store.selectors'
@@ -22,14 +22,16 @@ export class CatalogFacade {
   public productDetails$ = this.store$.select(selectProductDetails)
   public filterAttributes$ = this.store$.select(selectFilterAttributes)
   public productsData$ = this.store$.select(selectProductsData)
+  public pages$ = this.store$.select(selectPages)
+
   constructor(private store$: Store) {}
 
   public initCategories(): void {
     this.store$.dispatch(catalogPageActions.initCategories())
   }
 
-  public loadProducts(queryParams: QueryParams): void {
-    this.store$.dispatch(catalogPageActions.loadProducts({ queryParams }))
+  public loadProducts({ page, queryParams }: { page: number; queryParams: QueryParams }): void {
+    this.store$.dispatch(catalogPageActions.loadProducts({ page, queryParams }))
   }
 
   public loadProductByKey(productKey: string): void {

@@ -1,32 +1,34 @@
-<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-  <h2 class="tui-form__header tui-form__header_margin-top_none sign-in-logo">Login</h2>
+<tui-island class="island shadow-block">
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <h2 class="tui-form__header tui-form__header_margin-top_none sign-in-logo">Login</h2>
 
-  <div class="tui-form__row">
-    <tui-input
-      formControlName="username"
-      tuiHintContent="Email address must be properly formatted (e.g., user@example.com)."
-    >
-      <input tuiTextfield type="email" autocomplete="username" />
-      Email
-      <span class="tui-required"></span>
-    </tui-input>
-    <tui-error formControlName="username" [error]="[] | tuiFieldError | async" />
-  </div>
+    <div class="tui-form__row">
+      <tui-input
+        formControlName="username"
+        tuiHintContent="Email address must be properly formatted (e.g., user@example.com)"
+      >
+        <input tuiTextfield type="email" autocomplete="username" />
+        Email
+        <span class="tui-required"></span>
+      </tui-input>
+      <tui-error formControlName="username" [error]="[] | tuiFieldError | async" />
+    </div>
 
-  <div class="tui-form__row">
-    <tui-input-password
-      formControlName="password"
-      tuiHintContent="Password must minimum 8 latin characters, at least 1 latin uppercase letter, 1 lowercase letter, 1 number, and no space with start and end"
-      ><input tuiTextfield autocomplete="new-password" placeholder="Make it secure!" />Password
-      <span class="tui-required"></span>
-    </tui-input-password>
-    <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
-  </div>
+    <div class="tui-form__row">
+      <tui-input-password
+        formControlName="password"
+        tuiHintContent="Password must be at least 8 characters long and have 1 latin uppercase letter, 1 lowercase letter, 1 number, and no leading or trailing spaces"
+        ><input tuiTextfield autocomplete="new-password" placeholder="Make it secure!" />Password
+        <span class="tui-required"></span>
+      </tui-input-password>
+      <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
+    </div>
 
-  <div class="tui-form__row">
-    <button tuiButton size="m" type="submit" class="tui-form__buttons button-center" [disabled]="signInForm.invalid">
-      Submit
-    </button>
-  </div>
-</form>
-<h3 class="logo-redirect">If you don't have an account, please <a tuiLink routerLink="/auth/sign-up">register</a>.</h3>
+    <div class="tui-form__row">
+      <button tuiButton size="m" type="submit" class="tui-form__buttons button-center" [disabled]="signInForm.invalid">
+        Submit
+      </button>
+    </div>
+  </form>
+  <h3 class="logo-redirect">If you don't have an account, please <a tuiLink routerLink="/auth/sign-up">register</a></h3>
+</tui-island>

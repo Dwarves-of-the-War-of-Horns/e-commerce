@@ -19,7 +19,7 @@ export class CollaboratorsListComponent {
 
     {
       name: 'Andrew',
-      info: 'The most dedicated member of our team. Was doing sign up and sign in pages, user profile. Collaboration method: calmness. Without a doubt, a working horse of this project',
+      info: 'The most dedicated member of our team. Was doing sign up and sign in pages, user profile. Collaboration method: calmness. Without a doubt, a workhorse of this project',
       img: '/assets/icons/andrysha.webp',
       githubLink: 'https://github.com/ADyBaH',
     },

@@ -1,4 +1,5 @@
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
+import { TuiIslandModule } from '@taiga-ui/kit'
 
 import { GeneralInfoComponent } from './general-info.component'
 
@@ -9,6 +10,7 @@ describe('GeneralInfoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [GeneralInfoComponent],
+      imports: [TuiIslandModule],
     }).compileComponents()
 
     fixture = TestBed.createComponent(GeneralInfoComponent)

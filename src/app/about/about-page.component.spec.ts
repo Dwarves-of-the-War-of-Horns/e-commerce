@@ -4,6 +4,7 @@ import { TuiIslandModule } from '@taiga-ui/kit'
 import { AboutPageComponent } from './about-page.component'
 import { CollaboratorsListComponent } from './components/collaborators-list/collaborators-list.component'
 import { CourseLogoComponent } from './components/course-logo/course-logo.component'
+import { GeneralInfoComponent } from './components/general-info/general-info.component'
 import { ExtractGithubNickPipe } from './pipes/extract-github-nick.pipe'
 
 describe('AboutPageComponent', () => {
@@ -12,7 +13,13 @@ describe('AboutPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AboutPageComponent, CollaboratorsListComponent, ExtractGithubNickPipe, CourseLogoComponent],
+      declarations: [
+        AboutPageComponent,
+        CollaboratorsListComponent,
+        ExtractGithubNickPipe,
+        GeneralInfoComponent,
+        CourseLogoComponent,
+      ],
       imports: [TuiIslandModule],
     }).compileComponents()
 

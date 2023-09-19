@@ -1,8 +1,13 @@
 .general-info {
   display: flex;
-  gap: 3rem;
-  max-width: 1200px;
+  align-items: center;
+  max-width: 700px;
   margin: 1rem auto;
+
+  &__paragraph {
+    align-self: flex-start;
+    margin: 2rem;
+  }
 
   &__mentor-photo {
     display: block;

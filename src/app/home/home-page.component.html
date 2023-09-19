@@ -1,0 +1,79 @@
+<main class="main">
+  <div class="main__header">
+    <h2 class="tui-text_h2 header__heading">Welcome to our store!</h2>
+    <p class="tui-text_body-xl header__text">
+      We are happy that you visited us! Take a look around - we've got some cool stuff to share that we think you'll
+      love.
+    </p>
+    <p class="tui-text_body-xl header__text">Find something suitable? Check out our discounts:</p>
+    <ul class="discounts__list">
+      <li *ngFor="let discount of discounts$ | async">
+        <tui-tag
+          [value]="discount.code"
+          status="primary"
+          [cdkCopyToClipboard]="discount.code"
+          [hoverable]="true"
+          tuiDropdownHover
+          tuiDropdown="click to copy"
+          size="l"
+          class="tui-space_left-3 tui-space_right-3 tui-space_top-3"
+        />
+        {{ discount.description }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <tui-island class="island shadow-block">
+      <tui-marker-icon src="tuiIconUsers" mode="error" class="icon" />
+      <h3 class="tui-island__title">About us</h3>
+      <p class="tui-island__paragraph island__paragraph">
+        Check some info about who we are and what are we standing for.
+      </p>
+      <a tuiLink [routerLink]="['/', 'about']">About us</a>
+    </tui-island>
+
+    <tui-island class="island shadow-block">
+      <tui-marker-icon src="tuiIconGrid" mode="warning" class="icon" />
+      <h3 class="tui-island__title">Products</h3>
+      <p class="tui-island__paragraph island__paragraph">
+        Take a look at our products and find something that suits you best!
+      </p>
+      <a tuiLink class="tui-island__paragraph tui-island__paragraph_link" [routerLink]="['/', 'catalog']"
+        >Our products</a
+      >
+    </tui-island>
+
+    <tui-island class="island shadow-block">
+      <tui-marker-icon src="tuiIconUser" mode="link" class="icon" />
+      <h3 class="tui-island__title">Profile</h3>
+      <p class="tui-island__paragraph island__paragraph">Here you can change your password, settings and more</p>
+      <a tuiLink [routerLink]="['/', 'user']">User profile</a>
+    </tui-island>
+
+    <tui-island class="island shadow-block">
+      <tui-marker-icon src="tuiIconUserCheck" mode="success" class="icon" />
+      <h3 class="tui-island__title">Sign in</h3>
+      <p class="tui-island__paragraph island__paragraph">
+        Sign in to see the products that you added to the cart before
+      </p>
+      <a tuiLink [routerLink]="['/', 'auth', 'sign-in']">Sign in</a>
+    </tui-island>
+
+    <tui-island class="island shadow-block">
+      <tui-marker-icon src="tuiIconUserPlus" mode="link" mode="link" class="icon" />
+      <h3 class="tui-island__title">Sign up</h3>
+      <p class="tui-island__paragraph island__paragraph">Register to start shopping!</p>
+      <a tuiLink [routerLink]="['/', 'auth', 'sign-up']">Sign up</a>
+    </tui-island>
+
+    <tui-island class="island shadow-block">
+      <tui-marker-icon src="tuiIconShoppingCart" mode="error" class="icon" />
+      <h3 class="tui-island__title">Cart</h3>
+      <p class="tui-island__paragraph island__paragraph">
+        We can only imagine what kind of wonderful goods you store there
+      </p>
+      <a tuiLink [routerLink]="['/', 'cart']">Shopping cart</a>
+    </tui-island>
+  </div>
+</main>

@@ -1,0 +1,171 @@
+<div>
+  <h2 class="tui-text_h6 user-address-header">Addresses</h2>
+  <button
+    tuiIconButton
+    size="s"
+    [appearance]="'flat'"
+    icon="tuiIconPlus"
+    class="tui-space_top-3"
+    (click)="showAddressForm('addAddress')"
+  ></button>
+</div>
+<div class="address-form-container">
+  <div *ngFor="let address of userAddressData.userAddresses; let i = index; trackBy: addressesTrackByFn">
+    <tui-island class="shadow-block">
+      <div *ngIf="address.id === userAddressData.defaultBillingAddressId">
+        <div class="tui-island__content">
+          <figure class="tui-island__figure">
+            <tui-marker-icon src="tuiIconBriefcase" mode="warning" class="icon" size="xs" />
+          </figure>
+          <h3 class="tui-space_left-3">Default billing address</h3>
+        </div>
+      </div>
+      <div *ngIf="address.id === userAddressData.defaultShippingAddressId">
+        <div class="tui-island__content">
+          <figure class="tui-island__figure">
+            <tui-marker-icon src="tuiIconTruck" mode="success" class="icon" size="xs" />
+          </figure>
+          <h3 class="tui-space_left-3">Default shipping address</h3>
+        </div>
+      </div>
+      <div
+        *ngIf="
+          address.id !== userAddressData.defaultShippingAddressId &&
+          address.id !== userAddressData.defaultBillingAddressId
+        "
+      >
+        <div class="tui-island__content">
+          <h3 class="tui-space_left-3">Address #{{ i + 1 }}</h3>
+        </div>
+      </div>
+      <div class="tui-island__content tui-space_top-5">
+        <table class="tui-table">
+          <tbody>
+            <tr class="tui-table__tr">
+              <td class="tui-table__td user-td td-container"><b>City</b>:</td>
+              <td class="tui-table__td user-td">
+                {{ address.city }}
+              </td>
+            </tr>
+            <tr class="tui-table__tr">
+              <td class="tui-table__td user-td"><b>Street</b>:</td>
+              <td class="tui-table__td user-td">
+                {{ address.streetName }}
+              </td>
+            </tr>
+            <tr class="tui-table__tr">
+              <td class="tui-table__td user-td"><b>Postal code</b>:</td>
+              <td class="tui-table__td user-td">
+                {{ address.postalCode }}
+              </td>
+            </tr>
+            <tr class="tui-table__tr tui-table__tr_border_none">
+              <td class="tui-table__td user-td"><b>Country</b>:</td>
+              <td class="tui-table__td user-td">
+                {{ address.country === 'US' ? 'USA' : 'Canada' }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tui-form__buttons form-buttons">
+        <button tuiButton icon="tuiIconEdit" (click)="showAddressForm('changeAddress', i)" size="s">Edit</button>
+        <button tuiButton icon="tuiIconDelete" (click)="onSubmitRemoveAddress(address.id)" size="s">Remove</button>
+        <button
+          *ngIf="!(address.id === userAddressData.defaultBillingAddressId)"
+          tuiButton
+          icon="tuiIconBriefcase"
+          (click)="setDefaultBillingAddress(address.id)"
+          size="s"
+        >
+          Set as default billing address
+        </button>
+
+        <button
+          *ngIf="!(address.id === userAddressData.defaultShippingAddressId)"
+          tuiButton
+          icon="tuiIconTruck"
+          (click)="setDefaultShippingAddress(address.id)"
+          size="s"
+        >
+          Set as default shipping address
+        </button>
+      </div>
+    </tui-island>
+  </div>
+</div>
+
+<ng-template
+  let-observer
+  [tuiDialogOptions]="{ label: 'Edit/Add address', size: 'l' }"
+  [(tuiDialog)]="isShowEditingForm"
+>
+  <form [formGroup]="userAddressesForm" (ngSubmit)="onSubmit()">
+    <div class="tui-form__row">
+      <tui-input
+        formControlName="city"
+        tuiHintContent="Must contain at least one character and no special characters or numbers"
+      >
+        <input tuiTextfield />
+        City
+        <span class="tui-required"></span>
+      </tui-input>
+      <tui-error formControlName="city" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__row">
+      <tui-input formControlName="streetName" tuiHintContent="Must contain at least one character">
+        <input tuiTextfield />
+        Street
+        <span class="tui-required"></span>
+      </tui-input>
+      <tui-error formControlName="streetName" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__row">
+      <tui-input
+        formControlName="postalCode"
+        tuiHintContent="Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)"
+      >
+        <input tuiTextfield />
+        Postal code
+        <span class="tui-required"></span>
+      </tui-input>
+      <tui-error formControlName="postalCode" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__row">
+      <tui-select formControlName="country">
+        Country
+        <tui-data-list *tuiDataList>
+          <tui-opt-group>
+            <button
+              *ngFor="let country of countryArray; trackBy: countryTrackByFn"
+              tuiOption
+              [value]="country"
+              (click)="updatePostalCodeValidation()"
+            >
+              {{ country }}
+            </button>
+          </tui-opt-group>
+        </tui-data-list>
+      </tui-select>
+    </div>
+
+    <div class="tui-form__buttons form-buttons">
+      <button tuiButton size="m" type="submit" class="tui-form__button" [disabled]="userAddressesForm.invalid">
+        Save
+      </button>
+      <button
+        tuiButton
+        size="m"
+        class="tui-form__button"
+        type="button"
+        appearance="secondary"
+        (click)="showAddressForm('changeAddress')"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>

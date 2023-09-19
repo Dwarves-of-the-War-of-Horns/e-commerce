@@ -1,0 +1,92 @@
+.main {
+  &__header {
+    max-width: 80vw;
+    margin: auto;
+
+    * {
+      text-align: center;
+    }
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+
+    max-width: 1400px;
+    margin: 4rem auto;
+    padding-bottom: 4rem;
+  }
+
+  .icon {
+    margin-bottom: 1rem;
+  }
+
+  .island {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__paragraph {
+      flex-grow: 1;
+    }
+  }
+}
+
+.discounts {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: flex-start;
+
+    width: fit-content;
+    margin: 0 auto;
+
+    font: var(--tui-font-text-l);
+  }
+}
+
+@media (width <= 1400px) {
+  .main {
+    .container {
+      max-width: 90vw;
+    }
+  }
+}
+
+@media (width <= 1000px) {
+  .main {
+    .header {
+      &__heading {
+        font: var(--tui-font-heading-3);
+      }
+
+      &__text {
+        font: var(--tui-font-text-l);
+      }
+    }
+
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (width <= 475px) {
+  .main {
+    .header {
+      &__heading {
+        font: var(--tui-font-heading-4);
+      }
+
+      &__text {
+        font: var(--tui-font-text-l-2);
+      }
+    }
+
+    .container {
+      grid-template-columns: 1fr;
+    }
+  }
+}

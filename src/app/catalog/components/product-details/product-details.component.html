@@ -1,0 +1,48 @@
+<div class="product-details" *ngIf="productDetails$ | async as productDetails">
+  <div class="product-details__photos" *ngIf="productDetails.images">
+    <ec-product-details-carousel [images]="productDetails.images" />
+  </div>
+
+  <h3 class="tui-text_h3 product-details__heading">{{ productDetails.name }}</h3>
+
+  <p class="tui-text_body-xl product-details__description" *ngIf="productDetails.description">
+    {{ productDetails.description }}
+  </p>
+
+  <div class="product-details__info">
+    <ng-container *ngIf="productDetails.attributes && productDetails.attributes.length">
+      <ec-product-attributes [attributes]="productDetails.attributes" />
+    </ng-container>
+  </div>
+
+  <div class="product-details__price">
+    <ec-product-details-price [prices]="productDetails.prices" />
+  </div>
+
+  <button
+    *ngIf="!isInCart; else removeFromCartButton"
+    tuiButton
+    type="button"
+    class="product-details__button"
+    appearance="primary"
+    icon="tuiIconShoppingCart"
+    [showLoader]="!!(isCartLoading$ | async)"
+    (click)="addToCart()"
+  >
+    Add to cart
+  </button>
+</div>
+
+<ng-template #removeFromCartButton>
+  <button
+    tuiButton
+    type="button"
+    class="product-details__button"
+    appearance="secondary-destructive"
+    icon="tuiIconShoppingCart"
+    [showLoader]="!!(isCartLoading$ | async)"
+    (click)="removeFromCart()"
+  >
+    Remove from cart
+  </button>
+</ng-template>

@@ -1,0 +1,81 @@
+<div class="carousel">
+  <button
+    *ngIf="images.length > 1"
+    tuiIconButton
+    size="s"
+    appearance="mono"
+    icon="tuiIconChevronLeft"
+    title="Previous"
+    (click)="carousel.prev()"
+  ></button>
+
+  <tui-carousel #carousel [itemsCount]="1" [(index)]="carouselActiveIndex">
+    <ng-container *ngFor="let image of images; let i = index; trackBy: trackByImage">
+      <img
+        (click)="openDialog(template)"
+        *tuiItem
+        alt="product photo"
+        draggable="false"
+        [src]="image"
+        class="item"
+        [class.item_active]="i === carouselActiveIndex + 1"
+      />
+    </ng-container>
+  </tui-carousel>
+
+  <button
+    *ngIf="images.length > 1"
+    tuiIconButton
+    size="s"
+    appearance="mono"
+    icon="tuiIconChevronRight"
+    title="Next"
+    (click)="carousel.next()"
+  ></button>
+</div>
+
+<ng-template #template let-observer>
+  <div class="carousel dialog">
+    <div class="carousel-container">
+      <button
+        *ngIf="images.length > 1"
+        tuiIconButton
+        size="s"
+        appearance="mono"
+        icon="tuiIconChevronLeft"
+        title="Previous"
+        (click)="carousel.prev()"
+      ></button>
+
+      <tui-carousel #carousel [draggable]="true" [itemsCount]="1" [(index)]="carouselActiveIndex">
+        <ng-container *ngFor="let image of images; let i = index; trackBy: trackByImage">
+          <img
+            *tuiItem
+            alt="product photo"
+            draggable="false"
+            [src]="image"
+            class="item"
+            [class.item_active]="i === carouselActiveIndex + 1"
+          />
+        </ng-container>
+      </tui-carousel>
+
+      <button
+        *ngIf="images.length > 1"
+        tuiIconButton
+        size="s"
+        appearance="mono"
+        icon="tuiIconChevronRight"
+        title="Next"
+        (click)="carousel.next()"
+      ></button>
+    </div>
+    <tui-pagination
+      *ngIf="images.length > 1"
+      size="s"
+      class="pagination"
+      [length]="images.length"
+      [(index)]="carouselActiveIndex"
+    />
+  </div>
+</ng-template>

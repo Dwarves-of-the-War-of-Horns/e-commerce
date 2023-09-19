@@ -1,0 +1,152 @@
+<h2 class="tui-text_h6 user-address-header">Information</h2>
+<tui-island class="shadow-block">
+  <div class="tui-island__content">
+    <div class="form-container">
+      <div>
+        <table class="tui-table">
+          <tbody>
+            <tr class="tui-table__tr">
+              <td class="tui-table__td user-td td-container"><b>First name</b>:</td>
+              <td class="tui-table__td user-td">
+                {{ userData?.firstName }}
+              </td>
+            </tr>
+            <tr class="tui-table__tr">
+              <td class="tui-table__td user-td"><b>Last name</b>:</td>
+              <td class="tui-table__td user-td">
+                {{ userData?.lastName }}
+              </td>
+            </tr>
+            <tr class="tui-table__tr tui-table__tr_border_none">
+              <td class="tui-table__td user-td"><b>Date of birth</b>:</td>
+              <td class="tui-table__td user-td">
+                {{ userData?.dateOfBirth }}
+              </td>
+            </tr>
+            <tr class="tui-table__tr tui-table__tr_border_none">
+              <td class="tui-table__td user-td"><b>Email</b>:</td>
+              <td class="tui-table__td user-td">
+                {{ userData?.email }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="tui-form__buttons">
+    <button class="tui-form__button" tuiButton icon="tuiIconEdit" (click)="showEditionForm()" size="s">Edit</button>
+    <button class="tui-form__button" tuiButton icon="tuiIconKey" (click)="showPasswordForm()" size="s">
+      Change password
+    </button>
+  </div>
+</tui-island>
+<ng-template
+  let-observer
+  [tuiDialogOptions]="{ label: 'Edit Information', size: 'l' }"
+  [(tuiDialog)]="isShowEditingForm"
+>
+  <form [formGroup]="userInfoForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="tui-form__row">
+      <tui-input
+        formControlName="firstName"
+        tuiHintContent="Must contain at least one character and no special characters or numbers"
+      >
+        <input tuiTextfield />
+        First name
+        <span class="tui-required"></span>
+      </tui-input>
+      <tui-error formControlName="firstName" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__row">
+      <tui-input
+        formControlName="lastName"
+        tuiHintContent="Must contain at least one character and no special characters or numbers"
+      >
+        <input tuiTextfield />
+        Last name
+        <span class="tui-required"></span>
+      </tui-input>
+      <tui-error formControlName="lastName" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__row">
+      <tui-input-date
+        tuiTextfieldExampleText="Placeholder"
+        formControlName="dateOfBirth"
+        tuiHintContent="Please enter your date of birth. We are serving customers over 13 years old"
+      >
+        Date of birth
+        <span class="tui-required"></span>
+      </tui-input-date>
+      <tui-error formControlName="dateOfBirth" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__row">
+      <tui-input
+        formControlName="email"
+        tuiHintContent="Email address must be properly formatted (e.g., user@example.com)"
+      >
+        <input tuiTextfield type="email" autocomplete="username" />
+        Email
+        <span class="tui-required"></span>
+      </tui-input>
+      <tui-error formControlName="email" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__buttons">
+      <button tuiButton size="m" type="submit" class="tui-form__button" [disabled]="userInfoForm.invalid">Save</button>
+
+      <button
+        tuiButton
+        size="m"
+        class="tui-form__button"
+        type="button"
+        appearance="secondary"
+        (click)="showEditionForm()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template let-observer [tuiDialogOptions]="{ label: 'Edit Password', size: 'l' }" [(tuiDialog)]="isShowPasswordForm">
+  <form [formGroup]="userPasswordForm" (ngSubmit)="onSubmitNewPassword()" class="form-container">
+    <div class="tui-form__row">
+      <tui-input-password formControlName="currentPassword" tuiHintContent="Enter your current password"
+        ><input tuiTextfield autocomplete="currentPassword" />Current password
+        <span class="tui-required"></span>
+      </tui-input-password>
+      <tui-error formControlName="currentPassword" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__row">
+      <tui-input-password
+        formControlName="newPassword"
+        tuiHintContent="New password must be at least 8 characters long and have 1 latin uppercase letter, 1 lowercase letter, 1 number, and no leading or trailing spaces"
+        ><input tuiTextfield />New password
+        <span class="tui-required"></span>
+      </tui-input-password>
+      <tui-error formControlName="newPassword" [error]="[] | tuiFieldError | async" />
+    </div>
+
+    <div class="tui-form__buttons">
+      <button tuiButton size="m" type="submit" class="tui-form__button" [disabled]="userPasswordForm.invalid">
+        Save
+      </button>
+
+      <button
+        tuiButton
+        size="m"
+        class="tui-form__button"
+        type="button"
+        appearance="secondary"
+        (click)="hidePasswordForm()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>

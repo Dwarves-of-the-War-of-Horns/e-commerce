@@ -1,0 +1,28 @@
+<ng-container>
+  <tui-loader
+    [showLoader]="!!(productsData?.isProductsLoading || productsData?.products === null)"
+    [overlay]="true"
+    size="xl"
+  >
+    <ng-container *tuiLet="productsData?.products as products">
+      <ng-container *ngIf="products === null || products?.length; else noProducts">
+        <div class="products__list">
+          <ec-product-card
+            [routerLink]="['/', 'catalog', 'product', product.key]"
+            *ngFor="let product of products; trackBy: trackProduct"
+            [product]="product"
+            class="products__card"
+            [addToCartHandler]="addToCart"
+            [isInCart]="isInCart(product) | async"
+          />
+        </div>
+      </ng-container>
+    </ng-container>
+  </tui-loader>
+</ng-container>
+
+<ng-template #noProducts>
+  <div class="products__empty">
+    <p class="tui-text_h4">No products found :(</p>
+  </div>
+</ng-template>

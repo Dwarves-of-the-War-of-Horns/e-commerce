@@ -1,0 +1,31 @@
+<div class="catalog-page">
+  <ec-breadcrumps [navigation$]="navigationArray$" class="breadcrumbs" />
+  <tui-island class="side-panel shadow-block" size="s">
+    <ec-categories-list class="categories-list" />
+  </tui-island>
+  <button
+    tuiIconButton
+    icon="tuiIconAlignJustifyLarge"
+    type="button"
+    (click)="toggleSidebar(true)"
+    (tuiActiveZoneChange)="toggleSidebar($event)"
+    class="sidebar__button"
+  >
+    Show sidebar
+    <div *tuiSidebar="isSidebarOpen; direction: 'left'" class="sidebar">
+      <ec-categories-list class="categories__list" />
+    </div>
+  </button>
+  <div class="catalog-main">
+    <ec-catalog-form />
+    <ec-products-list [productsData]="productsData$ | async" class="products__list" />
+    <tui-pagination
+      [focusable]="true"
+      [(index)]="currentPageIndex"
+      [length]="(pages$ | async) || 1"
+      [sidePadding]="2"
+      [activePadding]="2"
+      (indexChange)="goToPage($event)"
+    />
+  </div>
+</div>

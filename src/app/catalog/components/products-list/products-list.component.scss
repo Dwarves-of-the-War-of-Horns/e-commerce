@@ -1,0 +1,40 @@
+.products {
+  $card-width: 300px;
+  $card-height: $card-width * 1.6;
+
+  &__empty {
+    color: var(--tui-text-02);
+    text-align: center;
+  }
+
+  &__list {
+    display: grid;
+    grid-auto-rows: $card-height;
+    grid-template-columns: repeat(auto-fill, $card-width);
+    gap: 1em;
+    justify-content: center;
+    justify-items: center;
+  }
+}
+
+@media (width <= 1000px) {
+  .products {
+    $card-width: 250px;
+    $card-height: $card-width * 1.8;
+
+    &__list {
+      grid-auto-rows: $card-height;
+      grid-template-columns: repeat(auto-fill, $card-width);
+      font-size: 0.9em;
+    }
+  }
+}
+
+@media (width <= 580px) {
+  .products {
+    &__list {
+      grid-auto-rows: min-content;
+      grid-template-columns: 1fr;
+    }
+  }
+}

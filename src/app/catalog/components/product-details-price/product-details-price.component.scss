@@ -1,0 +1,24 @@
+.price {
+  * {
+    margin-left: 0.5rem;
+  }
+
+  &--inactive {
+    font-size: 1rem;
+    font-weight: lighter;
+    color: var(--tui-text-03);
+    text-decoration: line-through;
+  }
+
+  &--discount {
+    font-size: 1.4rem;
+    font-weight: bolder;
+    color: var(--tui-negative);
+  }
+
+  &--default {
+    font-size: 1.4rem;
+    font-weight: bolder;
+    color: var(--tui-text-04);
+  }
+}

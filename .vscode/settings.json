@@ -1,0 +1,21 @@
+{
+  "cSpell.words": [
+    "ABCEGHJKLMNPRSTVXY",
+    "Commercetools",
+    "Commerstool",
+    "commitlint",
+    "compodoc",
+    "devkit",
+    "Dompurify",
+    "Dwarven",
+    "ngrx",
+    "plusplus",
+    "Polymorpheus",
+    "proto",
+    "recompiles",
+    "Stonebeard",
+    "tinkoff",
+    "trivago"
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
+}

@@ -1,0 +1,16 @@
+<div class="container">
+  <h2 class="header tui-text_h4">Cart</h2>
+  <tui-loader class="loader" [overlay]="true" [showLoader]="!!(isLoading$ | async)">
+    <div *ngIf="(products$ | async)?.length; else emptyCart" class="cart-container">
+      <tui-island class="shadow-block cart-container__items">
+        <ec-cart-items />
+      </tui-island>
+      <div class="cart-container__totals">
+        <ec-cart-total />
+      </div>
+    </div>
+  </tui-loader>
+  <ng-template #emptyCart>
+    <ec-empty-cart />
+  </ng-template>
+</div>

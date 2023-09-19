@@ -1,0 +1,28 @@
+.address-form-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 1rem;
+  max-width: 1400px;
+
+  @media (width <= 550px) {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+.td-container {
+  width: 40%;
+}
+
+.user-address-header {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.form-buttons {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.user-td {
+  line-break: anywhere;
+}

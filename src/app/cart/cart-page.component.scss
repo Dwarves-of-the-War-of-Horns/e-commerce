@@ -1,0 +1,30 @@
+.container {
+  width: 90vw;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.header {
+  margin: 0;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.cart-container {
+  display: flex;
+  gap: 1rem;
+
+  &__totals {
+    flex: 2;
+    height: auto;
+  }
+
+  &__items {
+    flex: 5;
+  }
+
+  @media (width <= 1000px) {
+    flex-direction: column;
+  }
+}
